@@ -1,7 +1,7 @@
 import _0_all_plot_tools as plt_tools
 import pandas as pd, numpy as np
 measure_results_folder = r'..\..\cases\_0_measurements\BUBBLE'
-original_prediction_results_folder = r'..\..\cases\_05_Basel_BSPR_ue1\ep_saving'
+original_prediction_results_folder = r'..\..\cases\_05_Basel_BSPR_ue1\vcwg_saving'
 bypass_predict_results_folder = r'..\..\cases\_05_Basel_BSPR_ue1\refining_M2\vcwg_ep_saving'
 all_in_one_saving_path = r'..\..\cases\_05_Basel_BSPR_ue1\refining_M2'
 IOP_start_time = '2002-06-10 01:00:00'
