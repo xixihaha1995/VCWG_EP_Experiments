@@ -16,33 +16,6 @@ def api_to_csv(state):
     newFile = open(api_path, "wb")
     newFile.write(newFileByteArray)
     newFile.close()
-def _nested_ep_only(state):
-    global one_time, accu_hvac_heat_rejection_J,zone_time_step_seconds \
-        ,hvac_heat_rejection_sensor_handle, ep_last_accumulated_time_index_in_seconds
-    if one_time:
-        if not coordination.ep_api.exchange.api_data_fully_ready(state):
-            return
-        one_time = False
-        zone_time_step_seconds = 3600 / coordination.ep_api.exchange.num_time_steps_in_hour(state)
-
-        hvac_heat_rejection_sensor_handle = \
-            coordination.ep_api.exchange.get_variable_handle(state,
-                                             "HVAC System Total Heat Rejection Energy",
-                                             "SIMHVAC")
-    warm_up = coordination.ep_api.exchange.warmup_flag(state)
-    if not warm_up:
-        curr_sim_time_in_hours = coordination.ep_api.exchange.current_sim_time(state)
-        curr_sim_time_in_seconds = curr_sim_time_in_hours * 3600
-        accumulation_time_step_in_seconds = curr_sim_time_in_seconds - ep_last_accumulated_time_index_in_seconds
-        accumulated_bool = 1 > abs(accumulation_time_step_in_seconds - zone_time_step_seconds)
-
-        accu_hvac_heat_rejection_J += coordination.ep_api.exchange.get_variable_value(state,
-                                                                                      hvac_heat_rejection_sensor_handle)
-        if accumulated_bool:
-            coordination.saving_data.append([curr_sim_time_in_seconds,
-                                             accu_hvac_heat_rejection_J])
-            accu_hvac_heat_rejection_J = 0
-            ep_last_accumulated_time_index_in_seconds = curr_sim_time_in_seconds
 def run_vcwg():
     epwFileName = 'Basel.epw'
     TopForcingFileName = None
@@ -658,23 +631,12 @@ def _nested_ep_then_vcwg(state):
                              msw_solar_w_m2*2 + mse_solar_w_m2*2 + ms1_solar_w_m2*2 + ms2_solar_w_m2*2 +
                              tsw_solar_w_m2 + tse_solar_w_m2 + ts1_solar_w_m2 + ts2_solar_w_m2)/16
 
-        n_wall_solat_w_m2 = (gnw_solar_w_m2 + gne_solar_w_m2 + gn1_solar_w_m2 + gn2_solar_w_m2 +
+        n_wall_solar_w_m2 = (gnw_solar_w_m2 + gne_solar_w_m2 + gn1_solar_w_m2 + gn2_solar_w_m2 +
                              mnw_solar_w_m2*2 + mne_solar_w_m2*2 + mn1_solar_w_m2*2 + mn2_solar_w_m2*2 +
                              tnw_solar_w_m2 + tne_solar_w_m2 + tn1_solar_w_m2 + tn2_solar_w_m2)/16
 
         coordination.ep_api.exchange.set_actuator_value(state, odb_actuator_handle, coordination.vcwg_canTemp_K - 273.15)
         coordination.ep_api.exchange.set_actuator_value(state, orh_actuator_handle, rh)
-
-        coordination.ep_elecTotal_w_m2_per_floor_area = elec_bld_meter_w_m2
-        coordination.ep_indoorTemp_C = zone_indor_temp_value
-        coordination.ep_indoorHum_Ratio = zone_indor_spe_hum_value
-        coordination.ep_sensCoolDemand_w_m2 = sens_cool_demand_w_m2_value
-        coordination.ep_sensHeatDemand_w_m2 = sens_heat_demand_w_m2_value
-        coordination.ep_coolConsump_w_m2 = cool_consumption_w_m2_value
-        coordination.ep_heatConsump_w_m2 = heat_consumption_w_m2_value
-        coordination.ep_floor_fluxMass_w_m2 = floor_flux
-        coordination.ep_fluxWall_w_m2 = wall_flux
-        coordination.ep_fluxRoof_w_m2 = roof_flux
 
         coordination.ep_floor_Text_K = floor_Text_C + 273.15
         coordination.ep_floor_Tint_K = floor_Tint_C + 273.15
@@ -686,5 +648,16 @@ def _nested_ep_then_vcwg(state):
         coordination.ep_wallSun_Tint_K = s_wall_Tint_C + 273.15
         coordination.ep_wallShade_Text_K = s_wall_Text_C + 273.15
         coordination.ep_wallShade_Tint_K = s_wall_Tint_C + 273.15
+
+        coordination.ep_elecTotal_w_m2_per_floor_area = elec_bld_meter_w_m2
+        coordination.ep_indoorTemp_C = zone_indor_temp_value
+        coordination.ep_indoorHum_Ratio = zone_indor_spe_hum_value
+        coordination.ep_sensCoolDemand_w_m2 = sens_cool_demand_w_m2_value
+        coordination.ep_sensHeatDemand_w_m2 = sens_heat_demand_w_m2_value
+        coordination.ep_coolConsump_w_m2 = cool_consumption_w_m2_value
+        coordination.ep_heatConsump_w_m2 = heat_consumption_w_m2_value
+        coordination.ep_floor_fluxMass_w_m2 = floor_flux
+        coordination.ep_fluxWall_w_m2 = wall_flux
+        coordination.ep_fluxRoof_w_m2 = roof_flux
 
         coordination.sem_energyplus.release()
