@@ -1,0 +1,28 @@
+\begin{thebibliography}{}
+
+\bibitem[Aliabadi et~al., 2021]{Aliabadi2021b}
+Aliabadi, A.~A., Moradi, M., McLeod, R.~M., Calder, D., and Dernovsek, R.
+  (2021).
+\newblock {How Much Building Renewable Energy Is Enough? The Vertical City
+  Weather Generator (VCWG v1.4.4)}.
+\newblock {\em Atmosphere}, 12(7):882.
+
+\bibitem[Moradi, 2021]{Moradi2021b}
+Moradi, M. (2021).
+\newblock {\em {The Vertical City Weather Generator}}.
+\newblock PhD thesis, University of Guelph, Guelph.
+
+\bibitem[Moradi et~al., 2021]{Moradi2021a}
+Moradi, M., Dyer, B., Nazem, A., Nambiar, M.~K., Nahian, M.~R., Bueno, B.,
+  Mackey, C., Vasanthakumar, S., Nazarian, N., Krayenhoff, E.~S., Norford,
+  L.~K., and Aliabadi, A.~A. (2021).
+\newblock {The Vertical City Weather Generator (VCWG v1.3.2)}.
+\newblock {\em Geosci. Model Dev.}, 14(2):961--984.
+
+\bibitem[Moradi et~al., 2022]{Moradi2022}
+Moradi, M., Krayenhoff, E.~S., and Aliabadi, A.~A. (2022).
+\newblock A comprehensive indoor–outdoor urban climate model with hydrology:
+  {The Vertical City Weather Generator (VCWG v2.0.0)}.
+\newblock {\em Building and Environment}, 207:108406.
+
+\end{thebibliography}
