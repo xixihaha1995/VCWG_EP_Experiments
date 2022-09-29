@@ -74,13 +74,35 @@ for i in range(len(ue1_heights)):
     bypass_potential_10min_c_compare_ver2_cvrmse.append(plt_tools.calculate_cvrmse(
         urban_2p6_10min_c_compare.iloc[:,i], bypass_potential_10min_c_compare_ver2.iloc[:,i]))
 
-# print the results
-print(f"BSPR CVRMSE:{compare_start_time} to {compare_end_time}-10min Canyon Temperature. p0 {p0} pa")
+# print the potential results
+print(f"BSPR Potential Temperature CVRMSE:{compare_start_time} to {compare_end_time}-10min Canyon Temperature. p0 {p0} pa")
 for i in range(len(ue1_heights)):
     print(f'Height {ue1_heights[i]}m. Original: {original_potential_10min_c_compare_cvrmse[i]:.2f}'
             f' Bypass ver0: {bypass_potential_10min_c_compare_ver0_cvrmse[i]:.2f}'
             f' Bypass ver1: {bypass_potential_10min_c_compare_ver1_cvrmse[i]:.2f}'
             f' Bypass ver2: {bypass_potential_10min_c_compare_ver2_cvrmse[i]:.2f}')
+
+original_real_10min_c_compare_cvrmse = []
+bypass_real_10min_c_compare_ver0_cvrmse = []
+bypass_real_10min_c_compare_ver1_cvrmse = []
+bypass_real_10min_c_compare_ver2_cvrmse = []
+for i in range(len(ue1_heights)):
+    original_real_10min_c_compare_cvrmse.append(plt_tools.calculate_cvrmse(
+        urban_2p6_10min_c_compare.iloc[:,i], original_real_10min_c_compare.iloc[:,i]))
+    bypass_real_10min_c_compare_ver0_cvrmse.append(plt_tools.calculate_cvrmse(
+        urban_2p6_10min_c_compare.iloc[:,i], bypass_real_10min_c_compare_ver0.iloc[:,i]))
+    bypass_real_10min_c_compare_ver1_cvrmse.append(plt_tools.calculate_cvrmse(
+        urban_2p6_10min_c_compare.iloc[:,i], bypass_real_10min_c_compare_ver1.iloc[:,i]))
+    bypass_real_10min_c_compare_ver2_cvrmse.append(plt_tools.calculate_cvrmse(
+        urban_2p6_10min_c_compare.iloc[:,i], bypass_real_10min_c_compare_ver2.iloc[:,i]))
+
+# print the real results
+print(f"BSPR Real Temperature CVRMSE:{compare_start_time} to {compare_end_time}-10min Canyon Temperature. p0 {p0} pa")
+for i in range(len(ue1_heights)):
+    print(f'Height {ue1_heights[i]}m. Original: {original_real_10min_c_compare_cvrmse[i]:.2f}'
+            f' Bypass ver0: {bypass_real_10min_c_compare_ver0_cvrmse[i]:.2f}'
+            f' Bypass ver1: {bypass_real_10min_c_compare_ver1_cvrmse[i]:.2f}'
+            f' Bypass ver2: {bypass_real_10min_c_compare_ver2_cvrmse[i]:.2f}')
 
 # # merge them together
 merged_df = pd.concat([rural_1p5_10min_c_compare,urban_2p6_10min_c_compare,
