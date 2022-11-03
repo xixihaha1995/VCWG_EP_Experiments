@@ -12,6 +12,8 @@ from Soil_Functions import Soil_Calculations
 from datetime import datetime
 from datetime import datetime
 
+import _0_vcwg_ep_coordination as coordination
+
 """
 Read input variables
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -412,6 +414,7 @@ def Data_Site(InputFile):
     SoilCal = Soil_Calculations()
 
     ipd = read_VCWG_param(InputFile)
+    ipd[coordination.uwgVariable] = coordination.uwgVariableValue
 
     # Rural model parameters
     class RSMParam_Def():

@@ -25,7 +25,7 @@ def run_vcwg():
     epwFileName = 'Capitoul.epw'
     TopForcingFileName = None
     VCWGParamFileName = 'initialize_Capitoul.uwg'
-    ViewFactorFileName = 'ViewFactor_Capitoul_MOST.txt'
+    ViewFactorFileName = f'{coordination.uwgVariable}{str(coordination.uwgVariableValue)}ViewFactor_Capitoul_MOST.txt'
     # Case name to append output file names with
     case = 'Capitoul_MOST'
     '''

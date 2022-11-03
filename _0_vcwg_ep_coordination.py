@@ -10,13 +10,13 @@ def init_ep_api():
     ep_api=EnergyPlusAPI()
     psychrometric =None
 
-def read_ini(config_file_name):
-    global config, project_path, sensor_heights
-    config = configparser.ConfigParser()
+def read_ini(input_config, input_uwgVariable, input_uwgVariableValue):
+    global config, project_path, sensor_heights, uwgVariable, uwgVariableValue
     # find the project path
     project_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(project_path,'A_prepost_processing', 'configs',config_file_name)
-    config.read(config_path)
+    config = input_config
+    uwgVariable = input_uwgVariable
+    uwgVariableValue = input_uwgVariableValue
     sensor_heights = [int(i) for i in config['_0_vcwg_ep_coordination.py']['sensor_height_meter'].split(',')]
 
 def init_semaphore_lock_settings():
@@ -219,8 +219,8 @@ def BEMCalc_Element(VerticalProfUrban,BEM, it, simTime, FractionsRoof, Geometry_
     '''
     data_saving_path = os.path.join(project_path, 'A_prepost_processing','sensitivity_saving',
                                     config['_0_vcwg_ep_coordination.py']['site_location'],
-                                    config['_0_vcwg_ep_coordination.py']['theme'],
-                                    config['_0_vcwg_ep_coordination.py']['choice'] + '.csv')
+                                    config['sensitivity']['theme'],
+                                    uwgVariable+ f'{str(uwgVariableValue)}.csv')
     global save_path_clean
     if os.path.exists(data_saving_path) and not save_path_clean:
         os.remove(data_saving_path)
