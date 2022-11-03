@@ -1,11 +1,23 @@
-import threading, sys, time, pandas as pd
-import numpy as np
+import threading, sys, configparser, os
+import numpy as np, datetime
+
+save_path_clean = False
+
 sys.path.insert(0,'C:\EnergyPlusV22-1-0')
 from pyenergyplus.api import EnergyPlusAPI
 def init_ep_api():
     global ep_api, psychrometric
     ep_api=EnergyPlusAPI()
     psychrometric =None
+
+def read_ini(config_file_name):
+    global config, project_path, sensor_heights
+    config = configparser.ConfigParser()
+    # find the project path
+    project_path = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(project_path,'A_prepost_processing', 'configs',config_file_name)
+    config.read(config_path)
+    sensor_heights = [int(i) for i in config['_0_vcwg_ep_coordination.py']['sensor_height_meter'].split(',')]
 
 def init_semaphore_lock_settings():
     global sem0, sem1, sem2, sem3
@@ -57,7 +69,7 @@ def init_variables_for_vcwg_ep():
     ep_wallShade_Text_K = 300
     ep_wallShade_Tint_K = 300
 
-def BEMCalc_Element(VerticalProfUrban,BEM, it, simTime, FractionsRoof, Geometry_m):
+def BEMCalc_Element(VerticalProfUrban,BEM, it, simTime, FractionsRoof, Geometry_m, MeteoData):
 
     global vcwg_needed_time_idx_in_seconds,\
         vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, vcwg_wsp_mps, vcwg_wdir_deg,\
@@ -96,7 +108,6 @@ def BEMCalc_Element(VerticalProfUrban,BEM, it, simTime, FractionsRoof, Geometry_
     vcwg_needed_time_idx_in_seconds = vcwg_time_index_in_seconds
     vcwg_canTemp_K = canTemp
     vcwg_canSpecHum_Ratio = canHum
-    overwriting_time_index = vcwg_time_index_in_seconds
     # Notify to the downstream (EP download canyon info from Parent) to start
     sem1.release()
 
@@ -105,12 +116,8 @@ def BEMCalc_Element(VerticalProfUrban,BEM, it, simTime, FractionsRoof, Geometry_
     # VCWG download EP results from Parent
 
     BEM_building.sensWaste = ep_sensWaste_w_m2_per_floor_area * BEM_building.nFloor
-    # transfer accumulated seconds to Day, Hour, Minute, Second
-    day_hour_min_sec = time.strftime("%dd-%HH:%MM:%SS", time.gmtime(vcwg_time_index_in_seconds))
-
-    #print(f"Handler ver{time_step_version}, {day_hour_min_sec}, "
-    #      f"sensWaste (Currently only HVAC Rejection):{BEM_building.sensWaste} watts/ unit footprint area")
     ep_sensWaste_w_m2_per_floor_area = 0
+
     BEM_building.ElecTotal = ep_elecTotal_w_m2_per_floor_area * BEM_building.nFloor
     BEM.mass.Text = ep_floor_Text_K
     BEM.mass.Tint = ep_floor_Tint_K
@@ -210,20 +217,45 @@ def BEMCalc_Element(VerticalProfUrban,BEM, it, simTime, FractionsRoof, Geometry_
         if count % 2 == 0:
             f2.write(fmt2)
     '''
+    data_saving_path = os.path.join(project_path, 'A_prepost_processing','sensitivity_saving',
+                                    config['_0_vcwg_ep_coordination.py']['site_location'],
+                                    config['_0_vcwg_ep_coordination.py']['theme'],
+                                    config['_0_vcwg_ep_coordination.py']['choice'] + '.csv')
+    global save_path_clean
+    if os.path.exists(data_saving_path) and not save_path_clean:
+        os.remove(data_saving_path)
+        save_path_clean = True
+    # start_time + accumulative_seconds
+    cur_datetime = datetime.datetime.strptime(config['_0_vcwg_ep_coordination.py']['start_time'], '%Y-%m-%d %H:%M:%S') + \
+                      datetime.timedelta(seconds=vcwg_time_index_in_seconds - simTime.dt)
+    domain_height = len(TempProf_cur)
+    vcwg_heights_profile = np.array([0.5 + i for i in range(domain_height)])
+    mapped_indices = [np.argmin(np.abs(vcwg_heights_profile - i)) for i in sensor_heights]
 
-    with open('capitoul.csv', 'a') as f1:
-        fmt1 = "%.3f," * 8 % (
-        simTime.secDay, WallshadeT, WalllitT, RoofT, canTemp, senWaste, TempProf_cur[19], PresProf_cur[19]) \
-         + "\n"
-        # fmt = "%.3f, %.2f, %.2f, %.2f, %.2f,%.2f\n" % (simTime.secDay,WallshadeT,WalllitT,RoofT,canTemp,senWaste)
+    #if not exist, create the file and write the header
+    if not os.path.exists(data_saving_path):
+        os.makedirs(os.path.dirname(data_saving_path), exist_ok=True)
+        with open(data_saving_path, 'a') as f1:
+            # prepare the header string for different sensors
+            header_str = 'cur_datetime,WallshadeT,WalllitT,RoofT,canTemp,senWaste,MeteoData.Tatm,MeteoData.Pre,'
+            for i in mapped_indices:
+                header_str += 'TempProf_cur[%d],' % i + 'PresProf_cur[%d],' % i
+            header_str = header_str[:-1] + '\n'
+            f1.write(header_str)
+
+    # write the data
+    with open(data_saving_path, 'a') as f1:
+        fmt1 = "%s," * 1 % (cur_datetime) + \
+               "%.3f," * 7 % (WallshadeT, WalllitT, RoofT, canTemp, senWaste, MeteoData.Tatm, MeteoData.Pre) + \
+               "%.3f," * 2* len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
+                                                        [PresProf_cur[i] for i in mapped_indices]) + '\n'
         f1.write(fmt1)
-    with open('10min_capitoul.csv', 'a') as f2:
-        fmt2 = "%.3f," * 8 % (simTime.secDay, WallshadeT, WalllitT, RoofT, canTemp, senWaste, TempProf_cur[19], \
-                               PresProf_cur[19]) + "\n"
-        # fmt = "%.3f, %.2f, %.2f, %.2f, %.2f,%.2f\n" % (simTime.secDay,WallshadeT,WalllitT,RoofT,canTemp,senWaste)
-        count = count + 1
-        if count % 2 == 0:
-            f2.write(fmt2)
+    # with open('capitoul.csv', 'a') as f1:
+    #     fmt1 = "%.3f," * 8 % (
+    #     simTime.secDay, WallshadeT, WalllitT, RoofT, canTemp, senWaste, TempProf_cur[19], PresProf_cur[19]) \
+    #      + "\n"
+    #     # fmt = "%.3f, %.2f, %.2f, %.2f, %.2f,%.2f\n" % (simTime.secDay,WallshadeT,WalllitT,RoofT,canTemp,senWaste)
+    #     f1.write(fmt1)
 
     '''
     with open('vancouver.csv', 'a') as f1:

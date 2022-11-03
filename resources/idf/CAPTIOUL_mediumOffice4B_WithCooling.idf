@@ -230,7 +230,7 @@ RunPeriod,
     1,                       !- Begin Day of Month
     ,                        !- Begin Year
     6,                       !- End Month
-    1,                      !- End Day of Month
+    30,                      !- End Day of Month
     ,                        !- End Year
     Tuesday,                 !- Day of Week for Start Day
     No,                      !- Use Weather File Holidays and Special Days
@@ -6921,77 +6921,77 @@ ZoneControl:Thermostat,
 ThermostatSetpoint:DualSetpoint,
     Core_bottom DualSPSched, !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Core_mid DualSPSched,    !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Core_top DualSPSched,    !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_bot_ZN_1 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_bot_ZN_2 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_bot_ZN_3 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_bot_ZN_4 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_mid_ZN_1 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_mid_ZN_2 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_mid_ZN_3 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_mid_ZN_4 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_top_ZN_1 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_top_ZN_2 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_top_ZN_3 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 ThermostatSetpoint:DualSetpoint,
     Perimeter_top_ZN_4 DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_org;             !- Cooling Setpoint Temperature Schedule Name
 
 
 !-   ===========  ALL OBJECTS IN CLASS: AIRTERMINAL:SINGLEDUCT:VAV:REHEAT ===========

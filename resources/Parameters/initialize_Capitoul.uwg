@@ -11,7 +11,7 @@
 # Simulation parameters,
 Month,6,           # starting month 6
 Day,1,             # starting day (1-31) 16
-nDay,5,           # number of days to run simulation 14
+nDay,30,           # number of days to run simulation 14
 dtSim,300,         # simulation time step [s]
 dtWeather,3600,    # weather time step [s]
 nDay_spinup,1,     # Number of days accounted for spin-up
