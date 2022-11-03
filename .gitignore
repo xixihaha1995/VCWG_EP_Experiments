@@ -1,5 +1,8 @@
+# git update gitingore
+#git rm -r --cached .
 only_ep/
 pyenergyplus/
+resources/idf/ep_outputs
 Results/
 _0_ep_files/
 _01_ep_5zone/
