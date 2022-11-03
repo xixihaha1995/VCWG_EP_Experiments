@@ -31,4 +31,4 @@ if __name__ == '__main__':
                     args=(config,uwgVariable, int(value)))
         p.start()
         print("Process started: ", p)
-        # p.join()
+        p.join()
