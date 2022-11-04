@@ -18,8 +18,8 @@ def read_ini(config_file_name):
 if __name__ == '__main__':
     info('main line')
     sensitivity_file = input("Please input the sensitivity file: "
-                             "[SensitivityCAPITOUL_albedo.ini]") or \
-                       "SensitivityCAPITOUL_albedo.ini"
+                             "[SensitivityCAPITOUL_theta_canyon.ini]") or \
+                       "SensitivityCAPITOUL_theta_canyon.ini"
     read_ini(sensitivity_file)
     uwgVariable = config['sensitivity']['uwgVariable']
     value_list = [float(i) for i in config['sensitivity']['value_list'].split(',')]
