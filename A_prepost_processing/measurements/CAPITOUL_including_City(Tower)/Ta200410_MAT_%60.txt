@@ -1,0 +1,403 @@
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 01/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 01/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040275
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 02/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 02/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040276
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 03/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 03/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040277
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 04/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 04/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040278
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 05/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 05/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040279
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 06/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 06/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040280
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 07/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 07/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040281
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 08/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 08/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040282
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 09/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 09/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040283
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 10/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 10/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040284
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 11/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 11/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040285
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 12/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 12/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040286
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 13/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 13/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040287
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 14/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 14/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040288
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 15/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 15/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040289
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 16/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 16/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040290
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 17/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 17/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040291
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 18/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 18/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040292
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 19/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 19/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040293
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 20/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 20/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040294
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 21/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 21/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040295
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 22/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 22/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040296
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 23/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 23/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040297
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 24/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 24/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040298
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	''	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 25/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 25/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040299
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 26/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 26/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040300
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	''	''	''	''	''	''	''	''	''	''	''	''	''	''	''
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 27/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 27/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040301
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 28/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 28/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040302
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 29/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 29/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040303
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 30/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 30/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040304
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#
+Fichier CNRM-MAT-CAPITOUL
+FILENO = 31/10
+FILE START TIME = 000059.000
+FILE STOP TIME = 235959.000
+DATE_ACQUISITION = 31/10/2004;
+PLATFORM = toulouse-alsace
+ACQ_ID = Ta040305
+TYPE = ASCII
+DATE_creation_fichier = 28-09-2006
+#END OF HEADER#
+'date'	'rft_time_INS_prod_%60'	'pre_air_adam_INS_%10_Mem_%60'	'tpr_air_adam_INS_%10_Mem_%60'	'hum_relcapa_adam_INS_%10_Mem_%60'	'ray_rgd_adam_INS_%10_Mem_%60'	'ray_rgm_adam_INS_%10_Mem_%60'	'ray_ird_adam_INS_%10_Mem_%60'	'ray_irm_adam_INS_%10_Mem_%60'	'prp_intensrr_ORG_INS_%10_Mem_%60'	'prp_intensrr_auget_c12_Ech_INS_%60'	'ven_dd_gillh_%60'	'ven_ff_gillh_%60'	'ven_dd_gillb_%60'	'ven_ff_gillb_%60'	'chm_conco2_d_li7500_Mem_%10_Mem_%60'	'ctl_posmat4_c12_Ech_INS_%60'
+'JJ/MM/AAAA'	'HHMMSS.SSS	UTC'	'hPa'	'celsius'	'%'	'watts/m2'	'watts/m2'	'watts/m2'	'watts/m2'	'millimeter/hour'	'mm/h'	'degree'	'meter/second'	'degree'	'meter/second'	'g/m3'	'none'
+#END OF PARAMETER LIST#

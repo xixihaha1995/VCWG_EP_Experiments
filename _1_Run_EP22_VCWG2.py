@@ -25,7 +25,7 @@ def run_ep_api(input_config, input_uwgVariable, input_value):
             idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Albedo0.7.idf'
     else:
         idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName']
-
+    # print(f'os.getpid(): {os.getpid()}, idfFileName: ', idfFileName)
     epwFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['epwFileName']
     coordination.init_ep_api()
     coordination.init_semaphore_lock_settings()
@@ -45,7 +45,14 @@ def run_ep_api(input_config, input_uwgVariable, input_value):
     coordination.ep_api.exchange.request_variable(state, "Site Outdoor Air Drybulb Temperature", "ENVIRONMENT")
     coordination.ep_api.exchange.request_variable(state, "Site Outdoor Air Humidity Ratio", "ENVIRONMENT")
 
-    output_path = os.path.join('.\\resources\\idf', f'{coordination.uwgVariable}{str(coordination.uwgVariableValue)}ep_outputs')
+    if coordination.uwgVariableValue > 0:
+        str_variable = 'positive' + str(abs(coordination.uwgVariableValue))
+    elif coordination.uwgVariableValue < 0:
+        str_variable = 'negative' + str(abs(coordination.uwgVariableValue))
+    else:
+        str_variable = '0'
+    output_path = os.path.join('.\\resources\\idf', f'{coordination.uwgVariable}{str_variable}ep_outputs')
+    # print(f'os.getpid(): {os.getpid()},output_path:{output_path}')
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
     idfFilePath = os.path.join('.\\resources\\idf', idfFileName)
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath

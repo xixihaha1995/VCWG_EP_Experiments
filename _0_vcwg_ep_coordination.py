@@ -2,7 +2,7 @@ import threading, sys, configparser, os
 import numpy as np, datetime
 
 save_path_clean = False
-
+uwgVariable, uwgVariableValue = 0, 0
 sys.path.insert(0,'C:\EnergyPlusV22-1-0')
 from pyenergyplus.api import EnergyPlusAPI
 def init_ep_api():
@@ -217,10 +217,17 @@ def BEMCalc_Element(VerticalProfUrban,BEM, it, simTime, FractionsRoof, Geometry_
         if count % 2 == 0:
             f2.write(fmt2)
     '''
+    if uwgVariableValue > 0:
+        str_variable = 'positive' + str(abs(uwgVariableValue))
+    elif uwgVariableValue < 0:
+        str_variable = 'negative' + str(abs(uwgVariableValue))
+    else:
+        str_variable = '0'
+
     data_saving_path = os.path.join(project_path, 'A_prepost_processing','sensitivity_saving',
                                     config['_0_vcwg_ep_coordination.py']['site_location'],
                                     config['sensitivity']['theme'],
-                                    uwgVariable+ f'{str(uwgVariableValue)}.csv')
+                                    uwgVariable+ f'{str_variable}.csv')
     global save_path_clean
     if os.path.exists(data_saving_path) and not save_path_clean:
         os.remove(data_saving_path)
@@ -240,7 +247,7 @@ def BEMCalc_Element(VerticalProfUrban,BEM, it, simTime, FractionsRoof, Geometry_
             header_str = 'cur_datetime,WallshadeT,WalllitT,RoofT,canTemp,senWaste,MeteoData.Tatm,MeteoData.Pre,'
             for i in mapped_indices:
                 header_str += 'TempProf_cur[%d],' % i + 'PresProf_cur[%d],' % i
-            header_str = header_str[:-1] + '\n'
+            header_str  += '\n'
             f1.write(header_str)
 
     # write the data

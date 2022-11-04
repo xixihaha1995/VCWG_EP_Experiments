@@ -3,6 +3,97 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\albedo\albedo0.25.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\albedo\albedo0.7.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\canyonWidth9ToRoofWidth\Width_roof18.2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\canyonWidth9ToRoofWidth\Width_roof4.5.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\canyonWidth9ToRoofWidth\Width_roof9.0.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\canyonWidthToHeight15\Width_canyon15.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\canyonWidthToHeight15\Width_canyon30.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\canyonWidthToHeight15\Width_canyon8.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\cooling\VCWGCooling_IDFCooling.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\cooling\VCWGCooling_IDFNoCooling.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\fveg_G\fveg_G0.0.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\fveg_G\fveg_G0.5.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\sensitivity_saving\CAPITOUL\fveg_G\fveg_G1.0.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\resources\DOERefBuildings\BLD10\BLD10_BuildingSummary.csv">
           <value>
             <Attribute>

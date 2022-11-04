@@ -1,4 +1,4 @@
-cur_datetime,WallshadeT,WalllitT,RoofT,canTemp,senWaste,MeteoData.Tatm,MeteoData.Pre,TempProf_cur[19],PresProf_cur[19]
+cur_datetime,WallshadeT,WalllitT,RoofT,canTemp,senWaste,MeteoData.Tatm,MeteoData.Pre,TempProf_cur[19],PresProf_cur[19],
 2004-06-01 00:05:00,291.484,290.969,290.057,290.704,0.000,287.334,99731.472,288.680,100089.700,
 2004-06-01 00:10:00,291.406,290.879,289.911,289.636,0.000,287.334,99729.111,288.271,100089.919,
 2004-06-01 00:15:00,291.446,290.926,290.097,290.088,0.000,287.334,99726.750,288.337,100089.878,

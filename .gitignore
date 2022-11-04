@@ -9,6 +9,7 @@ _01_ep_5zone/
 2_shared_zip/
 eplusssz.csv
 epluszsz.csv
+!A_prepost_processing/measurements/*.zip
 *.pkl
 *.pyc
 *.png
