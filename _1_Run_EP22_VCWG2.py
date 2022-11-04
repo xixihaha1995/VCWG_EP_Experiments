@@ -16,6 +16,7 @@ def run_ep_api(input_config, input_uwgVariable, input_value):
     coordination.init_semaphore_lock_settings()
     coordination.init_variables_for_vcwg_ep()
     state = coordination.ep_api.state_manager.new_state()
+    print("api_instance: ", coordination.ep_api)
     coordination.psychrometric=coordination.ep_api.functional.psychrometrics(state)
     coordination.ep_api.runtime.callback_begin_zone_timestep_before_set_current_weather(state,
                                                                                         time_step_handlers.overwrite_ep_weather)
@@ -29,7 +30,8 @@ def run_ep_api(input_config, input_uwgVariable, input_value):
     coordination.ep_api.exchange.request_variable(state, "Site Wind Direction", "ENVIRONMENT")
     coordination.ep_api.exchange.request_variable(state, "Site Outdoor Air Drybulb Temperature", "ENVIRONMENT")
     coordination.ep_api.exchange.request_variable(state, "Site Outdoor Air Humidity Ratio", "ENVIRONMENT")
-    output_path = os.path.join('.\\resources\\idf', 'ep_outputs')
+
+    output_path = os.path.join('.\\resources\\idf', f'{coordination.uwgVariable}{str(coordination.uwgVariableValue)}ep_outputs')
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
     idfFilePath = os.path.join('.\\resources\\idf', idfFileName)
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
@@ -39,24 +41,5 @@ def info(title):
     print('module name:', __name__)
     print('parent process:', os.getppid())
     print('process id:', os.getpid())
-# the __main__ will be executed when the script is run directly
-# when the script is imported, the __main__ will not be executed, we need change the __main__ to a function
-# def run(input_config, input_uwgVariable, input_value):
-#     info('main line')
-#     # global epwFileName, idfFileName
-#     # coordination.read_ini(input_config, input_uwgVariable, input_value)
-#     # epwFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['epwFileName']
-#     # idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName']
-#
-#     # Lichen: init the synchronization lock related settings: locks, shared variables.
-#     # coordination.init_ep_api()
-#     # coordination.init_semaphore_lock_settings()
-#     # coordination.init_variables_for_vcwg_ep()
-#
-#     # Lichen: run ep_thread first, wait for EP warm up and ep_thread will call run VCWG_thread
-#     ep_thread = Process(target=run_ep_api)
-#     ep_thread.start()
-#     # Lichen: wait for ep_thread to finish to post process some accumulated records
-#     ep_thread.join()
 
 
