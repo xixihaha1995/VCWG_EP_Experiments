@@ -22,9 +22,9 @@ def run_vcwg():
     # # Case name to append output file names with
     # case = '_BSPA_Refinement_M3ing_Basel_MOST'
     # # case = '_BSPR_Refinement_M2_Basel_MOST'
-    epwFileName = 'Capitoul.epw'
+    epwFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['epwFileName']
     TopForcingFileName = None
-    VCWGParamFileName = 'initialize_Capitoul.uwg'
+    VCWGParamFileName = coordination.config['_1_ep_time_step_handler.py']['VCWGParamFileName']
     ViewFactorFileName = f'{coordination.uwgVariable}{str(coordination.uwgVariableValue)}ViewFactor_Capitoul_MOST.txt'
     # Case name to append output file names with
     case = 'Capitoul_MOST'
