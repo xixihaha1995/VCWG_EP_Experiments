@@ -13,15 +13,6 @@ ep_last_accumulated_time_index_in_seconds = 0
 ep_last_call_time_seconds = 0
 
 def run_vcwg():
-    #epwFileName = 'Basel.epw'
-    # TopForcingFileName = None
-    # VCWGParamFileName = '_case6_initialize_Basel_BSPA_MOST.uwg'
-    # # VCWGParamFileName = '_case5_initialize_Basel_BSPR_MOST.uwg'
-    # ViewFactorFileName = '_case6_BSPA_ViewFactor_Basel_MOST.txt'
-    # # ViewFactorFileName = '_case5_BSPR_ViewFactor_Basel_MOST.txt'
-    # # Case name to append output file names with
-    # case = '_BSPA_Refinement_M3ing_Basel_MOST'
-    # # case = '_BSPR_Refinement_M2_Basel_MOST'
     epwFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['epwFileName']
     TopForcingFileName = None
     VCWGParamFileName = coordination.config['_1_ep_time_step_handler.py']['VCWGParamFileName']

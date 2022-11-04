@@ -414,8 +414,16 @@ def Data_Site(InputFile):
     SoilCal = Soil_Calculations()
 
     ipd = read_VCWG_param(InputFile)
-    ipd[coordination.uwgVariable] = coordination.uwgVariableValue
-
+    if coordination.uwgVariable == 'fveg_G':
+        ipd[coordination.uwgVariable] = coordination.uwgVariableValue
+        ipd['fimp_G'] = 1 - ipd['fveg_G']
+    elif coordination.uwgVariable == 'albedo':
+        ipd['aimp_R'] = coordination.uwgVariableValue
+        ipd['abare_G'] = coordination.uwgVariableValue
+        ipd['aimp_G'] = coordination.uwgVariableValue
+        ipd['albedo_W'] = coordination.uwgVariableValue
+    else:
+        ipd[coordination.uwgVariable] = coordination.uwgVariableValue
     # Rural model parameters
     class RSMParam_Def():
         pass

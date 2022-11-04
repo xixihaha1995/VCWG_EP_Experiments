@@ -9,14 +9,28 @@ def run_ep_api(input_config, input_uwgVariable, input_value):
     info('main line')
     global epwFileName, idfFileName
     coordination.read_ini(input_config, input_uwgVariable, input_value)
-    epwFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['epwFileName']
-    idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName']
+    if coordination.config['sensitivity']['uwgVariable'] == 'theta_canyon':
+        if input_value == -56:
+            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Ori+34.idf'
+        elif input_value == 0:
+            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Ori0.idf'
+        elif input_value == 56:
+            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Ori-34.idf'
+    elif coordination.config['sensitivity']['uwgVariable'] == 'albedo':
+        if input_value == 0.05:
+            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Albedo0.05.idf'
+        elif input_value == 0.25:
+            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Albedo0.25.idf'
+        elif input_value == 0.7:
+            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Albedo0.7.idf'
+    else:
+        idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName']
 
+    epwFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['epwFileName']
     coordination.init_ep_api()
     coordination.init_semaphore_lock_settings()
     coordination.init_variables_for_vcwg_ep()
     state = coordination.ep_api.state_manager.new_state()
-    print("api_instance: ", coordination.ep_api)
     coordination.psychrometric=coordination.ep_api.functional.psychrometrics(state)
     coordination.ep_api.runtime.callback_begin_zone_timestep_before_set_current_weather(state,
                                                                                         time_step_handlers.overwrite_ep_weather)
