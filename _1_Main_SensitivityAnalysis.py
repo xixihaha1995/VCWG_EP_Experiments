@@ -22,8 +22,8 @@ if __name__ == '__main__':
                        "SensitivityCAPITOUL_CanyonWidthToRoofWidth.ini"
     read_ini(sensitivity_file)
     uwgVariable = config['sensitivity']['uwgVariable']
-    value_list = [int(i) for i in config['sensitivity']['value_list'].split(',')]
+    value_list = [float(i) for i in config['sensitivity']['value_list'].split(',')]
     for value in value_list:
         p = Process(target=ByPass.run_ep_api,
-                    args=(config,uwgVariable, int(value)))
+                    args=(config,uwgVariable, value))
         p.start()
