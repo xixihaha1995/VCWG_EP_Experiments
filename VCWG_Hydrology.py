@@ -175,16 +175,16 @@ class VCWG_Hydro(object):
         # --------------------------
         # Define BEM for each DOE type (read the fraction)
         # Open pickle file in binary form
-        refDOE, refBEM, refSchedule = readDOE(False)
-        #multiprocessing safe open
-        if coordination.uwgVariableValue > 0:
-            str_variable = 'positive' + str(abs(coordination.uwgVariableValue))
-        elif coordination.uwgVariableValue < 0:
-            str_variable = 'negative' + str(abs(coordination.uwgVariableValue))
-        else:
-            str_variable = '0'
-        pklName = f'{coordination.uwgVariable}_{str_variable}readDOE.pkl'
-
+        # refDOE, refBEM, refSchedule = readDOE(False)
+        # #multiprocessing safe open
+        # if coordination.uwgVariableValue > 0:
+        #     str_variable = 'positive' + str(abs(coordination.uwgVariableValue))
+        # elif coordination.uwgVariableValue < 0:
+        #     str_variable = 'negative' + str(abs(coordination.uwgVariableValue))
+        # else:
+        #     str_variable = '0'
+        # pklName = f'{coordination.uwgVariable}_{str_variable}readDOE.pkl'
+        pklName = 'readDOE.pkl'
         readDOE_file = open(pklName, 'rb')
         refDOE = cPickle.load(readDOE_file)
         refBEM = cPickle.load(readDOE_file)

@@ -16,7 +16,8 @@ def run_vcwg():
     epwFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['epwFileName']
     TopForcingFileName = None
     VCWGParamFileName = coordination.config['_1_ep_time_step_handler.py']['VCWGParamFileName']
-    ViewFactorFileName = f'{coordination.uwgVariable}{str(coordination.uwgVariableValue)}ViewFactor_Capitoul_MOST.txt'
+    theme = coordination.config['sensitivity']['theme']
+    ViewFactorFileName = f'{theme}{coordination.uwgVariable}{str(coordination.uwgVariableValue)}ViewFactor_Capitoul_MOST.txt'
     # Case name to append output file names with
     case = 'Capitoul_MOST'
     '''

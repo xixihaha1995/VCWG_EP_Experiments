@@ -51,7 +51,8 @@ def run_ep_api(input_config, input_uwgVariable, input_value):
         str_variable = 'negative' + str(abs(coordination.uwgVariableValue))
     else:
         str_variable = '0'
-    output_path = os.path.join('.\\resources\\idf', f'{coordination.uwgVariable}{str_variable}ep_outputs')
+    theme = coordination.config['sensitivity']['theme']
+    output_path = os.path.join('.\\resources\\idf', f'{theme}{coordination.uwgVariable}{str_variable}ep_outputs')
     # print(f'os.getpid(): {os.getpid()},output_path:{output_path}')
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
     idfFilePath = os.path.join('.\\resources\\idf', idfFileName)

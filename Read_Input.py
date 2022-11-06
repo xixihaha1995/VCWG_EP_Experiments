@@ -417,7 +417,7 @@ def Data_Site(InputFile):
     if coordination.uwgVariable == 'fveg_G':
         ipd[coordination.uwgVariable] = coordination.uwgVariableValue
         ipd['fimp_G'] = 1 - ipd['fveg_G']
-    elif coordination.uwgVariable == 'albedo':
+    elif coordination.uwgVariable == 'albedo' or coordination.uwgVariable == 'albedoNoIDF':
         ipd['aimp_R'] = coordination.uwgVariableValue
         ipd['abare_G'] = coordination.uwgVariableValue
         ipd['aimp_G'] = coordination.uwgVariableValue
