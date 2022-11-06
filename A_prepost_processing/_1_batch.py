@@ -33,10 +33,10 @@ def get_measurements():
     rural_5min = rural_5min[compare_start_time:compare_end_time]
     #Air_Temperature_C, tpr_air2m_c13_cal_%60'_celsius, pre_air_c13_cal_%60'_hPa
     # initialize the dataframe, with the same index as rural, and 3 columns
-    comparison = pd.DataFrame(index=rural_5min.index, columns=['Rural_DBT_C', 'Rural_Pres_Pa', 'Urban_DBT_C'])
-    comparison['Rural_DBT_C'] = rural_5min['tpr_air2m_c13_cal_%60\'_celsius']
-    comparison['Rural_Pres_Pa'] = rural_5min['pre_air_c13_cal_%60\'_hPa'] * 100
+    comparison = pd.DataFrame(index=rural_5min.index, columns=['Urban_DBT_C', 'Rural_DBT_C'])
     comparison['Urban_DBT_C'] = urban_5min['Air_Temperature_C']
+    comparison['Rural_DBT_C'] = rural_5min['tpr_air2m_c13_cal_%60\'_celsius']
+
     comparison.to_csv('measurements\\' + processed_measurements)
     return comparison
 
@@ -51,10 +51,12 @@ def process_one_theme(theme, path):
     cvrmse_dict = {}
     for csv_file in csv_files:
         df = pd.read_csv(path + '\\' + csv_file, index_col=0, parse_dates=True)
+        df = df[compare_start_time:compare_end_time]
+        comparison['Rural_Pres_Pa'] = df['MeteoData.Pre']
         comparison['TempProf_' + csv_file] = df['TempProf_cur[19]']
         comparison['PresProf_' + csv_file] = df['PresProf_cur[19]']
-        comparison['RealTempProf_' + csv_file] = df['TempProf_cur[19]'] * \
-                                                 (df['PresProf_cur[19]'] / comparison['Rural_Pres_Pa']) ** 0.286 - 273.15
+        comparison['RealTempProf_' + csv_file] = (df['TempProf_cur[19]'] - 273.15)* \
+                                                 (df['PresProf_cur[19]'] / comparison['Rural_Pres_Pa']) ** 0.286
         cvrmse_dict[csv_file] = cvrmse(comparison['Urban_DBT_C'], comparison['RealTempProf_' + csv_file])
     # create new excel file, where the first sheet is the comparison, and the second sheet is the cvrmse
     if os.path.exists('sensitivity_saving\\' + theme + '\\comparison.xlsx'):
@@ -78,7 +80,7 @@ def process_all_themes():
 def main():
     global processed_measurements, compare_start_time, compare_end_time
     compare_start_time = '2004-06-01 00:05:00'
-    compare_end_time = '2004-06-30 23:55:00'
+    compare_end_time = '2004-06-30 22:55:00'
     processed_measurements = 'CAPITOUL_measurements_' + pd.to_datetime(compare_start_time).strftime('%Y-%m-%d') \
                              + '_to_' + pd.to_datetime(compare_end_time).strftime('%Y-%m-%d') + '.csv'
     process_all_themes()
