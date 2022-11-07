@@ -9,7 +9,7 @@ for each subfolder (which is a theme) under: sensitivity_saving\CAPITOUL:
         sheet 2:
         CVRMSE for each RealTempProf[SensorIdx] in each csv file
 '''
-import os, csv, numpy as np, pandas as pd
+import os, csv, numpy as np, pandas as pd, re
 
 
 def cvrmse(measurements, predictions):
@@ -53,9 +53,30 @@ def process_one_theme(theme, path):
         comparison['Rural_Pres_Pa'] = df['MeteoData.Pre']
         comparison['TempProf_' + csv_file] = df['TempProf_cur[19]']
         comparison['PresProf_' + csv_file] = df['PresProf_cur[19]']
-        comparison['RealTempProf_' + csv_file] = (df['TempProf_cur[19]'] - 273.15)* \
-                                                 (df['PresProf_cur[19]'] / comparison['Rural_Pres_Pa']) ** 0.286
-        cvrmse_dict[csv_file] = cvrmse(comparison['Urban_DBT_C'], comparison['RealTempProf_' + csv_file])
+        comparison['RealTempProf_' + csv_file] = (df['TempProf_cur[19]'])* \
+                                                 (df['PresProf_cur[19]'] / comparison['Rural_Pres_Pa']) ** 0.286 - 273.15
+        # from string csv_file extract float number based on regex
+        if theme == "cooling":
+            if "NoCooling" in csv_file:
+                key_name = "Without"
+            else:
+                key_name = "With"
+        else:
+            regex = r'(\d+\.?\d*)'
+            number = float(re.findall(regex, csv_file)[0])
+            if "positive" in csv_file:
+                number = "+" + str(number)
+            if "negative" in csv_file:
+                number = "-" + str(number)
+            if "theta" in csv_file:
+                if number == 0:
+                    key_name = "Ori_0"
+                else: key_name = str(number)
+            elif "NoIDF" in theme:
+                key_name = str(number) + "(NI)"
+            else:
+                key_name = str(number)
+        cvrmse_dict[key_name] = cvrmse(comparison['Urban_DBT_C'], comparison['RealTempProf_' + csv_file])
     # create new Excel file, where the first sheet is the comparison, and the second sheet is the cvrmse
     if os.path.exists('sensitivity_saving\\' + theme + '\\comparison.xlsx'):
         os.remove('sensitivity_saving\\' + theme + '\\comparison.xlsx')

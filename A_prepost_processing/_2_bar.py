@@ -1,45 +1,14 @@
 import os, pandas as pd
 import matplotlib.pyplot as plt
 
-# data_dict = {
-#     'Albedo(-)': {
-#         '0.05': 12.88,
-#         '0.25': 11.95,
-#         '0.7':10.59,
-#     },
-#     'WidthRoof(m)': {
-#         '4.5': 10.98,
-#         '9': 11.49,
-#         '18.2':11.96,
-#     },
-#     'WidthCanyon(m)' : {
-#         '8': 11.87,
-#         '15': 11.85,
-#         '30':11.17,
-#     },
-#     'fveg_G(-)' : {
-#         '0': 12.46,
-#         '0.5': 11.93,
-#         '1':11.79,
-#     },
-#     'IDFCooling(-)' : {
-#         'With': 11.94,
-#         'Without': 10.78,
-#     },
-#     'theta_canyon(deg)' : {
-#         '-56 deg': 11.96,
-#         '0 deg': 11.93,
-#         '56 deg':11.97,
-#     },
-# }
-
 def process_one_file(file_path, theme):
     # read sheet 'cvrmse'
     global data_all
     df = pd.read_excel(file_path, sheet_name='cvrmse')
     data_all[theme] = {}
-    for i in range(1,len(df)):
-        data_all[theme][df.iloc[i, 0]] = df.iloc[i, 1]
+    for i in range(len(df)):
+        # format the value to 4 decimal places
+        data_all[theme][df.iloc[i, 0]] = round(df.iloc[i, 1]* 100, 3)
 def process_one_theme(theme, theme_path):
     global data_all
     '''
@@ -75,13 +44,19 @@ def plot_one_dict(data_all, title, save_path):
     fix, ax = plt.subplots(figsize=(10, 6))
     x, y = [], []
     for theme, data in data_all.items():
+        # make all key to string
         x = list(data.keys())
+        x = [str(i) for i in x]
         # The value is fraction, so multiply 100
-        y = [i * 100 for i in list(data.values())]
+        y = list(data.values())
+        max_variation = max(y) - min(y)
         # group the sensitivity variable values by the sensitivity theme, where second layer keys are on top of each bar
         # this group share the same x-axis, theme
-        plt.bar(x, y, label=theme)
-    # set the x-axis label
+        # denote the y value on top of each bar
+        for i, v in enumerate(y):
+            ax.text(x[i], v + 0.1, str(v), ha='center', fontsize=8)
+        ax.bar(x, y, label=theme + ' [max variation: ' + str(round(max_variation, 3)) + '%]')
+            # set the x-axis label
     plt.xlabel('Sensitivity variable value')
     # set the y-axis label
     plt.ylabel('CVRMSE (%)')
@@ -97,8 +72,8 @@ def plot_one_dict(data_all, title, save_path):
 def main():
     data_all = process_all_themes()
     data_all_1, data_all_2 = split_data(data_all)
-    plot_one_dict(data_all_1, 'NoCooling', r'sensitivity_saving\CAPITOUL\NoCooling')
-    plot_one_dict(data_all_2, 'Cooling', r'sensitivity_saving\CAPITOUL\Cooling')
+    plot_one_dict(data_all_1, 'IDF Without Cooling', r'sensitivity_saving\CAPITOUL\NoCooling')
+    plot_one_dict(data_all_2, 'IDF With Cooling', r'sensitivity_saving\CAPITOUL\Cooling')
 
 if __name__ == '__main__':
     main()
