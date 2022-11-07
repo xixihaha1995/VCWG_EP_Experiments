@@ -9,9 +9,7 @@ for each subfolder (which is a theme) under: sensitivity_saving\CAPITOUL:
         sheet 2:
         CVRMSE for each RealTempProf[SensorIdx] in each csv file
 '''
-import os, csv, numpy as np
-
-import pandas as pd
+import os, csv, numpy as np, pandas as pd
 
 
 def cvrmse(measurements, predictions):
@@ -58,7 +56,7 @@ def process_one_theme(theme, path):
         comparison['RealTempProf_' + csv_file] = (df['TempProf_cur[19]'] - 273.15)* \
                                                  (df['PresProf_cur[19]'] / comparison['Rural_Pres_Pa']) ** 0.286
         cvrmse_dict[csv_file] = cvrmse(comparison['Urban_DBT_C'], comparison['RealTempProf_' + csv_file])
-    # create new excel file, where the first sheet is the comparison, and the second sheet is the cvrmse
+    # create new Excel file, where the first sheet is the comparison, and the second sheet is the cvrmse
     if os.path.exists('sensitivity_saving\\' + theme + '\\comparison.xlsx'):
         os.remove('sensitivity_saving\\' + theme + '\\comparison.xlsx')
     writer = pd.ExcelWriter(path + '\\' + theme + '_sensitivity_analysis.xlsx')
