@@ -49,12 +49,13 @@ def plot_one_dict(data_all, title, save_path):
         x = [str(i) for i in x]
         # The value is fraction, so multiply 100
         y = list(data.values())
+        max_variation = max(y) - min(y)
         # group the sensitivity variable values by the sensitivity theme, where second layer keys are on top of each bar
         # this group share the same x-axis, theme
         # denote the y value on top of each bar
         for i, v in enumerate(y):
             ax.text(x[i], v + 0.1, str(v), ha='center', fontsize=8)
-        ax.bar(x, y, label=theme)
+        ax.bar(x, y, label=theme + ' [max variation: ' + str(round(max_variation, 3)) + '%]')
             # set the x-axis label
     plt.xlabel('Sensitivity variable value')
     # set the y-axis label
