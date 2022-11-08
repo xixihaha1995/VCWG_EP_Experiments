@@ -39,3 +39,4 @@ EPTEMP-00000001/
 InputOutputReference.pdf
 EMSApplicationGuide.pdf
 0_docs/EMSApplicationGuide.pdf
+*.sqlite3
