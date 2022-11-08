@@ -96,6 +96,15 @@ def process_all_themes():
         process_one_theme(theme, all_themes_path + '\\' + theme)
     pass
 
+def sql_script():
+    # SELECT * FROM
+    # TabularDataWithStrings
+    # WHERE
+    # ReportName = 'AnnualBuildingUtilityPerformanceSummary'
+    # AND
+    # TableName = 'Site and Source Energy'
+    pass
+
 def main():
     global processed_measurements, compare_start_time, compare_end_time
     compare_start_time = '2004-06-01 00:05:00'
