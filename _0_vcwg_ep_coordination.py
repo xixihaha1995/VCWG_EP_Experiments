@@ -226,8 +226,7 @@ def BEMCalc_Element(VerticalProfUrban,BEM, it, simTime, FractionsRoof, Geometry_
 
     data_saving_path = os.path.join(project_path, 'A_prepost_processing','sensitivity_saving',
                                     config['_0_vcwg_ep_coordination.py']['site_location'],
-                                    config['sensitivity']['theme'],
-                                    uwgVariable+ f'{str_variable}.csv')
+                                    config['sensitivity']['theme'], f'{str_variable}.csv')
     global save_path_clean
     if os.path.exists(data_saving_path) and not save_path_clean:
         os.remove(data_saving_path)
