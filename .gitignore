@@ -26,7 +26,6 @@ EPTEMP-00000001/
 *.sql
 *.svg
 *.html
-*.htm
 *.mdd
 *.rdd
 *.shd

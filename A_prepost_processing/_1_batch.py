@@ -31,8 +31,16 @@ def get_measurements():
     comparison.to_csv('measurements\\' + processed_measurements)
     return comparison
 
-def read_sql(folder_name, report_name, table_name, row_name, col_name):
-    sql_path = os.path.join('..\\resources\\idf', folder_name+'ep_outputs', 'eplusout.sql')
+def read_sql(theme,csv_file, report_name, table_name, row_name, col_name, offline_bool):
+    if not offline_bool:
+        if "heta_canyon" in theme:
+            ep_folder_name = theme + 'theta_canyon' + re.search(r'(.*)\.csv', csv_file).group(1)
+        else:
+            ep_folder_name = theme + re.search(r'(.*)\.csv', csv_file).group(1)
+        sql_path = os.path.join('..\\resources\\idf', ep_folder_name+'ep_outputs', 'eplusout.sql')
+    else:
+        sql_path = os.path.join('.\\offline_saving\\CAPITOUL', theme, theme + re.search(r'(.*)\.csv', csv_file).group(1)
+                                +'ep_outputs', 'eplusout.offline.sql')
     if not os.path.exists(sql_path):
         return None
     abs_sql_path = os.path.abspath(sql_path)
@@ -51,7 +59,7 @@ def read_sql(folder_name, report_name, table_name, row_name, col_name):
     regex = r'(\d+\.?\d*)'
     number = float(re.findall(regex, results[0][1])[0])
     return number
-def process_one_theme(theme, path):
+def process_one_theme(theme, path, offline_bool = False):
     #find all csv files in the path, which does not contain 'save'
     csv_files = []
     for file in os.listdir(path):
@@ -94,19 +102,23 @@ def process_one_theme(theme, path):
                 key_name = str(number)
         cvrmse_dict['MeteoData.Pre_'+key_name] = cvrmse(comparison['Urban_DBT_C'], comparison['MeteoData.Pre_RealTempProf_' + csv_file])
         cvrmse_dict['Rural_Pres_Pa_'+key_name] = cvrmse(comparison['Urban_DBT_C'], comparison['Rural_Pres_Pa_RealTempProf_' + csv_file])
-        if "heta_canyon" in theme:
-            ep_folder_name = theme + 'theta_canyon' + re.search(r'(.*)\.csv', csv_file).group(1)
-            print(ep_folder_name)
-        else:
-            ep_folder_name = theme + re.search(r'(.*)\.csv', csv_file).group(1)
-        sql_dict[key_name] = read_sql(ep_folder_name, sql_report_name, sql_table_name, sql_row_name, sql_col_name)
+
+        sql_dict[key_name] = read_sql(theme,csv_file, sql_report_name, sql_table_name, sql_row_name, sql_col_name, offline_bool)
     # create new Excel file, where the first sheet is the comparison, and the second sheet is the cvrmse
     # third sheet is sql data
-    if os.path.exists('sensitivity_saving\\' + theme + '\\comparison.xlsx'):
-        os.remove('sensitivity_saving\\' + theme + '\\comparison.xlsx')
-    writer = pd.ExcelWriter(path + '\\' + theme + '_sensitivity_analysis.xlsx')
-    if os.path.exists('sensitivity_saving\\' + theme + '\\comparison.xlsx'):
-        os.remove('sensitivity_saving\\' + theme + '\\comparison.xlsx')
+    if not offline_bool:
+        if os.path.exists('sensitivity_saving\\' + theme + '\\comparison.xlsx'):
+            os.remove('sensitivity_saving\\' + theme + '\\comparison.xlsx')
+        writer = pd.ExcelWriter(path + '\\' + theme + '_sensitivity_analysis.xlsx')
+        if os.path.exists('sensitivity_saving\\' + theme + '\\comparison.xlsx'):
+            os.remove('sensitivity_saving\\' + theme + '\\comparison.xlsx')
+    else:
+        if os.path.exists('offline_saving\\' + theme + '\\comparison.xlsx'):
+            os.remove('offline_saving\\' + theme + '\\comparison.xlsx')
+        writer = pd.ExcelWriter(path + '\\' + theme + '_sensitivity_analysis.xlsx')
+        if os.path.exists('offline_saving\\' + theme + '\\comparison.xlsx'):
+            os.remove('offline_saving\\' + theme + '\\comparison.xlsx')
+
     comparison.to_excel(writer, 'comparison')
     # For the cvrmse, the index is the csv file name, and the column is the cvrmse
     cvrmse_df = pd.DataFrame.from_dict(cvrmse_dict, orient='index', columns=['cvrmse'])
@@ -116,14 +128,15 @@ def process_one_theme(theme, path):
     writer.save()
 
 def process_all_themes():
-    all_themes_path = r'sensitivity_saving\CAPITOUL'
-    all_themes = os.listdir(all_themes_path)
-    for theme in all_themes:
-        print(theme)
-        process_one_theme(theme, all_themes_path + '\\' + theme)
-    pass
+    online_themes_path = r'sensitivity_saving\CAPITOUL'
+    online_themes = os.listdir(online_themes_path)
+    for online_theme in online_themes:
+        process_one_theme(online_theme, online_themes_path + '\\' + online_theme)
 
-
+    offline_themes_path = r'offline_saving\CAPITOUL'
+    offline_themes = os.listdir(offline_themes_path)
+    for offline_theme in offline_themes:
+        process_one_theme(offline_theme, offline_themes_path + '\\' + offline_theme, offline_bool = True)
 
 def main():
     global processed_measurements, compare_start_time, compare_end_time, sql_report_name, sql_table_name, sql_row_name, sql_col_name
