@@ -1,15 +1,7 @@
-'''
-for each subfolder (which is a theme) under: sensitivity_saving\CAPITOUL:
-    do a theme based sensitivity analysis:
-    specifically:
-        sheet 1:
-        date-time, urban, rural, meteodata.pres,
-        (all other TempProf[SensorIdx] in each csv file)
-        (all other RealTempProf[SensorIdx] in each csv file)
-        sheet 2:
-        CVRMSE for each RealTempProf[SensorIdx] in each csv file
-'''
+
 import os, csv, numpy as np, pandas as pd, re
+import pathlib
+import sqlite3
 
 
 def cvrmse(measurements, predictions):
@@ -34,10 +26,31 @@ def get_measurements():
     comparison = pd.DataFrame(index=rural_5min.index, columns=['Urban_DBT_C', 'Rural_DBT_C'])
     comparison['Urban_DBT_C'] = urban_5min['Air_Temperature_C']
     comparison['Rural_DBT_C'] = rural_5min['tpr_air2m_c13_cal_%60\'_celsius']
+    comparison['Rural_Pres_Pa'] = rural_5min['pre_air_c13_cal_%60\'_hPa'] * 100
 
     comparison.to_csv('measurements\\' + processed_measurements)
     return comparison
 
+def read_sql(folder_name, report_name, table_name, row_name, col_name):
+    sql_path = os.path.join('..\\resources\\idf', folder_name+'ep_outputs', 'eplusout.sql')
+    if not os.path.exists(sql_path):
+        return None
+    abs_sql_path = os.path.abspath(sql_path)
+    sql_uri = '{}?mode=ro'.format(pathlib.Path(abs_sql_path).as_uri())
+    query = f"SELECT * FROM TabularDataWithStrings WHERE ReportName = '{report_name}' AND TableName = '{table_name}'" \
+            f" AND RowName = '{row_name}' AND ColumnName = '{col_name}'"
+    with sqlite3.connect(sql_uri, uri=True) as con:
+        cursor = con.cursor()
+        results = cursor.execute(query).fetchall()
+        if results:
+            pass
+        else:
+            msg = ("Cannot find the EnergyPlusVersion in the SQL file. "
+                   "Please inspect query used:\n{}".format(query))
+            raise ValueError(msg)
+    regex = r'(\d+\.?\d*)'
+    number = float(re.findall(regex, results[0][1])[0])
+    return number
 def process_one_theme(theme, path):
     #find all csv files in the path, which does not contain 'save'
     csv_files = []
@@ -47,14 +60,17 @@ def process_one_theme(theme, path):
     #process each csv file
     comparison = get_measurements()
     cvrmse_dict = {}
+    sql_dict = {}
     for csv_file in csv_files:
         df = pd.read_csv(path + '\\' + csv_file, index_col=0, parse_dates=True)
         df = df[compare_start_time:compare_end_time]
-        comparison['Rural_Pres_Pa'] = df['MeteoData.Pre']
+        comparison['MeteoData.Pre'] = df['MeteoData.Pre']
         comparison['TempProf_' + csv_file] = df['TempProf_cur[19]']
         comparison['PresProf_' + csv_file] = df['PresProf_cur[19]']
-        comparison['RealTempProf_' + csv_file] = (df['TempProf_cur[19]'])* \
-                                                 (df['PresProf_cur[19]'] / comparison['Rural_Pres_Pa']) ** 0.286 - 273.15
+        comparison['MeteoData.Pre_RealTempProf_' + csv_file] = (df['TempProf_cur[19]'])* \
+                                                 (df['PresProf_cur[19]'] / comparison['MeteoData.Pre']) ** 0.286 - 273.15
+        comparison['Rural_Pres_Pa_RealTempProf_' + csv_file] = (df['TempProf_cur[19]'])* \
+                                                    (df['PresProf_cur[19]'] / comparison['Rural_Pres_Pa']) ** 0.286 - 273.15
         # from string csv_file extract float number based on regex
         if theme == "cooling":
             if "NoCooling" in csv_file:
@@ -76,8 +92,12 @@ def process_one_theme(theme, path):
                 key_name = str(number) + "(NI)"
             else:
                 key_name = str(number)
-        cvrmse_dict[key_name] = cvrmse(comparison['Urban_DBT_C'], comparison['RealTempProf_' + csv_file])
+        cvrmse_dict['MeteoData.Pre_'+key_name] = cvrmse(comparison['Urban_DBT_C'], comparison['MeteoData.Pre_RealTempProf_' + csv_file])
+        cvrmse_dict['Rural_Pres_Pa_'+key_name] = cvrmse(comparison['Urban_DBT_C'], comparison['Rural_Pres_Pa_RealTempProf_' + csv_file])
+        ep_folder_name = theme + re.search(r'(.*)\.csv', csv_file).group(1)
+        sql_dict[key_name] = read_sql(ep_folder_name, sql_report_name, sql_table_name, sql_row_name, sql_col_name)
     # create new Excel file, where the first sheet is the comparison, and the second sheet is the cvrmse
+    # third sheet is sql data
     if os.path.exists('sensitivity_saving\\' + theme + '\\comparison.xlsx'):
         os.remove('sensitivity_saving\\' + theme + '\\comparison.xlsx')
     writer = pd.ExcelWriter(path + '\\' + theme + '_sensitivity_analysis.xlsx')
@@ -87,6 +107,8 @@ def process_one_theme(theme, path):
     # For the cvrmse, the index is the csv file name, and the column is the cvrmse
     cvrmse_df = pd.DataFrame.from_dict(cvrmse_dict, orient='index', columns=['cvrmse'])
     cvrmse_df.to_excel(writer, 'cvrmse')
+    sql_df = pd.DataFrame.from_dict(sql_dict, orient='index', columns=['total_site_energy'])
+    sql_df.to_excel(writer, 'sql')
     writer.save()
 
 def process_all_themes():
@@ -96,17 +118,14 @@ def process_all_themes():
         process_one_theme(theme, all_themes_path + '\\' + theme)
     pass
 
-def sql_script():
-    # SELECT * FROM
-    # TabularDataWithStrings
-    # WHERE
-    # ReportName = 'AnnualBuildingUtilityPerformanceSummary'
-    # AND
-    # TableName = 'Site and Source Energy'
-    pass
+
 
 def main():
-    global processed_measurements, compare_start_time, compare_end_time
+    global processed_measurements, compare_start_time, compare_end_time, sql_report_name, sql_table_name, sql_row_name, sql_col_name
+    sql_report_name = 'AnnualBuildingUtilityPerformanceSummary'
+    sql_table_name = 'Site and Source Energy'
+    sql_row_name = 'Total Site Energy'
+    sql_col_name = 'Total Energy'
     compare_start_time = '2004-06-01 00:05:00'
     compare_end_time = '2004-06-30 22:55:00'
     processed_measurements = 'CAPITOUL_measurements_' + pd.to_datetime(compare_start_time).strftime('%Y-%m-%d') \
