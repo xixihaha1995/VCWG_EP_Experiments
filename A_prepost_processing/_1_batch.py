@@ -133,10 +133,10 @@ def process_one_theme(theme, path, offline_bool = False):
     writer.save()
 
 def process_all_themes():
-    # online_themes_path = r'sensitivity_saving\CAPITOUL'
-    # online_themes = os.listdir(online_themes_path)
-    # for online_theme in online_themes:
-    #     process_one_theme(online_theme, online_themes_path + '\\' + online_theme)
+    online_themes_path = r'sensitivity_saving\CAPITOUL'
+    online_themes = os.listdir(online_themes_path)
+    for online_theme in online_themes:
+        process_one_theme(online_theme, online_themes_path + '\\' + online_theme)
 
     offline_themes_path = r'offline_saving\CAPITOUL'
     offline_themes = os.listdir(offline_themes_path)
