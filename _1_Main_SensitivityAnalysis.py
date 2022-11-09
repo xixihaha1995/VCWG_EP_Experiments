@@ -27,17 +27,30 @@ def one_ini(sensitivity_file_name):
         this_ini_process.append(p)
     return this_ini_process
 
-def for_loop_all_ini():
+def batch_run(ini_files):
     all_ini_process = []
-
-    ini_files2 = ["SensitivityCAPITOUL_theta_canyon.ini","SensitivityCAPITOUL_NoCooling_theta_canyon.ini"]
-    for ini_file in ini_files2:
+    for ini_file in ini_files:
         cur_ini_processes = one_ini(ini_file)
         all_ini_process.append(cur_ini_processes)
 
     for ini_processes in all_ini_process:
         for p in ini_processes:
             p.join()
+def for_loop_all_ini():
+    # todo_jobs = ["SensitivityCAPITOUL_albedo.ini", "SensitivityCAPITOUL_NoCooling_albedo.ini",
+    #              "SensitivityCAPITOUL_albedoNoIDF.ini", "SensitivityCAPITOUL_NoCooling_albedoNoIDF.ini",
+    #              "SensitivityCAPITOUL_CanyonWidthToCanyonHeight.ini",
+    #              "SensitivityCAPITOUL_NoCooling_CanyonWidthToCanyonHeight.ini",
+    #              "SensitivityCAPITOUL_CanyonWidthToRoofWidth.ini",
+    #              "SensitivityCAPITOUL_NoCooling_CanyonWidthToRoofWidth.ini",
+    #              "SensitivityCAPITOUL_fveg_G.ini", "SensitivityCAPITOUL_NoCooling_fveg_G.ini",
+    #              "SensitivityCAPITOUL_theta_canyon.ini", "SensitivityCAPITOUL_NoCooling_theta_canyon.ini"]
+    selected_jobs = ["SensitivityCAPITOUL_NoCooling_albedo.ini"]
+    nbr_job_for_one_batch = 1
+    for i in range(0,len(selected_jobs),nbr_job_for_one_batch):
+        print('Todo jobs',selected_jobs[i:i+nbr_job_for_one_batch])
+        batch_run(selected_jobs[i:i+nbr_job_for_one_batch])
+
 
 if __name__ == '__main__':
     for_loop_all_ini()
