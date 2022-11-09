@@ -94,7 +94,11 @@ def process_one_theme(theme, path):
                 key_name = str(number)
         cvrmse_dict['MeteoData.Pre_'+key_name] = cvrmse(comparison['Urban_DBT_C'], comparison['MeteoData.Pre_RealTempProf_' + csv_file])
         cvrmse_dict['Rural_Pres_Pa_'+key_name] = cvrmse(comparison['Urban_DBT_C'], comparison['Rural_Pres_Pa_RealTempProf_' + csv_file])
-        ep_folder_name = theme + re.search(r'(.*)\.csv', csv_file).group(1)
+        if "heta_canyon" in theme:
+            ep_folder_name = theme + 'theta_canyon' + re.search(r'(.*)\.csv', csv_file).group(1)
+            print(ep_folder_name)
+        else:
+            ep_folder_name = theme + re.search(r'(.*)\.csv', csv_file).group(1)
         sql_dict[key_name] = read_sql(ep_folder_name, sql_report_name, sql_table_name, sql_row_name, sql_col_name)
     # create new Excel file, where the first sheet is the comparison, and the second sheet is the cvrmse
     # third sheet is sql data
@@ -115,6 +119,7 @@ def process_all_themes():
     all_themes_path = r'sensitivity_saving\CAPITOUL'
     all_themes = os.listdir(all_themes_path)
     for theme in all_themes:
+        print(theme)
         process_one_theme(theme, all_themes_path + '\\' + theme)
     pass
 
