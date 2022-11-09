@@ -29,23 +29,8 @@ def one_ini(sensitivity_file_name):
 
 def for_loop_all_ini():
     all_ini_process = []
-    ini_files1 = ["SensitivityCAPITOUL_albedo.ini","SensitivityCAPITOUL_NoCooling_albedo.ini",
-                 "SensitivityCAPITOUL_albedoNoIDF.ini","SensitivityCAPITOUL_NoCooling_albedoNoIDF.ini",
-                 "SensitivityCAPITOUL_CanyonWidthToCanyonHeight.ini","SensitivityCAPITOUL_NoCooling_CanyonWidthToCanyonHeight.ini",]
-    for ini_file in ini_files1:
-        cur_ini_processes = one_ini(ini_file)
-        all_ini_process.append(cur_ini_processes)
 
-    print('all_ini_process',all_ini_process)
-    for ini_processes in all_ini_process:
-        print('ini_processes',ini_processes)
-        for p in ini_processes:
-            print('p',p)
-            p.join()
-
-    ini_files2 = ["SensitivityCAPITOUL_CanyonWidthToRoofWidth.ini","SensitivityCAPITOUL_NoCooling_CanyonWidthToRoofWidth.ini",
-                 "SensitivityCAPITOUL_fveg_G.ini","SensitivityCAPITOUL_NoCooling_fveg_G.ini",
-                 "SensitivityCAPITOUL_theta_canyon.ini","SensitivityCAPITOUL_NoCooling_theta_canyon.ini"]
+    ini_files2 = ["SensitivityCAPITOUL_theta_canyon.ini","SensitivityCAPITOUL_NoCooling_theta_canyon.ini"]
     for ini_file in ini_files2:
         cur_ini_processes = one_ini(ini_file)
         all_ini_process.append(cur_ini_processes)

@@ -422,6 +422,11 @@ def Data_Site(InputFile):
         ipd['abare_G'] = coordination.uwgVariableValue
         ipd['aimp_G'] = coordination.uwgVariableValue
         ipd['albedo_W'] = coordination.uwgVariableValue
+    elif coordination.uwgVariable == 'theta_canyon':
+        if coordination.uwgVariableValue == 180:
+            ipd['theta_canyon'] = 0
+        else:
+            ipd['theta_canyon'] = coordination.uwgVariableValue
     else:
         ipd[coordination.uwgVariable] = coordination.uwgVariableValue
     # Rural model parameters

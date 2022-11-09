@@ -10,12 +10,16 @@ def run_ep_api(input_config, input_uwgVariable, input_value):
     global epwFileName, idfFileName
     coordination.read_ini(input_config, input_uwgVariable, input_value)
     if coordination.config['sensitivity']['uwgVariable'] == 'theta_canyon':
-        if input_value == -56:
+        if input_value == -90:
+            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Ori0.idf'
+        elif input_value == -56:
             idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Ori+34.idf'
         elif input_value == 0:
-            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Ori0.idf'
-        elif input_value == 56:
-            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Ori-34.idf'
+            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Ori+90.idf'
+        elif input_value == 90:
+            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Ori+180.idf'
+        elif input_value == 180:
+            idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Ori+270.idf'
     elif coordination.config['sensitivity']['uwgVariable'] == 'albedo':
         if input_value == 0.05:
             idfFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['idfFileName'][:-4] + '_Albedo0.05.idf'
