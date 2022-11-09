@@ -39,8 +39,13 @@ def read_sql(theme,csv_file, report_name, table_name, row_name, col_name, offlin
             ep_folder_name = theme + re.search(r'(.*)\.csv', csv_file).group(1)
         sql_path = os.path.join('..\\resources\\idf', ep_folder_name+'ep_outputs', 'eplusout.sql')
     else:
-        sql_path = os.path.join('.\\offline_saving\\CAPITOUL', theme, theme + re.search(r'(.*)\.csv', csv_file).group(1)
-                                +'ep_outputs', 'eplusout.offline.sql')
+        csv_name = re.search(r'(.*)\.csv', csv_file).group(1)
+        current_path = os.path.join('.\\offline_saving\\CAPITOUL', theme)
+        # from all the folders in the current path, find the one that contains the csv file
+        for folder in os.listdir(current_path):
+            if csv_name in folder and 'ep_outputs' in folder:
+                sql_path = os.path.join(current_path, folder, 'eplusout.sql')
+                break
     if not os.path.exists(sql_path):
         return None
     abs_sql_path = os.path.abspath(sql_path)
@@ -128,10 +133,10 @@ def process_one_theme(theme, path, offline_bool = False):
     writer.save()
 
 def process_all_themes():
-    online_themes_path = r'sensitivity_saving\CAPITOUL'
-    online_themes = os.listdir(online_themes_path)
-    for online_theme in online_themes:
-        process_one_theme(online_theme, online_themes_path + '\\' + online_theme)
+    # online_themes_path = r'sensitivity_saving\CAPITOUL'
+    # online_themes = os.listdir(online_themes_path)
+    # for online_theme in online_themes:
+    #     process_one_theme(online_theme, online_themes_path + '\\' + online_theme)
 
     offline_themes_path = r'offline_saving\CAPITOUL'
     offline_themes = os.listdir(offline_themes_path)
