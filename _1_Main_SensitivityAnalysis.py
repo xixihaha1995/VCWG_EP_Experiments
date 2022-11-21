@@ -22,10 +22,10 @@ def one_ini(sensitivity_file_name):
     value_list = [i for i in config['Default']['value_list'].split(',')]
     this_ini_process = []
     for value in value_list:
-        p = Process(target=ByPass.run_ep_api, args=(config,experiments_theme, value))
-        p.start()
-        this_ini_process.append(p)
-        # ByPass.run_ep_api(config,experiments_theme, value)
+        # p = Process(target=ByPass.run_ep_api, args=(config,experiments_theme, value))
+        # p.start()
+        # this_ini_process.append(p)
+        ByPass.run_ep_api(config,experiments_theme, value)
 
     return this_ini_process
 
@@ -39,7 +39,7 @@ def batch_run(ini_files):
         for p in ini_processes:
             p.join()
 def for_loop_all_ini():
-    selected_jobs = ["IDFs_Size.ini"]
+    selected_jobs = ["IDFs_Type.ini"]
     nbr_job_for_one_batch = 1
     for i in range(0,len(selected_jobs),nbr_job_for_one_batch):
         print('Todo jobs',selected_jobs[i:i+nbr_job_for_one_batch])

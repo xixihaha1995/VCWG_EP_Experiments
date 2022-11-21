@@ -1,8 +1,7 @@
 import threading, sys, os
 import numpy as np, datetime
 
-sys.path.insert(0,'/usr/local/EnergyPlus-22-1-0/'),
-from pyenergyplus.api import EnergyPlusAPI
+
 
 
 def ini_all(input_config, experiments_theme, _controlValue):
@@ -24,7 +23,11 @@ def ini_all(input_config, experiments_theme, _controlValue):
     data_saving_path = os.path.join(project_path, 'A_prepost_processing',
                                     experiments_theme,f'{controlValue}.csv')
     ep_trivial_path = os.path.join(project_path, 'A_prepost_processing', experiments_theme, f"{controlValue}ep_trivial_outputs")
-
+    if config['Default']['operating_system'] == 'windows':
+        sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
+    else:
+        sys.path.insert(0, '/usr/local/EnergyPlus-22-1-0/'),
+    from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
     psychrometric = None
 

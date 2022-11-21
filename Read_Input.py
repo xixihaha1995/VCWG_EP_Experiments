@@ -435,17 +435,17 @@ def Data_Site(InputFile):
     if "MediumOffice" in coordination.controlValue:
         ipd['bld'][4][1] = 1
     elif "SmallOffice" in coordination.controlValue:
-        ipd['bld'][15][1] = 1
+        ipd['bld'][11][1] = 1
     elif "LargeOffice" in coordination.controlValue:
         ipd['bld'][3][1] = 1
     elif "MidRiseApartment" in coordination.controlValue:
         ipd['bld'][5][1] = 1
     elif "Stand-aloneRetail" in coordination.controlValue:
-        ipd['bld'][16][1] = 1
+        ipd['bld'][12][1] = 1
     elif "StripMall" in coordination.controlValue:
-        ipd['bld'][17][1] = 1
+        ipd['bld'][13][1] = 1
     elif "SuperMarket" in coordination.controlValue:
-        ipd['bld'][18][1] = 1
+        ipd['bld'][14][1] = 1
     # Rural model parameters
     class RSMParam_Def():
         pass
