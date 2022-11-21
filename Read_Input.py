@@ -414,21 +414,38 @@ def Data_Site(InputFile):
     SoilCal = Soil_Calculations()
 
     ipd = read_VCWG_param(InputFile)
-    if coordination.uwgVariable == 'fveg_G':
-        ipd[coordination.uwgVariable] = coordination.uwgVariableValue
-        ipd['fimp_G'] = 1 - ipd['fveg_G']
-    elif coordination.uwgVariable == 'albedo' or coordination.uwgVariable == 'albedoNoIDF':
-        ipd['aimp_R'] = coordination.uwgVariableValue
-        ipd['abare_G'] = coordination.uwgVariableValue
-        ipd['aimp_G'] = coordination.uwgVariableValue
-        ipd['albedo_W'] = coordination.uwgVariableValue
-    elif coordination.uwgVariable == 'theta_canyon':
-        if coordination.uwgVariableValue == 180:
-            ipd['theta_canyon'] = 0
-        else:
-            ipd['theta_canyon'] = coordination.uwgVariableValue
-    else:
-        ipd[coordination.uwgVariable] = coordination.uwgVariableValue
+    # # Building type (pre-80's build, 80's-present build, new) (0 or 1)
+    # bld,
+    # 0, 0, 0,  # FullServiceRestaurant
+    # 0, 0, 0,  # Hospital
+    # 0, 0, 0,  # LargeHotel
+    # 0, 0, 0,  # LargeOffice
+    # 0, 0, 0,  # MediumOffice
+    # 0, 1, 0,  # MidRiseApartment
+    # 0, 0, 0,  # OutPatient
+    # 0, 0, 0,  # PrimarySchool
+    # 0, 0, 0,  # QuickServiceRestaurant
+    # 0, 0, 0,  # SecondarySchool
+    # 0, 0, 0,  # SmallHotel
+    # 0, 0, 0,  # SmallOffice
+    # 0, 0, 0,  # Stand-aloneRetail
+    # 0, 0, 0,  # StripMall
+    # 0, 0, 0,  # SuperMarket
+    # 0, 0, 0,  # Warehouse
+    if "MediumOffice" in coordination.controlValue:
+        ipd['bld'][4][1] = 1
+    elif "SmallOffice" in coordination.controlValue:
+        ipd['bld'][15][1] = 1
+    elif "LargeOffice" in coordination.controlValue:
+        ipd['bld'][3][1] = 1
+    elif "MidRiseApartment" in coordination.controlValue:
+        ipd['bld'][5][1] = 1
+    elif "Stand-aloneRetail" in coordination.controlValue:
+        ipd['bld'][16][1] = 1
+    elif "StripMall" in coordination.controlValue:
+        ipd['bld'][17][1] = 1
+    elif "SuperMarket" in coordination.controlValue:
+        ipd['bld'][18][1] = 1
     # Rural model parameters
     class RSMParam_Def():
         pass

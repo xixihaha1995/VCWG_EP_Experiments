@@ -26,7 +26,6 @@ EPTEMP-00000001/
 *.sql
 *.svg
 *.html
-*.htm
 *.mdd
 *.rdd
 *.shd
@@ -39,3 +38,4 @@ EPTEMP-00000001/
 InputOutputReference.pdf
 EMSApplicationGuide.pdf
 0_docs/EMSApplicationGuide.pdf
+*.sqlite3

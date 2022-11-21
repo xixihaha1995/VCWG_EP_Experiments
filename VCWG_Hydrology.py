@@ -444,20 +444,6 @@ class VCWG_Hydro(object):
             SunPosition,MeteoData,Anthropogenic,location,ParCalculation = \
                 ForcingData(self.MeteoDataRaw_intp,it, self.WBCanyon.SoilPotW, self.VCWGParamFileName,self.simTime)
             self.simTime.UpdateDate()
-            #print(self.simTime.hourDay)
-            #print(self.simTime.dt)
-            #print(self.simTime.timeForcing)
-            #print(self.simTime.month)
-            #print(self.simTime.day)
-            #print(self.simTime.days)
-            #print(self.simTime.timePrint)
-            #print(self.simTime.timeDay)
-            #print(self.simTime.timeSim)
-            #print(self.simTime.timeMax)
-            #print(self.simTime.nt)
-            #print(self.simTime.hourDay)
-            #print(self.simTime.secDay)
-            #print(it)
             inobis = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
             Esimtime = int((inobis[self.simTime.month - 1] + self.simTime.day - 1) * self.simTime.timeDay)+(it-1)*300/3600
             #print(Esimtime)
@@ -638,10 +624,10 @@ class VCWG_Hydro(object):
                 # Calculate one-point temperature and humidity in the canyon: Using 1-D profiles in the canyon
                 canTemp = numpy.mean(self.UCM.VerticalProfUrban.th[0:self.Geometry_m.nz_u])
                 canHum = numpy.mean(self.UCM.VerticalProfUrban.qn[0:self.Geometry_m.nz_u])
-                ### modified
-                self.BEM[i] = coordination.BEMCalc_Element(self.UCM.VerticalProfUrban,
-                                                                      self.BEM[i], it, self.simTime, self.FractionsRoof,
-                                                                      self.Geometry_m, MeteoData)
+
+                self.BEM[i].building.BEMCalc(canTemp, canHum, self.BEM[i], MeteoData, ParCalculation, self.simTime,
+                                             self.Geometry_m,
+                                             self.FractionsRoof, self.EBCanyon.SWR, self.UCM.VerticalProfUrban,it)
                 ###
                 # Electricity consumption of urban area [W]
                 self.BEM[i].ElecTotal = self.BEM[i].building.ElecTotal * self.BEM[i].fl_area

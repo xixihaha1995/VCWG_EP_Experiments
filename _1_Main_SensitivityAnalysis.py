@@ -18,41 +18,33 @@ def read_ini(config_file_name):
 def one_ini(sensitivity_file_name):
     info(f'main line{sensitivity_file_name}')
     read_ini(sensitivity_file_name)
-    uwgVariable = config['sensitivity']['uwgVariable']
-    value_list = [float(i) for i in config['sensitivity']['value_list'].split(',')]
+    experiments_theme = config['Default']['experiments_theme']
+    value_list = [i for i in config['Default']['value_list'].split(',')]
     this_ini_process = []
     for value in value_list:
-        p = Process(target=ByPass.run_ep_api, args=(config,uwgVariable, value))
+        p = Process(target=ByPass.run_ep_api, args=(config,experiments_theme, value))
         p.start()
         this_ini_process.append(p)
+        # ByPass.run_ep_api(config,experiments_theme, value)
+
     return this_ini_process
 
-def for_loop_all_ini():
+def batch_run(ini_files):
     all_ini_process = []
-    ini_files1 = ["SensitivityCAPITOUL_albedo.ini","SensitivityCAPITOUL_NoCooling_albedo.ini",
-                 "SensitivityCAPITOUL_albedoNoIDF.ini","SensitivityCAPITOUL_NoCooling_albedoNoIDF.ini",
-                 "SensitivityCAPITOUL_CanyonWidthToCanyonHeight.ini","SensitivityCAPITOUL_NoCooling_CanyonWidthToCanyonHeight.ini",]
-    for ini_file in ini_files1:
-        cur_ini_processes = one_ini(ini_file)
-        all_ini_process.append(cur_ini_processes)
-
-    print('all_ini_process',all_ini_process)
-    for ini_processes in all_ini_process:
-        print('ini_processes',ini_processes)
-        for p in ini_processes:
-            print('p',p)
-            p.join()
-
-    ini_files2 = ["SensitivityCAPITOUL_CanyonWidthToRoofWidth.ini","SensitivityCAPITOUL_NoCooling_CanyonWidthToRoofWidth.ini",
-                 "SensitivityCAPITOUL_fveg_G.ini","SensitivityCAPITOUL_NoCooling_fveg_G.ini",
-                 "SensitivityCAPITOUL_theta_canyon.ini","SensitivityCAPITOUL_NoCooling_theta_canyon.ini"]
-    for ini_file in ini_files2:
+    for ini_file in ini_files:
         cur_ini_processes = one_ini(ini_file)
         all_ini_process.append(cur_ini_processes)
 
     for ini_processes in all_ini_process:
         for p in ini_processes:
             p.join()
+def for_loop_all_ini():
+    selected_jobs = ["IDFs_Size.ini"]
+    nbr_job_for_one_batch = 1
+    for i in range(0,len(selected_jobs),nbr_job_for_one_batch):
+        print('Todo jobs',selected_jobs[i:i+nbr_job_for_one_batch])
+        batch_run(selected_jobs[i:i+nbr_job_for_one_batch])
+
 
 if __name__ == '__main__':
     for_loop_all_ini()
