@@ -22,10 +22,10 @@ def one_ini(sensitivity_file_name):
     value_list = [i for i in config['Default']['value_list'].split(',')]
     this_ini_process = []
     for value in value_list:
-        # p = Process(target=ByPass.run_ep_api, args=(config,experiments_theme, value))
-        # p.start()
-        # this_ini_process.append(p)
-        ByPass.run_ep_api(config,experiments_theme, value)
+        p = Process(target=ByPass.run_ep_api, args=(config,experiments_theme, value))
+        p.start()
+        this_ini_process.append(p)
+        # ByPass.run_ep_api(config,experiments_theme, value)
 
     return this_ini_process
 
