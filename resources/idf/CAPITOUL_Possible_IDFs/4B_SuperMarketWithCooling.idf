@@ -91,7 +91,7 @@
 
   Building,
     Ref Bldg SuperMarket Post1980_v1.3_5.0,  !- Name
-    0.0000,                  !- North Axis {deg}
+    34.0000,                  !- North Axis {deg}
     City,                    !- Terrain
     0.0400,                  !- Loads Convergence Tolerance Value {W}
     0.2000,                  !- Temperature Convergence Tolerance Value {deltaC}
@@ -101,13 +101,13 @@
 
   RunPeriod,
     RUNPERIOD 1,             !- Name
-    1,                       !- Begin Month
+    6,                       !- Begin Month
     1,                       !- Begin Day of Month
     ,                        !- Begin Year
-    12,                      !- End Month
-    31,                      !- End Day of Month
+    6,                      !- End Month
+    30,                      !- End Day of Month
     ,                        !- End Year
-    Sunday,                  !- Day of Week for Start Day
+    Tuesday,                  !- Day of Week for Start Day
     No,                      !- Use Weather File Holidays and Special Days
     No,                      !- Use Weather File Daylight Saving Period
     No,                      !- Apply Weekend Holiday Rule
@@ -254,18 +254,18 @@
     7,                       !- Shading Calculation Update Frequency
     15000;                   !- Maximum Figures in Shadow Overlap Calculations
 
-  Timestep,4;
+  Timestep,12;
 
 ! WeatherFileName=USA_NM_Albuquerque_TMY2.epw
 
   Site:Location,
-    USA NM-ALBUQUERQUE,      !- Name
-    35.03,                   !- Latitude {deg}
-    -106.62,                 !- Longitude {deg}
-    -7.00,                   !- Time Zone {hr}
-    1619;                    !- Elevation {m}
+    Toulouse,                !- Name
+    43.63,                   !- Latitude {deg}
+    1.37,                    !- Longitude {deg}
+    1,                       !- Time Zone {hr}
+    153;                     !- Elevation {m}
 
-! ALBUQUERQUE_NM_USA Annual Heating 99.6%, MaxDB=-9°C
+! ALBUQUERQUE_NM_USA Annual Heating 99.6%, MaxDB=-9ï¿½C
 
   SizingPeriod:DesignDay,
     ALBUQUERQUE Ann Htg 99.6% Condns DB,  !- Name
@@ -295,7 +295,7 @@
     ,                        !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
     0.00;                    !- Sky Clearness
 
-! ALBUQUERQUE_NM_USA Annual Cooling (WB=>MDB) .4%, MDB=28.3°C WB=18.5°C
+! ALBUQUERQUE_NM_USA Annual Cooling (WB=>MDB) .4%, MDB=28.3ï¿½C WB=18.5ï¿½C
 
   SizingPeriod:DesignDay,
     ALBUQUERQUE Ann Clg .4% Condns WB=>MDB,  !- Name
@@ -2647,32 +2647,32 @@
   ThermostatSetpoint:DualSetpoint,
     Bakery DualSPSched,      !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;             !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Deli DualSPSched,        !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;             !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     DryStorage DualSPSched,  !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;             !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Office DualSPSched,      !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;             !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Produce DualSPSched,     !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;             !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Sales DualSPSched,       !- Name
     HTGSETP_SCH,             !- Heating Setpoint Temperature Schedule Name
-    CLGSETP_SCH;             !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;             !- Cooling Setpoint Temperature Schedule Name
 
   SetpointManager:SingleZone:Reheat,
     SupAirTemp MngrBakery,   !- Name
@@ -4274,7 +4274,7 @@
 ! ***SCHEDULES***
 
   Schedule:Compact,
-    CLGSETP_SCH,             !- Name
+    CLGSETP_SCH_WithCooling,             !- Name
     Temperature,             !- Schedule Type Limits Name
     Through: 12/31,          !- Field 1
     For WinterDesignDay,     !- Field 2
@@ -4283,6 +4283,17 @@
     Until: 6:00,30.0,        !- Field 6
     Until: 22:00,24.0,       !- Field 8
     Until: 24:00,30.0;       !- Field 10
+    
+    Schedule:Compact,
+    CLGSETP_SCH_WithoutCooling,             !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For WinterDesignDay,     !- Field 2
+    Until: 24:00,100,       !- Field 3
+    For: AllOtherDays,       !- Field 5
+    Until: 6:00,100,        !- Field 6
+    Until: 22:00,100,       !- Field 8
+    Until: 24:00,100;       !- Field 10
 
   Schedule:Compact,
     HTGSETP_SCH,             !- Name
@@ -6321,3 +6332,5 @@
 
   Output:Meter,WaterSystems:NaturalGas,hourly;
 
+  Output:Variable,*,Zone Air Temperature,timestep;
+  Output:Variable,*,Zone Air Humidity Ratio,timestep;

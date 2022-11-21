@@ -25,6 +25,10 @@ def run_ep_api(input_config, experiments_theme, input_value):
     elif 'LargeOffice' in input_value:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers.LargeOffice_get_ep_results)
+    else:
+        coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
+                                                                                      time_step_handlers.general_get_ep_results)
+
     coordination.ep_api.exchange.request_variable(state, "HVAC System Total Heat Rejection Energy", "SIMHVAC")
     coordination.ep_api.exchange.request_variable(state, "Site Wind Speed", "ENVIRONMENT")
     coordination.ep_api.exchange.request_variable(state, "Site Wind Direction", "ENVIRONMENT")

@@ -78,7 +78,7 @@
 
   Building,
     Ref Bldg Midrise Apartment Post1980_v1.3_5.0,  !- Name
-    0.0000,                  !- North Axis {deg}
+    34.0000,                  !- North Axis {deg}
     City,                    !- Terrain
     0.0400,                  !- Loads Convergence Tolerance Value {W}
     0.2000,                  !- Temperature Convergence Tolerance Value {deltaC}
@@ -88,13 +88,13 @@
 
   RunPeriod,
     RUNPERIOD 1,             !- Name
-    1,                       !- Begin Month
+    6,                       !- Begin Month
     1,                       !- Begin Day of Month
     ,                        !- Begin Year
-    12,                      !- End Month
-    31,                      !- End Day of Month
+    6,                      !- End Month
+    30,                      !- End Day of Month
     ,                        !- End Year
-    Sunday,                  !- Day of Week for Start Day
+    Tuesday,                  !- Day of Week for Start Day
     No,                      !- Use Weather File Holidays and Special Days
     No,                      !- Use Weather File Daylight Saving Period
     No,                      !- Apply Weekend Holiday Rule
@@ -241,18 +241,18 @@
     7,                       !- Shading Calculation Update Frequency
     15000;                   !- Maximum Figures in Shadow Overlap Calculations
 
-  Timestep,6;
+  Timestep,12;
 
 ! WeatherFileName=USA_NM_Albuquerque_TMY2.epw
 
   Site:Location,
-    USA NM-ALBUQUERQUE,      !- Name
-    35.03,                   !- Latitude {deg}
-    -106.62,                 !- Longitude {deg}
-    -7.00,                   !- Time Zone {hr}
-    1619;                    !- Elevation {m}
+    Toulouse,                !- Name
+    43.63,                   !- Latitude {deg}
+    1.37,                    !- Longitude {deg}
+    1,                       !- Time Zone {hr}
+    153;                     !- Elevation {m}
 
-! ALBUQUERQUE_NM_USA Annual Heating 99.6%, MaxDB=-9°C
+! ALBUQUERQUE_NM_USA Annual Heating 99.6%, MaxDB=-9ï¿½C
 
   SizingPeriod:DesignDay,
     ALBUQUERQUE Ann Htg 99.6% Condns DB,  !- Name
@@ -282,7 +282,7 @@
     ,                        !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
     0.00;                    !- Sky Clearness
 
-! ALBUQUERQUE_NM_USA Annual Cooling (WB=>MDB) .4%, MDB=28.3°C WB=18.5°C
+! ALBUQUERQUE_NM_USA Annual Cooling (WB=>MDB) .4%, MDB=28.3ï¿½C WB=18.5ï¿½C
 
   SizingPeriod:DesignDay,
     ALBUQUERQUE Ann Clg .4% Condns WB=>MDB,  !- Name
@@ -9346,37 +9346,37 @@
   ThermostatSetpoint:DualSetpoint,
     G N1 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     G N2 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     G NE Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     G NW Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     G S1 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     G S2 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     G SW Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     M Corridor DualSPSched,  !- Name
@@ -9386,47 +9386,47 @@
   ThermostatSetpoint:DualSetpoint,
     M N1 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     M N2 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     M NE Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     M NW Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     M S1 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     M S2 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     M SE Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     M SW Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Office DualSPSched,      !- Name
     OFF_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    OFF_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    OFF_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     T Corridor DualSPSched,  !- Name
@@ -9436,42 +9436,42 @@
   ThermostatSetpoint:DualSetpoint,
     T N1 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     T N2 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     T NE Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     T NW Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     T S1 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     T S2 Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     T SE Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     T SW Apartment DualSPSched,  !- Name
     APT_HTGSETP_SCH,         !- Heating Setpoint Temperature Schedule Name
-    APT_CLGSETP_SCH;         !- Cooling Setpoint Temperature Schedule Name
+    APT_CLGSETP_SCH_WithoutCooling;         !- Cooling Setpoint Temperature Schedule Name
 
   SetpointManager:SingleZone:Reheat,
     SupAirTemp Mngr G N1 Apartment,  !- Name
@@ -14627,11 +14627,18 @@
     UNTIL: 24:00,15.6;       !- Field 3
 
   Schedule:Compact,
-    APT_CLGSETP_SCH,         !- Name
+    APT_CLGSETP_SCH_WithCooling,         !- Name
     Temperature,             !- Schedule Type Limits Name
     THROUGH: 12/31,          !- Field 1
     FOR:AllDays,             !- Field 2
     UNTIL: 24:00,23.9;       !- Field 3
+    
+    Schedule:Compact,
+    APT_CLGSETP_SCH_WithoutCooling,         !- Name
+    Temperature,             !- Schedule Type Limits Name
+    THROUGH: 12/31,          !- Field 1
+    FOR:AllDays,             !- Field 2
+    UNTIL: 24:00,100;       !- Field 3
 
   Schedule:Compact,
     APT_HTGSETP_SCH,         !- Name
@@ -14652,9 +14659,10 @@
     UNTIL: 24:00,15.6,       !- Field 11
     FOR: AllOtherDays,       !- Field 13
     UNTIL: 24:00,15.6;       !- Field 14
+    
 
   Schedule:Compact,
-    OFF_CLGSETP_SCH,         !- Name
+    OFF_CLGSETP_SCH_WithCooling,         !- Name
     Temperature,             !- Schedule Type Limits Name
     THROUGH: 12/31,          !- Field 1
     FOR:Weekdays SummerDesignDay, !- Field 2
@@ -14665,6 +14673,19 @@
     UNTIL: 24:00,29.4,       !- Field 11
     FOR: AllOtherDays,       !- Field 13
     UNTIL: 24:00,29.4;       !- Field 14
+    
+    Schedule:Compact,
+    OFF_CLGSETP_SCH_WithoutCooling,         !- Name
+    Temperature,             !- Schedule Type Limits Name
+    THROUGH: 12/31,          !- Field 1
+    FOR:Weekdays SummerDesignDay, !- Field 2
+    UNTIL: 7:00,100,        !- Field 3
+    UNTIL: 8:00,100,        !- Field 5
+    UNTIL:17:00,100,        !- Field 7
+    UNTIL: 18:00,100,       !- Field 9
+    UNTIL: 24:00,100,       !- Field 11
+    FOR: AllOtherDays,       !- Field 13
+    UNTIL: 24:00,100;       !- Field 14
 
   Schedule:Compact,
     Dual Zone Control Type Sched,  !- Name
@@ -16176,4 +16197,6 @@
   Output:Meter,InteriorEquipment:NaturalGas,hourly;
 
   Output:Meter,WaterSystems:NaturalGas,hourly;
-
+  
+  Output:Variable,*,Zone Air Temperature,timestep;
+  Output:Variable,*,Zone Air Humidity Ratio,timestep;
