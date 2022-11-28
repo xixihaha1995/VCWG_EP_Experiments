@@ -13,15 +13,12 @@ ep_last_accumulated_time_index_in_seconds = 0
 ep_last_call_time_seconds = 0
 
 def run_vcwg():
-    if 'None' in coordination.config['Bypass']['epwFileName']:
-        epw_file_name = None
-    else:
-        epwFileName = coordination.config['Bypass']['epwFileName']
     if 'None' in coordination.config['Bypass']['TopForcingFileName']:
         TopForcingFileName = None
+        epwFileName = coordination.config['Bypass']['epwFileName']
     else:
+        epwFileName = None
         TopForcingFileName = coordination.config['Bypass']['TopForcingFileName']
-
     VCWGParamFileName = coordination.config['Bypass']['VCWGParamFileName']
     theme = coordination.config['Bypass']['experiments_theme']
     ViewFactorFileName = f'{theme}_ViewFactor.txt'

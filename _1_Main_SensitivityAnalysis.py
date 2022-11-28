@@ -23,8 +23,14 @@ def for_loop_all_ini():
     selected_jobs = ["BUBBLE_Ue1.ini","BUBBLE_Ue2.ini",
                      "Vancouver_Rural.ini","Vancouver_TopForcing.ini",
                      "CAPITOUL_WithCooling.ini","CAPITOUL_WithoutCooling.ini",]
-    selected_jobs = ["BUBBLE_Ue1.ini"]
-    nbr_job_for_one_batch = 1
+    # selected_jobs = ["BUBBLE_Ue1.ini"]
+    # selected_jobs = ["BUBBLE_Ue2.ini"]
+    # selected_jobs = ["Vancouver_Rural.ini"]
+    # selected_jobs = ["Vancouver_TopForcing.ini"]
+    # selected_jobs = ["CAPITOUL_WithCooling.ini"]
+    # selected_jobs = ["CAPITOUL_WithoutCooling.ini"]
+
+    nbr_job_for_one_batch = 2
     for i in range(0,len(selected_jobs),nbr_job_for_one_batch):
         print('Todo jobs',selected_jobs[i:i+nbr_job_for_one_batch])
         batch_run(selected_jobs[i:i+nbr_job_for_one_batch])
