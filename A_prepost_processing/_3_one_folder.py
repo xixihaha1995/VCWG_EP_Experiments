@@ -345,13 +345,12 @@ def main():
         compare_start_time, compare_end_time, sql_report_name, sql_table_name, sql_row_name, sql_col_name
     global experiments_folder
     # experiments_folder = 'BUBBLE_debug'
-    experiments_folder = 'CAPITOUL_which_fractions_debug'
     experiments_folder = 'CAPITOUL_WithoutCooling_Bypass'
     experiments_folder = 'CAPITOUL_WithCooling_Bypass'
-    experiments_folder = 'BUBBLE_Ue1_Bypass'
-    experiments_folder = 'BUBBLE_Ue2_Bypass'
-    experiments_folder = 'Vancouver_TopForcing_Bypass'
-    experiments_folder = 'Vancouver_Rural_Bypass'
+    # experiments_folder = 'BUBBLE_Ue1_Bypass'
+    # experiments_folder = 'BUBBLE_Ue2_Bypass'
+    # experiments_folder = 'Vancouver_TopForcing_Bypass'
+    # experiments_folder = 'Vancouver_Rural_Bypass'
     sql_report_name = 'AnnualBuildingUtilityPerformanceSummary'
     sql_table_name = 'Site and Source Energy'
     sql_row_name = 'Total Site Energy'
