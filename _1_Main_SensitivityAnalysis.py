@@ -12,7 +12,7 @@ def info(title):
 def batch_run(ini_files):
     all_ini_process = []
     for ini_file in ini_files:
-        p = Process(target=ByPass.run_ep_api, args=(ini_files))
+        p = Process(target=ByPass.run_ep_api, args=([ini_file]))
         p.start()
         all_ini_process.append([p])
 
