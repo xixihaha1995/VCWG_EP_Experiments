@@ -67,7 +67,7 @@ def pomme_read_one_file(file_path):
 
 def pomme_read_all_files():
     # '_4_measurements/CAPITOUL/CAPITOUL_including_City(Tower)'
-    measure_pomme_folder = 'measurements\\CAPITOUL_including_City(Tower)'
+    measure_pomme_folder = '_measurements\\CAPITOUL_including_City(Tower)'
     df = pd.DataFrame()
     file_name_str = 'TaYYYYMM_MAT_%60.asc' # where MM stands for the month
     #There are 11+2 files, from 200402 to 200502
@@ -152,7 +152,7 @@ def rural_get_one_file_data(file_path):
 
 def get_all_rural_files_data():
     # get the file path
-    file_path = r'measurements\CAPITOUL_including_Rural(Mondouzil)\Mo_BDD\Mo_BDD'
+    file_path = r'_measurements\CAPITOUL_including_Rural(Mondouzil)\Mo_BDD\Mo_BDD'
     # get the data from all the files
     df = pd.DataFrame()
     file_name_str = 'Mo_BDD_MM-2004.asc' # where MM stands for the month
@@ -173,12 +173,12 @@ def main():
     # df_zone7 = zone7_read_all_files()
     # df_zone7.to_csv('..\\_4_measurements\\CAPITOUL\\Mini_Zone7_Ori_12_min.csv')
     # df_pomme = pomme_read_all_files()
-    # df_pomme.to_csv('measurements\\Urban_Pomme_Ori_1_min.csv')
+    # df_pomme.to_csv('_measurements\\Urban_Pomme_Ori_1_min.csv')
 
     df_rural = get_all_rural_files_data()
-    df_rural.to_csv('measurements\\Rural_Ori_1_min.csv')
+    df_rural.to_csv('_measurements\\Rural_Ori_1_min.csv')
     df_rural.iloc[:, 2:] = df_rural.iloc[:, 2:].astype(float)
     df_rural_hourly = df_rural.resample('H').mean()
-    df_rural_hourly.to_csv('measurements\\Rural_Ori_1_hour.csv')
+    df_rural_hourly.to_csv('_measurements\\Rural_Ori_1_hour.csv')
 if __name__ == '__main__':
     main()

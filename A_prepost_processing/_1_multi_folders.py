@@ -11,10 +11,10 @@ def cvrmse(measurements, predictions):
     return cvrmse
 
 def get_measurements():
-    if os.path.exists('measurements\\' + processed_measurements):
-        return pd.read_csv('measurements\\' + processed_measurements, index_col=0, parse_dates=True)
-    urban_path = r'measurements\Urban_Pomme_Ori_1_min.csv'
-    rural_path = r'measurements\Rural_Ori_1_min.csv'
+    if os.path.exists('_measurements\\' + processed_measurements):
+        return pd.read_csv('_measurements\\' + processed_measurements, index_col=0, parse_dates=True)
+    urban_path = r'_measurements\Urban_Pomme_Ori_1_min.csv'
+    rural_path = r'_measurements\Rural_Ori_1_min.csv'
     urban = pd.read_csv(urban_path, index_col=0, parse_dates=True)
     rural = pd.read_csv(rural_path, index_col=0, parse_dates=True)
     urban_5min = urban.resample('5min').mean()
@@ -28,7 +28,7 @@ def get_measurements():
     comparison['Rural_DBT_C'] = rural_5min['tpr_air2m_c13_cal_%60\'_celsius']
     comparison['Rural_Pres_Pa'] = rural_5min['pre_air_c13_cal_%60\'_hPa'] * 100
 
-    comparison.to_csv('measurements\\' + processed_measurements)
+    comparison.to_csv('_measurements\\' + processed_measurements)
     return comparison
 
 def read_sql(theme,csv_file, report_name, table_name, row_name, col_name, offline_bool):
