@@ -252,7 +252,7 @@ def SmallOffice_get_ep_results(state):
         ep_last_call_time_seconds = curr_sim_time_in_seconds
         hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state,
                                                                                 hvac_heat_rejection_sensor_handle)
-        hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.smallOfficeBld_footprint_area_m2
+        hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
 
         time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)
@@ -277,7 +277,7 @@ def SmallOffice_get_ep_results(state):
         heat_consumption_w_m2_value = heat_consumption_w_value / zone_floor_area_m2
 
         elec_bld_meter_j_hourly = coordination.ep_api.exchange.get_variable_value(state, elec_bld_meter_handle)
-        elec_bld_meter_w_m2 = elec_bld_meter_j_hourly / 3600 / coordination.smallOfficeBld_footprint_area_m2
+        elec_bld_meter_w_m2 = elec_bld_meter_j_hourly / 3600 / coordination.footprint_area_m2
 
         core_flr_Text_c = coordination.ep_api.exchange.get_variable_value(state, core_flr_Text_handle)
         pre1_flr_Text_c = coordination.ep_api.exchange.get_variable_value(state, pre1_flr_Text_handle)
@@ -503,7 +503,7 @@ def MediumOffice_get_ep_results(state):
         accumulated_time_in_seconds = curr_sim_time_in_seconds - ep_last_call_time_seconds
         ep_last_call_time_seconds = curr_sim_time_in_seconds
         hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state,hvac_heat_rejection_sensor_handle)
-        hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.mediumOfficeBld_footprint_area_m2
+        hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
 
         time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)
@@ -630,7 +630,7 @@ def LargeOffice_get_ep_results(state):
         accumulated_time_in_seconds = curr_sim_time_in_seconds - ep_last_call_time_seconds
         ep_last_call_time_seconds = curr_sim_time_in_seconds
         hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state,hvac_heat_rejection_sensor_handle)
-        hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.mediumOfficeBld_footprint_area_m2
+        hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
 
         time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)
@@ -669,7 +669,7 @@ def general_get_ep_results(state):
         accumulated_time_in_seconds = curr_sim_time_in_seconds - ep_last_call_time_seconds
         ep_last_call_time_seconds = curr_sim_time_in_seconds
         hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state,hvac_heat_rejection_sensor_handle)
-        hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.mediumOfficeBld_footprint_area_m2
+        hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
 
         time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)
@@ -677,8 +677,4 @@ def general_get_ep_results(state):
         if not time_index_alignment_bool:
             coordination.sem2.release()
             return
-
-        coordination.ep_indoorTemp_C = coordination.ep_api.exchange.get_variable_value(state, zone_indor_temp_sensor_handle)
-        coordination.ep_indoorHum_Ratio = coordination.ep_api.exchange.get_variable_value(state,
-                                                                                   zone_indor_spe_hum_sensor_handle)
         coordination.sem3.release()

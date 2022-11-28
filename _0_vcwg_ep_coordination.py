@@ -13,7 +13,8 @@ def ini_all(input_config, experiments_theme, _controlValue):
         ep_indoorTemp_C, ep_sensWaste_w_m2_per_footprint_area, \
         ep_floor_Text_K, ep_floor_Tint_K, ep_roof_Text_K, ep_roof_Tint_K, \
         ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K, \
-        midRiseApartmentBld_floor_area_m2, mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2
+        mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
+        footprint_area_m2
     # find the project path
     config = input_config
     controlValue = _controlValue
@@ -43,9 +44,20 @@ def ini_all(input_config, experiments_theme, _controlValue):
     vcwg_wsp_mps = 0
     vcwg_wdir_deg = 0
 
-    midRiseApartmentBld_floor_area_m2 = 3135
-    smallOfficeBld_footprint_area_m2 = 511
-    mediumOfficeBld_footprint_area_m2 = 4982 / 3
+    if "SmallOffice" in controlValue:
+        footprint_area_m2 = 5500 * 0.09290304 / 1
+    elif "MediumOffice" in controlValue:
+        footprint_area_m2 = 53628 * 0.09290304 / 3
+    elif "LargeOffice" in controlValue:
+        footprint_area_m2 = 498588 * 0.09290304 / 12
+    elif "MidriseApartment" in controlValue:
+        footprint_area_m2 = 33740 * 0.09290304 / 4
+    elif "StandAloneRetail" in controlValue:
+        footprint_area_m2 = 24962 * 0.09290304 /1
+    elif "StripMall" in controlValue:
+        footprint_area_m2 = 22500 * 0.09290304 / 1
+    elif "SuperMarket" in controlValue:
+        footprint_area_m2 = 45000 * 0.09290304 / 1
 
     ep_indoorTemp_C = 20
     ep_sensWaste_w_m2_per_footprint_area = 0

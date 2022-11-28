@@ -37,7 +37,8 @@ def run_ep_api(input_config, experiments_theme, input_value):
 
     output_path = coordination.ep_trivial_path
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
-    idfFilePath = os.path.join('.\\resources\\idf\\CAPITOUL_Possible_IDFs', idfFileName)
+    idfs_path = coordination.config['Default']['idfs_path']
+    idfFilePath = os.path.join(f'.\\resources\\idf\\{idfs_path}', idfFileName)
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
     coordination.ep_api.runtime.run_energyplus(state, sys_args)
 def info(title):
@@ -45,5 +46,4 @@ def info(title):
     print('module name:', __name__)
     print('parent process:', os.getppid())
     print('process id:', os.getpid())
-
 
