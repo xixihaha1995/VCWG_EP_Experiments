@@ -93,7 +93,7 @@ SimulationControl,
 
 Building,
     Ref Bldg Midrise Apartment Post1980_v1.3_5.0,  !- Name
-    -25,                     !- North Axis {deg}
+    -20,                     !- North Axis {deg}
     City,                    !- Terrain
     0.0400,                  !- Loads Convergence Tolerance Value {W}
     0.2000,                  !- Temperature Convergence Tolerance Value {deltaC}
