@@ -13,13 +13,20 @@ ep_last_accumulated_time_index_in_seconds = 0
 ep_last_call_time_seconds = 0
 
 def run_vcwg():
-    epwFileName = coordination.config['_1_Main_Run_EP22_VCWG2.py']['epwFileName']
-    TopForcingFileName = None
-    VCWGParamFileName = coordination.config['_1_ep_time_step_handler.py']['VCWGParamFileName']
-    theme = coordination.config['Default']['experiments_theme']
-    ViewFactorFileName = f'{theme}_{str(coordination.controlValue)}ViewFactor.txt'
+    if 'None' in coordination.config['Bypass']['epwFileName']:
+        epw_file_name = None
+    else:
+        epwFileName = coordination.config['Bypass']['epwFileName']
+    if 'None' in coordination.config['Bypass']['TopForcingFileName']:
+        TopForcingFileName = None
+    else:
+        TopForcingFileName = coordination.config['Bypass']['TopForcingFileName']
+
+    VCWGParamFileName = coordination.config['Bypass']['VCWGParamFileName']
+    theme = coordination.config['Bypass']['experiments_theme']
+    ViewFactorFileName = f'{theme}_ViewFactor.txt'
     # Case name to append output file names with
-    case = 'Capitoul_MOST'
+    case = f'{theme}'
     '''
     epwFileName = None
     TopForcingFileName = 'Vancouver2008_ERA5_Jul.csv'

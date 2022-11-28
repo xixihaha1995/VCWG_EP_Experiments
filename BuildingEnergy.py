@@ -501,28 +501,34 @@ class Building(object):
             os.remove(coordination.data_saving_path)
             coordination.save_path_clean = True
 
-        cur_datetime = datetime.datetime.strptime(coordination.config['_0_vcwg_ep_coordination.py']['start_time'],
+        TempProf_cur = VerticalProfUrban.th
+        PresProf_cur = VerticalProfUrban.presProf
+        vcwg_needed_time_idx_in_seconds = it * simTime.dt
+        cur_datetime = datetime.datetime.strptime(coordination.config['__main__']['start_time'],
                                                   '%Y-%m-%d %H:%M:%S') + \
-                       datetime.timedelta(seconds=coordination.vcwg_needed_time_idx_in_seconds - simTime.dt)
+                       datetime.timedelta(seconds= vcwg_needed_time_idx_in_seconds)
+        # print('current time: ', cur_datetime)
         domain_height = len(TempProf_cur)
         vcwg_heights_profile = numpy.array([0.5 + i for i in range(domain_height)])
         mapped_indices = [numpy.argmin(numpy.abs(vcwg_heights_profile - i)) for i in coordination.sensor_heights]
 
-        # if not exist, create the file and write the header
         if not os.path.exists(coordination.data_saving_path):
             os.makedirs(os.path.dirname(coordination.data_saving_path), exist_ok=True)
             with open(coordination.data_saving_path, 'a') as f1:
                 # prepare the header string for different sensors
-                header_str = 'cur_datetime,sensWaste,MeteoData.Tatm,MeteoData.Pre,'
-                for i in mapped_indices:
-                    header_str += 'TempProf_cur[%d],' % i + 'PresProf_cur[%d],' % i
+                header_str = 'cur_datetime,canTemp,sensWaste,MeteoData.Tatm,MeteoData.Pre,'
+                for i in range(len(mapped_indices)):
+                    _temp_height = coordination.sensor_heights[i]
+                    header_str += f'TempProf_cur[{_temp_height}],'
+                for i in range(len(mapped_indices)):
+                    _temp_height = coordination.sensor_heights[i]
+                    header_str += f'PresProf_cur[{_temp_height}],'
                 header_str += '\n'
                 f1.write(header_str)
-
-        # write the data
+            # write the data
         with open(coordination.data_saving_path, 'a') as f1:
             fmt1 = "%s," * 1 % (cur_datetime) + \
-                   "%.3f," * 3 % (self.sensWaste, MeteoData.Tatm, MeteoData.Pre) + \
+                   "%.3f," * 4 % (canTemp,self.sensWaste, MeteoData.Tatm, MeteoData.Pre) + \
                    "%.3f," * 2 * len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
                                                              [PresProf_cur[i] for i in mapped_indices]) + '\n'
             f1.write(fmt1)

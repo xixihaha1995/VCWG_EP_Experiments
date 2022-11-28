@@ -1,11 +1,8 @@
+import configparser
 import threading, sys, os
-import numpy as np, datetime
 
-
-
-
-def ini_all(input_config, experiments_theme, _controlValue):
-    global config, project_path, save_path_clean, sensor_heights,ep_trivial_path, data_saving_path, controlValue, \
+def ini_all(sensitivity_file_name):
+    global config, project_path, save_path_clean, sensor_heights,ep_trivial_path, data_saving_path, bld_type,\
         ep_api, psychrometric,\
         sem0, sem1, sem2, sem3, \
         vcwg_needed_time_idx_in_seconds, \
@@ -16,14 +13,17 @@ def ini_all(input_config, experiments_theme, _controlValue):
         mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
         footprint_area_m2
     # find the project path
-    config = input_config
-    controlValue = _controlValue
+    config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass', sensitivity_file_name)
+    config.read(config_path)
+    bld_type = config['Bypass']['bld_type']
+    experiments_theme = config['Bypass']['experiments_theme']
     save_path_clean = False
-    sensor_heights = [int(i) for i in config['_0_vcwg_ep_coordination.py']['sensor_height_meter'].split(',')]
+    sensor_heights = [float(i) for i in config['Bypass']['sensor_height_meter'].split(',')]
     data_saving_path = os.path.join(project_path, 'A_prepost_processing',
-                                    experiments_theme,f'{controlValue}.csv')
-    ep_trivial_path = os.path.join(project_path, 'A_prepost_processing', experiments_theme, f"{controlValue}ep_trivial_outputs")
+                                    experiments_theme,'bypass_saving.csv')
+    ep_trivial_path = os.path.join(project_path, 'A_prepost_processing', experiments_theme, "ep_trivial_outputs")
     if config['Default']['operating_system'] == 'windows':
         sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
     else:
@@ -31,7 +31,6 @@ def ini_all(input_config, experiments_theme, _controlValue):
     from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
     psychrometric = None
-
     sem0 = threading.Semaphore(1)
     sem1 = threading.Semaphore(0)
     sem2 = threading.Semaphore(0)
@@ -44,19 +43,19 @@ def ini_all(input_config, experiments_theme, _controlValue):
     vcwg_wsp_mps = 0
     vcwg_wdir_deg = 0
 
-    if "SmallOffice" in controlValue:
+    if "SmallOffice" in bld_type:
         footprint_area_m2 = 5500 * 0.09290304 / 1
-    elif "MediumOffice" in controlValue:
+    elif "MediumOffice" in bld_type:
         footprint_area_m2 = 53628 * 0.09290304 / 3
-    elif "LargeOffice" in controlValue:
+    elif "LargeOffice" in bld_type:
         footprint_area_m2 = 498588 * 0.09290304 / 12
-    elif "MidriseApartment" in controlValue:
+    elif "MidriseApartment" in bld_type:
         footprint_area_m2 = 33740 * 0.09290304 / 4
-    elif "StandAloneRetail" in controlValue:
+    elif "StandAloneRetail" in bld_type:
         footprint_area_m2 = 24962 * 0.09290304 /1
-    elif "StripMall" in controlValue:
+    elif "StripMall" in bld_type:
         footprint_area_m2 = 22500 * 0.09290304 / 1
-    elif "SuperMarket" in controlValue:
+    elif "SuperMarket" in bld_type:
         footprint_area_m2 = 45000 * 0.09290304 / 1
 
     ep_indoorTemp_C = 20

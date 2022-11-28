@@ -3,6 +3,7 @@ import math
 from Radiation_Functions import RadiationFunctions
 import copy
 from psychrometrics import psychrometrics
+import _0_vcwg_ep_coordination as coordination
 
 """
 Surface energy balance model in the rural area 
@@ -147,10 +148,11 @@ class EnergyBalanceRural_Def(object):
 
             # Calculate ground heat flux using Penman-Monteith
             if SWR_Rural.SWRabsRural + LWR_Rural.LWRabsRural > 0:
-                MultiplierDay = 0.1
+                MultiplierDay = float(coordination.config['Bypass']['MultiplierDay'])
+
                 self.EnergyFlux.GfluxRural = MultiplierDay * (SWR_Rural.SWRabsRural+LWR_Rural.LWRabsRural)
             else:
-                MultiplierNight = 0.5
+                MultiplierNight = float(coordination.config['Bypass']['MultiplierNight'])
                 self.EnergyFlux.GfluxRural = MultiplierNight * (SWR_Rural.SWRabsRural+LWR_Rural.LWRabsRural)
 
             # Calculate latent heat flux [W m^-2]

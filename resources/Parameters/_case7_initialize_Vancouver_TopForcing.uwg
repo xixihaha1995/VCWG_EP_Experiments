@@ -9,64 +9,64 @@
 # SIMULATION CONTROL,
 # =================================================
 # Simulation parameters,
-Month,6,           # starting month 6
-Day,10,             # starting day (1-31) 16
-nDay,30,           # number of days to run simulation 14
+Month,7,           # starting month 6
+Day,1,             # starting day (1-31) 16
+nDay,31,           # number of days to run simulation 31
 dtSim,300,         # simulation time step [s]
 dtWeather,3600,    # weather time step [s]
 nDay_spinup,1,     # Number of days accounted for spin-up
-nightStart,19,     # Sunset time in local standard time
-nightEnd,6,        # Sunrise time in local standard time
-Elevation,245,     # Elevation above sea level [m]
+nightStart,18,     # Sunset time in local standard time
+nightEnd,8,        # Sunrise time in local standard time
+Elevation,90,     # Elevation above sea level [m]
 
 # =================================================
 # Control switches
 # =================================================
 OPTION_RAY,0,         # 1: read the view factors from an existing file, 0: calculate view factors by ray tracing
-Rural_Model_name,1,   # 1: MOST, 2: Using an external forcing file with variables specified at the top of the domain
+Rural_Model_name,2,   # 1: MOST, 2: Using an external forcing file with variables specified at the top of the domain
 EB_RuralModel_name,2, # 1: Louis, 2: Penman_Monteith
 Tdeep_ctrl,1,         # 1: Using force restore method, 2: Using climate data (from epw file). If reliable estimate of deep soil temperature is not available using force restore method is recommended
 
 # =================================================
 # Urban Configuration
 # =================================================
-nz,50,                 # number of points (nz*dz = 3*bldHeight)
-nz_u,14.6,               # number of canopy levels in the vertical (nz_u*dz = bldHeight)
+nz,20,                 # number of points (nz*dz = 3*bldHeight)
+nz_u,6.5,               # number of canopy levels in the vertical (nz_u*dz = bldHeight)
 dz,1,                  # vertical resolution [m]
-Width_canyon,18.2,     # distance between buildings at street level in the x and y direction must be equal [m]
-Width_roof,20.02,         # building dimension [m]
-theta_canyon,65,       # Canyon direction from geographical north, in the counter trigonometric direction (from -90 to 90 degrees)
-Height_canyon,14.6,      # Average building height [m]
+Width_canyon,23,       # distance between buildings at street level in the x and y direction must be equal [m]
+Width_roof,10,         # building dimension [m]
+theta_canyon,0.0,      # Canyon direction from geographical north, in the counter trigonometric direction (from -90 to 90 degrees)
+Height_canyon,6.5,      # Average building height [m]
 fveg_R,0,              # Vegetated roof fraction (between 0 and 1)
 fimp_R,1.0,            # Impervious roof fraction (between 0 and 1)
-fveg_G,0.0,            # Vegetated ground fraction
+fveg_G,0.5,            # Vegetated ground fraction
 fbare_G,0.0,           # Bare ground fraction
-fimp_G,1.0,            # Impervious ground fraction
+fimp_G,0.5,            # Impervious ground fraction
 Per_runoff_R,1,        # Percentage of roof excess water that leaves the system as runoff, needs to be between 0-1 [-]
 Per_runoff_G,0.5,      # Percentage of ground excess water that leaves the system as runoff, needs to be between 0-1 [-]
 
 # =================================================
 # Radiative Properties
 # =================================================
-aveg_R,0.20,         # Roof vegetation surface albedo (-)
-aimp_R,0.15,         # Roof impervious albedo (-)
+aveg_R,0.27,         # Roof vegetation surface albedo (-)
+aimp_R,0.13,         # Roof impervious albedo (-)
 eveg_R,0.95,         # Roof vegetation surface emissivity (-)
 eimp_R,0.95,         # Roof impervious emissivity (-)
-aveg_G,0.20,         # Ground vegetation surface albedo (-)
-abare_G,0.15,         # Ground vegetation surface albedo
-aimp_G,0.15,          # Ground impervious albedo (-)
+aveg_G,0.27,         # Ground vegetation surface albedo (-)
+abare_G,0.2,         # Ground vegetation surface albedo (-)
+aimp_G,0.14,         # Ground impervious albedo (-)
 eveg_G,0.95,         # Ground vegetation surface emissivity (-)
-ebare_G,0.95,       # Ground vegetation surface emissivity
+ebare_G,0.95,        # Ground vegetation surface emissivity (-)
 eimp_G,0.95,         # Ground impervious emissivity (-)
-albedo_W,0.15,       # Wall surface albedo (-)
+albedo_W,0.20,       # Wall surface albedo (-)
 emissivity_W,0.95,    # Wall emissivity (-)
-albedo_T,0.27,       # Tree albedo (-)
-emissivity_T,0.97,   # Tree emissivity (-)
-e_rural,0.95,        # Rural emissivity
-a_rural,0.2,         # Rural albedo
-aveg_rural,0.20,     # Vegetation (trees) albedo
-MCSampleSize,100,   # Sample size used in Monte Carlo algorithm to calculate view factors. Note: This parameter is only used when OPTION_RAY = 0
-NRays,50,           # Number of rays used in Monte Carlo algorithm to calculate view factors. Note: This parameter is only used when OPTION_RAY = 0
+albedo_T,0.27,      # Tree albedo (-)
+emissivity_T,0.95,   # Tree emissivity (-)
+e_rural,0.95,        # Rural emissivity (-)
+a_rural,0.2,         # Rural albedo (-)
+aveg_rural,0.20,     # Vegetation (trees) albedo (-)
+MCSampleSize,200,    # Sample size used in Monte Carlo algorithm to calculate view factors. Note: This parameter is only used when OPTION_RAY = 0
+NRays,100,           # Number of rays used in Monte Carlo algorithm to calculate view factors. Note: This parameter is only used when OPTION_RAY = 0
 
 # =================================================
 # Thermal Properties (Used by surface energy balance models. The building energy model does not use these variables)
@@ -154,16 +154,16 @@ Sl_G,0.035,           # specific leaf area of  biomass [m^2 gC^-1]
 # =================================================
 # Tree Vegetation Parameters
 # =================================================
-Radius_tree,1.5,       # Radius of tree crown [m]
-distance_tree,2.2,     # Tree-to-wall distance [m]
-LAD,                   # leaf area density profile per unit volume of the canyon [m^2 m^-3]
-0,1,2,3,4,5,6,7,8,     # height measured from the ground [m]
-0,0.01,0.05,0.07,0.1,0.15,0.07,0.05,0,
+Radius_tree,1.0,       # Radius of tree crown [m]
+distance_tree,2.0,     # Tree-to-wall distance [m]
+LAD,                   # height measured from the ground [m], leaf area density profile per unit volume of the canyon [m^2 m^-3]
+0,1,2,3,4,5,
+0,0.03,0.046,0.04,0.036,0.01,
 trees,1,               # 1 for trees and 0 for no trees
 ftree,1,               # 1 for trees and 0 for no trees
 omega,1,               # Clumping factor
 omega_drag,1,          # Clumping factor for calculation of drag coefficient
-LAI_T,2.0,             # Leaf area index for the Tree vegetation per projected unit area of tree [m^2 m^-2]
+LAI_T,1.0,             # Leaf area index for the Tree vegetation per projected unit area of tree [m^2 m^-2]
 SAI_T,0.2,             # Stem area index for the Tree vegetation [m^2 m^-2]
 d_leaf_T,4,            # Leaf dimension of Tree vegetation [cm]
 CASE_ROOT_T,1,         # Type of Root Profile
@@ -297,7 +297,7 @@ h_floor,3,             # Floor height [m] ## Check run with this lower height an
 # 8(Fairbanks)                  16
 # 4C (Basel)                    17
 
-zone,17,
+zone,10,
 
 # Building type (pre-80's build, 80's-present build, new) (0 or 1)
 bld,
@@ -306,13 +306,13 @@ bld,
 0,0,0,    # LargeHotel
 0,0,0,    # LargeOffice
 0,0,0,    # MediumOffice
-0,1,0,    # MidRiseApartment
+0,0,0,    # MidRiseApartment
 0,0,0,    # OutPatient
 0,0,0,    # PrimarySchool
 0,0,0,    # QuickServiceRestaurant
 0,0,0,    # SecondarySchool
 0,0,0,    # SmallHotel
-0,0,0,    # SmallOffice
+0,1,0,    # SmallOffice
 0,0,0,    # Stand-aloneRetail
 0,0,0,    # StripMall
 0,0,0,    # SuperMarket
