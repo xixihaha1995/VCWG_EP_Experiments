@@ -10,6 +10,11 @@ def cvrmse(measurements, predictions):
     rmse = np.sqrt(np.mean(bias**2))
     cvrmse = rmse / np.mean(abs(measurements))
     return cvrmse
+
+def normalized_mean_bias_error(measurements, predictions):
+    bias = predictions - measurements
+    nmb = np.mean(abs(bias)) / np.mean(measurements)
+    return nmb
 def read_text_as_csv(file_path, header=None, index_col=0, skiprows=3):
     '''
     df first column is index
@@ -208,6 +213,7 @@ def process_one_theme(path):
         if file.endswith('.csv'):
             csv_files.append(file)
     cvrmse_dict = {}
+    nmbe_dict = {}
     if "BUBBLE_Ue1" in experiments_folder:
         comparison = get_BUUBLE_Ue1_measurements()
         cvrmse_dict['Rural_2.6'] = cvrmse(comparison['Urban_DBT_C_2.6'], comparison['Rural_DBT_C'])
@@ -235,7 +241,8 @@ def process_one_theme(path):
         else:
             comparison = get_Vancouver_measurements()
         cvrmse_dict['Rural'] = cvrmse(comparison['Urban_DBT_C'], comparison['Rural_DBT_C'])
-        print(f'cvrmse for Rural is {cvrmse_dict["Rural"]}')
+        nmbe_dict['Rural'] = normalized_mean_bias_error(comparison['Urban_DBT_C'], comparison['Rural_DBT_C'])
+        print(f'cvrmse for Rural is {cvrmse_dict["Rural"]}, nmbe for Rural is {nmbe_dict["Rural"]}')
 
     sql_dict = {}
     for csv_file in csv_files:
@@ -259,7 +266,10 @@ def process_one_theme(path):
             tempCVRMSE = cvrmse(comparison[_tmp_col],
                                            comparison[csv_file + '_sensor_idx_' + height_idx])
             cvrmse_dict[csv_file + '_sensor_idx_' + height_idx] = tempCVRMSE
-            print(f'cvrmse for {csv_file} at height idx:{height_idx} is {tempCVRMSE}')
+            tempNMBE = normalized_mean_bias_error(comparison[_tmp_col],
+                                                  comparison[csv_file + '_sensor_idx_' + height_idx])
+            nmbe_dict[csv_file + '_sensor_idx_' + height_idx] = tempNMBE
+            print(f'cvrmse for {csv_file} at height idx:{height_idx} is {tempCVRMSE}, NMBE is {tempNMBE}')
 
         sql_dict[csv_file] = read_sql(csv_file)
     if os.path.exists(f'{experiments_folder}/comparison.xlsx'):
@@ -268,6 +278,8 @@ def process_one_theme(path):
     comparison.to_excel(writer, 'comparison')
     cvrmse_df = pd.DataFrame.from_dict(cvrmse_dict, orient='index', columns=['cvrmse'])
     cvrmse_df.to_excel(writer, 'cvrmse')
+    nmbe_df = pd.DataFrame.from_dict(nmbe_dict, orient='index', columns=['nmbe'])
+    nmbe_df.to_excel(writer, 'nmbe')
     sql_df = pd.DataFrame.from_dict(sql_dict, orient='index', columns=['total_site_energy'])
     sql_df.to_excel(writer, 'sql')
     writer.save()
@@ -349,7 +361,7 @@ def main():
 
     experiments_folder = 'BUBBLE_Ue1_Bypass'
     experiments_folder = 'CAPITOUL_WithoutCooling_Bypass'
-    experiments_folder = 'CAPITOUL_WithCooling_Bypass'
+    # experiments_folder = 'CAPITOUL_WithCooling_Bypass'
 
     # experiments_folder = 'BUBBLE_Ue2_Bypass'
     # experiments_folder = 'Vancouver_TopForcing_Bypass'
