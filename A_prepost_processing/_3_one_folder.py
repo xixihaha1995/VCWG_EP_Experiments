@@ -360,8 +360,8 @@ def main():
 
 
     experiments_folder = 'BUBBLE_Ue1_Bypass'
-    experiments_folder = 'CAPITOUL_WithoutCooling_Bypass'
-    # experiments_folder = 'CAPITOUL_WithCooling_Bypass'
+    # experiments_folder = 'CAPITOUL_WithoutCooling_Bypass'
+    experiments_folder = 'CAPITOUL_WithCooling_Bypass'
 
     # experiments_folder = 'BUBBLE_Ue2_Bypass'
     # experiments_folder = 'Vancouver_TopForcing_Bypass'
@@ -398,6 +398,6 @@ def main():
                          + '_to_' + pd.to_datetime(compare_end_time).strftime('%Y-%m-%d') + '.csv'
 
     process_one_theme(experiments_folder)
-    # plots()
+    plots()
 if __name__ == '__main__':
     main()
