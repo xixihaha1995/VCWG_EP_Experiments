@@ -1058,7 +1058,7 @@ Material,
     Wood 200mm,              !- Name
     MediumSmooth,            !- Roughness
     0.2,                     !- Thickness {m}
-    0.12,                    !- Conductivity {W/m-K}
+    0.93,                    !- Conductivity {W/m-K}
     540.0000,                !- Density {kg/m3}
     2222.2,                  !- Specific Heat {J/kg-K}
     0.9000000,               !- Thermal Absorptance

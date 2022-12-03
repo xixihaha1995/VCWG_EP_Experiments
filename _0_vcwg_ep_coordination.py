@@ -1,5 +1,9 @@
 import configparser
+import datetime
 import threading, sys, os
+
+import numpy
+
 
 def ini_all(sensitivity_file_name):
     global config, project_path, save_path_clean, sensor_heights,ep_trivial_path, data_saving_path, bld_type,\
@@ -68,3 +72,81 @@ def ini_all(sensitivity_file_name):
     ep_wallSun_Tint_K = 300
     ep_wallShade_Text_K = 300
     ep_wallShade_Tint_K = 300
+    
+def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
+                    FractionsRoof):
+    global ep_sensWaste_w_m2_per_footprint_area,save_path_clean,vcwg_needed_time_idx_in_seconds, \
+        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa
+
+    sem0.acquire()
+    vcwg_needed_time_idx_in_seconds = (it + 1) * simTime.dt
+
+    TempProf_cur = VerticalProfUrban.th
+    HumProf_cur = VerticalProfUrban.qn
+    PresProf_cur = VerticalProfUrban.presProf
+
+    canTempProf_cur = TempProf_cur[0:Geometry_m.nz_u]
+    canSpecHumProf_cur = HumProf_cur[0:Geometry_m.nz_u]
+    canPressProf_cur = PresProf_cur[0:Geometry_m.nz_u]
+
+    vcwg_canTemp_K = numpy.mean(canTempProf_cur)
+    vcwg_canSpecHum_Ratio = numpy.mean(canSpecHumProf_cur)
+    vcwg_canPress_Pa = numpy.mean(canPressProf_cur)
+    sem1.release()
+    
+    sem3.acquire()
+    BEM_Building = BEM.building
+    BEM_Building.ElecTotal = 0
+    BEM_Building.sensWaste = ep_sensWaste_w_m2_per_footprint_area
+    ep_sensWaste_w_m2_per_footprint_area = 0
+
+    BEM.mass.Text = ep_floor_Text_K
+    BEM.mass.Tint = ep_floor_Tint_K
+    BEM.wallSun.Text = ep_wallSun_Text_K
+    BEM.wallSun.Tint = ep_wallSun_Tint_K
+    BEM.wallShade.Text = ep_wallShade_Text_K
+    BEM.wallShade.Tint = ep_wallShade_Tint_K
+
+    if os.path.exists(data_saving_path) and not save_path_clean:
+        os.remove(data_saving_path)
+        save_path_clean = True
+
+    TempProf_cur = VerticalProfUrban.th
+    PresProf_cur = VerticalProfUrban.presProf
+    vcwg_needed_time_idx_in_seconds = it * simTime.dt
+    cur_datetime = datetime.datetime.strptime(config['__main__']['start_time'],
+                                              '%Y-%m-%d %H:%M:%S') + \
+                   datetime.timedelta(seconds=vcwg_needed_time_idx_in_seconds)
+    # print('current time: ', cur_datetime)
+    domain_height = len(TempProf_cur)
+    vcwg_heights_profile = numpy.array([0.5 + i for i in range(domain_height)])
+    mapped_indices = [numpy.argmin(numpy.abs(vcwg_heights_profile - i)) for i in sensor_heights]
+
+    wallSun_K = BEM.wallSun.Text
+    wallShade_K = BEM.wallShade.Text
+    roof_K = (FractionsRoof.fimp * BEM.roofImp.Text + FractionsRoof.fveg * BEM.roofVeg.Text)
+
+    if not os.path.exists(data_saving_path):
+        os.makedirs(os.path.dirname(data_saving_path), exist_ok=True)
+        with open(data_saving_path, 'a') as f1:
+            # prepare the header string for different sensors
+            header_str = 'cur_datetime,canTemp,sensWaste,wallSun_K,wallShade_K,roof_K,MeteoData.Tatm,MeteoData.Pre,'
+            for i in range(len(mapped_indices)):
+                _temp_height = sensor_heights[i]
+                header_str += f'TempProf_cur[{_temp_height}],'
+            for i in range(len(mapped_indices)):
+                _temp_height = sensor_heights[i]
+                header_str += f'PresProf_cur[{_temp_height}],'
+            header_str += '\n'
+            f1.write(header_str)
+        # write the data
+    with open(data_saving_path, 'a') as f1:
+        fmt1 = "%s," * 1 % (cur_datetime) + \
+               "%.3f," * 7 % (vcwg_canTemp_K, BEM_Building.sensWaste,wallSun_K,wallShade_K,roof_K,MeteoData.Tatm, MeteoData.Pre) + \
+               "%.3f," * 2 * len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
+                                                         [PresProf_cur[i] for i in mapped_indices]) + '\n'
+        f1.write(fmt1)
+
+    sem0.release()
+
+    return BEM
