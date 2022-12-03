@@ -126,6 +126,43 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     wallShade_K = BEM.wallShade.Text
     roof_K = (FractionsRoof.fimp * BEM.roofImp.Text + FractionsRoof.fveg * BEM.roofVeg.Text)
 
+    # dummy values overriding
+    BEM_Building.sensCoolDemand = 0
+    BEM_Building.sensHeatDemand = 0
+    BEM_Building.dehumDemand = 0
+    BEM_Building.Qhvac = 0
+    BEM_Building.coolConsump = 0
+    BEM_Building.heatConsump = 0
+    BEM_Building.QWater = 0.5
+    BEM_Building.QGas = 0.5
+    BEM_Building.Qheat = 0.5
+    BEM_Building.GasTotal = 0.5
+    # wall load per unit building footprint area [W m^-2]
+    BEM_Building.QWall = 0.5
+    # other surfaces load per unit building footprint area [W m^-2]
+    BEM_Building.QMass = 0.5
+    # window load due to temperature difference per unit building footprint area [W m^-2]
+    BEM_Building.QWindow = 0.5
+    # ceiling load per unit building footprint area [W m^-2]
+    BEM_Building.QCeil = 0.5
+    # infiltration load per unit building footprint area [W m^-2]
+    BEM_Building.QInfil = 0.5
+    # ventilation load per unit building footprint area [W m^-2]
+    BEM_Building.QVen = 0.5
+    BEM_Building.QWindowSolar = 0.5
+    BEM_Building.elecDomesticDemand = 0.5
+    BEM_Building.sensWaterHeatDemand = 0.5
+    BEM_Building.sensWasteCoolHeatDehum = 0.5
+    BEM_Building.indoorRhum = 0.6
+    BEM_Building.fluxSolar = 0.5
+    BEM_Building.fluxWindow = 0.5
+    BEM_Building.fluxInterior = 0.5
+    BEM_Building.fluxInfil = 0.5
+    BEM_Building.fluxVent = 0.5
+    BEM_Building.fluxWall = 0
+    BEM_Building.fluxRoof = 0
+    BEM_Building.fluxMass = 0
+
     if not os.path.exists(data_saving_path):
         os.makedirs(os.path.dirname(data_saving_path), exist_ok=True)
         with open(data_saving_path, 'a') as f1:
