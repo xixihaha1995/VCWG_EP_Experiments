@@ -381,8 +381,8 @@ def main():
             processed_file = 'BUBBLE_UE2_measurements_' + pd.to_datetime(compare_start_time).strftime('%Y-%m-%d') \
                                  + '_to_' + pd.to_datetime(compare_end_time).strftime('%Y-%m-%d') + '.csv'
     elif "CAPITOUL" in experiments_folder:
-        compare_start_time = '2004-06-01 00:05:00'
-        compare_end_time = '2004-06-30 22:55:00'
+        compare_start_time = '2004-06-01 00:00:00'
+        compare_end_time = '2004-06-30 23:55:00'
         processed_folder =  os.path.join('_measurements','CAPITOUL')
         processed_file = r'CAPITOUL_measurements_' + pd.to_datetime(compare_start_time).strftime('%Y-%m-%d') \
                                  + '_to_' + pd.to_datetime(compare_end_time).strftime('%Y-%m-%d') + '.csv'
@@ -398,6 +398,6 @@ def main():
                          + '_to_' + pd.to_datetime(compare_end_time).strftime('%Y-%m-%d') + '.csv'
 
     process_one_theme(experiments_folder)
-    plots()
+    # plots()
 if __name__ == '__main__':
     main()

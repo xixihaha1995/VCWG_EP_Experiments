@@ -107,6 +107,13 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     BEM.wallShade.Text = ep_wallShade_Text_K
     BEM.wallShade.Tint = ep_wallShade_Tint_K
 
+    if FractionsRoof.fimp > 0:
+        BEM.roofImp.Text = ep_roof_Text_K
+        BEM.roofImp.Tint = ep_roof_Tint_K
+    if FractionsRoof.fveg > 0:
+        BEM.roofVeg.Text = ep_roof_Text_K
+        BEM.roofVeg.Tint = ep_roof_Tint_K
+
     if os.path.exists(data_saving_path) and not save_path_clean:
         os.remove(data_saving_path)
         save_path_clean = True
