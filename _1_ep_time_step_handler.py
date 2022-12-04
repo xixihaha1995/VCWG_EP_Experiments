@@ -20,10 +20,10 @@ def run_vcwg():
         epwFileName = None
         TopForcingFileName = coordination.config['Bypass']['TopForcingFileName']
     VCWGParamFileName = coordination.config['Bypass']['VCWGParamFileName']
-    theme = coordination.config['Bypass']['experiments_theme']
-    ViewFactorFileName = f'{theme}_ViewFactor.txt'
+    csv = coordination.config['Bypass']['csv_file_name']
+    ViewFactorFileName = f'{csv}_ViewFactor.txt'
     # Case name to append output file names with
-    case = f'{theme}'
+    case = f'{csv}'
     '''
     epwFileName = None
     TopForcingFileName = 'Vancouver2008_ERA5_Jul.csv'

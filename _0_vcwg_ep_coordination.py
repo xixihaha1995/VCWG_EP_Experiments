@@ -15,8 +15,9 @@ def ini_all(sensitivity_file_name):
         ep_floor_Text_K, ep_floor_Tint_K, ep_roof_Text_K, ep_roof_Tint_K, \
         ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K, \
         mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
-        footprint_area_m2
+        footprint_area_m2, ForcTemp_K
     # find the project path
+    ForcTemp_K = 293.15
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
     config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass', sensitivity_file_name)
@@ -25,9 +26,11 @@ def ini_all(sensitivity_file_name):
     experiments_theme = config['Bypass']['experiments_theme']
     save_path_clean = False
     sensor_heights = [float(i) for i in config['Bypass']['sensor_height_meter'].split(',')]
+    csv_file_name = config['Bypass']['csv_file_name']
     data_saving_path = os.path.join(project_path, 'A_prepost_processing',
-                                    experiments_theme,'bypass_saving.csv')
-    ep_trivial_path = os.path.join(project_path, 'A_prepost_processing', experiments_theme, "ep_trivial_outputs")
+                                    experiments_theme,f'{csv_file_name}.csv')
+    ep_trivial_path = os.path.join(project_path, 'A_prepost_processing',
+                                   experiments_theme, f"{csv_file_name}_ep_trivial_outputs")
     if config['Default']['operating_system'] == 'windows':
         sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
     else:
@@ -176,7 +179,8 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
         os.makedirs(os.path.dirname(data_saving_path), exist_ok=True)
         with open(data_saving_path, 'a') as f1:
             # prepare the header string for different sensors
-            header_str = 'cur_datetime,canTemp,sensWaste,wallSun_K,wallShade_K,roof_K,MeteoData.Tatm,MeteoData.Pre,'
+            header_str = 'cur_datetime,canTemp,ForcTemp_K,sensWaste,wallSun_K,wallShade_K,roof_K,' \
+                         'MeteoData.Tatm,MeteoData.Pre,'
             for i in range(len(mapped_indices)):
                 _temp_height = sensor_heights[i]
                 header_str += f'TempProf_cur[{_temp_height}],'
@@ -188,7 +192,8 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
         # write the data
     with open(data_saving_path, 'a') as f1:
         fmt1 = "%s," * 1 % (cur_datetime) + \
-               "%.3f," * 7 % (vcwg_canTemp_K, BEM_Building.sensWaste,wallSun_K,wallShade_K,roof_K,MeteoData.Tatm, MeteoData.Pre) + \
+               "%.3f," * 8 % (vcwg_canTemp_K,ForcTemp_K,BEM_Building.sensWaste,
+                              wallSun_K,wallShade_K,roof_K,MeteoData.Tatm, MeteoData.Pre) + \
                "%.3f," * 2 * len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
                                                          [PresProf_cur[i] for i in mapped_indices]) + '\n'
         f1.write(fmt1)

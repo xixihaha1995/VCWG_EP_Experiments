@@ -5,6 +5,8 @@ from Resistance_Functions import Ressitance_Calculations
 from ColModel import ColumnModelCal
 import copy
 
+import _0_vcwg_ep_coordination as coordination
+
 """
 Urban canopy model
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -114,6 +116,7 @@ class UCM_Def():
         """
 
         ForcingVariable = [ForcTemp,ForcWindSpeed,ForcWindDir,Forcq_Top]
+        coordination.ForcTemp_K = ForcTemp
         # print(f'ForcWindSpeed = {ForcWindSpeed}')
 
         self.thb.ground_imp = copy.copy(thb_ground.ground_imp)    # source term in temperature equation originated from impervious ground [K m s^-1]
