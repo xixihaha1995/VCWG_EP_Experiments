@@ -250,6 +250,9 @@ def process_one_theme(path):
         df = df[compare_start_time:compare_end_time]
         comparison['MeteoData.Pre'] = df['MeteoData.Pre']
         comparison['sensWaste_' + csv_file] = df['sensWaste']
+        comparison['wallSun_K_' + csv_file] = df['wallSun_K']
+        comparison['wallShade_K_' + csv_file] = df['wallShade_K']
+        comparison['roof_K_' + csv_file] = df['roof_K']
 
         temp_prof_cols, pres_prof_cols = find_height_indice(df)
         for i in range(len(temp_prof_cols)):
@@ -360,8 +363,8 @@ def main():
 
 
     experiments_folder = 'BUBBLE_Ue1_Bypass'
-    experiments_folder = 'CAPITOUL_WithoutCooling_Bypass'
-    # experiments_folder = 'CAPITOUL_WithCooling_Bypass'
+    # experiments_folder = 'CAPITOUL_WithoutCooling_Bypass'
+    experiments_folder = 'CAPITOUL_WithCooling_Bypass'
 
     # experiments_folder = 'BUBBLE_Ue2_Bypass'
     # experiments_folder = 'Vancouver_TopForcing_Bypass'
