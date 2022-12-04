@@ -83,7 +83,7 @@ def overwrite_ep_weather(state):
         rh = 100*coordination.psychrometric.relative_humidity_b(state, coordination.vcwg_canTemp_K - 273.15,
                                                coordination.vcwg_canSpecHum_Ratio, coordination.vcwg_canPress_Pa)
         coordination.ep_api.exchange.set_actuator_value(state, odb_actuator_handle, coordination.vcwg_canTemp_K - 273.15)
-        print(f'EP: set odb to {coordination.vcwg_canTemp_K - 273.15}')
+        # print(f'EP: set odb to {coordination.vcwg_canTemp_K - 273.15}')
         coordination.ep_api.exchange.set_actuator_value(state, orh_actuator_handle, rh)
         # Notify the downstream (EP upload EP results to Parent) to start
         #coordination.sem1.release()#

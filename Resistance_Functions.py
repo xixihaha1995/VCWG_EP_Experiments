@@ -988,6 +988,7 @@ class Ressitance_Calculations(object):
 
         zz = Geometry_m.dz/2
         Utot = numpy.sqrt(vx_air**2 + vy_air**2)
+        # print('Utot',Utot)
 
         # Compute bulk Richardson number
         # th_air and Ts should be in [K]

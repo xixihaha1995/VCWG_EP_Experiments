@@ -90,6 +90,8 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     canPressProf_cur = PresProf_cur[0:Geometry_m.nz_u]
 
     vcwg_canTemp_K = numpy.mean(canTempProf_cur)
+    vcwg_canTemp_K = TempProf_cur[Geometry_m.nz_u]
+    # print(f'mean canTempProf_cur: {vcwg_canTemp_K - 273.15}, at roof: {TempProf_cur[Geometry_m.nz_u] - 273.15}')
     vcwg_canSpecHum_Ratio = numpy.mean(canSpecHumProf_cur)
     vcwg_canPress_Pa = numpy.mean(canPressProf_cur)
     sem1.release()
@@ -124,7 +126,7 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     cur_datetime = datetime.datetime.strptime(config['__main__']['start_time'],
                                               '%Y-%m-%d %H:%M:%S') + \
                    datetime.timedelta(seconds=vcwg_needed_time_idx_in_seconds)
-    # print('current time: ', cur_datetime)
+    print('current time: ', cur_datetime)
     domain_height = len(TempProf_cur)
     vcwg_heights_profile = numpy.array([0.5 + i for i in range(domain_height)])
     mapped_indices = [numpy.argmin(numpy.abs(vcwg_heights_profile - i)) for i in sensor_heights]

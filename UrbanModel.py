@@ -114,6 +114,7 @@ class UCM_Def():
         """
 
         ForcingVariable = [ForcTemp,ForcWindSpeed,ForcWindDir,Forcq_Top]
+        # print(f'ForcWindSpeed = {ForcWindSpeed}')
 
         self.thb.ground_imp = copy.copy(thb_ground.ground_imp)    # source term in temperature equation originated from impervious ground [K m s^-1]
         self.thb.ground_bare = copy.copy(thb_ground.ground_bare)  # source term in temperature equation originated from bare ground [K m s^-1]
