@@ -363,9 +363,10 @@ def main():
 
 
     experiments_folder = 'BUBBLE_Ue1_Bypass'
-    # experiments_folder = 'CAPITOUL_WithoutCooling_Bypass'
-    experiments_folder = 'CAPITOUL_WithCooling_Bypass'
-
+    experiments_folder = 'CAPITOUL_WithoutCooling_Bypass'
+    # experiments_folder = 'CAPITOUL_WithCooling_Bypass'
+    # experiments_folder = 'October_CAPITOUL_WithCooling_Bypass'
+    # experiments_folder = 'October_CAPITOUL_WithoutCooling_Bypass'
     # experiments_folder = 'BUBBLE_Ue2_Bypass'
     # experiments_folder = 'Vancouver_TopForcing_Bypass'
     # experiments_folder = 'Vancouver_Rural_Bypass'
