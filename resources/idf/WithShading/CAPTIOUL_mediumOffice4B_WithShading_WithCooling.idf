@@ -1084,8 +1084,8 @@ Material,
     265.0000,                !- Density {kg/m3}
     836.8000,                !- Specific Heat {J/kg-K}
     0.94,                    !- Thermal Absorptance
-    0.50,                    !- Solar Absorptance
-    0.50;                    !- Visible Absorptance
+    0.75,                    !- Solar Absorptance
+    0.75;                    !- Visible Absorptance
 
 Material,
     Std Wood 6inch,          !- Name
