@@ -404,7 +404,7 @@ def main():
             processed_file = r'Vancouver_Rural_measurements_' + pd.to_datetime(compare_start_time).strftime('%Y-%m-%d') \
                          + '_to_' + pd.to_datetime(compare_end_time).strftime('%Y-%m-%d') + '.csv'
 
-    process_one_theme(experiments_folder)
-    # plots()
+    # process_one_theme(experiments_folder)
+    plots()
 if __name__ == '__main__':
     main()
