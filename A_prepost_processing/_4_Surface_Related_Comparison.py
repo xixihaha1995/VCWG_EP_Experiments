@@ -39,6 +39,9 @@ themes = ['sensor_idx_20.0','ForcTemp_K','sensWaste', 'wallSun_K', 'wallShade_K'
 # 'sensWaste', 'wallSun_K', 'wallShade_K', 'roof_K', 'ForcTemp_K', sensor_idx_20.0
 cvrmse_nmb_dict = {}
 reorganized_excel = pd.ExcelWriter(os.path.join(experiments_folder, 'reorganized.xlsx'))
+# copy the "cvrmse" sheet from the original excel file
+old_cvrmse_sheet = pd.read_excel(os.path.join(experiments_folder, all_data_name), sheet_name='cvrmse', index_col=0)
+old_cvrmse_sheet.to_excel(reorganized_excel, sheet_name='cvrmse')
 for theme in themes:
     df = pd.DataFrame()
     for csv_file in all_csv_files:
@@ -57,6 +60,7 @@ for theme in themes:
 # convert cvrmse_nmb_dict to one sheet
 cvrmse_nmb_df = pd.DataFrame.from_dict(cvrmse_nmb_dict, orient='index', columns=['cvrmse', 'nmb'])
 cvrmse_nmb_df.to_excel(reorganized_excel, sheet_name='Distance_To_Dec_Bypass.csv')
+
 reorganized_excel.save()
 
 #plot the len(themes) subfigs, share x axis
