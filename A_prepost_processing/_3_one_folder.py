@@ -13,7 +13,7 @@ def cvrmse(measurements, predictions):
 
 def normalized_mean_bias_error(measurements, predictions):
     bias = predictions - measurements
-    nmb = np.mean(abs(bias)) / np.mean(measurements)
+    nmb = np.mean(bias) / np.mean(measurements)
     return nmb
 def read_text_as_csv(file_path, header=None, index_col=0, skiprows=3):
     '''
@@ -253,6 +253,7 @@ def process_one_theme(path):
         comparison['wallSun_K_' + csv_file] = df['wallSun_K']
         comparison['wallShade_K_' + csv_file] = df['wallShade_K']
         comparison['roof_K_' + csv_file] = df['roof_K']
+        comparison['ForcTemp_K_' + csv_file] = df['ForcTemp_K']
 
         temp_prof_cols, pres_prof_cols = find_height_indice(df)
         for i in range(len(temp_prof_cols)):
@@ -262,7 +263,8 @@ def process_one_theme(path):
             comparison[csv_file + '_sensor_idx_' + height_idx] = (comparison[csv_file + '_'+temp_prof_cols[i]]) * \
                                                                 (comparison[csv_file + '_'+pres_prof_cols[i]] / comparison['MeteoData.Pre']) \
                                                                 ** 0.286 - 273.15
-            if 'CAPITOUL' in experiments_folder or 'Vancouver' in experiments_folder:
+            if 'CAPITOUL' in experiments_folder or 'Vancouver' in experiments_folder \
+                    or "Improvements" in experiments_folder:
                 _tmp_col = 'Urban_DBT_C'
             else:
                 _tmp_col = 'Urban_DBT_C_' + height_idx
@@ -370,6 +372,7 @@ def main():
     # experiments_folder = 'BUBBLE_Ue2_Bypass'
     # experiments_folder = 'Vancouver_TopForcing_Bypass'
     # experiments_folder = 'Vancouver_Rural_Bypass'
+    experiments_folder = "CAPITOUL_ByPass_Improvements_Investigation"
     sql_report_name = 'AnnualBuildingUtilityPerformanceSummary'
     sql_table_name = 'Site and Source Energy'
     sql_row_name = 'Total Site Energy'
