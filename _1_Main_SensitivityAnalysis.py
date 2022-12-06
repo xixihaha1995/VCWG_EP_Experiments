@@ -30,11 +30,12 @@ def for_loop_all_ini():
     # selected_jobs = ["Vancouver_TopForcing.ini"]
     # selected_jobs = ["Vancouver_Rural.ini","Vancouver_TopForcing.ini"]
     selected_jobs = ["CAPITOUL_WithCooling.ini","Dec_CAPITOUL_WithoutCooling.ini"]
-    selected_jobs = ["Oct_CAPITOUL_WithoutCooling.ini","Bypassing_IDF.ini",
-                     "Bypassing_EPW.ini","Dec_CAPITOUL_WithoutCooling.ini"]
+    # selected_jobs = ["Oct_CAPITOUL_WithoutCooling.ini","Bypassing_IDF.ini",
+    #                  "Bypassing_EPW.ini","Dec_CAPITOUL_WithoutCooling.ini"]
+    selected_jobs = ["Dec_CAPITOUL_WithCooling.ini","Dec_CAPITOUL_WithoutCooling.ini"]
 
 
-    nbr_job_for_one_batch = 4
+    nbr_job_for_one_batch = 2
     for i in range(0,len(selected_jobs),nbr_job_for_one_batch):
         print('Todo jobs',selected_jobs[i:i+nbr_job_for_one_batch])
         batch_run(selected_jobs[i:i+nbr_job_for_one_batch])
