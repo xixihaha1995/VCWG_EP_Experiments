@@ -93,8 +93,6 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     canPressProf_cur = PresProf_cur[0:Geometry_m.nz_u]
 
     vcwg_canTemp_K = numpy.mean(canTempProf_cur)
-    vcwg_canTemp_K = TempProf_cur[Geometry_m.nz_u]
-    # print(f'mean canTempProf_cur: {vcwg_canTemp_K - 273.15}, at roof: {TempProf_cur[Geometry_m.nz_u] - 273.15}')
     vcwg_canSpecHum_Ratio = numpy.mean(canSpecHumProf_cur)
     vcwg_canPress_Pa = numpy.mean(canPressProf_cur)
     sem1.release()
