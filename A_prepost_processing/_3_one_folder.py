@@ -12,7 +12,7 @@ def cvrmse(measurements, predictions):
     return cvrmse
 
 def normalized_mean_bias_error(measurements, predictions):
-    bias = predictions - measurements
+    bias = measurements - predictions
     nmb = np.mean(bias) / np.mean(measurements)
     return nmb
 def read_text_as_csv(file_path, header=None, index_col=0, skiprows=3):
@@ -373,6 +373,7 @@ def main():
     # experiments_folder = 'Vancouver_TopForcing_Bypass'
     # experiments_folder = 'Vancouver_Rural_Bypass'
     experiments_folder = "CAPITOUL_ByPass_Improvements_Investigation"
+    experiments_folder = "CAPITOUL_Replicate_Bypass"
     sql_report_name = 'AnnualBuildingUtilityPerformanceSummary'
     sql_table_name = 'Site and Source Energy'
     sql_row_name = 'Total Site Energy'
@@ -404,7 +405,7 @@ def main():
             processed_file = r'Vancouver_Rural_measurements_' + pd.to_datetime(compare_start_time).strftime('%Y-%m-%d') \
                          + '_to_' + pd.to_datetime(compare_end_time).strftime('%Y-%m-%d') + '.csv'
 
-    # process_one_theme(experiments_folder)
-    plots()
+    process_one_theme(experiments_folder)
+    # plots()
 if __name__ == '__main__':
     main()
