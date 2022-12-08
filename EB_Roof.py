@@ -12,6 +12,8 @@ from Radiation_Functions import RadiationFunctions
 from scipy.optimize import least_squares
 import copy
 
+import _0_vcwg_ep_coordination as coordination
+
 """
 Compute energy balance at the roof
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -477,6 +479,7 @@ class EnergyBalanceRoof_Def(object):
 
         # sensible heat from impervious area [W m^-2]
         Hroof_imp = cp_atm * rho_atm * (Troof_imp - T_above_canyon) / ra
+        coordination.vcwg_hConv_w_m2_per_K = cp_atm * rho_atm / ra
         # Potential evaporation from runon water on impervious area [kg m^-2 s^-1]
         Eroof_imp_pot = rho_atm * (qsat_T_rimp - q_above_canyon) / ra
         # Potential evaporation from first soil layer [kg m^-2 s^-1]

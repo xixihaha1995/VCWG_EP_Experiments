@@ -15,9 +15,10 @@ def ini_all(sensitivity_file_name):
         ep_floor_Text_K, ep_floor_Tint_K, ep_roof_Text_K, ep_roof_Tint_K, \
         ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K, \
         mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
-        footprint_area_m2, ForcTemp_K
+        footprint_area_m2, ForcTemp_K, vcwg_hConv_w_m2_per_K
     # find the project path
     ForcTemp_K = 293.15
+    vcwg_hConv_w_m2_per_K = 10
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
     config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass', sensitivity_file_name)

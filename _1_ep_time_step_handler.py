@@ -47,7 +47,7 @@ def run_vcwg():
 def overwrite_ep_weather(state):
     global overwrite_ep_weather_inited_handle, odb_actuator_handle, orh_actuator_handle, \
         wsped_mps_actuator_handle, wdir_deg_actuator_handle,zone_flr_area_handle,\
-        called_vcwg_bool
+        called_vcwg_bool, roof_hConv_actuator_handle
 
 
     if not overwrite_ep_weather_inited_handle:
@@ -58,13 +58,16 @@ def overwrite_ep_weather(state):
             get_actuator_handle(state, "Weather Data", "Outdoor Dry Bulb", "Environment")
         orh_actuator_handle = coordination.ep_api.exchange.\
             get_actuator_handle(state, "Weather Data", "Outdoor Relative Humidity", "Environment")
+        roof_hConv_actuator_handle = coordination.ep_api.exchange. \
+            get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                "BUILDING_ROOF")
         oat_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state, "Site Outdoor Air Drybulb Temperature", "Environment")
         orh_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state, "Site Outdoor Air Humidity Ratio","Environment")
     # zone_flr_area_handle =  coordination.ep_api.exchange.get_internal_variable_handle(state, "Zone Floor Area", "CORE_ZN")
         #if one of the above handles is less than 0, then the actuator is not available
         # the entire program (multithread cooperation) should be terminated here, system exit with print messagePYTHO
         #if odb_actuator_handle < 0 or orh_actuator_handle < 0 or zone_flr_area_handle < 0:
-        if odb_actuator_handle < 0 or orh_actuator_handle < 0:
+        if odb_actuator_handle < 0 or orh_actuator_handle < 0 or roof_hConv_actuator_handle < 0:
             print('ovewrite_ep_weather(): some handle not available')
             os.getpid()
             os.kill(os.getpid(), signal.SIGTERM)
@@ -83,10 +86,8 @@ def overwrite_ep_weather(state):
         rh = 100*coordination.psychrometric.relative_humidity_b(state, coordination.vcwg_canTemp_K - 273.15,
                                                coordination.vcwg_canSpecHum_Ratio, coordination.vcwg_canPress_Pa)
         coordination.ep_api.exchange.set_actuator_value(state, odb_actuator_handle, coordination.vcwg_canTemp_K - 273.15)
-        # print(f'EP: set odb to {coordination.vcwg_canTemp_K - 273.15}')
         coordination.ep_api.exchange.set_actuator_value(state, orh_actuator_handle, rh)
-        # Notify the downstream (EP upload EP results to Parent) to start
-        #coordination.sem1.release()#
+        coordination.ep_api.exchange.set_actuator_value(state, roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
         coordination.sem2.release()#
 
 def SmallOffice_get_ep_results(state):
