@@ -374,6 +374,7 @@ def main():
     # experiments_folder = 'Vancouver_Rural_Bypass'
     experiments_folder = "CAPITOUL_ByPass_Improvements_Investigation"
     experiments_folder = "CAPITOUL_Replicate_Bypass"
+    # experiments_folder = "CAPITOUL_roof_hConv"
     sql_report_name = 'AnnualBuildingUtilityPerformanceSummary'
     sql_table_name = 'Site and Source Energy'
     sql_row_name = 'Total Site Energy'
