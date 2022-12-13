@@ -12,6 +12,14 @@ zone_floor_area_m2 = 0
 ep_last_accumulated_time_index_in_seconds = 0
 ep_last_call_time_seconds = 0
 
+def api_to_csv(state):
+    orig = coordination.ep_api.exchange.list_available_api_data_csv(state)
+    newFileByteArray = bytearray(orig)
+    api_path = os.path.join(coordination.data_saving_path,'..', 'api_data.csv')
+    newFile = open(api_path, "wb")
+    newFile.write(newFileByteArray)
+    newFile.close()
+
 def run_vcwg():
     if 'None' in coordination.config['Bypass']['TopForcingFileName']:
         TopForcingFileName = None
@@ -73,6 +81,7 @@ def overwrite_ep_weather(state):
 
     warm_up = coordination.ep_api.exchange.warmup_flag(state)
     if not warm_up:
+        api_to_csv(state)
         if not called_vcwg_bool:
             global zone_floor_area_m2
             #zone_floor_area_m2 = coordination.ep_api.exchange.get_internal_variable_value(state, zone_flr_area_handle)
