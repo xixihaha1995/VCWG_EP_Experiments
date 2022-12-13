@@ -5,9 +5,9 @@ from multiprocessing import Process
 import _0_vcwg_ep_coordination as coordination
 import _1_ep_time_step_handler as time_step_handlers
 
-def run_ep_api(sensitivity_file_name):
+def run_ep_api(sensitivity_file_name,_config=None, _value=None):
 
-    coordination.ini_all(sensitivity_file_name)
+    coordination.ini_all(sensitivity_file_name,_config, _value)
     state = coordination.ep_api.state_manager.new_state()
     coordination.psychrometric=coordination.ep_api.functional.psychrometrics(state)
     coordination.ep_api.runtime.callback_begin_zone_timestep_before_set_current_weather(state,

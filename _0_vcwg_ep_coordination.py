@@ -5,8 +5,8 @@ import threading, sys, os
 import numpy
 
 
-def ini_all(sensitivity_file_name):
-    global config, project_path, save_path_clean, sensor_heights,ep_trivial_path, data_saving_path, bld_type,\
+def ini_all(sensitivity_file_name,_config_file = None, _value = None):
+    global value, config, project_path, save_path_clean, sensor_heights,ep_trivial_path, data_saving_path, bld_type,\
         ep_api, psychrometric,\
         sem0, sem1, sem2, sem3, \
         vcwg_needed_time_idx_in_seconds, \
@@ -15,19 +15,24 @@ def ini_all(sensitivity_file_name):
         ep_floor_Text_K, ep_floor_Tint_K, ep_roof_Text_K, ep_roof_Tint_K, \
         ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K, \
         mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
-        footprint_area_m2, ForcTemp_K, vcwg_hConv_w_m2_per_K
+        footprint_area_m2, ForcTemp_K, vcwg_hConv_w_m2_per_K, EP_nFloor
     # find the project path
+    value = _value
     ForcTemp_K = 293.15
     vcwg_hConv_w_m2_per_K = 10
-    config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass', sensitivity_file_name)
-    config.read(config_path)
+    if _config_file is None:
+        config = configparser.ConfigParser()
+        config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass', sensitivity_file_name)
+        config.read(config_path)
+        csv_file_name = config['Bypass']['csv_file_name']
+    else:
+        config = _config_file
+        csv_file_name = _value
     bld_type = config['Bypass']['bld_type']
     experiments_theme = config['Bypass']['experiments_theme']
     save_path_clean = False
     sensor_heights = [float(i) for i in config['Bypass']['sensor_height_meter'].split(',')]
-    csv_file_name = config['Bypass']['csv_file_name']
     data_saving_path = os.path.join(project_path, 'A_prepost_processing',
                                     experiments_theme,f'{csv_file_name}.csv')
     ep_trivial_path = os.path.join(project_path, 'A_prepost_processing',
@@ -54,6 +59,7 @@ def ini_all(sensitivity_file_name):
     if "SmallOffice" in bld_type:
         footprint_area_m2 = 5500 * 0.09290304 / 1
     elif "MediumOffice" in bld_type:
+        EP_nFloor = 3
         footprint_area_m2 = 53628 * 0.09290304 / 3
     elif "LargeOffice" in bld_type:
         footprint_area_m2 = 498588 * 0.09290304 / 12

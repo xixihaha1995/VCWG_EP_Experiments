@@ -1,5 +1,7 @@
 import numpy
 import math
+import _0_vcwg_ep_coordination as coordination
+
 
 """
 Calculate sink and source terms associated with the presence of buildings in the 1D model for momentum, heat, and TKE  
@@ -40,6 +42,15 @@ class BuildingCol:
         self.z0_road = z0_road           # Road roughness [m]
         self.z0_roof = z0_roof           # Roof roughness [m]
         self.SensHt_HVAC = SensHt_HVAC            # Sensible waste heat from building
+        '''
+        self.SensHt_HVAC, scalar value, represents the whole building total sensible waste heat, has EP_nFloor floors
+        to define self.SensHt_HVAC_Floor, length as self.nz_u + 1, where almost all values are zero except the EP_nFloor
+        floors, which are the sensible waste heat from each floor, the value is the 1/EP_nFloor of self.SensHt_HVAC
+        '''
+        self.SensHt_HVAC_Floor = numpy.zeros(self.nz_u + 1)
+        nGrid_perFloor = int(self.nz_u / coordination.EP_nFloor)
+        for i in range(1, coordination.EP_nFloor + 1):
+            self.SensHt_HVAC_Floor[i * nGrid_perFloor] = self.SensHt_HVAC / coordination.EP_nFloor
         self.HVAC_street_frac = HVAC_street_frac  # Fraction of Sensible waste heat from building released into the atmosphere at street level
         self.HVAC_atm_frac = HVAC_atm_frac        # Fraction of sensible waste heat from building released into the atmosphere
         self.windMin = windMin                    # minimum wind speed
@@ -139,9 +150,20 @@ class BuildingCol:
             # Term in momentum equation [m s^-2]
             self.srex_vy_h[i] += (vhb / self.nd) * (self.ss[i] * self.lambdap / self.vol[i] / self.dz)
             # Term in energy equation [K s^-1]
-            self.srex_th_h[i] += (thb_Roofs_Imp / self.nd) * (self.ss[i] * self.lambdap / self.vol[i] / self.dz) * FractionsRoof.fimp + \
-                                 (thb_Roofs_Veg / self.nd) * (self.ss[i] * self.lambdap / self.vol[i] / self.dz) * FractionsRoof.fveg + \
-                                 self.HVAC_atm_frac*(1-self.HVAC_street_frac)*(self.SensHt_HVAC /(self.rho[i]*self.Cp)/self.dz)*self.ss[i]*self.lambdap/(1 - self.lambdap)
+            # print(self.SensHt_HVAC)
+            # print(self.SensHt_HVAC_Floor)
+            if 'vector' in coordination.value:
+                self.srex_th_h[i] += (thb_Roofs_Imp / self.nd) * (
+                            self.ss[i] * self.lambdap / self.vol[i] / self.dz) * FractionsRoof.fimp + \
+                                     (thb_Roofs_Veg / self.nd) * (self.ss[i] * self.lambdap / self.vol[i] / self.dz) * FractionsRoof.fveg + \
+                                     self.HVAC_atm_frac * (1 - self.HVAC_street_frac) * (
+                                                 self.SensHt_HVAC_Floor[i] / (self.rho[i] * self.Cp) / self.dz) * self.lambdap / (1 - self.lambdap)
+            else:
+                self.srex_th_h[i] += (thb_Roofs_Imp / self.nd) * (self.ss[i] * self.lambdap / self.vol[i] / self.dz) \
+                                     * FractionsRoof.fimp +(thb_Roofs_Veg / self.nd) * \
+                                     (self.ss[i] * self.lambdap / self.vol[i] / self.dz) * FractionsRoof.fveg + \
+                                 self.HVAC_atm_frac*(1-self.HVAC_street_frac)*\
+                                     (self.SensHt_HVAC /(self.rho[i]*self.Cp)/self.dz)*self.ss[i]*self.lambdap/(1 - self.lambdap)
 
 
             # Term in turbulent kinetic energy equation [m s^-3]
