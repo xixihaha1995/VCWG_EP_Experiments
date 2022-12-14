@@ -46,11 +46,19 @@ class BuildingCol:
         self.SensHt_HVAC, scalar value, represents the whole building total sensible waste heat, has EP_nFloor floors
         to define self.SensHt_HVAC_Floor, length as self.nz_u + 1, where almost all values are zero except the EP_nFloor
         floors, which are the sensible waste heat from each floor, the value is the 1/EP_nFloor of self.SensHt_HVAC
+        
+        centroids for each floor
+        self.SensHt_HVAC_Floor in total has self.nz_u + 1 points
+        split them into EP_nFloor floors, each floor has (self.nz_u + 1)/EP_nFloor points
+        The first floor has the first (self.nz_u + 1)/EP_nFloor points, 
+        and the centroid idx is (self.nz_u + 1)/EP_nFloor/2 
         '''
         self.SensHt_HVAC_Floor = numpy.zeros(self.nz_u + 1)
-        nGrid_perFloor = int(self.nz_u / coordination.EP_nFloor)
-        for i in range(1, coordination.EP_nFloor + 1):
-            self.SensHt_HVAC_Floor[i * nGrid_perFloor] = self.SensHt_HVAC / coordination.EP_nFloor
+        centroid_idices = numpy.arange((self.nz_u + 1)/coordination.EP_nFloor/2,
+                                       self.nz_u + 1, (self.nz_u + 1)/coordination.EP_nFloor)
+        for i in range(coordination.EP_nFloor):
+            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = self.SensHt_HVAC/coordination.EP_nFloor
+        # print('self.SensHt_HVAC_Floor', self.SensHt_HVAC_Floor)
         self.HVAC_street_frac = HVAC_street_frac  # Fraction of Sensible waste heat from building released into the atmosphere at street level
         self.HVAC_atm_frac = HVAC_atm_frac        # Fraction of sensible waste heat from building released into the atmosphere
         self.windMin = windMin                    # minimum wind speed

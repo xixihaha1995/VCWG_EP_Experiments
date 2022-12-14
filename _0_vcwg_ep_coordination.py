@@ -11,7 +11,8 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
         sem0, sem1, sem2, sem3, \
         vcwg_needed_time_idx_in_seconds, \
         vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, vcwg_wsp_mps, vcwg_wdir_deg, \
-        ep_indoorTemp_C, ep_sensWaste_w_m2_per_footprint_area, \
+        vcwg_canTemp_K_list, vcwg_canSpecHum_Ratio_list, vcwg_canPress_Pa_list, \
+    ep_indoorTemp_C, ep_sensWaste_w_m2_per_footprint_area, \
         ep_floor_Text_K, ep_floor_Tint_K, ep_roof_Text_K, ep_roof_Tint_K, \
         ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K, \
         mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
@@ -72,6 +73,10 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
     elif "SuperMarket" in bld_type:
         footprint_area_m2 = 45000 * 0.09290304 / 1
 
+    vcwg_canTemp_K_list = [ 300 for i in range(EP_nFloor)]
+    vcwg_canSpecHum_Ratio_list = [ 0 for i in range(EP_nFloor)]
+    vcwg_canPress_Pa_list = [ 0 for i in range(EP_nFloor)]
+
     ep_indoorTemp_C = 20
     ep_sensWaste_w_m2_per_footprint_area = 0
     ep_floor_Text_K = 300
@@ -86,7 +91,8 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
 def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
                     FractionsRoof):
     global ep_sensWaste_w_m2_per_footprint_area,save_path_clean,vcwg_needed_time_idx_in_seconds, \
-        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa
+        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, \
+        vcwg_canTemp_K_list, vcwg_canSpecHum_Ratio_list,vcwg_canPress_Pa_list
 
     sem0.acquire()
     vcwg_needed_time_idx_in_seconds = (it + 1) * simTime.dt
@@ -102,6 +108,19 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     vcwg_canTemp_K = numpy.mean(canTempProf_cur)
     vcwg_canSpecHum_Ratio = numpy.mean(canSpecHumProf_cur)
     vcwg_canPress_Pa = numpy.mean(canPressProf_cur)
+    '''
+    Instead vcwg_canTemp_K (use one scalar value to represent all grid points within the canopy, Geometry_m.nz_u)
+    To split the canopy into EP_nFloor layers:
+    The first layer is the floor,..., the last layer is for the highest floor    
+    '''
+    for i in range(EP_nFloor):
+        vcwg_canTemp_K_list[i] =numpy.mean(
+            canTempProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
+        vcwg_canSpecHum_Ratio_list[i] =numpy.mean(
+            canSpecHumProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
+        vcwg_canPress_Pa_list[i] =numpy.mean(
+            canPressProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
+    pass
     sem1.release()
     
     sem3.acquire()

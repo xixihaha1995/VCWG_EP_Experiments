@@ -34,7 +34,6 @@ def for_loop_all_ini():
     #                  "Bypassing_EPW.ini","Dec_CAPITOUL_WithoutCooling.ini"]
     selected_jobs = ["Dec_CAPITOUL_WithCooling.ini","Dec_CAPITOUL_WithoutCooling.ini"]
 
-
     nbr_job_for_one_batch = 2
     for i in range(0,len(selected_jobs),nbr_job_for_one_batch):
         print('Todo jobs',selected_jobs[i:i+nbr_job_for_one_batch])
@@ -53,13 +52,13 @@ def one_ini(sensitivity_file_name):
     batch_value_list = [value_list[i:i + nbr_of_parallel] for i in range(0, len(value_list), nbr_of_parallel)]
     for batch_nbr, batch_value in enumerate(batch_value_list):
         for value in batch_value:
-            # ByPass.run_ep_api(sensitivity_file_name,config, value)
-            this_ini_process.append(Process(target=ByPass.run_ep_api, args=(sensitivity_file_name,config, value)))
-        for process in this_ini_process:
-            process.start()
-        for process in this_ini_process:
-            process.join()
-        this_ini_process = []
+            ByPass.run_ep_api(sensitivity_file_name,config, value)
+        #     this_ini_process.append(Process(target=ByPass.run_ep_api, args=(sensitivity_file_name,config, value)))
+        # for process in this_ini_process:
+        #     process.start()
+        # for process in this_ini_process:
+        #     process.join()
+        # this_ini_process = []
 
 
 if __name__ == '__main__':
