@@ -120,7 +120,6 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
             canSpecHumProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
         vcwg_canPress_Pa_list[i] =numpy.mean(
             canPressProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
-    pass
     sem1.release()
     
     sem3.acquire()

@@ -63,6 +63,7 @@ def overwrite_ep_weather(state):
     global overwrite_ep_weather_inited_handle, \
         wsped_mps_actuator_handle, wdir_deg_actuator_handle,zone_flr_area_handle,\
         called_vcwg_bool, roof_hConv_actuator_handle, \
+        odb_actuator_handle, orh_actuator_handle, \
         odb_bot_actuator_handle, owb_bot_actuator_handle, odb_mid_actuator_handle, owb_mid_actuator_handle, \
         odb_top_actuator_handle, owb_top_actuator_handle
 
@@ -96,7 +97,6 @@ def overwrite_ep_weather(state):
     # zone_flr_area_handle =  coordination.ep_api.exchange.get_internal_variable_handle(state, "Zone Floor Area", "CORE_ZN")
         #if one of the above handles is less than 0, then the actuator is not available
         # the entire program (multithread cooperation) should be terminated here, system exit with print messagePYTHO
-        #if odb_actuator_handle < 0 or orh_actuator_handle < 0 or zone_flr_area_handle < 0:
         if odb_actuator_handle < 0 or orh_actuator_handle < 0 or roof_hConv_actuator_handle < 0 or \
                 odb_bot_actuator_handle < 0 or owb_bot_actuator_handle < 0 or odb_mid_actuator_handle < 0 or \
                 owb_mid_actuator_handle < 0 or odb_top_actuator_handle < 0 or owb_top_actuator_handle < 0:
@@ -132,7 +132,6 @@ def overwrite_ep_weather(state):
 
         coordination.ep_api.exchange.set_actuator_value(state, roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
         coordination.sem2.release()#
-
 def SmallOffice_get_ep_results(state):
     global get_ep_results_inited_handle, oat_sensor_handle, \
         hvac_heat_rejection_sensor_handle, elec_bld_meter_handle, \

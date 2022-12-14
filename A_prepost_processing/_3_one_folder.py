@@ -197,8 +197,21 @@ def read_sql(csv_file):
                    "Please inspect query used:\n{}".format(query))
             raise ValueError(msg)
     regex = r'(\d+\.?\d*)'
-    number = float(re.findall(regex, results[0][1])[0])
-    return number
+    totalEnergy = float(re.findall(regex, results[0][1])[0])
+
+    hvac_electricity_query = f"SELECT * FROM TabularDataWithStrings " \
+                             f"WHERE ReportName = '{sql_report_name}'" \
+                             f"AND TableName = 'Utility Use Per Total Floor Area' And RowName = 'HVAC' " \
+                             f"AND ColumnName = 'Electricity Intensity'"
+    hvac_electricity_query_results = cursor.execute(hvac_electricity_query).fetchall()
+    hvac_electricity = float(re.findall(regex, hvac_electricity_query_results[0][1])[0])
+    hvac_gas_query = f"SELECT * FROM TabularDataWithStrings " \
+                     f"WHERE ReportName = '{sql_report_name}'" \
+                     f"AND TableName = 'Utility Use Per Total Floor Area' And RowName = 'HVAC' " \
+                     f"AND ColumnName = 'Natural Gas Intensity'"
+    hvac_gas_query_results = cursor.execute(hvac_gas_query).fetchall()
+    hvac_gas = float(re.findall(regex, hvac_gas_query_results[0][1])[0])
+    return totalEnergy, hvac_electricity, hvac_gas
 def find_height_indice(df):
     cols = df.columns
     temp_prof_cols = [col for col in cols if 'TempProf_cur' in col]
@@ -276,7 +289,7 @@ def process_one_theme(path):
             nmbe_dict[csv_file + '_sensor_idx_' + height_idx] = tempNMBE
             print(f'cvrmse for {csv_file} at height idx:{height_idx} is {tempCVRMSE}, NMBE is {tempNMBE}')
 
-        sql_dict[csv_file] = read_sql(csv_file)
+        sql_dict[csv_file] = (read_sql(csv_file))
     if os.path.exists(f'{experiments_folder}/comparison.xlsx'):
         os.remove(f'{experiments_folder}/comparison.xlsx')
     writer = pd.ExcelWriter(f'{experiments_folder}/comparison.xlsx')
@@ -285,7 +298,9 @@ def process_one_theme(path):
     cvrmse_df.to_excel(writer, 'cvrmse')
     nmbe_df = pd.DataFrame.from_dict(nmbe_dict, orient='index', columns=['nmbe'])
     nmbe_df.to_excel(writer, 'nmbe')
-    sql_df = pd.DataFrame.from_dict(sql_dict, orient='index', columns=['total_site_energy'])
+    sql_df = pd.DataFrame.from_dict(sql_dict, orient='index', columns=['Total Site Energy[GJ]',
+                                                                       'HVAC Electricity Intensity [MJ/m2]',
+                                                                       'HVAC Natural Gas Intensity [MJ/m2]'])
     sql_df.to_excel(writer, 'sql')
     writer.save()
 
