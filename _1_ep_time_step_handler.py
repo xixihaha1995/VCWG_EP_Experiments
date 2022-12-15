@@ -152,22 +152,22 @@ def overwrite_ep_weather(state):
         coordination.ep_api.exchange.set_actuator_value(state, odb_actuator_handle, coordination.vcwg_canTemp_K - 273.15)
         coordination.ep_api.exchange.set_actuator_value(state, orh_actuator_handle, rh)
         if "SmallOffice" in coordination.bld_type:
-            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_west_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_east_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_north_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_south_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_west_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_east_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_north_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_south_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
         elif "MediumOffice" in coordination.bld_type:
-            coordination.ep_api.exchange.set_actuator_value(state, roof_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
         elif "MidriseApartment" in coordination.bld_type:
-            coordination.ep_api.exchange.set_actuator_value(state, tRoofSWA_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, tRoofNWA_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, tRoofSEA_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, tRoofNEA_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, tRoofN1A_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, tRoofN2A_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, tRoofS1A_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, tRoofS2A_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
-            coordination.ep_api.exchange.set_actuator_value(state, tRoofC_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofSWA_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofNWA_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofSEA_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofNEA_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofN1A_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofN2A_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofS1A_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofS2A_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofC_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
 
         coordination.sem2.release()#
 
