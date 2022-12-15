@@ -12,7 +12,7 @@ def info(title):
 def batch_run(ini_files):
     all_ini_process = []
     for ini_file in ini_files:
-        p = Process(target=ByPass.run_ep_api, args=([ini_file]))
+        p = Process(target=ByPass.run_vcwg, args=([ini_file]))
         p.start()
         all_ini_process.append([p])
         # ByPass.run_ep_api(ini_file)
@@ -21,11 +21,11 @@ def batch_run(ini_files):
         for p in ini_processes:
             p.join()
 def for_loop_all_ini():
-    # selected_jobs = ["BUBBLE_Ue1.ini","BUBBLE_Ue2.ini",
-    #                  "Vancouver_Rural.ini","Vancouver_TopForcing.ini",
-    #                  "CAPITOUL_WithCooling.ini","CAPITOUL_WithoutCooling.ini",]
+    selected_jobs = ["BUBBLE_Ue1.ini","BUBBLE_Ue2.ini",
+                     "Vancouver_Rural.ini","Vancouver_TopForcing.ini",
+                     "CAPITOUL_WithCooling.ini","CAPITOUL_WithoutCooling.ini",]
     # selected_jobs = ["BUBBLE_Ue1.ini","BUBBLE_Ue2.ini"]
-    selected_jobs = ["CAPITOUL_WithCooling.ini"]
+    # selected_jobs = ["CAPITOUL_WithCooling.ini"]
     nbr_job_for_one_batch = 6
     for i in range(0,len(selected_jobs),nbr_job_for_one_batch):
         print('Todo jobs',selected_jobs[i:i+nbr_job_for_one_batch])
