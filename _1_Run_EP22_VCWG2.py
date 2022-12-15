@@ -4,6 +4,7 @@ from threading import Thread
 from multiprocessing import Process
 import _0_vcwg_ep_coordination as coordination
 import _1_ep_time_step_handler as time_step_handlers
+from VCWG_Hydrology import VCWG_Hydro
 
 def run_ep_api(sensitivity_file_name):
 
@@ -39,3 +40,20 @@ def run_ep_api(sensitivity_file_name):
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
     coordination.ep_api.runtime.run_energyplus(state, sys_args)
 
+def run_vcwg(sensitivity_file_name):
+    coordination.ini_all(sensitivity_file_name)
+    state = coordination.ep_api.state_manager.new_state()
+    coordination.psychrometric=coordination.ep_api.functional.psychrometrics(state)
+    if 'None' in coordination.config['Bypass']['TopForcingFileName']:
+        TopForcingFileName = None
+        epwFileName = coordination.config['Bypass']['epwFileName']
+    else:
+        epwFileName = None
+        TopForcingFileName = coordination.config['Bypass']['TopForcingFileName']
+    VCWGParamFileName = coordination.config['Bypass']['VCWGParamFileName']
+    csv = coordination.config['Bypass']['csv_file_name']
+    ViewFactorFileName = f'{csv}_ViewFactor.txt'
+    # Initialize the UWG object and run the simulation
+    case = f'{csv}'
+    VCWG = VCWG_Hydro(epwFileName, TopForcingFileName, VCWGParamFileName, ViewFactorFileName, case)
+    VCWG.run()
