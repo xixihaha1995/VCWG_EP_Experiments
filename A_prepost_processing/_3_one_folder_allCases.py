@@ -246,7 +246,12 @@ def process_one_theme(csv_filename):
         cvrmse_dict['Rural_21.5'] = cvrmse(comparison['Urban_DBT_C_21.5'], comparison['Rural_DBT_C'])
         cvrmse_dict['Rural_25.5'] = cvrmse(comparison['Urban_DBT_C_25.5'], comparison['Rural_DBT_C'])
         cvrmse_dict['Rural_31.2'] = cvrmse(comparison['Urban_DBT_C_31.2'], comparison['Rural_DBT_C'])
-        print(f'cvrmse for Rural vs Urban is {cvrmse_dict}')
+        print(f'cvrmse for Rural_2.6 is {cvrmse_dict["Rural_2.6"]}')
+        print(f'cvrmse for Rural_13.9 is {cvrmse_dict["Rural_13.9"]}')
+        print(f'cvrmse for Rural_17.5 is {cvrmse_dict["Rural_17.5"]}')
+        print(f'cvrmse for Rural_21.5 is {cvrmse_dict["Rural_21.5"]}')
+        print(f'cvrmse for Rural_25.5 is {cvrmse_dict["Rural_25.5"]}')
+        print(f'cvrmse for Rural_31.2 is {cvrmse_dict["Rural_31.2"]}')
     elif "BUBBLE_UE2" in csv_filename:
         comparison = get_BUUBLE_Ue2_measurements()
         cvrmse_dict['Rural_3.0'] = cvrmse(comparison['Urban_DBT_C_3.0'], comparison['Rural_DBT_C'])
