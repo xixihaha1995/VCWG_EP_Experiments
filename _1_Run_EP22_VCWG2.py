@@ -35,7 +35,7 @@ def run_ep_api(sensitivity_file_name):
     epwFileName = coordination.config['Bypass']['epwFileName']
     output_path = coordination.ep_trivial_path
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
-    idfFilePath = os.path.join(f'.\\resources\\idf\\WithShading', idfFileName)
+    idfFilePath = os.path.join(f'.\\resources\\idf\\AllCases', idfFileName)
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
     coordination.ep_api.runtime.run_energyplus(state, sys_args)
 
