@@ -47,8 +47,16 @@ def run_vcwg():
 def overwrite_ep_weather(state):
     global overwrite_ep_weather_inited_handle, odb_actuator_handle, orh_actuator_handle, \
         wsped_mps_actuator_handle, wdir_deg_actuator_handle,zone_flr_area_handle,\
-        called_vcwg_bool, roof_hConv_actuator_handle
-
+        called_vcwg_bool
+    if "SmallOffice" in coordination.bld_type:
+        global Attic_roof_west_hConv_actuator_handle, Attic_roof_east_hConv_actuator_handle, \
+            Attic_roof_north_hConv_actuator_handle, Attic_roof_south_hConv_actuator_handle
+    elif "MediumOffice" in coordination.bld_type:
+        global roof_hConv_actuator_handle
+    elif "MidriseApartment" in coordination.bld_type:
+        global tRoofSWA_hConv_actuator_handle, tRoofNWA_hConv_actuator_handle, tRoofSEA_hConv_actuator_handle, \
+            tRoofNEA_hConv_actuator_handle, tRoofN1A_hConv_actuator_handle, tRoofN2A_hConv_actuator_handle, \
+            tRoofS1A_hConv_actuator_handle, tRoofS2A_hConv_actuator_handle, tRoofC_hConv_actuator_handle
 
     if not overwrite_ep_weather_inited_handle:
         if not coordination.ep_api.exchange.api_data_fully_ready(state):
@@ -58,36 +66,109 @@ def overwrite_ep_weather(state):
             get_actuator_handle(state, "Weather Data", "Outdoor Dry Bulb", "Environment")
         orh_actuator_handle = coordination.ep_api.exchange.\
             get_actuator_handle(state, "Weather Data", "Outdoor Relative Humidity", "Environment")
-        roof_hConv_actuator_handle = coordination.ep_api.exchange. \
-            get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
-                                "BUILDING_ROOF")
-        oat_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state, "Site Outdoor Air Drybulb Temperature", "Environment")
-        orh_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state, "Site Outdoor Air Humidity Ratio","Environment")
-    # zone_flr_area_handle =  coordination.ep_api.exchange.get_internal_variable_handle(state, "Zone Floor Area", "CORE_ZN")
-        #if one of the above handles is less than 0, then the actuator is not available
-        # the entire program (multithread cooperation) should be terminated here, system exit with print messagePYTHO
-        #if odb_actuator_handle < 0 or orh_actuator_handle < 0 or zone_flr_area_handle < 0:
-        if odb_actuator_handle < 0 or orh_actuator_handle < 0 or roof_hConv_actuator_handle < 0:
+        if "SmallOffice" in coordination.bld_type:
+            Attic_roof_west_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient",
+                                    "Attic_roof_west")
+            Attic_roof_east_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient",
+                                    "Attic_roof_east")
+            Attic_roof_north_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient",
+                                    "Attic_roof_north")
+            Attic_roof_south_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient",
+                                    "Attic_roof_south")
+        elif "MediumOffice" in coordination.bld_type:
+            roof_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "BUILDING_ROOF")
+        elif "MidriseApartment" in coordination.bld_type:
+            # global tRoofSWA_hConv_actuator_handle, tRoofNWA_hConv_actuator_handle, tRoofSEA_hConv_actuator_handle, \
+            #     tRoofNEA_hConv_actuator_handle, tRoofN1A_hConv_actuator_handle, tRoofN2A_hConv_actuator_handle, \
+            #     tRoofS1A_hConv_actuator_handle, tRoofS2A_hConv_actuator_handle, tRoofC_hConv_actuator_handle
+            tRoofSWA_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "t Roof SWA")
+            tRoofNWA_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "t Roof NWA")
+            tRoofSEA_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "t Roof SEA")
+            tRoofNEA_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "t Roof NEA")
+            tRoofN1A_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "t Roof N1A")
+            tRoofN2A_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "t Roof N2A")
+            tRoofS1A_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "t Roof S1A")
+            tRoofS2A_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "t Roof S2A")
+            tRoofC_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "t Roof C")
+        if odb_actuator_handle < 0 or orh_actuator_handle < 0:
             print('ovewrite_ep_weather(): some handle not available')
             os.getpid()
             os.kill(os.getpid(), signal.SIGTERM)
+
+        if "SmallOffice" in coordination.bld_type:
+            if Attic_roof_west_hConv_actuator_handle < 0 or Attic_roof_east_hConv_actuator_handle < 0 or \
+                Attic_roof_north_hConv_actuator_handle < 0 or Attic_roof_south_hConv_actuator_handle < 0:
+                print('ovewrite_ep_weather():  SmallOffice, some roofhConv handle not available')
+                os.getpid()
+                os.kill(os.getpid(), signal.SIGTERM)
+        elif "MediumOffice" in coordination.bld_type:
+            if roof_hConv_actuator_handle < 0:
+                print('ovewrite_ep_weather():  MediumOffice, some roofhConv handle not available')
+                os.getpid()
+                os.kill(os.getpid(), signal.SIGTERM)
+        elif "MidriseApartment" in coordination.bld_type:
+            if tRoofSWA_hConv_actuator_handle < 0 or tRoofNWA_hConv_actuator_handle < 0 or \
+                tRoofSEA_hConv_actuator_handle < 0 or tRoofNEA_hConv_actuator_handle < 0 or \
+                tRoofN1A_hConv_actuator_handle < 0 or tRoofN2A_hConv_actuator_handle < 0 or \
+                tRoofS1A_hConv_actuator_handle < 0 or tRoofS2A_hConv_actuator_handle < 0 or \
+                tRoofC_hConv_actuator_handle < 0:
+                print('ovewrite_ep_weather():  MidriseApartment, some roofhConv handle not available')
+                os.getpid()
+                os.kill(os.getpid(), signal.SIGTERM)
 
     warm_up = coordination.ep_api.exchange.warmup_flag(state)
     if not warm_up:
         if not called_vcwg_bool:
             global zone_floor_area_m2
-            #zone_floor_area_m2 = coordination.ep_api.exchange.get_internal_variable_value(state, zone_flr_area_handle)
             called_vcwg_bool = True
             Thread(target=run_vcwg).start()
-        # Wait for the upstream (VCWG upload canyon info to Parent) to finish
         coordination.sem1.acquire()
-        # EP download the canyon info from Parent
-        #psychrometric = coordination.ep_api.functional.psychrometrics(state)
         rh = 100*coordination.psychrometric.relative_humidity_b(state, coordination.vcwg_canTemp_K - 273.15,
                                                coordination.vcwg_canSpecHum_Ratio, coordination.vcwg_canPress_Pa)
         coordination.ep_api.exchange.set_actuator_value(state, odb_actuator_handle, coordination.vcwg_canTemp_K - 273.15)
         coordination.ep_api.exchange.set_actuator_value(state, orh_actuator_handle, rh)
-        coordination.ep_api.exchange.set_actuator_value(state, roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+        if "SmallOffice" in coordination.bld_type:
+            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_west_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_east_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_north_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_south_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+        elif "MediumOffice" in coordination.bld_type:
+            coordination.ep_api.exchange.set_actuator_value(state, roof_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+        elif "MidriseApartment" in coordination.bld_type:
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofSWA_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofNWA_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofSEA_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofNEA_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofN1A_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofN2A_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofS1A_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofS2A_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+            coordination.ep_api.exchange.set_actuator_value(state, tRoofC_hConv_actuator_handle, coordination.vcwg_hConv_W_m2_K)
+
         coordination.sem2.release()#
 
 def SmallOffice_get_ep_results(state):

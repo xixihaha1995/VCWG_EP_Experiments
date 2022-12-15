@@ -21,7 +21,7 @@ def ini_all(sensitivity_file_name):
     vcwg_hConv_w_m2_per_K = 10
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass', sensitivity_file_name)
+    config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass','AllCases',sensitivity_file_name)
     config.read(config_path)
     bld_type = config['Bypass']['bld_type']
     experiments_theme = config['Bypass']['experiments_theme']
@@ -101,7 +101,10 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     sem3.acquire()
     BEM_Building = BEM.building
     BEM_Building.ElecTotal = 0
-    BEM_Building.sensWaste = ep_sensWaste_w_m2_per_footprint_area
+    if 'WithoutCooling' in config['Bypass']['csv_file_name']:
+        BEM_Building.sensWaste = 0
+    else:
+        BEM_Building.sensWaste = ep_sensWaste_w_m2_per_footprint_area
     ep_sensWaste_w_m2_per_footprint_area = 0
 
     BEM.mass.Text = ep_floor_Text_K
