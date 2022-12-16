@@ -12,10 +12,10 @@ def info(title):
 def batch_run(ini_files):
     all_ini_process = []
     for ini_file in ini_files:
-        p = Process(target=ByPass.run_ep_api, args=([ini_file]))
-        p.start()
-        all_ini_process.append([p])
-        # ByPass.run_ep_api(ini_file)
+        # p = Process(target=ByPass.run_ep_api, args=([ini_file]))
+        # p.start()
+        # all_ini_process.append([p])
+        ByPass.run_ep_api(ini_file)
 
     for ini_processes in all_ini_process:
         for p in ini_processes:
@@ -60,8 +60,5 @@ def one_ini(sensitivity_file_name):
             process.join()
         this_ini_process = []
 
-
 if __name__ == '__main__':
-    # for_loop_all_ini()
-    # one_ini("CAPITOUL_The_Effect_sensWaste_Profile.ini")
     one_ini("DummyChicago20Stories_The_Effect_sensWaste_Profile.ini")
