@@ -1161,7 +1161,8 @@ def _20Stories_get_ep_results(state):
             os.getpid()
             os.kill(os.getpid(), signal.SIGTERM)
     # get EP results, upload to coordination
-    if called_vcwg_bool:
+    warm_up = coordination.ep_api.exchange.warmup_flag(state)
+    if not warm_up and called_vcwg_bool:
         global ep_last_call_time_seconds
         coordination.sem2.acquire()
         curr_sim_time_in_hours = coordination.ep_api.exchange.current_sim_time(state)

@@ -24,6 +24,7 @@ EPTEMP-00000001/
 *.mtr
 *.rvaudit
 *.sql
+!A_prepost_processing/DummyChicago20Stories_Simplified/vector_Waste_ep_trivial_outputs/eplusout.sql
 *.svg
 *.html
 *.mdd
