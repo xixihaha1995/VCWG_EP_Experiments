@@ -1378,7 +1378,7 @@ def Simplified_20Stories_get_ep_results(state):
         surface596_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface596_north_wall_Text_c_handle)
 
         north_wall_Text_c = (surface26_north_wall_Text_c + surface326_north_wall_Text_c * 18 + surface596_north_wall_Text_c) / 20
-        
+
         coordination.ep_floor_Text_K = floor_Text_c + 273.15
         coordination.ep_roof_Text_K = roof_Text_c + 273.15
 
