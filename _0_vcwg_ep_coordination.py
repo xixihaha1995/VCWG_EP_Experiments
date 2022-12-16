@@ -72,7 +72,9 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
         footprint_area_m2 = 22500 * 0.09290304 / 1
     elif "SuperMarket" in bld_type:
         footprint_area_m2 = 45000 * 0.09290304 / 1
-
+    elif "20Stories" in bld_type:
+        EP_nFloor = 20
+        footprint_area_m2 = 30 * 15
     vcwg_canTemp_K_list = [ 300 for i in range(EP_nFloor)]
     vcwg_canSpecHum_Ratio_list = [ 0 for i in range(EP_nFloor)]
     vcwg_canPress_Pa_list = [ 0 for i in range(EP_nFloor)]
