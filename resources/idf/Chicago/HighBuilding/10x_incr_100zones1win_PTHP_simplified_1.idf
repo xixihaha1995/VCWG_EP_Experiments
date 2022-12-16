@@ -7575,7 +7575,7 @@ OutdoorAir:NodeList,
     PTHP 43 OA Node;         !- Node or NodeList Name 1
 
 OutdoorAir:NodeList,
-    PTHP44 OA Node;          !- Node or NodeList Name 1
+    PTHP 44 OA Node;          !- Node or NodeList Name 1
 
 OutdoorAir:NodeList,
     PTHP 45 OA Node;         !- Node or NodeList Name 1

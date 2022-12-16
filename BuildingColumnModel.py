@@ -55,7 +55,6 @@ class BuildingCol:
         '''
         self.SensHt_HVAC_Floor = numpy.zeros(self.nz_u + 1)
         for i in range(coordination.EP_nFloor):
-            print(f'i = {i}, SensHt_HVAC_Floor = {self.SensHt_HVAC_Floor}')
             if '20Stories' in coordination.bld_type:
                 centroid_idices = numpy.arange((self.nz_u + 1) / coordination.EP_nFloor / 2,
                                                self.nz_u + 1, (self.nz_u + 1) / coordination.EP_nFloor)
