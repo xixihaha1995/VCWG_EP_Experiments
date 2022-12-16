@@ -57,7 +57,7 @@ class BuildingCol:
         centroid_idices = numpy.arange((self.nz_u + 1)/coordination.EP_nFloor/2,
                                        self.nz_u + 1, (self.nz_u + 1)/coordination.EP_nFloor)
         for i in range(coordination.EP_nFloor):
-            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = self.SensHt_HVAC/coordination.EP_nFloor
+            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = self.SensHt_HVAC/coordination.EP_nFloor * (i+1)
         # print('self.SensHt_HVAC_Floor', self.SensHt_HVAC_Floor)
         self.HVAC_street_frac = HVAC_street_frac  # Fraction of Sensible waste heat from building released into the atmosphere at street level
         self.HVAC_atm_frac = HVAC_atm_frac        # Fraction of sensible waste heat from building released into the atmosphere

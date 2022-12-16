@@ -24,6 +24,9 @@ def run_ep_api(sensitivity_file_name,_config=None, _value=None):
     elif '20Stories' in coordination.bld_type:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers._20Stories_get_ep_results)
+    elif 'SimplifiedHighBld' in coordination.bld_type:
+        coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
+                                                                                      time_step_handlers.SimplifiedHighBld_get_ep_results)
     else:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers.general_get_ep_results)
@@ -38,7 +41,7 @@ def run_ep_api(sensitivity_file_name,_config=None, _value=None):
     epwFileName = coordination.config['Bypass']['epwFileName']
     output_path = coordination.ep_trivial_path
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
-    idfFilePath = os.path.join(f'.\\resources\\idf', idfFileName)
+    idfFilePath = os.path.join(f'.\\resources\\idf\\Chicago\\HighBuilding', idfFileName)
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
     coordination.ep_api.runtime.run_energyplus(state, sys_args)
 

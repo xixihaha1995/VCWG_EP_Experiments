@@ -15,7 +15,7 @@ ep_last_call_time_seconds = 0
 def api_to_csv(state):
     orig = coordination.ep_api.exchange.list_available_api_data_csv(state)
     newFileByteArray = bytearray(orig)
-    api_path = os.path.join(coordination.data_saving_path,'..', 'api_data.csv')
+    api_path = os.path.join(coordination.data_saving_path,'..', f'{coordination.value}_api_data.csv')
     newFile = open(api_path, "wb")
     newFile.write(newFileByteArray)
     newFile.close()
@@ -91,20 +91,10 @@ def overwrite_ep_weather(state):
                 get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:TOPDRYBULB")
             owb_top_actuator_handle = coordination.ep_api.exchange.\
                 get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:TOPWETBULB")
-        if "20Stories" in coordination.bld_type:
+        if "20Stories" in coordination.bld_type or 'SimplifiedHighBld' in coordination.bld_type:
             global Surface_576_roof_hConv_actuator_handle, \
             Surface_582_roof_hConv_actuator_handle, Surface_588_roof_hConv_actuator_handle, \
-            Surface_594_roof_hConv_actuator_handle, Surface_600_roof_hConv_actuator_handle, \
-            odb_floor1_actuator_handle, owb_floor1_actuator_handle, odb_floor2_actuator_handle, owb_floor2_actuator_handle, \
-            odb_floor3_actuator_handle, owb_floor3_actuator_handle, odb_floor4_actuator_handle, owb_floor4_actuator_handle, \
-            odb_floor5_actuator_handle, owb_floor5_actuator_handle, odb_floor6_actuator_handle, owb_floor6_actuator_handle, \
-            odb_floor7_actuator_handle, owb_floor7_actuator_handle, odb_floor8_actuator_handle, owb_floor8_actuator_handle, \
-            odb_floor9_actuator_handle, owb_floor9_actuator_handle, odb_floor10_actuator_handle, owb_floor10_actuator_handle, \
-            odb_floor11_actuator_handle, owb_floor11_actuator_handle, odb_floor12_actuator_handle, owb_floor12_actuator_handle, \
-            odb_floor13_actuator_handle, owb_floor13_actuator_handle, odb_floor14_actuator_handle, owb_floor14_actuator_handle, \
-            odb_floor15_actuator_handle, owb_floor15_actuator_handle, odb_floor16_actuator_handle, owb_floor16_actuator_handle, \
-            odb_floor17_actuator_handle, owb_floor17_actuator_handle, odb_floor18_actuator_handle, owb_floor18_actuator_handle, \
-            odb_floor19_actuator_handle, owb_floor19_actuator_handle, odb_floor20_actuator_handle, owb_floor20_actuator_handle
+            Surface_594_roof_hConv_actuator_handle, Surface_600_roof_hConv_actuator_handle
 
             Surface_576_roof_hConv_actuator_handle = coordination.ep_api.exchange. \
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
@@ -121,6 +111,19 @@ def overwrite_ep_weather(state):
             Surface_600_roof_hConv_actuator_handle = coordination.ep_api.exchange. \
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
                                     "Surface 600")
+        if "20Stories" in coordination.bld_type or 'SimplifiedHighBld' in coordination.bld_type:
+            global odb_floor1_actuator_handle, owb_floor1_actuator_handle, odb_floor2_actuator_handle, owb_floor2_actuator_handle, \
+            odb_floor3_actuator_handle, owb_floor3_actuator_handle, odb_floor4_actuator_handle, owb_floor4_actuator_handle, \
+            odb_floor5_actuator_handle, owb_floor5_actuator_handle, odb_floor6_actuator_handle, owb_floor6_actuator_handle, \
+            odb_floor7_actuator_handle, owb_floor7_actuator_handle, odb_floor8_actuator_handle, owb_floor8_actuator_handle, \
+            odb_floor9_actuator_handle, owb_floor9_actuator_handle, odb_floor10_actuator_handle, owb_floor10_actuator_handle, \
+            odb_floor11_actuator_handle, owb_floor11_actuator_handle, odb_floor12_actuator_handle, owb_floor12_actuator_handle, \
+            odb_floor13_actuator_handle, owb_floor13_actuator_handle, odb_floor14_actuator_handle, owb_floor14_actuator_handle, \
+            odb_floor15_actuator_handle, owb_floor15_actuator_handle, odb_floor16_actuator_handle, owb_floor16_actuator_handle, \
+            odb_floor17_actuator_handle, owb_floor17_actuator_handle, odb_floor18_actuator_handle, owb_floor18_actuator_handle, \
+            odb_floor19_actuator_handle, owb_floor19_actuator_handle, odb_floor20_actuator_handle, owb_floor20_actuator_handle
+
+
             odb_floor1_actuator_handle = coordination.ep_api.exchange.\
                 get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_1DryBulb")
             owb_floor1_actuator_handle = coordination.ep_api.exchange.\
@@ -237,7 +240,7 @@ def overwrite_ep_weather(state):
 
     warm_up = coordination.ep_api.exchange.warmup_flag(state)
     if not warm_up:
-        # api_to_csv(state)
+        api_to_csv(state)
         if not called_vcwg_bool:
             global zone_floor_area_m2
             #zone_floor_area_m2 = coordination.ep_api.exchange.get_internal_variable_value(state, zone_flr_area_handle)
