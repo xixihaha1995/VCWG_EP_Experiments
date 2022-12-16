@@ -22,6 +22,9 @@ def run_ep_api(sensitivity_file_name):
     elif 'LargeOffice' in coordination.bld_type:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers.LargeOffice_get_ep_results)
+    elif 'MidriseApartment' in coordination.bld_type:
+        coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
+                                                                                      time_step_handlers.MidriseApartment_get_ep_results)
     else:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers.general_get_ep_results)
