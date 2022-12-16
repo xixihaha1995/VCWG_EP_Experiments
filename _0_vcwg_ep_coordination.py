@@ -117,14 +117,30 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     Instead vcwg_canTemp_K (use one scalar value to represent all grid points within the canopy, Geometry_m.nz_u)
     To split the canopy into EP_nFloor layers:
     The first layer is the floor,..., the last layer is for the highest floor    
+    For 20Stories, each floor has one outdoor air node.
+    For SimplifiedHighBld, the first floor has one outdoor air node, the 2-19th floors have same outdoor air node, the 20th floor has one outdoor air node.
     '''
     for i in range(EP_nFloor):
-        vcwg_canTemp_K_list[i] =numpy.mean(
-            canTempProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
-        vcwg_canSpecHum_Ratio_list[i] =numpy.mean(
-            canSpecHumProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
-        vcwg_canPress_Pa_list[i] =numpy.mean(
-            canPressProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
+        if '20Stories' in bld_type:
+            vcwg_canTemp_K_list[i] =numpy.mean(
+                canTempProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
+            vcwg_canSpecHum_Ratio_list[i] =numpy.mean(
+                canSpecHumProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
+            vcwg_canPress_Pa_list[i] =numpy.mean(
+                canPressProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
+        elif 'SimplifiedHighBld' in bld_type:
+            nbr_grid_points_per_floor = int(Geometry_m.nz_u / EP_nFloor)
+            # index 0: is mean of floor 1
+            # index 1: is mean of floor 2-19
+            # index 2: is mean of floor 20
+            floor_range_dict = {0: [0, 1], 1: [2, 19], 2: [20, 20]}
+            vcwg_canTemp_K_list[i] = numpy.mean(
+                canTempProf_cur[int(floor_range_dict[i][0] * nbr_grid_points_per_floor):int(
+                    (floor_range_dict[i][1] + 1) * nbr_grid_points_per_floor)])
+            vcwg_canSpecHum_Ratio_list[i] = numpy.mean(
+                canSpecHumProf_cur[int(floor_range_dict[i][0] * nbr_grid_points_per_floor):int(
+                    (floor_range_dict[i][1] + 1) * nbr_grid_points_per_floor)])
+
     sem1.release()
     
     sem3.acquire()

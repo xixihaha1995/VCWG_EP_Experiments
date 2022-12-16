@@ -1,3 +1,136 @@
+  Output:Variable,
+    *,                       !- Key Value
+    Surface Outside Face Temperature,  !- Variable Name
+    timestep;                !- Reporting Frequency
+
+!-This file contains 100 zone, numbering from 1 to 100
+!-In total, there is 20 stories, each story contains 5 zones
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 1,      !- Name
+    Thermal Zone 1,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 2,      !- Name
+    Thermal Zone 2,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 3,      !- Name
+    Thermal Zone 3,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 4,      !- Name
+    Thermal Zone 4,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 5,      !- Name
+    Thermal Zone 5,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 51,     !- Name
+    Thermal Zone 51,            !- Zone Name
+    OutdoorAirNode:Floor_11;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 52,     !- Name
+    Thermal Zone 52,            !- Zone Name
+    OutdoorAirNode:Floor_11;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 53,     !- Name
+    Thermal Zone 53,            !- Zone Name
+    OutdoorAirNode:Floor_11;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 54,     !- Name
+    Thermal Zone 54,            !- Zone Name
+    OutdoorAirNode:Floor_11;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 55,     !- Name
+    Thermal Zone 55,            !- Zone Name
+    OutdoorAirNode:Floor_11;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 96,     !- Name
+    Thermal Zone 96,            !- Zone Name
+    OutdoorAirNode:Floor_20;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 97,     !- Name
+    Thermal Zone 97,            !- Zone Name
+    OutdoorAirNode:Floor_20;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 98,     !- Name
+    Thermal Zone 98,            !- Zone Name
+    OutdoorAirNode:Floor_20;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 99,     !- Name
+    Thermal Zone 99,            !- Zone Name
+    OutdoorAirNode:Floor_20;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 100,     !- Name
+    Thermal Zone 100,            !- Zone Name
+    OutdoorAirNode:Floor_20;     !- Outdoor Air Node Name
+
+OutdoorAir:Node,
+    OutdoorAirNode:Floor_1,     !- Name
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_1DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_1WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    OutdoorAirNode:Floor_11,     !- Name
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_11DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_11WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    OutdoorAirNode:Floor_20,     !- Name
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+
+Schedule:Compact,
+    OutdoorAirNode:Floor_1DryBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OutdoorAirNode:Floor_1WetBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OutdoorAirNode:Floor_11DryBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OutdoorAirNode:Floor_11WetBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OutdoorAirNode:Floor_20DryBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OutdoorAirNode:Floor_20WetBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+
 !-Generator IDFEditor 1.51
 !-Option SortedOrder
 

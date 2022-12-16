@@ -94,7 +94,9 @@ def overwrite_ep_weather(state):
         if "20Stories" in coordination.bld_type or 'SimplifiedHighBld' in coordination.bld_type:
             global Surface_576_roof_hConv_actuator_handle, \
             Surface_582_roof_hConv_actuator_handle, Surface_588_roof_hConv_actuator_handle, \
-            Surface_594_roof_hConv_actuator_handle, Surface_600_roof_hConv_actuator_handle
+            Surface_594_roof_hConv_actuator_handle, Surface_600_roof_hConv_actuator_handle, \
+                odb_floor1_actuator_handle, owb_floor1_actuator_handle, odb_floor11_actuator_handle, owb_floor11_actuator_handle,\
+                odb_floor20_actuator_handle, owb_floor20_actuator_handle
 
             Surface_576_roof_hConv_actuator_handle = coordination.ep_api.exchange. \
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
@@ -111,23 +113,31 @@ def overwrite_ep_weather(state):
             Surface_600_roof_hConv_actuator_handle = coordination.ep_api.exchange. \
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
                                     "Surface 600")
-        if "20Stories" in coordination.bld_type or 'SimplifiedHighBld' in coordination.bld_type:
-            global odb_floor1_actuator_handle, owb_floor1_actuator_handle, odb_floor2_actuator_handle, owb_floor2_actuator_handle, \
+            odb_floor1_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_1DryBulb")
+            owb_floor1_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_1WetBulb")
+            odb_floor11_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_11DryBulb")
+            owb_floor11_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_11WetBulb")
+            odb_floor20_actuator_handle = coordination.ep_api.exchange.\
+                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_20DryBulb")
+            owb_floor20_actuator_handle = coordination.ep_api.exchange.\
+                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_20WetBulb")
+
+        if "20Stories" in coordination.bld_type:
+            global  odb_floor2_actuator_handle, owb_floor2_actuator_handle, \
             odb_floor3_actuator_handle, owb_floor3_actuator_handle, odb_floor4_actuator_handle, owb_floor4_actuator_handle, \
             odb_floor5_actuator_handle, owb_floor5_actuator_handle, odb_floor6_actuator_handle, owb_floor6_actuator_handle, \
             odb_floor7_actuator_handle, owb_floor7_actuator_handle, odb_floor8_actuator_handle, owb_floor8_actuator_handle, \
             odb_floor9_actuator_handle, owb_floor9_actuator_handle, odb_floor10_actuator_handle, owb_floor10_actuator_handle, \
-            odb_floor11_actuator_handle, owb_floor11_actuator_handle, odb_floor12_actuator_handle, owb_floor12_actuator_handle, \
+             odb_floor12_actuator_handle, owb_floor12_actuator_handle, \
             odb_floor13_actuator_handle, owb_floor13_actuator_handle, odb_floor14_actuator_handle, owb_floor14_actuator_handle, \
             odb_floor15_actuator_handle, owb_floor15_actuator_handle, odb_floor16_actuator_handle, owb_floor16_actuator_handle, \
             odb_floor17_actuator_handle, owb_floor17_actuator_handle, odb_floor18_actuator_handle, owb_floor18_actuator_handle, \
-            odb_floor19_actuator_handle, owb_floor19_actuator_handle, odb_floor20_actuator_handle, owb_floor20_actuator_handle
+            odb_floor19_actuator_handle, owb_floor19_actuator_handle
 
-
-            odb_floor1_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_1DryBulb")
-            owb_floor1_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_1WetBulb")
             odb_floor2_actuator_handle = coordination.ep_api.exchange.\
                 get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_2DryBulb")
             owb_floor2_actuator_handle = coordination.ep_api.exchange.\
@@ -164,10 +174,6 @@ def overwrite_ep_weather(state):
                 get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_10DryBulb")
             owb_floor10_actuator_handle = coordination.ep_api.exchange.\
                 get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_10WetBulb")
-            odb_floor11_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_11DryBulb")
-            owb_floor11_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_11WetBulb")
             odb_floor12_actuator_handle = coordination.ep_api.exchange.\
                 get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_12DryBulb")
             owb_floor12_actuator_handle = coordination.ep_api.exchange.\
@@ -200,10 +206,6 @@ def overwrite_ep_weather(state):
                 get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_19DryBulb")
             owb_floor19_actuator_handle = coordination.ep_api.exchange.\
                 get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_19WetBulb")
-            odb_floor20_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_20DryBulb")
-            owb_floor20_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:Floor_20WetBulb")
 
         if odb_actuator_handle < 0 or orh_actuator_handle < 0:
             print('ovewrite_ep_weather(): some handle not available')
@@ -237,10 +239,19 @@ def overwrite_ep_weather(state):
                 print('ovewrite_ep_weather(): 20Stories,some handle not available')
                 os.getpid()
                 os.kill(os.getpid(), signal.SIGTERM)
+        if 'SimplifiedHighBld' in coordination.bld_type:
+            if Surface_576_roof_hConv_actuator_handle < 0 or \
+                Surface_582_roof_hConv_actuator_handle < 0 or Surface_588_roof_hConv_actuator_handle < 0 or \
+                Surface_594_roof_hConv_actuator_handle < 0 or Surface_600_roof_hConv_actuator_handle < 0 or \
+                odb_floor1_actuator_handle < 0 or owb_floor1_actuator_handle < 0 or odb_floor11_actuator_handle < 0 or \
+                owb_floor11_actuator_handle < 0 or odb_floor20_actuator_handle < 0 or owb_floor20_actuator_handle < 0:
+                print('ovewrite_ep_weather(): SimplifiedHighBld,some handle not available')
+                os.getpid()
+                os.kill(os.getpid(), signal.SIGTERM)
 
     warm_up = coordination.ep_api.exchange.warmup_flag(state)
     if not warm_up:
-        api_to_csv(state)
+        # api_to_csv(state)
         if not called_vcwg_bool:
             global zone_floor_area_m2
             #zone_floor_area_m2 = coordination.ep_api.exchange.get_internal_variable_value(state, zone_flr_area_handle)
@@ -259,30 +270,35 @@ def overwrite_ep_weather(state):
                 coordination.ep_api.exchange.set_actuator_value(state, owb_mid_actuator_handle, owb_c_list[1])
                 coordination.ep_api.exchange.set_actuator_value(state, odb_top_actuator_handle, odb_c_list[2])
                 coordination.ep_api.exchange.set_actuator_value(state, owb_top_actuator_handle, owb_c_list[2])
-            elif "20Stories" in coordination.bld_type:
+            elif "20Stories" in coordination.bld_type or "SimplifiedHighBld" in coordination.bld_type:
                 odb_c_list = [i - 273.15 for i in coordination.vcwg_canTemp_K_list]
                 owb_c_list = [to_get_wet_bulb(state, i, coordination.vcwg_canSpecHum_Ratio_list[odb_c_list.index(i)],
                                               coordination.vcwg_canPress_Pa_list[odb_c_list.index(i)]) for i in odb_c_list]
-                all_odb_actuator_handle_list = [odb_floor1_actuator_handle, odb_floor2_actuator_handle,
-                                                odb_floor3_actuator_handle, odb_floor4_actuator_handle,
-                                                odb_floor5_actuator_handle, odb_floor6_actuator_handle,
-                                                odb_floor7_actuator_handle, odb_floor8_actuator_handle,
-                                                odb_floor9_actuator_handle, odb_floor10_actuator_handle,
-                                                odb_floor11_actuator_handle, odb_floor12_actuator_handle,
-                                                odb_floor13_actuator_handle, odb_floor14_actuator_handle,
-                                                odb_floor15_actuator_handle, odb_floor16_actuator_handle,
-                                                odb_floor17_actuator_handle, odb_floor18_actuator_handle,
-                                                odb_floor19_actuator_handle, odb_floor20_actuator_handle]
-                all_owb_actuator_handle_list = [owb_floor1_actuator_handle, owb_floor2_actuator_handle,
-                                                owb_floor3_actuator_handle, owb_floor4_actuator_handle,
-                                                owb_floor5_actuator_handle, owb_floor6_actuator_handle,
-                                                owb_floor7_actuator_handle, owb_floor8_actuator_handle,
-                                                owb_floor9_actuator_handle, owb_floor10_actuator_handle,
-                                                owb_floor11_actuator_handle, owb_floor12_actuator_handle,
-                                                owb_floor13_actuator_handle, owb_floor14_actuator_handle,
-                                                owb_floor15_actuator_handle, owb_floor16_actuator_handle,
-                                                owb_floor17_actuator_handle, owb_floor18_actuator_handle,
-                                                owb_floor19_actuator_handle, owb_floor20_actuator_handle]
+                if '20Stories' in coordination.bld_type:
+                    all_odb_actuator_handle_list = [odb_floor1_actuator_handle, odb_floor2_actuator_handle,
+                                                    odb_floor3_actuator_handle, odb_floor4_actuator_handle,
+                                                    odb_floor5_actuator_handle, odb_floor6_actuator_handle,
+                                                    odb_floor7_actuator_handle, odb_floor8_actuator_handle,
+                                                    odb_floor9_actuator_handle, odb_floor10_actuator_handle,
+                                                    odb_floor11_actuator_handle, odb_floor12_actuator_handle,
+                                                    odb_floor13_actuator_handle, odb_floor14_actuator_handle,
+                                                    odb_floor15_actuator_handle, odb_floor16_actuator_handle,
+                                                    odb_floor17_actuator_handle, odb_floor18_actuator_handle,
+                                                    odb_floor19_actuator_handle, odb_floor20_actuator_handle]
+                    all_owb_actuator_handle_list = [owb_floor1_actuator_handle, owb_floor2_actuator_handle,
+                                                    owb_floor3_actuator_handle, owb_floor4_actuator_handle,
+                                                    owb_floor5_actuator_handle, owb_floor6_actuator_handle,
+                                                    owb_floor7_actuator_handle, owb_floor8_actuator_handle,
+                                                    owb_floor9_actuator_handle, owb_floor10_actuator_handle,
+                                                    owb_floor11_actuator_handle, owb_floor12_actuator_handle,
+                                                    owb_floor13_actuator_handle, owb_floor14_actuator_handle,
+                                                    owb_floor15_actuator_handle, owb_floor16_actuator_handle,
+                                                    owb_floor17_actuator_handle, owb_floor18_actuator_handle,
+                                                    owb_floor19_actuator_handle, owb_floor20_actuator_handle]
+                elif 'SimplifiedHighBld' in coordination.bld_type:
+                    all_odb_actuator_handle_list = [odb_floor1_actuator_handle, odb_floor11_actuator_handle, odb_floor20_actuator_handle]
+                    all_owb_actuator_handle_list = [owb_floor1_actuator_handle, owb_floor11_actuator_handle, owb_floor20_actuator_handle]
+
                 for i in range(len(all_odb_actuator_handle_list)):
                     coordination.ep_api.exchange.set_actuator_value(state, all_odb_actuator_handle_list[i], odb_c_list[i])
                     coordination.ep_api.exchange.set_actuator_value(state, all_owb_actuator_handle_list[i], owb_c_list[i])
@@ -295,7 +311,7 @@ def overwrite_ep_weather(state):
 
         if "MediumOffice" in coordination.bld_type:
             coordination.ep_api.exchange.set_actuator_value(state, roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
-        elif "20Stories" in coordination.bld_type:
+        elif "20Stories" in coordination.bld_type or "SimplifiedHighBld" in coordination.bld_type:
             coordination.ep_api.exchange.set_actuator_value(state, Surface_576_roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
             coordination.ep_api.exchange.set_actuator_value(state, Surface_582_roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
             coordination.ep_api.exchange.set_actuator_value(state, Surface_588_roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
@@ -1223,6 +1239,146 @@ def _20Stories_get_ep_results(state):
 
         north_wall_Text_c = (surface26_north_wall_Text_c + surface56_north_wall_Text_c + surface86_north_wall_Text_c + surface116_north_wall_Text_c + surface146_north_wall_Text_c + surface176_north_wall_Text_c + surface206_north_wall_Text_c + surface236_north_wall_Text_c + surface266_north_wall_Text_c + surface296_north_wall_Text_c + surface326_north_wall_Text_c + surface356_north_wall_Text_c + surface386_north_wall_Text_c + surface416_north_wall_Text_c + surface446_north_wall_Text_c + surface476_north_wall_Text_c + surface506_north_wall_Text_c + surface536_north_wall_Text_c + surface566_north_wall_Text_c + surface596_north_wall_Text_c) / 20
 
+        coordination.ep_floor_Text_K = floor_Text_c + 273.15
+        coordination.ep_roof_Text_K = roof_Text_c + 273.15
+
+        coordination.ep_wallSun_Text_K = south_wall_Text_c + 273.15
+        coordination.ep_wallShade_Text_K = north_wall_Text_c + 273.15
+
+        coordination.sem3.release()
+
+def Simplified_20Stories_get_ep_results(state):
+    global get_ep_results_inited_handle, \
+        hvac_heat_rejection_sensor_handle,\
+        surface576_roof_Text_c_handle, surface582_roof_Text_c_handle, surface588_roof_Text_c_handle, \
+        surface594_roof_Text_c_handle, surface600_roof_Text_c_handle, surface1_floor_Text_c_handle, \
+        surface7_floor_Text_c_handle, surface13_floor_Text_c_handle, surface19_floor_Text_c_handle, \
+        surface25_floor_Text_c_handle, \
+        surface2_south_wall_Text_c_handle, surface302_south_wall_Text_c_handle, surface572_south_wall_Text_c_handle,\
+    surface26_north_wall_Text_c_handle,surface326_north_wall_Text_c_handle, surface596_north_wall_Text_c_handle,\
+    surface14_east_wall_Text_c_handle, surface314_east_wall_Text_c_handle, surface584_east_wall_Text_c_handle,\
+    surface10_west_wall_Text_c_handle,surface310_west_wall_Text_c_handle, surface580_west_wall_Text_c_handle
+
+    if not get_ep_results_inited_handle:
+        if not coordination.ep_api.exchange.api_data_fully_ready(state):
+            return
+        get_ep_results_inited_handle = True
+        hvac_heat_rejection_sensor_handle = \
+            coordination.ep_api.exchange.get_variable_handle(state,\
+                                                             "HVAC System Total Heat Rejection Energy",\
+                                                             "SIMHVAC")
+        surface576_roof_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
+                                                                                            "Surface 576")
+        surface582_roof_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
+                                                                                            "Surface 582")
+        surface588_roof_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 588")
+        surface594_roof_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 594")
+        surface600_roof_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 600")
+        surface1_floor_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 1")
+        surface7_floor_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 7")
+        surface13_floor_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 13")
+        surface19_floor_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 19")
+        surface25_floor_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 25")
+        surface2_south_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 2")
+        surface302_south_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 302")
+        surface572_south_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 572")
+        surface26_north_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 26")
+        surface326_north_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 326")
+        surface596_north_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 596")
+        surface14_east_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 14")
+        surface314_east_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 314")
+        surface584_east_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 584")
+        surface10_west_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 10")
+        surface310_west_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 310")
+        surface580_west_wall_Text_c_handle = coordination.ep_api.exchange.\
+            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 580")
+
+        if (hvac_heat_rejection_sensor_handle == -1 or \
+                surface576_roof_Text_c_handle == -1 or surface582_roof_Text_c_handle == -1 or \
+                surface588_roof_Text_c_handle == -1 or surface594_roof_Text_c_handle == -1 or \
+                surface600_roof_Text_c_handle == -1 or surface1_floor_Text_c_handle == -1 or \
+                surface7_floor_Text_c_handle == -1 or surface13_floor_Text_c_handle == -1 or \
+                surface19_floor_Text_c_handle == -1 or surface25_floor_Text_c_handle == -1 or \
+            surface2_south_wall_Text_c_handle == -1 or surface302_south_wall_Text_c_handle == -1 or surface572_south_wall_Text_c_handle == -1 or \
+            surface26_north_wall_Text_c_handle == -1 or surface326_north_wall_Text_c_handle == -1 or surface596_north_wall_Text_c_handle == -1 or \
+            surface14_east_wall_Text_c_handle == -1 or surface314_east_wall_Text_c_handle == -1 or surface584_east_wall_Text_c_handle == -1 or \
+            surface10_west_wall_Text_c_handle == -1 or surface310_west_wall_Text_c_handle == -1 or surface580_west_wall_Text_c_handle == -1):
+
+            print('Simplified_20Stories_get_ep_results(): some handle not available')
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+    # get EP results, upload to coordination
+    if called_vcwg_bool:
+        global ep_last_call_time_seconds
+        coordination.sem2.acquire()
+        curr_sim_time_in_hours = coordination.ep_api.exchange.current_sim_time(state)
+        curr_sim_time_in_seconds = curr_sim_time_in_hours * 3600  # Should always accumulate, since system time always advances
+        accumulated_time_in_seconds = curr_sim_time_in_seconds - ep_last_call_time_seconds
+        ep_last_call_time_seconds = curr_sim_time_in_seconds
+        hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state,hvac_heat_rejection_sensor_handle)
+        hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
+        coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
+
+        time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)
+
+        if not time_index_alignment_bool:
+            coordination.sem2.release()
+            return
+        surface576_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface576_roof_Text_c_handle)
+        surface582_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface582_roof_Text_c_handle)
+        surface588_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface588_roof_Text_c_handle)
+        surface594_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface594_roof_Text_c_handle)
+        surface600_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface600_roof_Text_c_handle)
+
+        roof_Text_c = (surface576_roof_Text_c + surface582_roof_Text_c + surface588_roof_Text_c + surface594_roof_Text_c + surface600_roof_Text_c) / 5
+
+        surface1_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface1_floor_Text_c_handle)
+        surface7_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface7_floor_Text_c_handle)
+        surface13_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface13_floor_Text_c_handle)
+        surface19_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface19_floor_Text_c_handle)
+        surface25_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface25_floor_Text_c_handle)
+
+        floor_Text_c = (surface1_floor_Text_c + surface7_floor_Text_c + surface13_floor_Text_c + surface19_floor_Text_c + surface25_floor_Text_c) / 5
+
+        surface2_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface2_south_wall_Text_c_handle)
+        surface302_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface302_south_wall_Text_c_handle)
+        surface572_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface572_south_wall_Text_c_handle)
+
+        south_wall_Text_c = (surface2_south_wall_Text_c + surface302_south_wall_Text_c * 18 + surface572_south_wall_Text_c) / 20
+
+        surface26_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface26_north_wall_Text_c_handle)
+        surface326_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface326_north_wall_Text_c_handle)
+        surface596_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface596_north_wall_Text_c_handle)
+
+        north_wall_Text_c = (surface26_north_wall_Text_c + surface326_north_wall_Text_c * 18 + surface596_north_wall_Text_c) / 20
+        
         coordination.ep_floor_Text_K = floor_Text_c + 273.15
         coordination.ep_roof_Text_K = roof_Text_c + 273.15
 

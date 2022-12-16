@@ -12,10 +12,10 @@ def info(title):
 def batch_run(ini_files):
     all_ini_process = []
     for ini_file in ini_files:
-        # p = Process(target=ByPass.run_ep_api, args=([ini_file]))
-        # p.start()
-        # all_ini_process.append([p])
-        ByPass.run_ep_api(ini_file)
+        p = Process(target=ByPass.run_ep_api, args=([ini_file]))
+        p.start()
+        all_ini_process.append([p])
+        # ByPass.run_ep_api(ini_file)
 
     for ini_processes in all_ini_process:
         for p in ini_processes:
