@@ -488,7 +488,7 @@ class Building(object):
         # Waste heat of water heating
         self.QWater = (1 / self.heatEff - 1.) * self.sensWaterHeatDemand
         self.QGas = BEM.Gas * (1 - self.heatEff) * self.nFloor
-        if 'WithoutCooling' in coordination.config['Bypass']['csv_file_name']:
+        if 'WithoutCooling' in coordination.csv_file_name:
             self.sensWaste = 0
         else:
             self.sensWaste = self.sensWasteCoolHeatDehum + self.QWater + self.QGas

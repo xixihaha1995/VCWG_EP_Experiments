@@ -59,9 +59,8 @@ def run_vcwg(sensitivity_file_name):
         epwFileName = None
         TopForcingFileName = coordination.config['Bypass']['TopForcingFileName']
     VCWGParamFileName = coordination.config['Bypass']['VCWGParamFileName']
-    csv = coordination.config['Bypass']['csv_file_name']
-    ViewFactorFileName = f'{csv}_ViewFactor.txt'
+    ViewFactorFileName = f'{coordination.csv_file_name}_ViewFactor.txt'
     # Initialize the UWG object and run the simulation
-    case = f'{csv}'
+    case = f'{coordination.csv_file_name}'
     VCWG = VCWG_Hydro(epwFileName, TopForcingFileName, VCWGParamFileName, ViewFactorFileName, case)
     VCWG.run()

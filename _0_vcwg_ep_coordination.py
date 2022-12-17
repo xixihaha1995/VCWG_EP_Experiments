@@ -117,7 +117,7 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     sem3.acquire()
     BEM_Building = BEM.building
     BEM_Building.ElecTotal = 0
-    if 'WithoutCooling' in config['Bypass']['csv_file_name']:
+    if 'WithoutCooling' in csv_file_name:
         BEM_Building.sensWaste = 0
     else:
         BEM_Building.sensWaste = ep_sensWaste_w_m2_per_footprint_area
