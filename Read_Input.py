@@ -126,6 +126,11 @@ def read_VCWG_param(VCWG_param_file_path):
 
     ipd_vcwg = _init_param_dict
 
+    if coordination.nbr_control_variables == 3:
+        ipd_vcwg[coordination.ctl_virable_2] = float(coordination.value_2)
+        ipd_vcwg[coordination.ctl_virable_3] = float(coordination.value_3)
+
+    ipd_vcwg[coordination.ctl_virable_1] = float(coordination.value_1)
     return ipd_vcwg
 
 def ForcingData(MeteoDataRaw, itt, varargin,VCWG_param_file_path,SimTime):
