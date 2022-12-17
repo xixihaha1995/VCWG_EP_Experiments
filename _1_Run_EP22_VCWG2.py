@@ -16,6 +16,9 @@ def run_ep_api(sensitivity_file_name):
     if 'MediumOffice' in coordination.bld_type:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers.MediumOffice_get_ep_results)
+    elif 'ShoeBoxMedOffi' in coordination.bld_type:
+        coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
+                                                                                      time_step_handlers.ShoeBoxMedOffi_get_ep_results)
     elif 'SmallOffice' in coordination.bld_type:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers.SmallOffice_get_ep_results)
@@ -39,7 +42,7 @@ def run_ep_api(sensitivity_file_name):
     epwFileName = coordination.config['Bypass']['epwFileName']
     output_path = coordination.ep_trivial_path
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
-    idfFilePath = os.path.join(f'.\\resources\\idf\\AllCases', idfFileName)
+    idfFilePath = os.path.join(f'.\\resources\\idf\\Chicago\\MediumOffice', idfFileName)
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
     coordination.ep_api.runtime.run_energyplus(state, sys_args)
 

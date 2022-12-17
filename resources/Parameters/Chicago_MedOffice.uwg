@@ -35,7 +35,7 @@ nz_u,15,               # number of canopy levels in the vertical (nz_u*dz = bldH
 dz,1,                  # vertical resolution [m]
 Width_canyon,9,     # distance between buildings at street level in the x and y direction must be equal [m]
 Width_roof,18.2,         # building dimension [m]
-theta_canyon,0,       # Canyon direction from geographical north, in the counter trigonometric direction (from -90 to 90 degrees)
+theta_canyon,90,       # Canyon direction from geographical north, in the counter trigonometric direction (from -90 to 90 degrees)
 Height_canyon,15,      # Average building height [m]
 fveg_R,0,              # Vegetated roof fraction (between 0 and 1)
 fimp_R,1.0,            # Impervious roof fraction (between 0 and 1)

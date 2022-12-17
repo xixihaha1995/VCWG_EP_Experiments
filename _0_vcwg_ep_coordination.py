@@ -21,7 +21,7 @@ def ini_all(sensitivity_file_name):
     vcwg_hConv_w_m2_per_K = 10
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass','AllCases',sensitivity_file_name)
+    config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass',sensitivity_file_name)
     config.read(config_path)
     bld_type = config['Bypass']['bld_type']
     experiments_theme = config['Bypass']['experiments_theme']
@@ -53,7 +53,7 @@ def ini_all(sensitivity_file_name):
 
     if "SmallOffice" in bld_type:
         footprint_area_m2 = 5500 * 0.09290304 / 1
-    elif "MediumOffice" in bld_type:
+    elif "MediumOffice" in bld_type or 'ShoeBoxMedOffi' in bld_type:
         footprint_area_m2 = 53628 * 0.09290304 / 3
     elif "LargeOffice" in bld_type:
         footprint_area_m2 = 498588 * 0.09290304 / 12
