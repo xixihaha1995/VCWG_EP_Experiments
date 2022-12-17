@@ -34,6 +34,30 @@ def for_loop_all_ini():
         print('Todo jobs',selected_jobs[i:i+nbr_job_for_one_batch])
         batch_run(selected_jobs[i:i+nbr_job_for_one_batch])
 
+def read_ini(config_file_name):
+    global config
+    config = configparser.ConfigParser()
+    project_path = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(project_path, 'A_prepost_processing','configs','MedOffice_Sensitivity',config_file_name)
+    config.read(config_path)
+def one_ini(sensitivity_file_name):
+    read_ini(sensitivity_file_name)
+    ctl_viriable_1 = config['Bypass']['control_variable_1']
+    ctl_values_1 = [i for i in config['Bypass']['control_values_1'].split(',')]
+    this_ini_process = []
+    nbr_of_parallel = 4
+    batch_value_list = [ctl_values_1[i:i + nbr_of_parallel] for i in range(0, len(ctl_values_1), nbr_of_parallel)]
+    for batch_nbr, batch_value in enumerate(batch_value_list):
+        for value in batch_value:
+            # ByPass.run_ep_api(sensitivity_file_name,config, ctl_viriable_1, value)
+            this_ini_process.append(Process(target=ByPass.run_ep_api, args=(sensitivity_file_name,config, ctl_viriable_1, value)))
+        for process in this_ini_process:
+            process.start()
+        for process in this_ini_process:
+            process.join()
+        this_ini_process = []
+
 
 if __name__ == '__main__':
-    for_loop_all_ini()
+    # for_loop_all_ini()
+    one_ini('Chicago_MedOffice_Density.ini')

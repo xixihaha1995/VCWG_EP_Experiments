@@ -3,10 +3,13 @@ import datetime
 import threading, sys, os
 
 import numpy
+# coordination.ini_all(sensitivity_file_name, config, ctl_viriable_1, value_1,
+#                          ctl_viriable_2, value_2, ctl_viriable_3, value_3)
 
-
-def ini_all(sensitivity_file_name):
-    global config, project_path, save_path_clean, sensor_heights,ep_trivial_path, data_saving_path, bld_type,\
+def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
+            _ctl_viriable_2=None, _value_2=None, _ctl_viriable_3=None, _value_3=None):
+    global csv_file_name,nbr_control_variables,ctl_virable_1, value_1, ctl_viriable_2, value_2, ctl_viriable_3, value_3,\
+        config, project_path, save_path_clean, sensor_heights,ep_trivial_path, data_saving_path, bld_type,\
         ep_api, psychrometric,\
         sem0, sem1, sem2, sem3, \
         vcwg_needed_time_idx_in_seconds, \
@@ -17,17 +20,30 @@ def ini_all(sensitivity_file_name):
         mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
         footprint_area_m2, ForcTemp_K, vcwg_hConv_w_m2_per_K
     # find the project path
+    if _ctl_viriable_3 is not None:
+        nbr_control_variables = 3
+        ctl_viriable_3 = _ctl_viriable_3
+        value_3 = _value_3
+        ctl_viriable_2 = _ctl_viriable_2
+        value_2 = _value_2
+    else:
+        nbr_control_variables = 1
+    ctl_virable_1 = _ctl_viriable_1
+    value_1 = _value_1
     ForcTemp_K = 293.15
     vcwg_hConv_w_m2_per_K = 10
-    config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass',sensitivity_file_name)
-    config.read(config_path)
+    if _config is None:
+        config = configparser.ConfigParser()
+        config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass',sensitivity_file_name)
+        config.read(config_path)
+    else:
+        config = _config
     bld_type = config['Bypass']['bld_type']
     experiments_theme = config['Bypass']['experiments_theme']
     save_path_clean = False
     sensor_heights = [float(i) for i in config['Bypass']['sensor_height_meter'].split(',')]
-    csv_file_name = config['Bypass']['csv_file_name']
+    csv_file_name = ctl_virable_1 + '_' + str(value_1)
     data_saving_path = os.path.join(project_path, 'A_prepost_processing',
                                     experiments_theme,f'{csv_file_name}.csv')
     ep_trivial_path = os.path.join(project_path, 'A_prepost_processing',

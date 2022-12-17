@@ -20,10 +20,9 @@ def run_vcwg():
         epwFileName = None
         TopForcingFileName = coordination.config['Bypass']['TopForcingFileName']
     VCWGParamFileName = coordination.config['Bypass']['VCWGParamFileName']
-    csv = coordination.config['Bypass']['csv_file_name']
-    ViewFactorFileName = f'{csv}_ViewFactor.txt'
+    ViewFactorFileName = f'{coordination.csv_file_name}_ViewFactor.txt'
     # Case name to append output file names with
-    case = f'{csv}'
+    case = f'{coordination.csv_file_name}'
     # Initialize the UWG object and run the simulation
     VCWG = VCWG_Hydro(epwFileName, TopForcingFileName, VCWGParamFileName, ViewFactorFileName, case)
     VCWG.run()
