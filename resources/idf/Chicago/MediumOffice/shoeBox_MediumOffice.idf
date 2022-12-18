@@ -790,10 +790,10 @@ BuildingSurface:Detailed,
   WindExposed,                            !- Wind Exposure
   ,                                       !- View Factor to Ground
   ,                                       !- Number of Vertices
-  49.6824, 0, 11.8872,                    !- X,Y,Z Vertex 1 {m}
-  49.6824, 0, 0,                          !- X,Y,Z Vertex 2 {m}
-  49.6824, 33.2232, 0,                    !- X,Y,Z Vertex 3 {m}
-  49.6824, 33.2232, 11.8872;              !- X,Y,Z Vertex 4 {m}
+  49.911, 0, 11.8872,                     !- X,Y,Z Vertex 1 {m}
+  49.911, 0, 0,                           !- X,Y,Z Vertex 2 {m}
+  49.911, 33.274, 0,                      !- X,Y,Z Vertex 3 {m}
+  49.911, 33.274, 11.8872;                !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
   east_window,                            !- Name
@@ -805,10 +805,10 @@ FenestrationSurface:Detailed,
   ,                                       !- Frame and Divider Name
   ,                                       !- Multiplier
   ,                                       !- Number of Vertices
-  49.6824, 0.0254, 7.81878331393568,      !- X,Y,Z Vertex 1 {m}
-  49.6824, 0.0254, 3.89,                  !- X,Y,Z Vertex 2 {m}
-  49.6824, 33.1978, 3.89,                 !- X,Y,Z Vertex 3 {m}
-  49.6824, 33.1978, 7.81878331393568;     !- X,Y,Z Vertex 4 {m}
+  49.911, 0.0254, 7.89117412844037,       !- X,Y,Z Vertex 1 {m}
+  49.911, 0.0254, 3.9624,                 !- X,Y,Z Vertex 2 {m}
+  49.911, 33.2486, 3.9624,                !- X,Y,Z Vertex 3 {m}
+  49.911, 33.2486, 7.89117412844037;      !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
   floor,                                  !- Name
@@ -822,10 +822,10 @@ BuildingSurface:Detailed,
   NoWind,                                 !- Wind Exposure
   ,                                       !- View Factor to Ground
   ,                                       !- Number of Vertices
-  49.6824, 33.2232, 0,                    !- X,Y,Z Vertex 1 {m}
-  49.6824, 0, 0,                          !- X,Y,Z Vertex 2 {m}
+  49.911, 33.274, 0,                      !- X,Y,Z Vertex 1 {m}
+  49.911, 0, 0,                           !- X,Y,Z Vertex 2 {m}
   0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
-  0, 33.2232, 0;                          !- X,Y,Z Vertex 4 {m}
+  0, 33.274, 0;                           !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
   north,                                  !- Name
@@ -839,10 +839,10 @@ BuildingSurface:Detailed,
   WindExposed,                            !- Wind Exposure
   ,                                       !- View Factor to Ground
   ,                                       !- Number of Vertices
-  49.6824, 33.2232, 11.8872,              !- X,Y,Z Vertex 1 {m}
-  49.6824, 33.2232, 0,                    !- X,Y,Z Vertex 2 {m}
-  0, 33.2232, 0,                          !- X,Y,Z Vertex 3 {m}
-  0, 33.2232, 11.8872;                    !- X,Y,Z Vertex 4 {m}
+  49.911, 33.274, 11.8872,                !- X,Y,Z Vertex 1 {m}
+  49.911, 33.274, 0,                      !- X,Y,Z Vertex 2 {m}
+  0, 33.274, 0,                           !- X,Y,Z Vertex 3 {m}
+  0, 33.274, 11.8872;                     !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
   north_window,                           !- Name
@@ -854,10 +854,10 @@ FenestrationSurface:Detailed,
   ,                                       !- Frame and Divider Name
   ,                                       !- Multiplier
   ,                                       !- Number of Vertices
-  49.657, 33.2232, 7.81679112384852,      !- X,Y,Z Vertex 1 {m}
-  49.657, 33.2232, 3.89,                  !- X,Y,Z Vertex 2 {m}
-  0.0254000000000048, 33.2232, 3.89,      !- X,Y,Z Vertex 3 {m}
-  0.0254000000000048, 33.2232, 7.81679112384852; !- X,Y,Z Vertex 4 {m}
+  49.8856, 33.274, 7.88917271523179,      !- X,Y,Z Vertex 1 {m}
+  49.8856, 33.274, 3.9624,                !- X,Y,Z Vertex 2 {m}
+  0.0254000000000048, 33.274, 3.9624,     !- X,Y,Z Vertex 3 {m}
+  0.0254000000000048, 33.274, 7.88917271523179; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
   roof,                                   !- Name
@@ -871,9 +871,9 @@ BuildingSurface:Detailed,
   WindExposed,                            !- Wind Exposure
   ,                                       !- View Factor to Ground
   ,                                       !- Number of Vertices
-  49.6824, 0, 11.8872,                    !- X,Y,Z Vertex 1 {m}
-  49.6824, 33.2232, 11.8872,              !- X,Y,Z Vertex 2 {m}
-  0, 33.2232, 11.8872,                    !- X,Y,Z Vertex 3 {m}
+  49.911, 0, 11.8872,                     !- X,Y,Z Vertex 1 {m}
+  49.911, 33.274, 11.8872,                !- X,Y,Z Vertex 2 {m}
+  0, 33.274, 11.8872,                     !- X,Y,Z Vertex 3 {m}
   0, 0, 11.8872;                          !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
@@ -890,8 +890,8 @@ BuildingSurface:Detailed,
   ,                                       !- Number of Vertices
   0, 0, 11.8872,                          !- X,Y,Z Vertex 1 {m}
   0, 0, 0,                                !- X,Y,Z Vertex 2 {m}
-  49.6824, 0, 0,                          !- X,Y,Z Vertex 3 {m}
-  49.6824, 0, 11.8872;                    !- X,Y,Z Vertex 4 {m}
+  49.911, 0, 0,                           !- X,Y,Z Vertex 3 {m}
+  49.911, 0, 11.8872;                     !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
   south_window,                           !- Name
@@ -903,10 +903,10 @@ FenestrationSurface:Detailed,
   ,                                       !- Frame and Divider Name
   ,                                       !- Multiplier
   ,                                       !- Number of Vertices
-  0.0254, 0, 7.81679112384852,            !- X,Y,Z Vertex 1 {m}
-  0.0254, 0, 3.89,                        !- X,Y,Z Vertex 2 {m}
-  49.657, 0, 3.89,                        !- X,Y,Z Vertex 3 {m}
-  49.657, 0, 7.81679112384852;            !- X,Y,Z Vertex 4 {m}
+  0.0254, 0, 7.88917271523179,            !- X,Y,Z Vertex 1 {m}
+  0.0254, 0, 3.9624,                      !- X,Y,Z Vertex 2 {m}
+  49.8856, 0, 3.9624,                     !- X,Y,Z Vertex 3 {m}
+  49.8856, 0, 7.88917271523179;           !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
   west,                                   !- Name
@@ -920,8 +920,8 @@ BuildingSurface:Detailed,
   WindExposed,                            !- Wind Exposure
   ,                                       !- View Factor to Ground
   ,                                       !- Number of Vertices
-  0, 33.2232, 11.8872,                    !- X,Y,Z Vertex 1 {m}
-  0, 33.2232, 0,                          !- X,Y,Z Vertex 2 {m}
+  0, 33.274, 11.8872,                     !- X,Y,Z Vertex 1 {m}
+  0, 33.274, 0,                           !- X,Y,Z Vertex 2 {m}
   0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
   0, 0, 11.8872;                          !- X,Y,Z Vertex 4 {m}
 
@@ -935,10 +935,10 @@ FenestrationSurface:Detailed,
   ,                                       !- Frame and Divider Name
   ,                                       !- Multiplier
   ,                                       !- Number of Vertices
-  0, 33.1978, 7.81878331393568,           !- X,Y,Z Vertex 1 {m}
-  0, 33.1978, 3.89,                       !- X,Y,Z Vertex 2 {m}
-  0, 0.0254000000000048, 3.89,            !- X,Y,Z Vertex 3 {m}
-  0, 0.0254000000000048, 7.81878331393568; !- X,Y,Z Vertex 4 {m}
+  0, 33.2486, 7.89117412844037,           !- X,Y,Z Vertex 1 {m}
+  0, 33.2486, 3.9624,                     !- X,Y,Z Vertex 2 {m}
+  0, 0.0254000000000048, 3.9624,          !- X,Y,Z Vertex 3 {m}
+  0, 0.0254000000000048, 7.89117412844037; !- X,Y,Z Vertex 4 {m}
 
 
 
