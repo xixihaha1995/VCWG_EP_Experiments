@@ -40,8 +40,8 @@ def read_ini(config_file_name):
     project_path = os.path.dirname(os.path.abspath(__file__))
     config_path = os.path.join(project_path, 'A_prepost_processing','configs','MedOffice_Sensitivity',config_file_name)
     config.read(config_path)
-def one_ini(sensitivity_file_name):
-    read_ini(sensitivity_file_name)
+
+def one_control_variable(sensitivity_file_name):
     ctl_viriable_1 = config['Bypass']['control_variable_1']
     ctl_values_1 = [i for i in config['Bypass']['control_values_1'].split(',')]
     this_ini_process = []
@@ -50,15 +50,54 @@ def one_ini(sensitivity_file_name):
     for batch_nbr, batch_value in enumerate(batch_value_list):
         for value in batch_value:
             # ByPass.run_ep_api(sensitivity_file_name,config, ctl_viriable_1, value)
-            this_ini_process.append(Process(target=ByPass.run_ep_api, args=(sensitivity_file_name,config, ctl_viriable_1, value)))
+            this_ini_process.append(
+                Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value)))
         for process in this_ini_process:
             process.start()
         for process in this_ini_process:
             process.join()
         this_ini_process = []
 
+def mixed_variable(sensitivity_file_name):
+    #three control variables (4 * 4 * 3 = 48)
+    #nbr_of_parallel = 4
+    ctl_viriable_1 = config['Bypass']['control_variable_1']
+    ctl_values_1 = [i for i in config['Bypass']['control_values_1'].split(',')]
+    ctl_viriable_2 = config['Bypass']['control_variable_2']
+    ctl_values_2 = [i for i in config['Bypass']['control_values_2'].split(',')]
+    ctl_viriable_3 = config['Bypass']['control_variable_3']
+    ctl_values_3 = [i for i in config['Bypass']['control_values_3'].split(',')]
+    nbr_of_parallel = 4
+    batch_value_list_1 = [ctl_values_1[i:i + nbr_of_parallel] for i in range(0, len(ctl_values_1), nbr_of_parallel)]
+    batch_value_list_2 = [ctl_values_2[i:i + nbr_of_parallel] for i in range(0, len(ctl_values_2), nbr_of_parallel)]
+    batch_value_list_3 = [ctl_values_3[i:i + nbr_of_parallel] for i in range(0, len(ctl_values_3), nbr_of_parallel)]
+    this_ini_process = []
+    for batch_nbr_1, batch_value_1 in enumerate(batch_value_list_1):
+        for batch_nbr_2, batch_value_2 in enumerate(batch_value_list_2):
+            for batch_nbr_3, batch_value_3 in enumerate(batch_value_list_3):
+                for value_1 in batch_value_1:
+                    for value_2 in batch_value_2:
+                        for value_3 in batch_value_3:
+                            this_ini_process.append(
+                                Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
+                            if len(this_ini_process) == nbr_of_parallel:
+                                for process in this_ini_process:
+                                    process.start()
+                                for process in this_ini_process:
+                                    process.join()
+                                this_ini_process = []
+def one_ini(sensitivity_file_name):
+    read_ini(sensitivity_file_name)
+    if config['Bypass']['nbr_of_control_variables'] == '1':
+        one_control_variable(sensitivity_file_name)
+    else:
+        mixed_variable(sensitivity_file_name)
+
+
+
 
 if __name__ == '__main__':
     # for_loop_all_ini()
     # one_ini('Chicago_MedOffice_Density.ini')
-    one_ini('Chicago_MedOffice_Orientation.ini')
+    # one_ini('Chicago_MedOffice_Orientation.ini')
+    one_ini('Chicago_MedOffice_MixedVariable.ini')

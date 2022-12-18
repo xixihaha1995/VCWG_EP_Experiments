@@ -20,6 +20,8 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
         mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
         footprint_area_m2, ForcTemp_K, vcwg_hConv_w_m2_per_K
     # find the project path
+    ctl_virable_1 = _ctl_viriable_1
+    value_1 = _value_1
     if _ctl_viriable_3 is not None:
         nbr_control_variables = 3
         ctl_viriable_3 = _ctl_viriable_3
@@ -30,7 +32,7 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
     else:
         nbr_control_variables = 1
         csv_file_name = ctl_virable_1 + '_' + str(value_1)
-    ctl_virable_1 = _ctl_viriable_1
+    print(f'csv_file_name = {csv_file_name}')
     value_1 = _value_1
     ForcTemp_K = 293.15
     vcwg_hConv_w_m2_per_K = 10
