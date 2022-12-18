@@ -40,7 +40,12 @@ def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1,
     coordination.ep_api.exchange.request_variable(state, "Site Outdoor Air Drybulb Temperature", "ENVIRONMENT")
     coordination.ep_api.exchange.request_variable(state, "Site Outdoor Air Humidity Ratio", "ENVIRONMENT")
 
-    idfFileName = coordination.config['Bypass']['idfFileName']
+    if 'building_orientation' in coordination.ctl_virable_1:
+        idfFileName = coordination.config['Bypass']['idfFileName'][:-4] + '_Ori' + str(int(value_1)) + '.idf'
+    elif coordination.nbr_control_variables == 3:
+        idfFileName = coordination.config['Bypass']['idfFileName'][:-4] + '_Ori' + str(int(value_3)) + '.idf'
+    else:
+        idfFileName = coordination.config['Bypass']['idfFileName']
     epwFileName = coordination.config['Bypass']['epwFileName']
     output_path = coordination.ep_trivial_path
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)

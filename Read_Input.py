@@ -126,11 +126,22 @@ def read_VCWG_param(VCWG_param_file_path):
 
     ipd_vcwg = _init_param_dict
 
+    '''
+    theta_canyon/ctl_value: 90/0, 0/90, -90/180,0/270 
+    '''
+    ctl_value_to_theta_canyon = {0: 90, 90: 0, 180: -90, 270: 0}
     if coordination.nbr_control_variables == 3:
-        ipd_vcwg[coordination.ctl_virable_2] = float(coordination.value_2)
-        ipd_vcwg[coordination.ctl_virable_3] = float(coordination.value_3)
+        ipd_vcwg['fveg_G'] = float(coordination.value_2)
+        ipd_vcwg['fimp_G'] = 1 - float(coordination.value_2)
+        ipd_vcwg['theta_canyon'] = ctl_value_to_theta_canyon[int(coordination.value_3)]
 
-    ipd_vcwg[coordination.ctl_virable_1] = float(coordination.value_1)
+    if 'building_orientation' in coordination.ctl_virable_1:
+        ipd_vcwg['theta_canyon'] = ctl_value_to_theta_canyon[int(coordination.value_1)]
+    elif 'fveg_G' in coordination.ctl_virable_1:
+        ipd_vcwg['fveg_G'] = float(coordination.value_1)
+        ipd_vcwg['fimp_G'] = 1 - float(coordination.value_1)
+    else:
+        ipd_vcwg[coordination.ctl_virable_1] = float(coordination.value_1)
     return ipd_vcwg
 
 def ForcingData(MeteoDataRaw, itt, varargin,VCWG_param_file_path,SimTime):

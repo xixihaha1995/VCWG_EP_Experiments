@@ -26,8 +26,10 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
         value_3 = _value_3
         ctl_viriable_2 = _ctl_viriable_2
         value_2 = _value_2
+        csv_file_name = ctl_virable_1 + '_' + str(value_1) + '_' + ctl_viriable_2 + '_' + str(value_2) + '_' + ctl_viriable_3 + '_' + str(value_3)
     else:
         nbr_control_variables = 1
+        csv_file_name = ctl_virable_1 + '_' + str(value_1)
     ctl_virable_1 = _ctl_viriable_1
     value_1 = _value_1
     ForcTemp_K = 293.15
@@ -43,7 +45,7 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
     experiments_theme = config['Bypass']['experiments_theme']
     save_path_clean = False
     sensor_heights = [float(i) for i in config['Bypass']['sensor_height_meter'].split(',')]
-    csv_file_name = ctl_virable_1 + '_' + str(value_1)
+
     data_saving_path = os.path.join(project_path, 'A_prepost_processing',
                                     experiments_theme,f'{csv_file_name}.csv')
     ep_trivial_path = os.path.join(project_path, 'A_prepost_processing',
