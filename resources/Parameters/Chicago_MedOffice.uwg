@@ -39,9 +39,9 @@ theta_canyon,90,       # Canyon direction from geographical north, in the counte
 Height_canyon,11.88,      # Average building height [m]
 fveg_R,0,              # Vegetated roof fraction (between 0 and 1)
 fimp_R,1.0,            # Impervious roof fraction (between 0 and 1)
-fveg_G,0.5,            # Vegetated ground fraction
+fveg_G,0,            # Vegetated ground fraction
 fbare_G,0.0,           # Bare ground fraction
-fimp_G,0.5,            # Impervious ground fraction
+fimp_G,1,            # Impervious ground fraction
 Per_runoff_R,1,        # Percentage of roof excess water that leaves the system as runoff, needs to be between 0-1 [-]
 Per_runoff_G,0.5,      # Percentage of ground excess water that leaves the system as runoff, needs to be between 0-1 [-]
 
