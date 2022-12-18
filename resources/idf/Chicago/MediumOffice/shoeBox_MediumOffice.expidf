@@ -271,108 +271,108 @@ Schedule:Compact,
     Until: 24:00,21.0,       !- Field 20
     For: AllOtherDays,       !- Field 22
     Until: 24:00,15.6;       !- Field 23
-
- HVACTemplate:Thermostat,
-    All Zones,               !- Name
-    HTGSETP_SCH,            !- Heating Setpoint Schedule Name
-    ,                        !- Constant Heating Setpoint {C}
-    CLGSETP_SCH,            !- Cooling Setpoint Schedule Name
-    ;                        !- Constant Cooling Setpoint {C}
-
-  HVACTemplate:Zone:VAV,
-    Thermal Zone 1,                !- Zone Name
-    DXVAV Sys 1,             !- Template VAV System Name
-    All Zones,               !- Template Thermostat Name
-    autosize,                !- Supply Air Maximum Flow Rate {m3/s}
-    ,                        !- Zone Heating Sizing Factor
-    ,                        !- Zone Cooling Sizing Factor
-    Constant,                !- Zone Minimum Air Flow Input Method
-    0.3,                     !- Constant Minimum Air Flow Fraction
-    ,                        !- Fixed Minimum Air Flow Rate {m3/s}
-    ,                        !- Minimum Air Flow Fraction Schedule Name
-    flow/person,             !- Outdoor Air Method
-    0.00944,                 !- Outdoor Air Flow Rate per Person {m3/s}
-    0.0,                     !- Outdoor Air Flow Rate per Zone Floor Area {m3/s-m2}
-    0.0,                     !- Outdoor Air Flow Rate per Zone {m3/s}
-    Electric,                !- Reheat Coil Type
-    ,                        !- Reheat Coil Availability Schedule Name
-    Reverse,                 !- Damper Heating Action
-    ,                        !- Maximum Flow per Zone Floor Area During Reheat {m3/s-m2}
-    ,                        !- Maximum Flow Fraction During Reheat
-    ,                        !- Maximum Reheat Air Temperature {C}
-    ,                        !- Design Specification Outdoor Air Object Name for Control
-    ,                        !- Supply Plenum Name
-    ,                        !- Return Plenum Name
-    None,                    !- Baseboard Heating Type
-    ,                        !- Baseboard Heating Availability Schedule Name
-    autosize,                !- Baseboard Heating Capacity {W}
-    SystemSupplyAirTemperature,  !- Zone Cooling Design Supply Air Temperature Input Method
-    ,                        !- Zone Cooling Design Supply Air Temperature {C}
-    ,                        !- Zone Cooling Design Supply Air Temperature Difference {deltaC}
-    SupplyAirTemperature,    !- Zone Heating Design Supply Air Temperature Input Method
-    50.0,                    !- Zone Heating Design Supply Air Temperature {C}
-    ;                        !- Zone Heating Design Supply Air Temperature Difference {deltaC}
-
- HVACTemplate:System:PackagedVAV,
-    DXVAV Sys 1,             !- Name
-    FanAvailSched,           !- System Availability Schedule Name
-    autosize,                !- Supply Fan Maximum Flow Rate {m3/s}
-    autosize,                !- Supply Fan Minimum Flow Rate {m3/s}
-    DrawThrough,             !- Supply Fan Placement
-    0.7,                     !- Supply Fan Total Efficiency
-    1000,                    !- Supply Fan Delta Pressure {Pa}
-    0.9,                     !- Supply Fan Motor Efficiency
-    1,                       !- Supply Fan Motor in Air Stream Fraction
-    TwoSpeedDX,              !- Cooling Coil Type
-    ,                        !- Cooling Coil Availability Schedule Name
-    ,                        !- Cooling Coil Setpoint Schedule Name
-    12.8,                    !- Cooling Coil Design Setpoint {C}
-    autosize,                !- Cooling Coil Gross Rated Total Capacity {W}
-    autosize,                !- Cooling Coil Gross Rated Sensible Heat Ratio
-    3,                       !- Cooling Coil Gross Rated COP {W/W}
-    Gas,                     !- Heating Coil Type
-    ,                        !- Heating Coil Availability Schedule Name
-    ,                        !- Heating Coil Setpoint Schedule Name
-    10,                      !- Heating Coil Design Setpoint {C}
-    autosize,                !- Heating Coil Capacity {W}
-    0.8,                     !- Gas Heating Coil Efficiency
-    ,                        !- Gas Heating Coil Parasitic Electric Load {W}
-    autosize,                !- Maximum Outdoor Air Flow Rate {m3/s}
-    autosize,                !- Minimum Outdoor Air Flow Rate {m3/s}
-    ProportionalMinimum,     !- Minimum Outdoor Air Control Type
-    Min OA Sched,            !- Minimum Outdoor Air Schedule Name
-    DifferentialDryBulb,     !- Economizer Type
-    NoLockout,               !- Economizer Lockout
-    19,                      !- Economizer Maximum Limit Dry-Bulb Temperature {C}
-    ,                        !- Economizer Maximum Limit Enthalpy {J/kg}
-    ,                        !- Economizer Maximum Limit Dewpoint Temperature {C}
-    4,                       !- Economizer Minimum Limit Dry-Bulb Temperature {C}
-    ,                        !- Supply Plenum Name
-    ,                !- Return Plenum Name
-    InletVaneDampers,        !- Supply Fan Part-Load Power Coefficients
-    CycleOnAny,              !- Night Cycle Control
-    ,                        !- Night Cycle Control Zone Name
-    None,                    !- Heat Recovery Type
-    0.7,                     !- Sensible Heat Recovery Effectiveness
-    0.65,                    !- Latent Heat Recovery Effectiveness
-    None,                    !- Cooling Coil Setpoint Reset Type
-    None,                    !- Heating Coil Setpoint Reset Type
-    None,                    !- Dehumidification Control Type
-    ,                        !- Dehumidification Control Zone Name
-    60,                      !- Dehumidification Setpoint {percent}
-    None,                    !- Humidifier Type
-    ,                        !- Humidifier Availability Schedule Name
-    0.000001,                !- Humidifier Rated Capacity {m3/s}
-    2690,                    !- Humidifier Rated Electric Power {W}
-    ,                        !- Humidifier Control Zone Name
-    30,                      !- Humidifier Setpoint {percent}
-    NonCoincident,           !- Sizing Option
-    ,                        !- Return Fan
-    ,                        !- Return Fan Total Efficiency
-    ,                        !- Return Fan Delta Pressure {Pa}
-    ,                        !- Return Fan Motor Efficiency
-    ,                        !- Return Fan Motor in Air Stream Fraction
-    ;                        !- Return Fan Part-Load Power Coefficients
+! 
+!  HVACTemplate:Thermostat,
+!     All Zones,               !- Name
+!     HTGSETP_SCH,            !- Heating Setpoint Schedule Name
+!     ,                        !- Constant Heating Setpoint {C}
+!     CLGSETP_SCH,            !- Cooling Setpoint Schedule Name
+!     ;                        !- Constant Cooling Setpoint {C}
+! 
+!   HVACTemplate:Zone:VAV,
+!     Thermal Zone 1,                !- Zone Name
+!     DXVAV Sys 1,             !- Template VAV System Name
+!     All Zones,               !- Template Thermostat Name
+!     autosize,                !- Supply Air Maximum Flow Rate {m3/s}
+!     ,                        !- Zone Heating Sizing Factor
+!     ,                        !- Zone Cooling Sizing Factor
+!     Constant,                !- Zone Minimum Air Flow Input Method
+!     0.3,                     !- Constant Minimum Air Flow Fraction
+!     ,                        !- Fixed Minimum Air Flow Rate {m3/s}
+!     ,                        !- Minimum Air Flow Fraction Schedule Name
+!     flow/person,             !- Outdoor Air Method
+!     0.00944,                 !- Outdoor Air Flow Rate per Person {m3/s}
+!     0.0,                     !- Outdoor Air Flow Rate per Zone Floor Area {m3/s-m2}
+!     0.0,                     !- Outdoor Air Flow Rate per Zone {m3/s}
+!     Electric,                !- Reheat Coil Type
+!     ,                        !- Reheat Coil Availability Schedule Name
+!     Reverse,                 !- Damper Heating Action
+!     ,                        !- Maximum Flow per Zone Floor Area During Reheat {m3/s-m2}
+!     ,                        !- Maximum Flow Fraction During Reheat
+!     ,                        !- Maximum Reheat Air Temperature {C}
+!     ,                        !- Design Specification Outdoor Air Object Name for Control
+!     ,                        !- Supply Plenum Name
+!     ,                        !- Return Plenum Name
+!     None,                    !- Baseboard Heating Type
+!     ,                        !- Baseboard Heating Availability Schedule Name
+!     autosize,                !- Baseboard Heating Capacity {W}
+!     SystemSupplyAirTemperature,  !- Zone Cooling Design Supply Air Temperature Input Method
+!     ,                        !- Zone Cooling Design Supply Air Temperature {C}
+!     ,                        !- Zone Cooling Design Supply Air Temperature Difference {deltaC}
+!     SupplyAirTemperature,    !- Zone Heating Design Supply Air Temperature Input Method
+!     50.0,                    !- Zone Heating Design Supply Air Temperature {C}
+!     ;                        !- Zone Heating Design Supply Air Temperature Difference {deltaC}
+! 
+!  HVACTemplate:System:PackagedVAV,
+!     DXVAV Sys 1,             !- Name
+!     FanAvailSched,           !- System Availability Schedule Name
+!     autosize,                !- Supply Fan Maximum Flow Rate {m3/s}
+!     autosize,                !- Supply Fan Minimum Flow Rate {m3/s}
+!     DrawThrough,             !- Supply Fan Placement
+!     0.7,                     !- Supply Fan Total Efficiency
+!     1000,                    !- Supply Fan Delta Pressure {Pa}
+!     0.9,                     !- Supply Fan Motor Efficiency
+!     1,                       !- Supply Fan Motor in Air Stream Fraction
+!     TwoSpeedDX,              !- Cooling Coil Type
+!     ,                        !- Cooling Coil Availability Schedule Name
+!     ,                        !- Cooling Coil Setpoint Schedule Name
+!     12.8,                    !- Cooling Coil Design Setpoint {C}
+!     autosize,                !- Cooling Coil Gross Rated Total Capacity {W}
+!     autosize,                !- Cooling Coil Gross Rated Sensible Heat Ratio
+!     3,                       !- Cooling Coil Gross Rated COP {W/W}
+!     Gas,                     !- Heating Coil Type
+!     ,                        !- Heating Coil Availability Schedule Name
+!     ,                        !- Heating Coil Setpoint Schedule Name
+!     10,                      !- Heating Coil Design Setpoint {C}
+!     autosize,                !- Heating Coil Capacity {W}
+!     0.8,                     !- Gas Heating Coil Efficiency
+!     ,                        !- Gas Heating Coil Parasitic Electric Load {W}
+!     autosize,                !- Maximum Outdoor Air Flow Rate {m3/s}
+!     autosize,                !- Minimum Outdoor Air Flow Rate {m3/s}
+!     ProportionalMinimum,     !- Minimum Outdoor Air Control Type
+!     Min OA Sched,            !- Minimum Outdoor Air Schedule Name
+!     DifferentialDryBulb,     !- Economizer Type
+!     NoLockout,               !- Economizer Lockout
+!     19,                      !- Economizer Maximum Limit Dry-Bulb Temperature {C}
+!     ,                        !- Economizer Maximum Limit Enthalpy {J/kg}
+!     ,                        !- Economizer Maximum Limit Dewpoint Temperature {C}
+!     4,                       !- Economizer Minimum Limit Dry-Bulb Temperature {C}
+!     ,                        !- Supply Plenum Name
+!     ,                !- Return Plenum Name
+!     InletVaneDampers,        !- Supply Fan Part-Load Power Coefficients
+!     CycleOnAny,              !- Night Cycle Control
+!     ,                        !- Night Cycle Control Zone Name
+!     None,                    !- Heat Recovery Type
+!     0.7,                     !- Sensible Heat Recovery Effectiveness
+!     0.65,                    !- Latent Heat Recovery Effectiveness
+!     None,                    !- Cooling Coil Setpoint Reset Type
+!     None,                    !- Heating Coil Setpoint Reset Type
+!     None,                    !- Dehumidification Control Type
+!     ,                        !- Dehumidification Control Zone Name
+!     60,                      !- Dehumidification Setpoint {percent}
+!     None,                    !- Humidifier Type
+!     ,                        !- Humidifier Availability Schedule Name
+!     0.000001,                !- Humidifier Rated Capacity {m3/s}
+!     2690,                    !- Humidifier Rated Electric Power {W}
+!     ,                        !- Humidifier Control Zone Name
+!     30,                      !- Humidifier Setpoint {percent}
+!     NonCoincident,           !- Sizing Option
+!     ,                        !- Return Fan
+!     ,                        !- Return Fan Total Efficiency
+!     ,                        !- Return Fan Delta Pressure {Pa}
+!     ,                        !- Return Fan Motor Efficiency
+!     ,                        !- Return Fan Motor in Air Stream Fraction
+!     ;                        !- Return Fan Part-Load Power Coefficients
 
   Sizing:Parameters,
     1.2,                     !- Heating Sizing Factor
@@ -687,7 +687,7 @@ ScheduleTypeLimits,
     0.9000,                  !- Thermal Absorptance
     0.7000,                  !- Solar Absorptance
     0.7000;                  !- Visible Absorptance
-    
+
   Material,
     IEAD NonRes Roof Insulation,  !- Name
     MediumRough,             !- Roughness
@@ -715,7 +715,7 @@ ScheduleTypeLimits,
     HW CONCRETE,             !- Outside Layer
     CP02 CARPET PAD;         !- Layer 2
 
-    
+
   Material,
     HW CONCRETE,             !- Name
     Rough,                   !- Roughness
@@ -3541,4 +3541,498 @@ LifeCycleCost:NonrecurringCost,
   Construction,                           !- Category
   0,                                      !- Cost
   ServicePeriod;                          !- Start of Costs
+! 
+! -------------------------------------------------------------
+! New objects created from ExpandObjects
+! -------------------------------------------------------------
+! 
 
+ThermostatSetpoint:DualSetpoint,
+  All Zones Dual SP Control,                               !- Name
+  HTGSETP_SCH,                                             !- Heating Setpoint Temperature Schedule Name
+  CLGSETP_SCH;                                             !- Cooling Setpoint Temperature Schedule Name
+
+ScheduleTypeLimits,
+  HVACTemplate Any Number;                                 !- Name
+
+Schedule:Compact,
+  HVACTemplate-Always 4,                                   !- Name
+  HVACTemplate Any Number,                                 !- Schedule Type Limits Name
+  Through: 12/31,                                          !- Field 1
+  For: AllDays,                                            !- Field 2
+  Until: 24:00,                                            !- Field 3
+  4;                                                       !- Field 4
+
+ZoneControl:Thermostat,
+  Thermal Zone 1 Thermostat,                               !- Name
+  Thermal Zone 1,                                          !- Zone or ZoneList Name
+  HVACTemplate-Always 4,                                   !- Control Type Schedule Name
+  ThermostatSetpoint:DualSetpoint,                         !- Control Object Type
+  All Zones Dual SP Control;                               !- Control Name
+
+DesignSpecification:OutdoorAir,
+  SZ DSOA Thermal Zone 1,                                  !- Name
+  flow/person,                                             !- Outdoor Air Method
+  0.00944,                                                 !- Outdoor Air Flow per Person {m3/s}
+  0.0,                                                     !- Outdoor Air Flow per Zone Floor Area {m3/s-m2}
+  0.0;                                                     !- Outdoor Air Flow per Zone {m3/s}
+
+Sizing:Zone,
+  Thermal Zone 1,                                          !- Zone or ZoneList Name
+  SupplyAirTemperature,                                    !- Zone Cooling Design Supply Air Temperature Input Method
+  12.8,                                                    !- Zone Cooling Design Supply Air Temperature {C}
+  11.11,                                                   !- Zone Cooling Design Supply Air Temperature Difference {delta C}
+  SupplyAirTemperature,                                    !- Zone Heating Design Supply Air Temperature Input Method
+  50.0,                                                    !- Zone Heating Design Supply Air Temperature {C}
+  ,                                                        !- Zone Heating Design Supply Air Temperature Difference {delta C}
+  0.008,                                                   !- Zone Cooling Design Supply Air Humidity Ratio {kg-H20/kg-air}
+  0.008,                                                   !- Zone Heating Design Supply Air Humidity Ratio {kg-H2O/kg-air}
+  SZ DSOA Thermal Zone 1,                                  !- Design Specification Outdoor Air Object Name
+  ,                                                        !- Zone Heating Sizing Factor
+  ,                                                        !- Zone Cooling Sizing Factor
+  DesignDay,                                               !- Cooling Design Air Flow Method
+  0,                                                       !- Cooling Design Air Flow Rate {m3/s}
+  ,                                                        !- Cooling Minimum Air Flow per Zone Floor Area {m3/s-m2}
+  ,                                                        !- Cooling Minimum Air Flow {m3/s}
+  0,                                                       !- Cooling Minimum Air Flow Fraction {}
+  DesignDay,                                               !- Heating Design Air Flow Method
+  0,                                                       !- Heating Design Air Flow Rate {m3/s}
+  ,                                                        !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
+  ,                                                        !- Heating Maximum Air Flow {m3/s}
+  0,                                                       !- Heating Maximum Air Flow Fraction {}
+  SZ DSZAD Thermal Zone 1;                                 !- Design Specification Zone Air Distribution Object Name
+
+DesignSpecification:ZoneAirDistribution,
+  SZ DSZAD Thermal Zone 1,                                 !- Name
+  1,                                                       !- Zone Air Distribution Effectiveness in Cooling Mode {}
+  1;                                                       !- Zone Air Distribution Effectiveness in Heating Mode {}
+
+ZoneHVAC:EquipmentConnections,
+  Thermal Zone 1,                                          !- Zone Name
+  Thermal Zone 1 Equipment,                                !- Zone Conditioning Equipment List Name
+  Thermal Zone 1 Supply Inlet,                             !- Zone Air Inlet Node or NodeList Name
+  ,                                                        !- Zone Air Exhaust Node or NodeList Name
+  Thermal Zone 1 Zone Air Node,                            !- Zone Air Node Name
+  Thermal Zone 1 Return Outlet;                            !- Zone Return Air Node Name
+
+ZoneHVAC:EquipmentList,
+  Thermal Zone 1 Equipment,                                !- Name
+  SequentialLoad,                                          !- Load Distribution Scheme
+  ZoneHVAC:AirDistributionUnit,                            !- Zone Equipment Object Type
+  Thermal Zone 1 ATU,                                      !- Zone Equipment Name
+  1,                                                       !- Zone Equipment Cooling Sequence
+  1,                                                       !- Zone Equipment Heating or No-Load Sequence
+  ,                                                        !- Zone Equipment Sequential Cooling Fraction Schedule Name
+  ;                                                        !- Zone Equipment Sequential Heating Fraction Schedule Name
+
+ZoneHVAC:AirDistributionUnit,
+  Thermal Zone 1 ATU,                                      !- Name
+  Thermal Zone 1 Supply Inlet,                             !- Air Distribution Unit Outlet Node Name
+  AirTerminal:SingleDuct:VAV:Reheat,                       !- Air Terminal Object Type
+  Thermal Zone 1 VAV Reheat;                               !- Air Terminal Name
+
+AirTerminal:SingleDuct:VAV:Reheat,
+  Thermal Zone 1 VAV Reheat,                               !- Name
+  ,                                                        !- Availability Schedule Name
+  Thermal Zone 1 Damper Outlet,                            !- Damper Air Outlet Node Name
+  Thermal Zone 1 Zone Equip Inlet,                         !- Air Inlet Node Name
+  autosize,                                                !- Maximum air flow rate {m3/s}
+  Constant,                                                !- Zone Minimum Air Flow Input Method
+  0.3,                                                     !- Constant Minimum Air Flow Fraction
+  ,                                                        !- Fixed Minimum Air Flow Rate
+  ,                                                        !- Minimum Air Flow Fraction Schedule Name
+  Coil:Heating:Electric,                                   !- Reheat Coil Object Type
+  Thermal Zone 1 Reheat Coil,                              !- Reheat Coil Name
+  ,                                                        !- Maximum Hot Water or Steam Flow Rate {m3/s}
+  ,                                                        !- Minimum Hot Water or Steam Flow Rate {m3/s}
+  Thermal Zone 1 Supply Inlet,                             !- Air Outlet Node Name
+  0.001,                                                   !- Convergence Tolerance
+  Reverse,                                                 !- Damper Heating Action
+  ,                                                        !- Maximum Flow per Zone Floor Area During Reheat
+  ,                                                        !- Maximum Flow Fraction During Reheat
+  ,                                                        !- Maximum Reheat Air Temperature
+  ;                                                        !- Design Specification Outdoor Air Object Name
+
+Coil:Heating:Electric,
+  Thermal Zone 1 Reheat Coil,                              !- Name
+  ,                                                        !- Availability Schedule Name
+  1,                                                       !- Efficiency
+  autosize,                                                !- Nominal Capacity of the Coil {W}
+  Thermal Zone 1 Damper Outlet,                            !- Air Inlet Node Name
+  Thermal Zone 1 Supply Inlet;                             !- Air Outlet Node Name
+
+Sizing:System,
+  DXVAV Sys 1,                                             !- AirLoop Name
+  Sensible,                                                !- Type of Load to Size On
+  autosize,                                                !- Design Outdoor Air Flow Rate {m3/s}
+  0.3,                                                     !- Central Heating Maximum System Air Flow Ratio
+  2,                                                       !- Preheat Design Temperature {C}
+  0.008,                                                   !- Preheat Design Humidity Ratio {kg-H2O/kg-air}
+  11,                                                      !- Precool Design Temperature {C}
+  0.008,                                                   !- Precool Design Humidity Ratio {kg-H2O/kg-air}
+  12.8,                                                    !- Central Cooling Design Supply Air Temperature {C}
+  10,                                                      !- Central Heating Design Supply Air Temperature {C}
+  NonCoincident,                                           !- Type of Zone Sum to Use
+  No,                                                      !- 100% Outdoor Air in Cooling
+  No,                                                      !- 100% Outdoor Air in Heating
+  0.008,                                                   !- Central Cooling Design Supply Air Humidity Ratio {kg-H2O/kg-air}
+  0.008,                                                   !- Central Heating Design Supply Air Humidity Ratio {kg-H2O/kg-air}
+  DesignDay,                                               !- Cooling Supply Air Flow Rate Method
+  0,                                                       !- Cooling Supply Air Flow Rate {m3/s}
+  ,                                                        !- Cooling Supply Air Flow Rate Per Floor Area {m3/s-m2}
+  ,                                                        !- Cooling Fraction of Autosized Cooling Supply Air Flow Rate
+  ,                                                        !- Cooling Supply Air Flow Rate Per Unit Cooling Capacity {m3/s-W}
+  DesignDay,                                               !- Heating Supply Air Flow Rate Method
+  0,                                                       !- Heating Supply Air Flow Rate {m3/s}
+  ,                                                        !- Heating Supply Air Flow Rate Per Floor Area {m3/s-m2}
+  ,                                                        !- Heating Fraction of Autosized Heating Supply Air Flow Rate
+  ,                                                        !- Heating Fraction of Autosized Cooling Supply Air Flow Rate
+  ,                                                        !- Heating Supply Air Flow Rate Per Unit Heating Capacity {m3/s-W}
+  ZoneSum,                                                 !- System Outdoor Air Method
+  1.0,                                                     !- Zone Maximum Outdoor Air Fraction
+  CoolingDesignCapacity,                                   !- Cooling Design Capacity Method
+  autosize,                                                !- Cooling Design Capacity {W}
+  ,                                                        !- Cooling Design Capacity Per Floor Area {W/m2}
+  ,                                                        !- Fraction of Autosized Cooling Design Capacity
+  HeatingDesignCapacity,                                   !- Heating Design Capacity Method
+  autosize,                                                !- Heating Design Capacity {W}
+  ,                                                        !- Heating Design Capacity Per Floor Area {W/m2}
+  ,                                                        !- Fraction of Autosized Heating Design Capacity
+  OnOff;                                                   !- Central Cooling Capacity Control Method
+
+AirLoopHVAC,
+  DXVAV Sys 1,                                             !- Name
+  ,                                                        !- Controller List Name
+  DXVAV Sys 1 Availability Managers,                       !- Availability Manager List Name
+  autosize,                                                !- Design Supply Air Flow Rate {m3/s}
+  DXVAV Sys 1 Branches,                                    !- Branch List Name
+  ,                                                        !- Connector List Name
+  DXVAV Sys 1 Air Loop Inlet,                              !- Supply Side Inlet Node Name
+  DXVAV Sys 1 Return Air Outlet,                           !- Demand Side Outlet Node Name
+  DXVAV Sys 1 Supply Path Inlet,                           !- Demand Side Inlet Node Names
+  DXVAV Sys 1 Supply Fan Outlet;                           !- Supply Side Outlet Node Names
+
+BranchList,
+  DXVAV Sys 1 Branches,                                    !- Name
+  DXVAV Sys 1 Main Branch;                                 !- Branch Name
+
+Branch,
+  DXVAV Sys 1 Main Branch,                                 !- Name
+  ,                                                        !- Pressure Drop Curve Name
+  AirLoopHVAC:OutdoorAirSystem,                            !- Component Object Type
+  DXVAV Sys 1 OA System,                                   !- Component Name
+  DXVAV Sys 1 Air Loop Inlet,                              !- Component Inlet Node Name
+  DXVAV Sys 1 Mixed Air Outlet,                            !- Component Outlet Node Name
+  CoilSystem:Cooling:DX,                                   !- Component Object Type
+  DXVAV Sys 1 System,                                      !- Component Name
+  DXVAV Sys 1 Mixed Air Outlet,                            !- Component Inlet Node Name
+  DXVAV Sys 1 Cooling Coil Outlet,                         !- Component Outlet Node Name
+  Coil:Heating:Fuel,                                       !- Component Object Type
+  DXVAV Sys 1 Heating Coil,                                !- Component Name
+  DXVAV Sys 1 Cooling Coil Outlet,                         !- Component Inlet Node Name
+  DXVAV Sys 1 Heating Coil Outlet,                         !- Component Outlet Node Name
+  Fan:VariableVolume,                                      !- Component Object Type
+  DXVAV Sys 1 Supply Fan,                                  !- Component Name
+  DXVAV Sys 1 Heating Coil Outlet,                         !- Component Inlet Node Name
+  DXVAV Sys 1 Supply Fan Outlet;                           !- Component Outlet Node Name
+
+AirLoopHVAC:SupplyPath,
+  DXVAV Sys 1 Supply Path,                                 !- Name
+  DXVAV Sys 1 Supply Path Inlet,                           !- Supply Air Path Inlet Node Name
+  AirLoopHVAC:ZoneSplitter,                                !- Component Object Type
+  DXVAV Sys 1 Zone Splitter;                               !- Component Name
+
+AirLoopHVAC:ZoneSplitter,
+  DXVAV Sys 1 Zone Splitter,                               !- Name
+  DXVAV Sys 1 Supply Path Inlet,                           !- Inlet Node Name
+  Thermal Zone 1 Zone Equip Inlet;                         !- Outlet Node Name
+
+AirLoopHVAC:ReturnPath,
+  DXVAV Sys 1 Return Path,                                 !- Name
+  DXVAV Sys 1 Return Air Outlet,                           !- Return Air Path Outlet Node Name
+  AirLoopHVAC:ZoneMixer,                                   !- Component Object Type
+  DXVAV Sys 1 Zone Mixer;                                  !- Component Name
+
+AirLoopHVAC:ZoneMixer,
+  DXVAV Sys 1 Zone Mixer,                                  !- Name
+  DXVAV Sys 1 Return Air Outlet,                           !- Outlet Node Name
+  Thermal Zone 1 Return Outlet;                            !- Inlet Node Name
+
+AvailabilityManagerAssignmentList,
+  DXVAV Sys 1 Availability Managers,                       !- Name
+  AvailabilityManager:NightCycle,                          !- Availability Manager Object Type
+  DXVAV Sys 1 Availability;                                !- Availability Manager Name
+
+AvailabilityManager:NightCycle,
+  DXVAV Sys 1 Availability,                                !- Name
+  HVACTemplate-Always 1,                                   !- Applicability Schedule Name
+  FanAvailSched,                                           !- Fan Schedule Name
+  CycleOnAny,                                              !- Control Type
+  0.2,                                                     !- Thermostat Tolerance {deltaC}
+  FixedRunTime,                                            !- Cycling Run Time Control Type
+  3600,                                                    !- Cycling run time {s}
+  ;                                                        !- Control Zone Name
+
+Schedule:Compact,
+  HVACTemplate-Always 1,                                   !- Name
+  HVACTemplate Any Number,                                 !- Schedule Type Limits Name
+  Through: 12/31,                                          !- Field 1
+  For: AllDays,                                            !- Field 2
+  Until: 24:00,                                            !- Field 3
+  1;                                                       !- Field 4
+
+Schedule:Compact,
+  HVACTemplate-Always 12.8,                                !- Name
+  HVACTemplate Any Number,                                 !- Schedule Type Limits Name
+  Through: 12/31,                                          !- Field 1
+  For: AllDays,                                            !- Field 2
+  Until: 24:00,                                            !- Field 3
+  12.8;                                                    !- Field 4
+
+SetpointManager:Scheduled,
+  DXVAV Sys 1 Cooling Supply Air Temp Manager,             !- Name
+  Temperature,                                             !- Control Variable
+  HVACTemplate-Always 12.8,                                !- Schedule Name
+  DXVAV Sys 1 Supply Fan Outlet;                           !- Setpoint Node or NodeList Name
+
+CoilSystem:Cooling:DX,
+  DXVAV Sys 1 System,                                      !- Name
+  ,                                                        !- Availability Schedule Name
+  DXVAV Sys 1 Mixed Air Outlet,                            !- DX Cooling Coil System Inlet Node Name
+  DXVAV Sys 1 Cooling Coil Outlet,                         !- DX Cooling Coil System Outlet Node Name
+  DXVAV Sys 1 Cooling Coil Outlet,                         !- DX Cooling Coil System Sensor Node Name
+  Coil:Cooling:DX:TwoSpeed,                                !- Cooling Coil Object Type
+  DXVAV Sys 1 Cooling Coil,                                !- Cooling Coil Name
+  None,                                                    !- Dehumidification Control Type
+  Yes,                                                     !- Run on Sensible Load
+  No;                                                      !- Run on Latent Load
+
+Coil:Cooling:DX:TwoSpeed,
+  DXVAV Sys 1 Cooling Coil,                                !- Name
+  ,                                                        !- Availability Schedule Name
+  autosize,                                                !- Rated High Speed Total Cooling Capacity
+  autosize,                                                !- Rated High Speed Sensible Heat Ratio
+  3,                                                       !- Rated High Speed COP
+  autosize,                                                !- Rated High Speed Air Flow Rate
+  ,                                                        !- Unit Internal Static Air Pressure
+  DXVAV Sys 1 Mixed Air Outlet,                            !- Air Inlet Node Name
+  DXVAV Sys 1 Cooling Coil Outlet,                         !- Air Outlet Node Name
+  DXVAV Sys 1 DX Coil Cap-FT,                              !- Total Cooling Capacity Function of Temperature Curve Name
+  DXVAV Sys 1 DX Coil Cap-FF,                              !- Total Cooling Capacity Function of Flow Fraction Curve Name
+  DXVAV Sys 1 DX Coil EIR-FT,                              !- Energy Input Ratio Function of Temperature Curve Name
+  DXVAV Sys 1 DX Coil EIR-FF,                              !- Energy Input Ratio Function of Flow Fraction Curve Name
+  DXVAV Sys 1 DX Coil PLF,                                 !- Part Load Fraction Correlation Curve Name
+  Autosize,                                                !- Rated Low Speed Total Cooling Capacity
+  autosize,                                                !- Rated Low Speed Sensible Heat Ratio
+  4.500000,                                                !- Rated Low Speed COP
+  Autosize,                                                !- Rated Low Speed Air Flow Rate
+  DXVAV Sys 1 DX Coil Low Cap-FT,                          !- Low Speed Total Cooling Capacity Function of Temperature Curve Name
+  DXVAV Sys 1 DX Coil Low EIR-FT;                          !- Low Speed Energy Input Ratio Function of Temperature Curve Name
+
+Curve:Biquadratic,
+! DOE-2.1E, SDL-C4
+  DXVAV Sys 1 DX Coil Cap-FT,                              !- Name
+  0.476428,                                                !- Coefficient1 Constant
+  0.401147E-01,                                            !- Coefficient2 x
+  0.226411E-03,                                            !- Coefficient3 x**2
+  -0.827136E-03,                                           !- Coefficient4 y
+  -0.732240E-05,                                           !- Coefficient5 y**2
+  -0.446278E-03,                                           !- Coefficient6 x*y
+  12.77778,                                                !- Minimum Value of x
+  23.88889,                                                !- Maximum Value of x
+  23.88889,                                                !- Minimum Value of y
+  46.11111;                                                !- Maximum Value of y
+
+Curve:Cubic,
+! DOE-2.1E, SDL-C78
+  DXVAV Sys 1 DX Coil Cap-FF,                              !- Name
+  .47278589,                                               !- Coefficient1 Constant
+  1.2433415,                                               !- Coefficient2 x
+  -1.0387055,                                              !- Coefficient3 x**2
+  .32257813,                                               !- Coefficient4 x**3
+  0.5,                                                     !- Minimum Value of x
+  1.5;                                                     !- Maximum Value of x
+
+Curve:Biquadratic,
+! DOE-2.1E, SDL-C82
+  DXVAV Sys 1 DX Coil EIR-FT,                              !- Name
+  0.632475,                                                !- Coefficient1 Constant
+   -0.121321E-01,                                          !- Coefficient2 x
+  0.507773E-03,                                            !- Coefficient3 x**2
+  0.155377E-01,                                            !- Coefficient4 y
+  0.272840E-03,                                            !- Coefficient5 y**2
+  -0.679201E-03,                                           !- Coefficient6 x*y
+  12.77778,                                                !- Minimum Value of x
+  23.88889,                                                !- Maximum Value of x
+  23.88889,                                                !- Minimum Value of y
+  46.11111;                                                !- Maximum Value of y
+
+Curve:Cubic,
+! DOE-2.1E, SDL-C82
+  DXVAV Sys 1 DX Coil EIR-FF,                              !- Name
+  1.0079484,                                               !- Coefficient1 Constant
+  .34544129,                                               !- Coefficient2 x
+  -.6922891,                                               !- Coefficient3 x**2
+  .33889943,                                               !- Coefficient4 x**3
+  0.5,                                                     !- Minimum Value of x
+  1.5;                                                     !- Maximum Value of x
+
+Curve:Quadratic,
+  DXVAV Sys 1 DX Coil PLF,                                 !- Name
+  0.85,                                                    !- Coefficient1 Constant
+  0.15,                                                    !- Coefficient2 x
+  0.0,                                                     !- Coefficient3 x**2
+  0.0,                                                     !- Minimum Value of x
+  1.0;                                                     !- Maximum Value of x
+
+Curve:Biquadratic,
+! DOE-2.1E, SDL-C4
+  DXVAV Sys 1 DX Coil Low Cap-FT,                          !- Name
+  0.476428E+00,                                            !- Coefficient1 Constant
+  0.401147E-01,                                            !- Coefficient2 x
+  0.226411E-03,                                            !- Coefficient3 x**2
+  -0.827136E-03,                                           !- Coefficient4 y
+  -0.732240E-05,                                           !- Coefficient5 y**2
+  -0.446278E-03,                                           !- Coefficient6 x*y
+  12.77778,                                                !- Minimum Value of x
+  23.88889,                                                !- Maximum Value of x
+  23.88889,                                                !- Minimum Value of y
+  46.11111;                                                !- Maximum Value of y
+
+Curve:Biquadratic,
+  DXVAV Sys 1 DX Coil Low EIR-FT,                          !- Name
+  0.774645E+00,                                            !- Coefficient1 Constant
+  -0.343731E-01,                                           !- Coefficient2 x
+  0.783173E-03,                                            !- Coefficient3 x**2
+  0.146596E-01,                                            !- Coefficient4 y
+  0.488851E-03,                                            !- Coefficient5 y**2
+  -0.752036E-03,                                           !- Coefficient6 x*y
+  12.77778,                                                !- Minimum Value of x
+  23.88889,                                                !- Maximum Value of x
+  23.88889,                                                !- Minimum Value of y
+  46.11111;                                                !- Maximum Value of y
+
+SetpointManager:MixedAir,
+  DXVAV Sys 1 Cooling Coil Air Temp Manager,               !- Name
+  Temperature,                                             !- Control Variable
+  DXVAV Sys 1 Supply Fan Outlet,                           !- Reference Setpoint Node Name
+  DXVAV Sys 1 Heating Coil Outlet,                         !- Fan Inlet Node Name
+  DXVAV Sys 1 Supply Fan Outlet,                           !- Fan Outlet Node Name
+  DXVAV Sys 1 Mixed Air Nodes;                             !- Setpoint Node or NodeList Name
+
+NodeList,
+  DXVAV Sys 1 Mixed Air Nodes,                             !- Name
+  DXVAV Sys 1 Cooling Coil Outlet,                         !- Node Name
+  DXVAV Sys 1 Mixed Air Outlet;                            !- Node Name
+
+Coil:Heating:Fuel,
+  DXVAV Sys 1 Heating Coil,                                !- Name
+  ,                                                        !- Availability Schedule Name
+  NaturalGas,                                              !- Fuel Type
+  0.8,                                                     !- Gas Burner Efficiency
+  autosize,                                                !- Nominal Capacity of the Coil {W}
+  DXVAV Sys 1 Cooling Coil Outlet,                         !- Air Inlet Node Name
+  DXVAV Sys 1 Heating Coil Outlet,                         !- Air Outlet Node Name
+  DXVAV Sys 1 Heating Coil Outlet,                         !- Coil Temp Setpoint Node
+  0.0,                                                     !- Parasitic Electric Load {W}
+  DXVAV Sys 1 Heating Coil PLF-FPLR,                       !- Part load fraction correlation (function of part load ratio)
+  0;                                                       !- Parasitic Gas Load {W}
+
+Curve:Cubic,
+  DXVAV Sys 1 Heating Coil PLF-FPLR,                       !- Name
+  0.8,                                                     !- Coefficient1 Constant
+  0.2,                                                     !- Coefficient2 x
+  0,                                                       !- Coefficient3 x**2
+  0,                                                       !- Coefficient4 x**3
+  0,                                                       !- Minimum Value of x
+  1;                                                       !- Maximum Value of x
+
+Schedule:Compact,
+  HVACTemplate-Always 10,                                  !- Name
+  HVACTemplate Any Number,                                 !- Schedule Type Limits Name
+  Through: 12/31,                                          !- Field 1
+  For: AllDays,                                            !- Field 2
+  Until: 24:00,                                            !- Field 3
+  10;                                                      !- Field 4
+! NOTE:  Heating supply air setpoint is placed on Supply Path Inlet node to allow separate heating and cooling setpoints.
+! SetpointManager:MixedAir <system name> Heating Coil Air Temp Manager adjusts this setpoint for fan heat and places it on the Heating Coil Outlet
+
+SetpointManager:Scheduled,
+  DXVAV Sys 1 Heating Supply Air Temp Manager,             !- Name
+  Temperature,                                             !- Control Variable
+  HVACTemplate-Always 10,                                  !- Schedule Name
+  DXVAV Sys 1 Supply Path Inlet;                           !- Setpoint Node or NodeList Name
+
+SetpointManager:MixedAir,
+  DXVAV Sys 1 Heating Coil Air Temp Manager,               !- Name
+  Temperature,                                             !- Control Variable
+  DXVAV Sys 1 Supply Path Inlet,                           !- Reference Setpoint Node Name
+  DXVAV Sys 1 Heating Coil Outlet,                         !- Fan Inlet Node Name
+  DXVAV Sys 1 Supply Fan Outlet,                           !- Fan Outlet Node Name
+  DXVAV Sys 1 Heating Coil Outlet;                         !- Setpoint Node or NodeList Name
+
+Fan:VariableVolume,
+  DXVAV Sys 1 Supply Fan,                                  !- Name
+  FanAvailSched,                                           !- Availability Schedule Name
+  0.7,                                                     !- Fan Efficiency
+  1000,                                                    !- Pressure Rise {Pa}
+  autosize,                                                !- Maximum Flow Rate {m3/s}
+  Fraction,                                                !- Fan Power Minimum Flow Rate Input Method
+  0.25,                                                    !- Fan Power Minimum Flow Fraction
+  ,                                                        !- Fan Power Minimum Air Flow Rate {m3/s}
+  0.9,                                                     !- Motor Efficiency
+  1,                                                       !- Motor in Airstream Fraction
+  0.35071223,                                              !- Fan Power Coefficient 1
+  0.30850535,                                              !- Fan Power Coefficient 2
+  -0.54137364,                                             !- Fan Power Coefficient 3
+  0.87198823,                                              !- Fan Power Coefficient 4
+  0,                                                       !- Fan Power Coefficient 5
+  DXVAV Sys 1 Heating Coil Outlet,                         !- Air Inlet Node Name
+  DXVAV Sys 1 Supply Fan Outlet;                           !- Air Outlet Node Name
+
+OutdoorAir:NodeList,
+  DXVAV Sys 1 Outside Air Inlet;                           !- Node or NodeList Name 1
+
+AirLoopHVAC:OutdoorAirSystem,
+  DXVAV Sys 1 OA System,                                   !- Name
+  DXVAV Sys 1 OA System Controllers,                       !- Controller List Name
+  DXVAV Sys 1 OA System Equipment;                         !- Outdoor Air Equipment List Name
+
+AirLoopHVAC:ControllerList,
+  DXVAV Sys 1 OA System Controllers,                       !- Name
+  Controller:OutdoorAir,                                   !- Controller Object Type
+  DXVAV Sys 1 OA Controller;                               !- Controller Name
+
+AirLoopHVAC:OutdoorAirSystem:EquipmentList,
+  DXVAV Sys 1 OA System Equipment,                         !- Name
+  OutdoorAir:Mixer,                                        !- Component Object Type
+  DXVAV Sys 1 OA Mixing Box;                               !- Component Name
+
+OutdoorAir:Mixer,
+  DXVAV Sys 1 OA Mixing Box,                               !- Name
+  DXVAV Sys 1 Mixed Air Outlet,                            !- Mixed Air Node Name
+  DXVAV Sys 1 Outside Air Inlet,                           !- Outside Air Stream Node Name
+  DXVAV Sys 1 Relief Air Outlet,                           !- Relief Air Stream Node Name
+  DXVAV Sys 1 Air Loop Inlet;                              !- Return Air Stream Node Name
+
+Controller:OutdoorAir,
+  DXVAV Sys 1 OA Controller,                               !- Name
+  DXVAV Sys 1 Relief Air Outlet,                           !- Relief Air Outlet Node Name
+  DXVAV Sys 1 Air Loop Inlet,                              !- Return Air Node Name
+  DXVAV Sys 1 Mixed Air Outlet,                            !- Mixed Air Node Name
+  DXVAV Sys 1 Outside Air Inlet,                           !- Actuator Node Name
+  autosize,                                                !- Minimum Outdoor Air Flow Rate {m3/s}
+  autosize,                                                !- Maximum Outdoor Air Flow Rate {m3/s}
+  DifferentialDryBulb,                                     !- Economizer Control Type
+  ModulateFlow,                                            !- Economizer Control Action Type
+  19,                                                      !- Economizer Maximum Limit Dry-Bulb Temperature {C}
+  ,                                                        !- Economizer Maximum Limit Enthalpy {J/kg}
+  ,                                                        !- Economizer Maximum Limit Dewpoint Temperature (C)
+  ,                                                        !- Electronic Enthalpy Limit Curve Name
+  4,                                                       !- Economizer Minimum Limit Dry-Bulb Temperature {C}
+  NoLockout,                                               !- Lockout Type
+  ProportionalMinimum,                                     !- Minimum Limit Type
+  Min OA Sched,                                            !- Minimum Outdoor Air Schedule Name
+  ,                                                        !- Minimum Fraction of Outdoor Air Schedule Name
+  ,                                                        !- Maximum Fraction of Outdoor Air Schedule Name
+  ;                                                        !- Mechanical Ventilation Controller Name
