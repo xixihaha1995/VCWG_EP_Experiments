@@ -9,12 +9,12 @@ def cvrmse(measurements, predictions):
     bias = predictions - measurements
     rmse = np.sqrt(np.mean(bias**2))
     cvrmse = rmse / np.mean(abs(measurements))
-    return cvrmse
+    return round(cvrmse*100, 2)
 
 def normalized_mean_bias_error(measurements, predictions):
     bias = measurements - predictions
     nmb = np.mean(bias) / np.mean(measurements)
-    return nmb
+    return round(nmb*100, 2)
 def read_text_as_csv(file_path, header=None, index_col=0, skiprows=3):
     '''
     df first column is index
@@ -246,12 +246,20 @@ def process_one_theme(csv_filename):
         cvrmse_dict['Rural_21.5'] = cvrmse(comparison['Urban_DBT_C_21.5'], comparison['Rural_DBT_C'])
         cvrmse_dict['Rural_25.5'] = cvrmse(comparison['Urban_DBT_C_25.5'], comparison['Rural_DBT_C'])
         cvrmse_dict['Rural_31.2'] = cvrmse(comparison['Urban_DBT_C_31.2'], comparison['Rural_DBT_C'])
-        print(f'cvrmse for Rural_2.6 is {cvrmse_dict["Rural_2.6"]}')
-        print(f'cvrmse for Rural_13.9 is {cvrmse_dict["Rural_13.9"]}')
-        print(f'cvrmse for Rural_17.5 is {cvrmse_dict["Rural_17.5"]}')
-        print(f'cvrmse for Rural_21.5 is {cvrmse_dict["Rural_21.5"]}')
-        print(f'cvrmse for Rural_25.5 is {cvrmse_dict["Rural_25.5"]}')
-        print(f'cvrmse for Rural_31.2 is {cvrmse_dict["Rural_31.2"]}')
+        nmbe_dict['Rural_2.6'] = normalized_mean_bias_error(comparison['Urban_DBT_C_2.6'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_13.9'] = normalized_mean_bias_error(comparison['Urban_DBT_C_13.9'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_17.5'] = normalized_mean_bias_error(comparison['Urban_DBT_C_17.5'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_21.5'] = normalized_mean_bias_error(comparison['Urban_DBT_C_21.5'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_25.5'] = normalized_mean_bias_error(comparison['Urban_DBT_C_25.5'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_31.2'] = normalized_mean_bias_error(comparison['Urban_DBT_C_31.2'], comparison['Rural_DBT_C'])
+
+        print(f'cvrmse for Rural_2.6 is {cvrmse_dict["Rural_2.6"]}, nmbe is {nmbe_dict["Rural_2.6"]}')
+        print(f'cvrmse for Rural_13.9 is {cvrmse_dict["Rural_13.9"]}, nmbe is {nmbe_dict["Rural_13.9"]}')
+        print(f'cvrmse for Rural_17.5 is {cvrmse_dict["Rural_17.5"]}, nmbe is {nmbe_dict["Rural_17.5"]}')
+        print(f'cvrmse for Rural_21.5 is {cvrmse_dict["Rural_21.5"]}, nmbe is {nmbe_dict["Rural_21.5"]}')
+        print(f'cvrmse for Rural_25.5 is {cvrmse_dict["Rural_25.5"]}, nmbe is {nmbe_dict["Rural_25.5"]}')
+        print(f'cvrmse for Rural_31.2 is {cvrmse_dict["Rural_31.2"]}, nmbe is {nmbe_dict["Rural_31.2"]}')
+
     elif "BUBBLE_UE2" in csv_filename:
         comparison = get_BUUBLE_Ue2_measurements()
         cvrmse_dict['Rural_3.0'] = cvrmse(comparison['Urban_DBT_C_3.0'], comparison['Rural_DBT_C'])
@@ -259,11 +267,17 @@ def process_one_theme(csv_filename):
         cvrmse_dict['Rural_22.9'] = cvrmse(comparison['Urban_DBT_C_22.9'], comparison['Rural_DBT_C'])
         cvrmse_dict['Rural_27.8'] = cvrmse(comparison['Urban_DBT_C_27.8'], comparison['Rural_DBT_C'])
         cvrmse_dict['Rural_32.9'] = cvrmse(comparison['Urban_DBT_C_32.9'], comparison['Rural_DBT_C'])
-        print(f'cvrmse for Rural vs Urban(3.0) is {cvrmse_dict["Rural_3.0"]}')
-        print(f'cvrmse for Rural vs Urban(15.8) is {cvrmse_dict["Rural_15.8"]}')
-        print(f'cvrmse for Rural vs Urban(22.9) is {cvrmse_dict["Rural_22.9"]}')
-        print(f'cvrmse for Rural vs Urban(27.8) is {cvrmse_dict["Rural_27.8"]}')
-        print(f'cvrmse for Rural vs Urban(32.9) is {cvrmse_dict["Rural_32.9"]}')
+        nmbe_dict['Rural_3.0'] = normalized_mean_bias_error(comparison['Urban_DBT_C_3.0'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_15.8'] = normalized_mean_bias_error(comparison['Urban_DBT_C_15.8'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_22.9'] = normalized_mean_bias_error(comparison['Urban_DBT_C_22.9'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_27.8'] = normalized_mean_bias_error(comparison['Urban_DBT_C_27.8'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_32.9'] = normalized_mean_bias_error(comparison['Urban_DBT_C_32.9'], comparison['Rural_DBT_C'])
+
+        print(f'cvrmse for Rural vs Urban(3.0) is {cvrmse_dict["Rural_3.0"]}, nmbe is {nmbe_dict["Rural_3.0"]}')
+        print(f'cvrmse for Rural vs Urban(15.8) is {cvrmse_dict["Rural_15.8"]}, nmbe is {nmbe_dict["Rural_15.8"]}')
+        print(f'cvrmse for Rural vs Urban(22.9) is {cvrmse_dict["Rural_22.9"]}, nmbe is {nmbe_dict["Rural_22.9"]}')
+        print(f'cvrmse for Rural vs Urban(27.8) is {cvrmse_dict["Rural_27.8"]}, nmbe is {nmbe_dict["Rural_27.8"]}')
+        print(f'cvrmse for Rural vs Urban(32.9) is {cvrmse_dict["Rural_32.9"]}, nmbe is {nmbe_dict["Rural_32.9"]}')
     else:
         if "CAPITOUL" in csv_filename:
             comparison = get_CAPITOUL_measurements()
