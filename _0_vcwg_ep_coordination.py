@@ -28,7 +28,9 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
         value_3 = _value_3
         ctl_viriable_2 = _ctl_viriable_2
         value_2 = _value_2
-        csv_file_name = ctl_virable_1 + '_' + str(value_1) + '_' + ctl_viriable_2 + '_' + str(value_2) + '_' + ctl_viriable_3 + '_' + str(value_3)
+        csv_file_name = ctl_virable_1 + '_' + str(value_1) + '_' + \
+                        ctl_viriable_2 + '_' + str(value_2) + '_' + \
+                        ctl_viriable_3 + '_' + str(value_3)
     else:
         nbr_control_variables = 1
         csv_file_name = ctl_virable_1 + '_' + str(value_1)
