@@ -228,7 +228,7 @@ Zone,
 BuildingSurface:Detailed,
   Surface 1,                              !- Name
   Floor,                                  !- Surface Type
-  ,                                       !- Construction Name
+  ExtSlabCarpet 4in ClimateZone 1-8,      !- Construction Name
   Thermal Zone 1,                         !- Zone Name
   ,                                       !- Space Name
   Ground,                                 !- Outside Boundary Condition
@@ -237,15 +237,15 @@ BuildingSurface:Detailed,
   NoWind,                                 !- Wind Exposure
   ,                                       !- View Factor to Ground
   ,                                       !- Number of Vertices
-  38.109525, 14.322425, 0,                !- X,Y,Z Vertex 1 {m}
-  38.109525, 0, 0,                        !- X,Y,Z Vertex 2 {m}
+  49.911, 33.274, 0,                      !- X,Y,Z Vertex 1 {m}
+  49.911, 0, 0,                           !- X,Y,Z Vertex 2 {m}
   0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
-  0, 14.322425, 0;                        !- X,Y,Z Vertex 4 {m}
+  0, 33.274, 0;                           !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
   Surface 2,                              !- Name
-  Wall,                                   !- Surface Type
-  ,                                       !- Construction Name
+  Roof,                                   !- Surface Type
+  ASHRAE 189.1-2009 ExtRoof IEAD ClimateZone 2-5, !- Construction Name
   Thermal Zone 1,                         !- Zone Name
   ,                                       !- Space Name
   Outdoors,                               !- Outside Boundary Condition
@@ -254,30 +254,111 @@ BuildingSurface:Detailed,
   WindExposed,                            !- Wind Exposure
   ,                                       !- View Factor to Ground
   ,                                       !- Number of Vertices
-  0, 14.322425, 11.8872,                  !- X,Y,Z Vertex 1 {m}
-  0, 14.322425, 0,                        !- X,Y,Z Vertex 2 {m}
-  0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
+  49.911, 0, 11.8872,                     !- X,Y,Z Vertex 1 {m}
+  49.911, 33.274, 11.8872,                !- X,Y,Z Vertex 2 {m}
+  0, 33.274, 11.8872,                     !- X,Y,Z Vertex 3 {m}
   0, 0, 11.8872;                          !- X,Y,Z Vertex 4 {m}
 
+BuildingSurface:Detailed,
+  Surface 3,                              !- Name
+  Wall,                                   !- Surface Type
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 5, !- Construction Name
+  Thermal Zone 1,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.911, 33.274, 11.8872,                !- X,Y,Z Vertex 1 {m}
+  49.911, 33.274, 0,                      !- X,Y,Z Vertex 2 {m}
+  0, 33.274, 0,                           !- X,Y,Z Vertex 3 {m}
+  0, 33.274, 11.8872;                     !- X,Y,Z Vertex 4 {m}
+
 FenestrationSurface:Detailed,
-  Sub Surface 1,                          !- Name
+  Sub Surface 2,                          !- Name
   Window,                                 !- Surface Type
-  ,                                       !- Construction Name
-  Surface 2,                              !- Building Surface Name
+  ASHRAE 189.1-2009 ExtWindow ClimateZone 4-5, !- Construction Name
+  Surface 3,                              !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
   ,                                       !- Multiplier
   ,                                       !- Number of Vertices
-  0, 14.297025, 7.89673916262514,         !- X,Y,Z Vertex 1 {m}
-  0, 14.297025, 3.96,                     !- X,Y,Z Vertex 2 {m}
-  0, 0.0254000000000012, 3.96,            !- X,Y,Z Vertex 3 {m}
-  0, 0.0254000000000012, 7.89673916262514; !- X,Y,Z Vertex 4 {m}
+  49.8856, 33.274, 7.88917271523179,      !- X,Y,Z Vertex 1 {m}
+  49.8856, 33.274, 3.9624,                !- X,Y,Z Vertex 2 {m}
+  0.0254000000000048, 33.274, 3.9624,     !- X,Y,Z Vertex 3 {m}
+  0.0254000000000048, 33.274, 7.88917271523179; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  Surface 3,                              !- Name
+  Surface 4,                              !- Name
   Wall,                                   !- Surface Type
-  ,                                       !- Construction Name
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 5, !- Construction Name
+  Thermal Zone 1,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  0, 33.274, 11.8872,                     !- X,Y,Z Vertex 1 {m}
+  0, 33.274, 0,                           !- X,Y,Z Vertex 2 {m}
+  0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
+  0, 0, 11.8872;                          !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 3,                          !- Name
+  Window,                                 !- Surface Type
+  ASHRAE 189.1-2009 ExtWindow ClimateZone 4-5, !- Construction Name
+  Surface 4,                              !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  0, 33.2486, 7.89117412844037,           !- X,Y,Z Vertex 1 {m}
+  0, 33.2486, 3.9624,                     !- X,Y,Z Vertex 2 {m}
+  0, 0.0254000000000048, 3.9624,          !- X,Y,Z Vertex 3 {m}
+  0, 0.0254000000000048, 7.89117412844037; !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 5,                              !- Name
+  Wall,                                   !- Surface Type
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 5, !- Construction Name
+  Thermal Zone 1,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.911, 0, 11.8872,                     !- X,Y,Z Vertex 1 {m}
+  49.911, 0, 0,                           !- X,Y,Z Vertex 2 {m}
+  49.911, 33.274, 0,                      !- X,Y,Z Vertex 3 {m}
+  49.911, 33.274, 11.8872;                !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 4,                          !- Name
+  Window,                                 !- Surface Type
+  ASHRAE 189.1-2009 ExtWindow ClimateZone 4-5, !- Construction Name
+  Surface 5,                              !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  49.911, 0.0254, 7.89117412844037,       !- X,Y,Z Vertex 1 {m}
+  49.911, 0.0254, 3.9624,                 !- X,Y,Z Vertex 2 {m}
+  49.911, 33.2486, 3.9624,                !- X,Y,Z Vertex 3 {m}
+  49.911, 33.2486, 7.89117412844037;      !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 6,                              !- Name
+  Wall,                                   !- Surface Type
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 5, !- Construction Name
   Thermal Zone 1,                         !- Zone Name
   ,                                       !- Space Name
   Outdoors,                               !- Outside Boundary Condition
@@ -288,104 +369,23 @@ BuildingSurface:Detailed,
   ,                                       !- Number of Vertices
   0, 0, 11.8872,                          !- X,Y,Z Vertex 1 {m}
   0, 0, 0,                                !- X,Y,Z Vertex 2 {m}
-  38.109525, 0, 0,                        !- X,Y,Z Vertex 3 {m}
-  38.109525, 0, 11.8872;                  !- X,Y,Z Vertex 4 {m}
+  49.911, 0, 0,                           !- X,Y,Z Vertex 3 {m}
+  49.911, 0, 11.8872;                     !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  Sub Surface 2,                          !- Name
+  Sub Surface 1,                          !- Name
   Window,                                 !- Surface Type
-  ,                                       !- Construction Name
-  Surface 3,                              !- Building Surface Name
-  ,                                       !- Outside Boundary Condition Object
-  ,                                       !- View Factor to Ground
-  ,                                       !- Frame and Divider Name
-  ,                                       !- Multiplier
-  ,                                       !- Number of Vertices
-  0.0254, 0, 7.88801204037708,            !- X,Y,Z Vertex 1 {m}
-  0.0254, 0, 3.96,                        !- X,Y,Z Vertex 2 {m}
-  38.084125, 0, 3.96,                     !- X,Y,Z Vertex 3 {m}
-  38.084125, 0, 7.88801204037708;         !- X,Y,Z Vertex 4 {m}
-
-BuildingSurface:Detailed,
-  Surface 4,                              !- Name
-  Roof,                                   !- Surface Type
-  ,                                       !- Construction Name
-  Thermal Zone 1,                         !- Zone Name
-  ,                                       !- Space Name
-  Outdoors,                               !- Outside Boundary Condition
-  ,                                       !- Outside Boundary Condition Object
-  SunExposed,                             !- Sun Exposure
-  WindExposed,                            !- Wind Exposure
-  ,                                       !- View Factor to Ground
-  ,                                       !- Number of Vertices
-  38.109525, 0, 11.8872,                  !- X,Y,Z Vertex 1 {m}
-  38.109525, 14.322425, 11.8872,          !- X,Y,Z Vertex 2 {m}
-  0, 14.322425, 11.8872,                  !- X,Y,Z Vertex 3 {m}
-  0, 0, 11.8872;                          !- X,Y,Z Vertex 4 {m}
-
-BuildingSurface:Detailed,
-  Surface 5,                              !- Name
-  Wall,                                   !- Surface Type
-  ,                                       !- Construction Name
-  Thermal Zone 1,                         !- Zone Name
-  ,                                       !- Space Name
-  Outdoors,                               !- Outside Boundary Condition
-  ,                                       !- Outside Boundary Condition Object
-  SunExposed,                             !- Sun Exposure
-  WindExposed,                            !- Wind Exposure
-  ,                                       !- View Factor to Ground
-  ,                                       !- Number of Vertices
-  38.109525, 0, 11.8872,                  !- X,Y,Z Vertex 1 {m}
-  38.109525, 0, 0,                        !- X,Y,Z Vertex 2 {m}
-  38.109525, 14.322425, 0,                !- X,Y,Z Vertex 3 {m}
-  38.109525, 14.322425, 11.8872;          !- X,Y,Z Vertex 4 {m}
-
-FenestrationSurface:Detailed,
-  Sub Surface 4,                          !- Name
-  Window,                                 !- Surface Type
-  ,                                       !- Construction Name
-  Surface 5,                              !- Building Surface Name
-  ,                                       !- Outside Boundary Condition Object
-  ,                                       !- View Factor to Ground
-  ,                                       !- Frame and Divider Name
-  ,                                       !- Multiplier
-  ,                                       !- Number of Vertices
-  38.109525, 0.0254, 7.89673916262514,    !- X,Y,Z Vertex 1 {m}
-  38.109525, 0.0254, 3.96,                !- X,Y,Z Vertex 2 {m}
-  38.109525, 14.297025, 3.96,             !- X,Y,Z Vertex 3 {m}
-  38.109525, 14.297025, 7.89673916262514; !- X,Y,Z Vertex 4 {m}
-
-BuildingSurface:Detailed,
-  Surface 6,                              !- Name
-  Wall,                                   !- Surface Type
-  ,                                       !- Construction Name
-  Thermal Zone 1,                         !- Zone Name
-  ,                                       !- Space Name
-  Outdoors,                               !- Outside Boundary Condition
-  ,                                       !- Outside Boundary Condition Object
-  SunExposed,                             !- Sun Exposure
-  WindExposed,                            !- Wind Exposure
-  ,                                       !- View Factor to Ground
-  ,                                       !- Number of Vertices
-  38.109525, 14.322425, 11.8872,          !- X,Y,Z Vertex 1 {m}
-  38.109525, 14.322425, 0,                !- X,Y,Z Vertex 2 {m}
-  0, 14.322425, 0,                        !- X,Y,Z Vertex 3 {m}
-  0, 14.322425, 11.8872;                  !- X,Y,Z Vertex 4 {m}
-
-FenestrationSurface:Detailed,
-  Sub Surface 3,                          !- Name
-  Window,                                 !- Surface Type
-  ,                                       !- Construction Name
+  ASHRAE 189.1-2009 ExtWindow ClimateZone 4-5, !- Construction Name
   Surface 6,                              !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
   ,                                       !- Multiplier
   ,                                       !- Number of Vertices
-  38.084125, 14.322425, 7.88801204037708, !- X,Y,Z Vertex 1 {m}
-  38.084125, 14.322425, 3.96,             !- X,Y,Z Vertex 2 {m}
-  0.0254000000000048, 14.322425, 3.96,    !- X,Y,Z Vertex 3 {m}
-  0.0254000000000048, 14.322425, 7.88801204037708; !- X,Y,Z Vertex 4 {m}
+  0.0254, 0, 7.88917271523179,            !- X,Y,Z Vertex 1 {m}
+  0.0254, 0, 3.9624,                      !- X,Y,Z Vertex 2 {m}
+  49.8856, 0, 3.9624,                     !- X,Y,Z Vertex 3 {m}
+  49.8856, 0, 7.88917271523179;           !- X,Y,Z Vertex 4 {m}
 
 SimulationControl,
   No,                                     !- Do Zone Sizing Calculation
@@ -396,12 +396,9 @@ SimulationControl,
   ,                                       !- Do HVAC Sizing Simulation for Sizing Periods
   ;                                       !- Maximum Number of HVAC Sizing Simulation Passes
 
-ConvergenceLimits,
-  1;                                      !- Minimum System Timestep {minutes}
-
-HeatBalanceAlgorithm,
-  ConductionTransferFunction,             !- Algorithm
-  200;                                    !- Surface Temperature Upper Limit {C}
+Sizing:Parameters,
+  1.25,                                   !- Heating Sizing Factor
+  1.15;                                   !- Cooling Sizing Factor
 
 RunPeriod,
   Run Period 1,                           !- Name
@@ -418,42 +415,6 @@ RunPeriod,
   Yes,                                    !- Use Weather File Rain Indicators
   Yes;                                    !- Use Weather File Snow Indicators
 
-ShadowCalculation,
-  PolygonClipping,                        !- Shading Calculation Method
-  Periodic,                               !- Shading Calculation Update Frequency Method
-  7,                                      !- Shading Calculation Update Frequency
-  15000,                                  !- Maximum Figures in Shadow Overlap Calculations
-  SutherlandHodgman,                      !- Polygon Clipping Algorithm
-  512,                                    !- Pixel Counting Resolution
-  SimpleSkyDiffuseModeling,               !- Sky Diffuse Modeling Algorithm
-  No,                                     !- Output External Shading Calculation Results
-  No,                                     !- Disable Self-Shading Within Shading Zone Groups
-  No;                                     !- Disable Self-Shading From Shading Zone Groups to Other Zones
-
-SurfaceConvectionAlgorithm:Inside,
-  TARP;                                   !- Algorithm
-
-SurfaceConvectionAlgorithm:Outside,
-  DOE-2;                                  !- Algorithm
-
-Sizing:Parameters,
-  1.25,                                   !- Heating Sizing Factor
-  1.15;                                   !- Cooling Sizing Factor
-
-ZoneAirContaminantBalance,
-  No;                                     !- Carbon Dioxide Concentration
-
-ZoneAirHeatBalanceAlgorithm,
-  AnalyticalSolution;                     !- Algorithm
-
-ZoneCapacitanceMultiplier:ResearchSpecial,
-  Zone Capacitance Multiplier Research Special, !- Name
-  ,                                       !- Zone or ZoneList Name
-  ,                                       !- Temperature Capacity Multiplier
-  ,                                       !- Humidity Capacity Multiplier
-  ,                                       !- Carbon Dioxide Capacity Multiplier
-  ;                                       !- Generic Contaminant Capacity Multiplier
-
 Output:Table:SummaryReports,
   AllSummary;                             !- Report Name 1
 
@@ -463,6 +424,105 @@ GlobalGeometryRules,
   Relative,                               !- Coordinate System
   Relative,                               !- Daylighting Reference Point Coordinate System
   Relative;                               !- Rectangular Surface Coordinate System
+
+Material,
+  1/2IN Gypsum,                           !- Name
+  Smooth,                                 !- Roughness
+  0.0127,                                 !- Thickness {m}
+  0.16,                                   !- Conductivity {W/m-K}
+  784.9,                                  !- Density {kg/m3}
+  830.000000000001,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.4,                                    !- Solar Absorptance
+  0.4;                                    !- Visible Absorptance
+
+Material,
+  1IN Stucco,                             !- Name
+  Smooth,                                 !- Roughness
+  0.0253,                                 !- Thickness {m}
+  0.691799999999999,                      !- Conductivity {W/m-K}
+  1858,                                   !- Density {kg/m3}
+  836.999999999999,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.92,                                   !- Solar Absorptance
+  0.92;                                   !- Visible Absorptance
+
+Material,
+  8IN Concrete HW,                        !- Name
+  MediumRough,                            !- Roughness
+  0.2033,                                 !- Thickness {m}
+  1.72959999999999,                       !- Conductivity {W/m-K}
+  2242.99999999999,                       !- Density {kg/m3}
+  836.999999999999,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.65,                                   !- Solar Absorptance
+  0.65;                                   !- Visible Absorptance
+
+Material,
+  F08 Metal surface,                      !- Name
+  Smooth,                                 !- Roughness
+  0.0008,                                 !- Thickness {m}
+  45.2800000000001,                       !- Conductivity {W/m-K}
+  7823.99999999999,                       !- Density {kg/m3}
+  500,                                    !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  F16 Acoustic tile,                      !- Name
+  MediumSmooth,                           !- Roughness
+  0.0191,                                 !- Thickness {m}
+  0.06,                                   !- Conductivity {W/m-K}
+  368,                                    !- Density {kg/m3}
+  590.000000000002,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.3,                                    !- Solar Absorptance
+  0.3;                                    !- Visible Absorptance
+
+Material,
+  G01a 19mm gypsum board,                 !- Name
+  MediumSmooth,                           !- Roughness
+  0.019,                                  !- Thickness {m}
+  0.16,                                   !- Conductivity {W/m-K}
+  800,                                    !- Density {kg/m3}
+  1090,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.4,                                    !- Solar Absorptance
+  0.4;                                    !- Visible Absorptance
+
+Material,
+  G05 25mm wood,                          !- Name
+  MediumSmooth,                           !- Roughness
+  0.0254,                                 !- Thickness {m}
+  0.15,                                   !- Conductivity {W/m-K}
+  608,                                    !- Density {kg/m3}
+  1630,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material,
+  I01 25mm insulation board,              !- Name
+  MediumRough,                            !- Roughness
+  0.0254,                                 !- Thickness {m}
+  0.03,                                   !- Conductivity {W/m-K}
+  43,                                     !- Density {kg/m3}
+  1210,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.6,                                    !- Solar Absorptance
+  0.6;                                    !- Visible Absorptance
+
+Material,
+  M11 100mm lightweight concrete,         !- Name
+  MediumRough,                            !- Roughness
+  0.1016,                                 !- Thickness {m}
+  0.53,                                   !- Conductivity {W/m-K}
+  1280,                                   !- Density {kg/m3}
+  840.000000000002,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
 
 Material,
   MAT-CC05 4 HW CONCRETE,                 !- Name
@@ -475,16 +535,503 @@ Material,
   0.85,                                   !- Solar Absorptance
   0.85;                                   !- Visible Absorptance
 
+Material,
+  Metal Decking,                          !- Name
+  MediumSmooth,                           !- Roughness
+  0.0015,                                 !- Thickness {m}
+  45.006,                                 !- Conductivity {W/m-K}
+  7680,                                   !- Density {kg/m3}
+  418.4,                                  !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.6,                                    !- Solar Absorptance
+  0.6;                                    !- Visible Absorptance
+
+Material,
+  Metal Roofing,                          !- Name
+  MediumSmooth,                           !- Roughness
+  0.0015,                                 !- Thickness {m}
+  45.006,                                 !- Conductivity {W/m-K}
+  7680,                                   !- Density {kg/m3}
+  418.4,                                  !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.6,                                    !- Solar Absorptance
+  0.6;                                    !- Visible Absorptance
+
+Material,
+  Roof Insulation [18],                   !- Name
+  MediumRough,                            !- Roughness
+  0.1693,                                 !- Thickness {m}
+  0.049,                                  !- Conductivity {W/m-K}
+  265,                                    !- Density {kg/m3}
+  836.800000000001,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Roof Insulation [21],                   !- Name
+  MediumRough,                            !- Roughness
+  0.2105,                                 !- Thickness {m}
+  0.049,                                  !- Conductivity {W/m-K}
+  265,                                    !- Density {kg/m3}
+  836.800000000001,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Roof Insulation [25],                   !- Name
+  MediumRough,                            !- Roughness
+  0.263,                                  !- Thickness {m}
+  0.049,                                  !- Conductivity {W/m-K}
+  265,                                    !- Density {kg/m3}
+  836.800000000001,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Roof Insulation [26],                   !- Name
+  MediumRough,                            !- Roughness
+  0.2941,                                 !- Thickness {m}
+  0.049,                                  !- Conductivity {W/m-K}
+  265,                                    !- Density {kg/m3}
+  836.800000000001,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Roof Membrane,                          !- Name
+  VeryRough,                              !- Roughness
+  0.0095,                                 !- Thickness {m}
+  0.16,                                   !- Conductivity {W/m-K}
+  1121.29,                                !- Density {kg/m3}
+  1460,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Wall Insulation [31],                   !- Name
+  MediumRough,                            !- Roughness
+  0.0337000000000001,                     !- Thickness {m}
+  0.0432,                                 !- Conductivity {W/m-K}
+  91,                                     !- Density {kg/m3}
+  836.999999999999,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material,
+  Wall Insulation [35],                   !- Name
+  MediumRough,                            !- Roughness
+  0.0452,                                 !- Thickness {m}
+  0.0432,                                 !- Conductivity {W/m-K}
+  91,                                     !- Density {kg/m3}
+  836.999999999999,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material,
+  Wall Insulation [36],                   !- Name
+  MediumRough,                            !- Roughness
+  0.0565999999999999,                     !- Thickness {m}
+  0.0432,                                 !- Conductivity {W/m-K}
+  91,                                     !- Density {kg/m3}
+  836.999999999999,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material,
+  Wall Insulation [37],                   !- Name
+  MediumRough,                            !- Roughness
+  0.0680999999999999,                     !- Thickness {m}
+  0.0432,                                 !- Conductivity {W/m-K}
+  91,                                     !- Density {kg/m3}
+  836.999999999999,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material,
+  Wall Insulation [40],                   !- Name
+  MediumRough,                            !- Roughness
+  0.0793999999999999,                     !- Thickness {m}
+  0.0432,                                 !- Conductivity {W/m-K}
+  91,                                     !- Density {kg/m3}
+  836.999999999999,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material,
+  Wall Insulation [42],                   !- Name
+  MediumRough,                            !- Roughness
+  0.0913999999999999,                     !- Thickness {m}
+  0.0432,                                 !- Conductivity {W/m-K}
+  91,                                     !- Density {kg/m3}
+  836.999999999999,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material,
+  Wall Insulation [44],                   !- Name
+  MediumRough,                            !- Roughness
+  0.1104,                                 !- Thickness {m}
+  0.0432,                                 !- Conductivity {W/m-K}
+  91,                                     !- Density {kg/m3}
+  836.999999999999,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material:AirGap,
+  F04 Wall air space resistance,          !- Name
+  0.15;                                   !- Thermal Resistance {m2-K/W}
+
+Material:AirGap,
+  F05 Ceiling air space resistance,       !- Name
+  0.18;                                   !- Thermal Resistance {m2-K/W}
+
 Material:NoMass,
   CP02 CARPET PAD,                        !- Name
   Smooth,                                 !- Roughness
   0.1,                                    !- Thermal Resistance {m2-K/W}
   0.9,                                    !- Thermal Absorptance
-  0.7,                                    !- Solar Absorptance
-  0.7;                                    !- Visible Absorptance
+  0.8,                                    !- Solar Absorptance
+  0.8;                                    !- Visible Absorptance
+
+WindowMaterial:Blind,
+  Window Material Blind 1,                !- Name
+  Horizontal,                             !- Slat Orientation
+  0.025,                                  !- Slat Width {m}
+  0.01875,                                !- Slat Separation {m}
+  0.001,                                  !- Slat Thickness {m}
+  45,                                     !- Slat Angle {deg}
+  221,                                    !- Slat Conductivity {W/m-K}
+  0,                                      !- Slat Beam Solar Transmittance
+  0.5,                                    !- Front Side Slat Beam Solar Reflectance
+  0.5,                                    !- Back Side Slat Beam Solar Reflectance
+  0,                                      !- Slat Diffuse Solar Transmittance
+  0.5,                                    !- Front Side Slat Diffuse Solar Reflectance
+  0.5,                                    !- Back Side Slat Diffuse Solar Reflectance
+  0,                                      !- Slat Beam Visible Transmittance
+  0.5,                                    !- Front Side Slat Beam Visible Reflectance
+  0.5,                                    !- Back Side Slat Beam Visible Reflectance
+  0,                                      !- Slat Diffuse Visible Transmittance
+  0.5,                                    !- Front Side Slat Diffuse Visible Reflectance
+  0.5,                                    !- Back Side Slat Diffuse Visible Reflectance
+  0,                                      !- Slat Infrared Hemispherical Transmittance
+  0.9,                                    !- Front Side Slat Infrared Hemispherical Emissivity
+  0.9,                                    !- Back Side Slat Infrared Hemispherical Emissivity
+  0.05,                                   !- Blind to Glass Distance {m}
+  0.5,                                    !- Blind Top Opening Multiplier
+  0.5,                                    !- Blind Bottom Opening Multiplier
+  0.5,                                    !- Blind Left Side Opening Multiplier
+  0.5,                                    !- Blind Right Side Opening Multiplier
+  0,                                      !- Minimum Slat Angle {deg}
+  180;                                    !- Maximum Slat Angle {deg}
+
+WindowMaterial:Glazing,
+  Clear 3mm,                              !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.00299999999999999,                    !- Thickness {m}
+  0.837,                                  !- Solar Transmittance at Normal Incidence
+  0.075,                                  !- Front Side Solar Reflectance at Normal Incidence
+  0,                                      !- Back Side Solar Reflectance at Normal Incidence
+  0.898,                                  !- Visible Transmittance at Normal Incidence
+  0.081,                                  !- Front Side Visible Reflectance at Normal Incidence
+  0,                                      !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.84,                                   !- Front Side Infrared Hemispherical Emissivity
+  0.84,                                   !- Back Side Infrared Hemispherical Emissivity
+  0.9,                                    !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowMaterial:Glazing,
+  Theoretical Glass [167],                !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.00299999999999999,                    !- Thickness {m}
+  0.2374,                                 !- Solar Transmittance at Normal Incidence
+  0.7126,                                 !- Front Side Solar Reflectance at Normal Incidence
+  0,                                      !- Back Side Solar Reflectance at Normal Incidence
+  0.2512,                                 !- Visible Transmittance at Normal Incidence
+  0.6988,                                 !- Front Side Visible Reflectance at Normal Incidence
+  0,                                      !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.985,                                  !- Front Side Infrared Hemispherical Emissivity
+  0.985,                                  !- Back Side Infrared Hemispherical Emissivity
+  2.1073,                                 !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowMaterial:Glazing,
+  Theoretical Glass [197],                !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.00299999999999999,                    !- Thickness {m}
+  0.2349,                                 !- Solar Transmittance at Normal Incidence
+  0.7151,                                 !- Front Side Solar Reflectance at Normal Incidence
+  0,                                      !- Back Side Solar Reflectance at Normal Incidence
+  0.2512,                                 !- Visible Transmittance at Normal Incidence
+  0.6988,                                 !- Front Side Visible Reflectance at Normal Incidence
+  0,                                      !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.9,                                    !- Front Side Infrared Hemispherical Emissivity
+  0.9,                                    !- Back Side Infrared Hemispherical Emissivity
+  0.0415,                                 !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowMaterial:Glazing,
+  Theoretical Glass [202],                !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.00299999999999999,                    !- Thickness {m}
+  0.2325,                                 !- Solar Transmittance at Normal Incidence
+  0.7175,                                 !- Front Side Solar Reflectance at Normal Incidence
+  0,                                      !- Back Side Solar Reflectance at Normal Incidence
+  0.3192,                                 !- Visible Transmittance at Normal Incidence
+  0.6308,                                 !- Front Side Visible Reflectance at Normal Incidence
+  0,                                      !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.9,                                    !- Front Side Infrared Hemispherical Emissivity
+  0.9,                                    !- Back Side Infrared Hemispherical Emissivity
+  0.0192,                                 !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowMaterial:Glazing,
+  Theoretical Glass [207],                !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.00299999999999999,                    !- Thickness {m}
+  0.3311,                                 !- Solar Transmittance at Normal Incidence
+  0.6189,                                 !- Front Side Solar Reflectance at Normal Incidence
+  0,                                      !- Back Side Solar Reflectance at Normal Incidence
+  0.44,                                   !- Visible Transmittance at Normal Incidence
+  0.51,                                   !- Front Side Visible Reflectance at Normal Incidence
+  0,                                      !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.9,                                    !- Front Side Infrared Hemispherical Emissivity
+  0.9,                                    !- Back Side Infrared Hemispherical Emissivity
+  0.0133,                                 !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowMaterial:Glazing,
+  Theoretical Glass [216],                !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.00299999999999999,                    !- Thickness {m}
+  0.3801,                                 !- Solar Transmittance at Normal Incidence
+  0.5699,                                 !- Front Side Solar Reflectance at Normal Incidence
+  0,                                      !- Back Side Solar Reflectance at Normal Incidence
+  0.5079,                                 !- Visible Transmittance at Normal Incidence
+  0.4421,                                 !- Front Side Visible Reflectance at Normal Incidence
+  0,                                      !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.9,                                    !- Front Side Infrared Hemispherical Emissivity
+  0.9,                                    !- Back Side Infrared Hemispherical Emissivity
+  0.0133,                                 !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowMaterial:Glazing,
+  Theoretical Glass [221],                !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.00299999999999999,                    !- Thickness {m}
+  0.4296,                                 !- Solar Transmittance at Normal Incidence
+  0.5204,                                 !- Front Side Solar Reflectance at Normal Incidence
+  0,                                      !- Back Side Solar Reflectance at Normal Incidence
+  0.4503,                                 !- Visible Transmittance at Normal Incidence
+  0.4997,                                 !- Front Side Visible Reflectance at Normal Incidence
+  0,                                      !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.9,                                    !- Front Side Infrared Hemispherical Emissivity
+  0.9,                                    !- Back Side Infrared Hemispherical Emissivity
+  0.0089,                                 !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowProperty:FrameAndDivider,
+  Window Property Frame And Divider 1,    !- Name
+  0.05081016,                             !- Frame Width {m}
+  0.05081016,                             !- Frame Outside Projection {m}
+  0.05081016,                             !- Frame Inside Projection {m}
+  0,                                      !- Frame Conductance {W/m2-K}
+  1,                                      !- Ratio of Frame-Edge Glass Conductance to Center-Of-Glass Conductance
+  0.7,                                    !- Frame Solar Absorptance
+  0.7,                                    !- Frame Visible Absorptance
+  0.9,                                    !- Frame Thermal Hemispherical Emissivity
+  DividedLite,                            !- Divider Type
+  0,                                      !- Divider Width {m}
+  0,                                      !- Number of Horizontal Dividers
+  0,                                      !- Number of Vertical Dividers
+  0,                                      !- Divider Outside Projection {m}
+  0,                                      !- Divider Inside Projection {m}
+  0,                                      !- Divider Conductance {W/m2-K}
+  1,                                      !- Ratio of Divider-Edge Glass Conductance to Center-Of-Glass Conductance
+  0,                                      !- Divider Solar Absorptance
+  0,                                      !- Divider Visible Absorptance
+  0.9,                                    !- Divider Thermal Hemispherical Emissivity
+  0,                                      !- Outside Reveal Solar Absorptance
+  0,                                      !- Inside Sill Depth {m}
+  0,                                      !- Inside Sill Solar Absorptance
+  0,                                      !- Inside Reveal Depth {m}
+  0,                                      !- Inside Reveal Solar Absorptance
+  CurtainWall;                            !- NFRC Product Type for Assembly Calculations
 
 Construction,
-  ExtSlabCarpet 4in ClimateZone 1-8;      !- Name
+  ASHRAE 189.1-2009 ExtRoof IEAD ClimateZone 1, !- Name
+  Roof Membrane,                          !- Layer 1
+  Roof Insulation [18],                   !- Layer 2
+  Metal Decking;                          !- Layer 3
+
+Construction,
+  ASHRAE 189.1-2009 ExtRoof IEAD ClimateZone 2-5, !- Name
+  Roof Membrane,                          !- Layer 1
+  Roof Insulation [21],                   !- Layer 2
+  Metal Decking;                          !- Layer 3
+
+Construction,
+  ASHRAE 189.1-2009 ExtRoof IEAD ClimateZone 7-8, !- Name
+  Roof Membrane,                          !- Layer 1
+  Roof Insulation [26],                   !- Layer 2
+  Metal Decking;                          !- Layer 3
+
+Construction,
+  ASHRAE 189.1-2009 ExtRoof Metal ClimateZone 6, !- Name
+  Metal Roofing,                          !- Layer 1
+  Roof Insulation [25],                   !- Layer 2
+  Metal Decking;                          !- Layer 3
+
+Construction,
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 1, !- Name
+  1IN Stucco,                             !- Layer 1
+  8IN Concrete HW,                        !- Layer 2
+  Wall Insulation [31],                   !- Layer 3
+  1/2IN Gypsum;                           !- Layer 4
+
+Construction,
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 2, !- Name
+  1IN Stucco,                             !- Layer 1
+  8IN Concrete HW,                        !- Layer 2
+  Wall Insulation [35],                   !- Layer 3
+  1/2IN Gypsum;                           !- Layer 4
+
+Construction,
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 3, !- Name
+  1IN Stucco,                             !- Layer 1
+  8IN Concrete HW,                        !- Layer 2
+  Wall Insulation [36],                   !- Layer 3
+  1/2IN Gypsum;                           !- Layer 4
+
+Construction,
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 4, !- Name
+  1IN Stucco,                             !- Layer 1
+  8IN Concrete HW,                        !- Layer 2
+  Wall Insulation [37],                   !- Layer 3
+  1/2IN Gypsum;                           !- Layer 4
+
+Construction,
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 5, !- Name
+  1IN Stucco,                             !- Layer 1
+  8IN Concrete HW,                        !- Layer 2
+  Wall Insulation [40],                   !- Layer 3
+  1/2IN Gypsum;                           !- Layer 4
+
+Construction,
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 6, !- Name
+  1IN Stucco,                             !- Layer 1
+  8IN Concrete HW,                        !- Layer 2
+  Wall Insulation [42],                   !- Layer 3
+  1/2IN Gypsum;                           !- Layer 4
+
+Construction,
+  ASHRAE 189.1-2009 ExtWall Mass ClimateZone 7-8, !- Name
+  1IN Stucco,                             !- Layer 1
+  8IN Concrete HW,                        !- Layer 2
+  Wall Insulation [44],                   !- Layer 3
+  1/2IN Gypsum;                           !- Layer 4
+
+Construction,
+  ASHRAE 189.1-2009 ExtWindow ClimateZone 1, !- Name
+  Theoretical Glass [167];                !- Layer 1
+
+Construction,
+  ASHRAE 189.1-2009 ExtWindow ClimateZone 2, !- Name
+  Theoretical Glass [197];                !- Layer 1
+
+Construction,
+  ASHRAE 189.1-2009 ExtWindow ClimateZone 3, !- Name
+  Theoretical Glass [202];                !- Layer 1
+
+Construction,
+  ASHRAE 189.1-2009 ExtWindow ClimateZone 4-5, !- Name
+  Theoretical Glass [207];                !- Layer 1
+
+Construction,
+  ASHRAE 189.1-2009 ExtWindow ClimateZone 6, !- Name
+  Theoretical Glass [216];                !- Layer 1
+
+Construction,
+  ASHRAE 189.1-2009 ExtWindow ClimateZone 7-8, !- Name
+  Theoretical Glass [221];                !- Layer 1
+
+Construction,
+  Exterior Door,                          !- Name
+  F08 Metal surface,                      !- Layer 1
+  I01 25mm insulation board;              !- Layer 2
+
+Construction,
+  ExtSlabCarpet 4in ClimateZone 1-8,      !- Name
+  MAT-CC05 4 HW CONCRETE,                 !- Layer 1
+  CP02 CARPET PAD;                        !- Layer 2
+
+Construction,
+  Interior Ceiling,                       !- Name
+  M11 100mm lightweight concrete,         !- Layer 1
+  F05 Ceiling air space resistance,       !- Layer 2
+  F16 Acoustic tile;                      !- Layer 3
+
+Construction,
+  Interior Door,                          !- Name
+  G05 25mm wood;                          !- Layer 1
+
+Construction,
+  Interior Floor,                         !- Name
+  F16 Acoustic tile,                      !- Layer 1
+  F05 Ceiling air space resistance,       !- Layer 2
+  M11 100mm lightweight concrete;         !- Layer 3
+
+Construction,
+  Interior Partition,                     !- Name
+  G05 25mm wood;                          !- Layer 1
+
+Construction,
+  Interior Wall,                          !- Name
+  G01a 19mm gypsum board,                 !- Layer 1
+  F04 Wall air space resistance,          !- Layer 2
+  G01a 19mm gypsum board;                 !- Layer 3
+
+Construction,
+  Interior Window,                        !- Name
+  Clear 3mm;                              !- Layer 1
+
+Construction:AirBoundary,
+  Air Wall_ConstructionAirBoundary,       !- Name
+  None,                                   !- Air Exchange Method
+  0,                                      !- Simple Mixing Air Changes per Hour {1/hr}
+  ;                                       !- Simple Mixing Schedule Name
 
 ScheduleTypeLimits,
   ActivityLevel,                          !- Name
@@ -2828,10 +3375,6 @@ Schedule:Constant,
 OutdoorAir:Node,
   Model Outdoor Air Node;                 !- Name
 
-OutputControl:ReportingTolerances,
-  0.2,                                    !- Tolerance for Time Heating Setpoint Not Met {deltaC}
-  0.2;                                    !- Tolerance for Time Cooling Setpoint Not Met {deltaC}
-
 Site:Location,
   Site 1,                                 !- Name
   0,                                      !- Latitude {deg}
@@ -2854,8 +3397,7 @@ Lights,
   ,                                       !- Return Air Fraction
   ,                                       !- Fraction Radiant
   ,                                       !- Fraction Visible
-  1,                                      !- Fraction Replaceable
-  General;                                !- End-Use Subcategory
+  ;                                       !- Fraction Replaceable
 
 People,
   189.1-2009 - Office - WholeBuilding - Md Office - CZ4-8 People, !- Name
@@ -2879,8 +3421,7 @@ ElectricEquipment,
   ,                                       !- Watts per Person {W/person}
   ,                                       !- Fraction Latent
   ,                                       !- Fraction Radiant
-  ,                                       !- Fraction Lost
-  General;                                !- End-Use Subcategory
+  ;                                       !- Fraction Lost
 
 ZoneInfiltration:DesignFlowRate,
   189.1-2009 - Office - WholeBuilding - Md Office - CZ4-8 Infiltration, !- Name
