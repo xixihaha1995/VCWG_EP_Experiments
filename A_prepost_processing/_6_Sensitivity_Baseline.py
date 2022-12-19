@@ -111,7 +111,11 @@ df_energy.to_excel(all_sensitivity, sheet_name=sheet_names[0])
 df_canTemp_c_sheet = pd.DataFrame(index=all_dfs[baseline].index)
 df_canTemp_c_sheet['Baseline'] = all_dfs[baseline]['canTemp'] - 273.15
 for csv_file in all_csv_files:
-    df_canTemp_c_sheet[csv_file] = all_dfs[csv_file]['canTemp'] - 273.15
+    # check if 'canTemp' is in the csv file
+    if 'canTemp' in all_dfs[csv_file].columns:
+        df_canTemp_c_sheet[csv_file] = all_dfs[csv_file]['canTemp'] - 273.15
+    else:
+        df_canTemp_c_sheet[csv_file] = all_dfs[csv_file]['canTemp_K'] - 273.15
 df_canTemp_c_sheet.to_excel(all_sensitivity, sheet_name=sheet_names[1])
 
 '''

@@ -199,8 +199,8 @@ def main():
     for experiment in os.listdir(experiments_folder):
         if experiment.endswith('.csv'):
             experiments.append(experiment)
-    experiments = ['OnlyVCWG_Width_canyon_33.3_fveg_G_0.5_building_orientation_0.csv',
-                   'OnlyVCWG_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv']
+    # experiments = ['OnlyVCWG_Width_canyon_33.3_fveg_G_0.5_building_orientation_0.csv',
+    #                'OnlyVCWG_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv']
     # for experiment in experiments:
     #     generate_epw(experiment)
     #     run_energyplus(experiment)

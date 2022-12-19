@@ -141,7 +141,7 @@ def read_VCWG_param(VCWG_param_file_path):
         ipd_vcwg['fimp_G'] = 1 - float(coordination.value_1)
     else:
         ipd_vcwg[coordination.ctl_virable_1] = float(coordination.value_1)
-    ipd_vcwg['Per_runoff_G'] = ipd_vcwg['fimp_G']
+    # ipd_vcwg['Per_runoff_G'] = ipd_vcwg['fimp_G']
     return ipd_vcwg
 
 def ForcingData(MeteoDataRaw, itt, varargin,VCWG_param_file_path,SimTime):
