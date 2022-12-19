@@ -149,7 +149,6 @@ class EnergyBalanceRural_Def(object):
             # Calculate ground heat flux using Penman-Monteith
             if SWR_Rural.SWRabsRural + LWR_Rural.LWRabsRural > 0:
                 MultiplierDay = float(coordination.config['Bypass']['MultiplierDay'])
-
                 self.EnergyFlux.GfluxRural = MultiplierDay * (SWR_Rural.SWRabsRural+LWR_Rural.LWRabsRural)
             else:
                 MultiplierNight = float(coordination.config['Bypass']['MultiplierNight'])
