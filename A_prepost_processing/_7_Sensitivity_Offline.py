@@ -131,6 +131,8 @@ def run_energyplus(experiment):
         idf_template_name += '_Ori0.idf'
     elif 'orientation_90' in experiment:
         idf_template_name += '_Ori90.idf'
+    elif 'orientation_45' in experiment:
+        idf_template_name += '_Ori45.idf'
 
 
     output_path = os.path.join(experiments_folder,
@@ -203,7 +205,7 @@ def main():
     #                'OnlyVCWG_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv']
     # for experiment in experiments:
     #     generate_epw(experiment)
-    #     run_energyplus(experiment)
+        run_energyplus(experiment)
 
     get_offline_comparison(experiments)
 
