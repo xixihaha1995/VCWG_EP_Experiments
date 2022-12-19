@@ -503,9 +503,11 @@ class Building(object):
         if os.path.exists(coordination.data_saving_path) and not coordination.save_path_clean:
             os.remove(coordination.data_saving_path)
             coordination.save_path_clean = True
-
         TempProf_cur = VerticalProfUrban.th
         PresProf_cur = VerticalProfUrban.presProf
+        canPressProf_cur = PresProf_cur[0:Geometry_m.nz_u]
+        vcwg_canPress_Pa = numpy.mean(canPressProf_cur)
+
         vcwg_needed_time_idx_in_seconds = it * simTime.dt
         cur_datetime = datetime.datetime.strptime(coordination.config['__main__']['start_time'],
                                                   '%Y-%m-%d %H:%M:%S') + \
@@ -515,7 +517,7 @@ class Building(object):
         wallShade_K = BEM.wallShade.Text
         roof_K = (FractionsRoof.fimp * BEM.roofImp.Text + FractionsRoof.fveg * BEM.roofVeg.Text)
 
-        domain_height = len(TempProf_cur)
+        domain_height = len(PresProf_cur)
         vcwg_heights_profile = numpy.array([0.5 + i for i in range(domain_height)])
         mapped_indices = [numpy.argmin(numpy.abs(vcwg_heights_profile - i)) for i in coordination.sensor_heights]
 
@@ -523,7 +525,7 @@ class Building(object):
             os.makedirs(os.path.dirname(coordination.data_saving_path), exist_ok=True)
             with open(coordination.data_saving_path, 'a') as f1:
                 # prepare the header string for different sensors
-                header_str = 'cur_datetime,canTemp,sensWaste,coolConsump[J],heatConsump[J],ElecTotal[J],' \
+                header_str = 'cur_datetime,canTemp_K,canHum_Ratio,canPres_Pa,sensWaste,coolConsump[J],heatConsump[J],ElecTotal[J],' \
                              'wallSun_K,wallShade_K,roof_K,MeteoData.Tatm,MeteoData.Pre,'
                 for i in range(len(mapped_indices)):
                     _temp_height = coordination.sensor_heights[i]
@@ -541,8 +543,8 @@ class Building(object):
         elec_total_J = self.ElecTotal * coordination.footprint_area_m2 * 300
         with open(coordination.data_saving_path, 'a') as f1:
             fmt1 = "%s," * 1 % (cur_datetime) + \
-                   "%.3f," * 10 % (canTemp,self.sensWaste, cool_consump_J,heat_consump_J,elec_total_J,
-                                   wallSun_K,wallShade_K,roof_K, MeteoData.Tatm, MeteoData.Pre) + \
+                   "%.3f," * 12 % (canTemp,canHum,vcwg_canPress_Pa,self.sensWaste, cool_consump_J,heat_consump_J,
+                                   elec_total_J,wallSun_K,wallShade_K,roof_K, MeteoData.Tatm, MeteoData.Pre) + \
                    "%.3f," * 2 * len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
                                                              [PresProf_cur[i] for i in mapped_indices]) + '\n'
             f1.write(fmt1)

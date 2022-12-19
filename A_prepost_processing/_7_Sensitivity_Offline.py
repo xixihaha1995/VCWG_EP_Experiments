@@ -13,6 +13,7 @@ import re
 import numpy as np
 
 sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
+sys.path.insert(0, '/usr/local/EnergyPlus-22-1-0/')
 import pandas as pd
 
 def cvrmse_percentage(measurements, predictions):
@@ -94,7 +95,7 @@ def date_time_to_epw_ith_row_in_normal_year(date_time):
 def generate_epw(experiment):
     state = ep_api.state_manager.new_state()
     psychrometric = ep_api.functional.psychrometrics(state)
-    vcwg_outputs = pd.read_csv(experiment, index_col=0, parse_dates=True)
+    vcwg_outputs = pd.read_csv(os.path.join(experiments_folder,experiment), index_col=0, parse_dates=True)
     vcwg_outputs_hourly = vcwg_outputs.resample('H').mean()
     '''
     VCWG hour is 0-23, while epw hour is 1-24
@@ -108,10 +109,10 @@ def generate_epw(experiment):
             lines[ith_row] = lines[ith_row].split(',')
             vcwg_prediction = vcwg_outputs_hourly.iloc[i]
             dry_bulb_c = vcwg_prediction['canTemp_K'] - 273.15
-            relative_humidity_percentage = vcwg_prediction['rh_%']
-            press_pa = vcwg_prediction['vcwg_canPress_Pa']
-            humidity_ratio = psychrometric.humidity_ratio_c(state,
-                dry_bulb_c, relative_humidity_percentage / 100, press_pa)
+            humidity_ratio = vcwg_prediction['canHum_Ratio']
+            press_pa = vcwg_prediction['canPres_Pa']
+            relative_humidity_percentage = 100*psychrometric.relative_humidity_b(state,
+                                                                             dry_bulb_c,humidity_ratio,press_pa)
             dew_point_c = psychrometric.dew_point(state, humidity_ratio, press_pa)
             lines[ith_row][6] = str(dry_bulb_c)
             lines[ith_row][7] = str(dew_point_c)
@@ -124,17 +125,19 @@ def generate_epw(experiment):
     with open(generate_epw_path, 'w') as f:
         f.writelines(lines)
 def run_energyplus(experiment):
+    #/home/xiaoai/VCWG_EP_Experiments/resources/idf/Chicago/MediumOffice/RefBldgMediumOfficeNew2004_v1.4_7.2_5A_USA_IL_CHICAGO-OHARE_Ori0.idf
     idf_template_name = 'RefBldgMediumOfficeNew2004_v1.4_7.2_5A_USA_IL_CHICAGO-OHARE'
     if 'orientation_0' in experiment:
         idf_template_name += '_Ori0.idf'
     elif 'orientation_90' in experiment:
         idf_template_name += '_Ori90.idf'
 
+
     output_path = os.path.join(experiments_folder,
                                f'{experiment[:-4]}_ep_trivial_outputs')
     project_path = os.path.dirname(os.path.abspath(__file__))
-    idfFilePath = os.path.join(project_path,'resources','idf','Chicago','MediumOffice',idf_template_name)
-    sys_args = '-d', output_path, '-w', experiment.replace('.csv', '.epw'), idfFilePath
+    idfFilePath = os.path.join(project_path,'..','resources','idf','Chicago','MediumOffice',idf_template_name)
+    sys_args = '-d', output_path, '-w', os.path.join(experiments_folder,experiment.replace('.csv', '.epw')), idfFilePath
     state = ep_api.state_manager.new_state()
     ep_api.runtime.run_energyplus(state, sys_args)
 
@@ -143,7 +146,7 @@ def sort_by_numbers(s):
     return [float(x) for x in re.findall(regex, s)]
 def get_offline_comparison(experiments):
     experiments.sort(key=sort_by_numbers)
-    baseline = 'Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
+    baseline = 'OnlyVCWG_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
     sheet_names = ['Energy Consumption', 'CanTempC', 'CanTempComparison']
 
     all_dfs = {}
@@ -163,9 +166,9 @@ def get_offline_comparison(experiments):
     df_energy.to_excel(all_sensitivity, sheet_name=sheet_names[0])
 
     df_canTemp_c_sheet = pd.DataFrame(index=all_dfs[baseline].index)
-    df_canTemp_c_sheet['Baseline'] = all_dfs[baseline]['canTemp'] - 273.15
+    df_canTemp_c_sheet['Baseline'] = all_dfs[baseline]['canTemp_K'] - 273.15
     for csv_file in experiments:
-        df_canTemp_c_sheet[csv_file] = all_dfs[csv_file]['canTemp'] - 273.15
+        df_canTemp_c_sheet[csv_file] = all_dfs[csv_file]['canTemp_K'] - 273.15
     df_canTemp_c_sheet.to_excel(all_sensitivity, sheet_name=sheet_names[1])
 
     '''
@@ -188,6 +191,7 @@ def get_offline_comparison(experiments):
     all_sensitivity.save()
 def main():
     global experiments_folder, epw_template,ep_api
+    from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
     experiments_folder = 'Chicago_MedOffice_Sensitivity_OnlyVCWG'
     epw_template = os.path.join('..','resources','epw','USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw')
@@ -195,9 +199,11 @@ def main():
     for experiment in os.listdir(experiments_folder):
         if experiment.endswith('.csv'):
             experiments.append(experiment)
-    for experiment in experiments:
-        generate_epw(experiment)
-        run_energyplus(experiment)
+    experiments = ['OnlyVCWG_Width_canyon_33.3_fveg_G_0.5_building_orientation_0.csv',
+                   'OnlyVCWG_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv']
+    # for experiment in experiments:
+    #     generate_epw(experiment)
+    #     run_energyplus(experiment)
 
     get_offline_comparison(experiments)
 

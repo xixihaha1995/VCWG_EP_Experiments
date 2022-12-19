@@ -82,8 +82,8 @@ def mixed_variable(sensitivity_file_name):
                             if 'OnlyVCWG' in framework:
                                 # ByPass.run_vcwg(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2,
                                 #                 value_2, ctl_viriable_3, value_3)
-                                if value_1 == '33.3' and (value_2 == '0' or value_2 == '0.5'):
-                                    continue
+                                # if value_1 == '33.3' and (value_2 == '0' or value_2 == '0.5'):
+                                #     continue
                                 this_ini_process.append(
                                     Process(target=ByPass.run_vcwg, args=(sensitivity_file_name, config,
                                                                           ctl_viriable_1, value_1,
