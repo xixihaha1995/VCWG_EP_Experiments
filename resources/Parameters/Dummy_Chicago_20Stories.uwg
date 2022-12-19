@@ -297,7 +297,7 @@ h_floor,3,             # Floor height [m] ## Check run with this lower height an
 # 8(Fairbanks)                  16
 # 4C (Basel)                    17
 
-zone,9,
+zone,11,
 
 # Building type (pre-80's build, 80's-present build, new) (0 or 1)
 bld,
@@ -305,8 +305,8 @@ bld,
 0,0,0,    # Hospital
 0,0,0,    # LargeHotel
 0,0,0,    # LargeOffice
-0,0,0,    # MediumOffice
-0,1,0,    # MidRiseApartment
+0,0,1,    # MediumOffice
+0,0,0,    # MidRiseApartment
 0,0,0,    # OutPatient
 0,0,0,    # PrimarySchool
 0,0,0,    # QuickServiceRestaurant
