@@ -22,20 +22,6 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
     # find the project path
     ctl_virable_1 = _ctl_viriable_1
     value_1 = _value_1
-    if _ctl_viriable_3 is not None:
-        nbr_control_variables = 3
-        ctl_viriable_3 = _ctl_viriable_3
-        value_3 = _value_3
-        ctl_viriable_2 = _ctl_viriable_2
-        value_2 = _value_2
-        csv_file_name = ctl_virable_1 + '_' + str(value_1) + '_' + \
-                        ctl_viriable_2 + '_' + str(value_2) + '_' + \
-                        ctl_viriable_3 + '_' + str(value_3)
-    else:
-        nbr_control_variables = 1
-        csv_file_name = ctl_virable_1 + '_' + str(value_1)
-    print(f'csv_file_name = {csv_file_name}')
-    value_1 = _value_1
     ForcTemp_K = 293.15
     vcwg_hConv_w_m2_per_K = 10
     project_path = os.path.dirname(os.path.abspath(__file__))
@@ -45,6 +31,20 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
         config.read(config_path)
     else:
         config = _config
+    csv_file_name = config['Bypass']['framework'] + '_'
+    if _ctl_viriable_3 is not None:
+        nbr_control_variables = 3
+        ctl_viriable_3 = _ctl_viriable_3
+        value_3 = _value_3
+        ctl_viriable_2 = _ctl_viriable_2
+        value_2 = _value_2
+        csv_file_name += ctl_virable_1 + '_' + str(value_1) + '_' + \
+                        ctl_viriable_2 + '_' + str(value_2) + '_' + \
+                        ctl_viriable_3 + '_' + str(value_3)
+    else:
+        nbr_control_variables = 1
+        csv_file_name += ctl_virable_1 + '_' + str(value_1)
+    print(f'csv_file_name = {csv_file_name}')
     bld_type = config['Bypass']['bld_type']
     experiments_theme = config['Bypass']['experiments_theme']
     save_path_clean = False

@@ -53,8 +53,10 @@ def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1,
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
     coordination.ep_api.runtime.run_energyplus(state, sys_args)
 
-def run_vcwg(sensitivity_file_name):
-    coordination.ini_all(sensitivity_file_name)
+def run_vcwg(sensitivity_file_name,config, ctl_viriable_1, value_1,
+               ctl_viriable_2=None, value_2=None, ctl_viriable_3=None, value_3=None):
+    coordination.ini_all(sensitivity_file_name, config, ctl_viriable_1, value_1,
+                         ctl_viriable_2, value_2, ctl_viriable_3, value_3)
     state = coordination.ep_api.state_manager.new_state()
     coordination.psychrometric=coordination.ep_api.functional.psychrometrics(state)
     if 'None' in coordination.config['Bypass']['TopForcingFileName']:

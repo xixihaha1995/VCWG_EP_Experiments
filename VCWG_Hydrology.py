@@ -183,7 +183,7 @@ class VCWG_Hydro(object):
         #     str_variable = 'negative' + str(abs(coordination.uwgVariableValue))
         # else:
         #     str_variable = '0'
-        # pklName = f'{coordination.uwgVariable}_{str_variable}readDOE.pkl'
+        # pklName = f'{coordination.csv_file_name}readDOE.pkl'
         pklName = 'readDOE.pkl'
         readDOE_file = open(pklName, 'rb')
         refDOE = cPickle.load(readDOE_file)
