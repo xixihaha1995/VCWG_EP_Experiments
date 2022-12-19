@@ -171,7 +171,7 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
                                z0_road,z0_roof,SensHt_HVAC,ColParam.HVAC_street_frac,ColParam.HVAC_atm_frac,ColParam.WindMin_Urban)
     BuildingCoef.BuildingDrag_UTC(thb,qhb,tvb,FractionsGround,FractionsRoof,TWallSun,TWallShade,TGround,TRoof)
 
-    print(f'BuildingCoef.srex_th_h = {BuildingCoef.srex_th_h[:Geometry_m.nz_u + 1]}')
+    # print(f'BuildingCoef.srex_th_h = {BuildingCoef.srex_th_h[:Geometry_m.nz_u + 1]}')
 
     # Drag coefficient for vegetation foliage
     cdv = 0.2
@@ -244,7 +244,7 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     tke_new,wtke,dwtkedz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,tke_bc_bottom,tke_bc_top,dts,rho,tke,Km,srim_tke,srex_tke,sf,vol,Geometry_m.dz)
     # Solve temperature equation
     th_new,wth,dwthdz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,T_bc_bottom,T_bc_top,dts,rho,th,Km/ColParam.prandtl,srim_th,srex_th,sf,vol,Geometry_m.dz)
-    print(f'th_new[:Geometry_.nz_u + 1] = {th_new[:Geometry_m.nz_u + 1] - 273.15}')
+    # print(f'th_new[:Geometry_.nz_u + 1] = {th_new[:Geometry_m.nz_u + 1] - 273.15}')
     # Solve specific humidity equation
     qn_new,wqn,dwqndz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,q_bc_bottom,q_bc_top,dts,rho,qn,Km/ColParam.schmidt,srim_qn,srex_qn,sf,vol,Geometry_m.dz)
 

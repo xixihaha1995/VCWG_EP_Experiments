@@ -60,7 +60,7 @@ def to_get_wet_bulb(state, dry_bulb_temp_C, humidity_ratio, barometric_pressure_
     _wetbulb = coordination.psychrometric.wet_bulb(state, dry_bulb_temp_C, humidity_ratio, barometric_pressure_Pa)
     return _wetbulb
 def overwrite_ep_weather(state):
-    global overwrite_ep_weather_inited_handle, \
+    global overwrite_ep_weather_inited_handle, oat_sensor_handle,\
         wsped_mps_actuator_handle, wdir_deg_actuator_handle,zone_flr_area_handle,\
         called_vcwg_bool, odb_actuator_handle, orh_actuator_handle
 
@@ -68,6 +68,9 @@ def overwrite_ep_weather(state):
         if not coordination.ep_api.exchange.api_data_fully_ready(state):
             return
         overwrite_ep_weather_inited_handle = True
+        oat_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                             "Site Outdoor Air Drybulb Temperature",
+                                                                             "Environment")
         odb_actuator_handle = coordination.ep_api.exchange.\
             get_actuator_handle(state, "Weather Data", "Outdoor Dry Bulb", "Environment")
         orh_actuator_handle = coordination.ep_api.exchange.\
@@ -275,6 +278,8 @@ def overwrite_ep_weather(state):
                 owb_c_list = [to_get_wet_bulb(state, i, coordination.vcwg_canSpecHum_Ratio_list[odb_c_list.index(i)],
                                               coordination.vcwg_canPress_Pa_list[odb_c_list.index(i)]) for i in odb_c_list]
                 if '20Stories' in coordination.bld_type:
+                    oat_temp_c = coordination.ep_api.exchange.get_variable_value(state, oat_sensor_handle)
+                    print(f'20Stories, oat_temp_c: {oat_temp_c}, odb_c_list: {odb_c_list}')
                     all_odb_actuator_handle_list = [odb_floor1_actuator_handle, odb_floor2_actuator_handle,
                                                     odb_floor3_actuator_handle, odb_floor4_actuator_handle,
                                                     odb_floor5_actuator_handle, odb_floor6_actuator_handle,
