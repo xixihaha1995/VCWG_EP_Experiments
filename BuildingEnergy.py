@@ -523,7 +523,8 @@ class Building(object):
             os.makedirs(os.path.dirname(coordination.data_saving_path), exist_ok=True)
             with open(coordination.data_saving_path, 'a') as f1:
                 # prepare the header string for different sensors
-                header_str = 'cur_datetime,canTemp,sensWaste,wallSun_K,wallShade_K,roof_K,MeteoData.Tatm,MeteoData.Pre,'
+                header_str = 'cur_datetime,canTemp,sensWaste,coolConsump[J],heatConsump[J],ElecTotal[J],' \
+                             'wallSun_K,wallShade_K,roof_K,MeteoData.Tatm,MeteoData.Pre,'
                 for i in range(len(mapped_indices)):
                     _temp_height = coordination.sensor_heights[i]
                     header_str += f'TempProf_cur[{_temp_height}],'
@@ -533,9 +534,15 @@ class Building(object):
                 header_str += '\n'
                 f1.write(header_str)
             # write the data
+
+        "coolConsump[J],heatConsump[J],ElecTotal[J]"
+        cool_consump_J = self.coolConsump * coordination.footprint_area_m2 * 300
+        heat_consump_J = self.heatConsump * coordination.footprint_area_m2 * 300
+        elec_total_J = self.ElecTotal * coordination.footprint_area_m2 * 300
         with open(coordination.data_saving_path, 'a') as f1:
             fmt1 = "%s," * 1 % (cur_datetime) + \
-                   "%.3f," * 7 % (canTemp,self.sensWaste, wallSun_K,wallShade_K,roof_K, MeteoData.Tatm, MeteoData.Pre) + \
+                   "%.3f," * 10 % (canTemp,self.sensWaste, cool_consump_J,heat_consump_J,elec_total_J,
+                                   wallSun_K,wallShade_K,roof_K, MeteoData.Tatm, MeteoData.Pre) + \
                    "%.3f," * 2 * len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
                                                              [PresProf_cur[i] for i in mapped_indices]) + '\n'
             f1.write(fmt1)
