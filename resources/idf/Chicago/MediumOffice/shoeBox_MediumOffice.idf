@@ -291,12 +291,12 @@ Schedule:Compact,
     ,                        !- Fixed Minimum Air Flow Rate {m3/s}
     ,                        !- Minimum Air Flow Fraction Schedule Name
     flow/person,             !- Outdoor Air Method
-    0.00944,                 !- Outdoor Air Flow Rate per Person {m3/s}
+    0.0375,                 !- Outdoor Air Flow Rate per Person {m3/s}
     0.0,                     !- Outdoor Air Flow Rate per Zone Floor Area {m3/s-m2}
     0.0,                     !- Outdoor Air Flow Rate per Zone {m3/s}
     Electric,                !- Reheat Coil Type
     ,                        !- Reheat Coil Availability Schedule Name
-    Reverse,                 !- Damper Heating Action
+    NORMAL,                 !- Damper Heating Action
     ,                        !- Maximum Flow per Zone Floor Area During Reheat {m3/s-m2}
     ,                        !- Maximum Flow Fraction During Reheat
     ,                        !- Maximum Reheat Air Temperature {C}
@@ -307,7 +307,7 @@ Schedule:Compact,
     ,                        !- Baseboard Heating Availability Schedule Name
     autosize,                !- Baseboard Heating Capacity {W}
     SystemSupplyAirTemperature,  !- Zone Cooling Design Supply Air Temperature Input Method
-    ,                        !- Zone Cooling Design Supply Air Temperature {C}
+    12.8,                        !- Zone Cooling Design Supply Air Temperature {C}
     ,                        !- Zone Cooling Design Supply Air Temperature Difference {deltaC}
     SupplyAirTemperature,    !- Zone Heating Design Supply Air Temperature Input Method
     50.0,                    !- Zone Heating Design Supply Air Temperature {C}
@@ -343,10 +343,10 @@ Schedule:Compact,
     Min OA Sched,            !- Minimum Outdoor Air Schedule Name
     DifferentialDryBulb,     !- Economizer Type
     NoLockout,               !- Economizer Lockout
-    19,                      !- Economizer Maximum Limit Dry-Bulb Temperature {C}
-    ,                        !- Economizer Maximum Limit Enthalpy {J/kg}
+    28.0,                      !- Economizer Maximum Limit Dry-Bulb Temperature {C}
+    64000.0,                        !- Economizer Maximum Limit Enthalpy {J/kg}
     ,                        !- Economizer Maximum Limit Dewpoint Temperature {C}
-    4,                       !- Economizer Minimum Limit Dry-Bulb Temperature {C}
+    -100,                       !- Economizer Minimum Limit Dry-Bulb Temperature {C}
     ,                        !- Supply Plenum Name
     ,                !- Return Plenum Name
     InletVaneDampers,        !- Supply Fan Part-Load Power Coefficients
@@ -375,9 +375,9 @@ Schedule:Compact,
     ;                        !- Return Fan Part-Load Power Coefficients
 
   Sizing:Parameters,
-    1.2,                     !- Heating Sizing Factor
-    1.2,                     !- Cooling Sizing Factor
-    ;                        !- Timesteps in Averaging Window
+    1.33,                    !- Heating Sizing Factor
+    1.33,                    !- Cooling Sizing Factor
+    6;                       !- Timesteps in Averaging Window
 
   SimulationControl,
     Yes,                     !- Do Zone Sizing Calculation
@@ -537,7 +537,7 @@ Schedule:Compact,
     Area/Person,             !- Number of People Calculation Method
     ,                        !- Number of People
     ,                        !- People per Floor Area {person/m2}
-    55.74,                   !- Floor Area per Person {m2/person}
+    6.19,                   !- Floor Area per Person {m2/person}
     0.3000,                  !- Fraction Radiant
     AUTOCALCULATE,           !- Sensible Heat Fraction
     ACTIVITY_SCH,            !- Activity Level Schedule Name
