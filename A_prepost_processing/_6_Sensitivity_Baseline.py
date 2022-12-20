@@ -18,7 +18,7 @@ def normalized_mean_bias_error_percentage(measurements, predictions):
     return round(nmb * 100, 2)
 
 def read_sql(csv_file):
-
+    print(csv_file)
     sql_report_name = 'AnnualBuildingUtilityPerformanceSummary'
     sql_table_name = 'Site and Source Energy'
     sql_row_name = 'Total Site Energy'
@@ -76,6 +76,32 @@ plot_fontsize = 12
 experiments_folder = 'Chicago_MedOffice_Sensitivity'
 
 '''
+Modify subfolder name
+
+for subfolder in os.listdir(experiments_folder):
+    # determine if the subfolder is a folder
+    if os.path.isdir(os.path.join(experiments_folder, subfolder)):
+        if 'ep_trivial_outputs' in subfolder:
+            if 'ByPass' in subfolder or 'OnlyVCWG' in subfolder:
+                continue
+            else:
+                #add 'ByPass' to the subfolder name
+                new_subfolder = 'ByPass_' + subfolder
+                os.rename(os.path.join(experiments_folder, subfolder), os.path.join(experiments_folder, new_subfolder))
+'''
+'''
+Modify CSV file name
+for file in os.listdir(experiments_folder):
+    if file.endswith('.csv'):
+        if 'ByPass' in file or 'OnlyVCWG' in file:
+            continue
+        else:
+            new_file = 'ByPass_' + file
+            os.rename(os.path.join(experiments_folder, file), os.path.join(experiments_folder, new_file))
+'''
+
+
+'''
 read all csv files, and create a new excel file with the following sheets:
 canTemp_c, energy (Total Site Energy, HVAC Electricity, HVAC Gas)
 '''
@@ -84,7 +110,7 @@ def sort_by_numbers(s):
     return [float(x) for x in re.findall(regex, s)]
 all_csv_files = [f for f in os.listdir(experiments_folder) if f.endswith('.csv')]
 all_csv_files.sort(key=sort_by_numbers)
-baseline = 'Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
+baseline = 'ByPass_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
 sheet_names = ['Energy Consumption','CanTempC', 'CanTempComparison']
 '''
 In each sheet, index is pd.to_datetime(index),
@@ -134,14 +160,3 @@ df_canTemp_comparison_sheet.loc['Baseline', 'CVRMSE(%)'] = 0
 df_canTemp_comparison_sheet.loc['Baseline', 'NMBE(%)'] = 0
 df_canTemp_comparison_sheet.to_excel(all_sensitivity, sheet_name=sheet_names[2])
 all_sensitivity.save()
-#
-# # plot the canTemp_c comparison
-#
-#
-# fig, ax = plt.subplots(figsize=(8, 6))
-# for i, csv_file in enumerate(all_csv_files):
-#     ax.plot(df_canTemp_c.index, df_canTemp_c[csv_file], label=csv_file)
-# ax.set_xlabel('Time [h]', fontsize=plot_fontsize)
-# ax.set_ylabel('Temperature [C]', fontsize=plot_fontsize)
-# ax.legend()
-# plt.show()

@@ -93,12 +93,11 @@ def mixed_variable(sensitivity_file_name):
                                 #                   value_2, ctl_viriable_3, value_3)
                                 this_ini_process.append(
                                     Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
-                            if len(this_ini_process) == nbr_of_parallel:
-                                for process in this_ini_process:
-                                    process.start()
-                                for process in this_ini_process:
-                                    process.join()
-                                this_ini_process = []
+                for process in this_ini_process:
+                    process.start()
+                for process in this_ini_process:
+                    process.join()
+                this_ini_process = []
 def one_ini(sensitivity_file_name):
     read_ini(sensitivity_file_name)
     if config['Bypass']['nbr_of_control_variables'] == '1':
