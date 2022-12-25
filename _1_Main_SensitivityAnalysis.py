@@ -69,35 +69,28 @@ def mixed_variable(sensitivity_file_name):
     ctl_viriable_3 = config['Bypass']['control_variable_3']
     ctl_values_3 = [i for i in config['Bypass']['control_values_3'].split(',')]
     nbr_of_parallel = 4
-    batch_value_list_1 = [ctl_values_1[i:i + nbr_of_parallel] for i in range(0, len(ctl_values_1), nbr_of_parallel)]
-    batch_value_list_2 = [ctl_values_2[i:i + nbr_of_parallel] for i in range(0, len(ctl_values_2), nbr_of_parallel)]
-    batch_value_list_3 = [ctl_values_3[i:i + nbr_of_parallel] for i in range(0, len(ctl_values_3), nbr_of_parallel)]
-    this_ini_process = []
-    for batch_nbr_1, batch_value_1 in enumerate(batch_value_list_1):
-        for batch_nbr_2, batch_value_2 in enumerate(batch_value_list_2):
-            for batch_nbr_3, batch_value_3 in enumerate(batch_value_list_3):
-                for value_1 in batch_value_1:
-                    for value_2 in batch_value_2:
-                        for value_3 in batch_value_3:
-                            if 'OnlyVCWG' in framework:
-                                # ByPass.run_vcwg(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2,
-                                #                 value_2, ctl_viriable_3, value_3)
-                                # if value_1 == '33.3' and (value_2 == '0' or value_2 == '0.5'):
-                                #     continue
-                                this_ini_process.append(
-                                    Process(target=ByPass.run_vcwg, args=(sensitivity_file_name, config,
-                                                                          ctl_viriable_1, value_1,
-                                                                          ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
-                            else:
-                                # ByPass.run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2,
-                                #                   value_2, ctl_viriable_3, value_3)
-                                this_ini_process.append(
-                                    Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
-                for process in this_ini_process:
-                    process.start()
-                for process in this_ini_process:
-                    process.join()
-                this_ini_process = []
+    all_process = []
+    for value_1 in ctl_values_1:
+        for value_2 in ctl_values_2:
+            for value_3 in ctl_values_3:
+                if 'OnlyVCWG' in framework:
+                    ByPass.run_vcwg(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2,
+                                    value_2, ctl_viriable_3, value_3)
+                    # all_process.append(
+                    #     Process(target=ByPass.run_vcwg, args=(sensitivity_file_name, config,
+                    #                                           ctl_viriable_1, value_1,
+                    #                                           ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
+                else:
+                    # ByPass.run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2,
+                    #                   value_2, ctl_viriable_3, value_3)
+                    all_process.append(
+                        Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
+    for i in range(0, len(all_process), nbr_of_parallel):
+        for process in all_process[i:i + nbr_of_parallel]:
+            process.start()
+        for process in all_process[i:i + nbr_of_parallel]:
+            process.join()
+
 def one_ini(sensitivity_file_name):
     read_ini(sensitivity_file_name)
     if config['Bypass']['nbr_of_control_variables'] == '1':
@@ -113,4 +106,4 @@ if __name__ == '__main__':
     # one_ini('Chicago_MedOffice_Density.ini')
     # one_ini('Chicago_MedOffice_Orientation.ini')
     # one_ini('Chicago_MedOffice_MixedVariable.ini')
-    one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
+    one_ini('Chicago_MedOffice_MixedVariable_PartialVCWG.ini')

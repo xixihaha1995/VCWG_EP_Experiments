@@ -480,6 +480,8 @@ class EnergyBalanceRoof_Def(object):
         # sensible heat from impervious area [W m^-2]
         Hroof_imp = cp_atm * rho_atm * (Troof_imp - T_above_canyon) / ra
         coordination.vcwg_hConv_w_m2_per_K = cp_atm * rho_atm / ra
+        print(f'Troof_imp: {Troof_imp - 273.15}, T_above_canyon: {T_above_canyon - 273.15},'
+              f'hConv: {coordination.vcwg_hConv_w_m2_per_K}')
         # Potential evaporation from runon water on impervious area [kg m^-2 s^-1]
         Eroof_imp_pot = rho_atm * (qsat_T_rimp - q_above_canyon) / ra
         # Potential evaporation from first soil layer [kg m^-2 s^-1]

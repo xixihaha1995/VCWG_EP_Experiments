@@ -183,22 +183,22 @@ class Building(object):
         QWater: energy consumption for domestic hot water [W m^-2]
         QGas: energy consumption for gas [W m^-2]
         """
+        if 'PartialVCWG' in coordination.csv_file_name:
+            coordination.sem0.acquire()
+            coordination.vcwg_needed_time_idx_in_seconds = (it + 1) * simTime.dt
 
-        # # coordination.sem0.acquire()
-        # coordination.vcwg_needed_time_idx_in_seconds = (it + 1) * simTime.dt
-        #
-        # TempProf_cur = VerticalProfUrban.th
-        # HumProf_cur = VerticalProfUrban.qn
-        # PresProf_cur = VerticalProfUrban.presProf
-        #
-        # canTempProf_cur = TempProf_cur[0:Geometry_m.nz_u]
-        # canSpecHumProf_cur = HumProf_cur[0:Geometry_m.nz_u]
-        # canPressProf_cur = PresProf_cur[0:Geometry_m.nz_u]
-        #
-        # coordination.vcwg_canTemp_K = numpy.mean(canTempProf_cur)
-        # coordination.vcwg_canSpecHum_Ratio = numpy.mean(canSpecHumProf_cur)
-        # coordination.vcwg_canPress_Pa = numpy.mean(canPressProf_cur)
-        # # coordination.sem1.release()
+            TempProf_cur = VerticalProfUrban.th
+            HumProf_cur = VerticalProfUrban.qn
+            PresProf_cur = VerticalProfUrban.presProf
+
+            canTempProf_cur = TempProf_cur[0:Geometry_m.nz_u]
+            canSpecHumProf_cur = HumProf_cur[0:Geometry_m.nz_u]
+            canPressProf_cur = PresProf_cur[0:Geometry_m.nz_u]
+
+            coordination.vcwg_canTemp_K = numpy.mean(canTempProf_cur)
+            coordination.vcwg_canSpecHum_Ratio = numpy.mean(canSpecHumProf_cur)
+            coordination.vcwg_canPress_Pa = numpy.mean(canPressProf_cur)
+            coordination.sem1.release()
 
         self.logger.debug("Logging at {} {}".format(__name__, self.__repr__()))
 
@@ -496,9 +496,13 @@ class Building(object):
         # energy consumption for domestic hot water per unit floor area + energy consumption of the heating system per unit floor area
         self.GasTotal = BEM.Gas + (massFlorRateSWH*CpH20*(T_hot - MeteoData.waterTemp)/self.nFloor)/self.heatEff + self.heatConsump/self.nFloor
 
-        # coordination.sem3.acquire()
-        # self.sensWaste = coordination.ep_sensWaste_w_m2_per_footprint_area
-        # coordination.ep_sensWaste_w_m2_per_footprint_area = 0
+        if 'PartialVCWG' in coordination.csv_file_name:
+            coordination.sem3.acquire()
+            self.sensWaste = coordination.ep_sensWaste_w_m2_per_footprint_area
+            coordination.ep_sensWaste_w_m2_per_footprint_area = 0
+            BEM.roofImp.Text = coordination.ep_roof_Text_K
+            BEM.roofVeg.Text = coordination.ep_roof_Text_K
+            coordination.sem0.release()
 
         if os.path.exists(coordination.data_saving_path) and not coordination.save_path_clean:
             os.remove(coordination.data_saving_path)
@@ -549,4 +553,3 @@ class Building(object):
                                                              [PresProf_cur[i] for i in mapped_indices]) + '\n'
             f1.write(fmt1)
 
-        # coordination.sem0.release()
