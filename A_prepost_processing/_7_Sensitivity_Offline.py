@@ -195,13 +195,12 @@ def main():
     global experiments_folder, epw_template,ep_api
     from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
-    experiments_folder = 'Chicago_MedOffice_Sensitivity_OnlyVCWG'
+    experiments_folder = 'Chicago_MedOffice_Sensitivity'
     epw_template = os.path.join('..','resources','epw','USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw')
     experiments = []
     for experiment in os.listdir(experiments_folder):
-        if experiment.endswith('.csv'):
+        if experiment.endswith('.csv') and 'PartialVCWG' in experiment:
             experiments.append(experiment)
-    experiments = ['OnlyVCWG_Width_canyon_44.4_fveg_G_0_building_orientation_0.csv']
     for experiment in experiments:
         generate_epw(experiment)
         run_energyplus(experiment)
