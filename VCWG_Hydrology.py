@@ -660,9 +660,7 @@ class VCWG_Hydro(object):
                       f'LEflux:{self.EBRoof.LEflux.LEfluxRoofImp}, Hflux:{self.EBRoof.Hflux.HfluxRoofImp},'
                       f'fluxRoof:{self.BEM[i].building.fluxRoof}, '
                       f'Net: {self.EBRoof.SWR.SWRabsRoofImp+self.EBRoof.LWR.LWRabsRoofImp - self.EBRoof.LEflux.LEfluxRoofImp - self.EBRoof.Hflux.HfluxRoofImp -self.BEM[i].building.fluxRoof}')
-                print(f'Wall Sun: {self.BEM[i].wallSun.Text - 273.15}, '
-                      f'Wall Shade: {self.BEM[i].wallShade.Text - 273.15},'
-                      f' Roof Imp: {self.BEM[i].roofImp.Text - 273.15}')
+                print(f' Roof Imp: {self.BEM[i].roofImp.Text - 273.15}')
 
             # -----------------------------------
             # Update outdoor surface temperatures
