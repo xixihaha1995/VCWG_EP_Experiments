@@ -1,3 +1,25 @@
+    InternalMass,
+    Thermal Zone 1 Internal Mass,  !- Name
+    InteriorFurnishings,     !- Construction Name
+    Thermal Zone 1,             !- Zone or ZoneList Name
+    ,                        !- Space or SpaceList Name
+    9957;               !- Surface Area {m2}
+
+    Construction,
+    InteriorFurnishings,     !- Name
+    Std Wood 6inch;          !- Outside Layer
+
+    Material,
+    Std Wood 6inch,          !- Name
+    MediumSmooth,            !- Roughness
+    0.15,                    !- Thickness {m}
+    0.12,                    !- Conductivity {W/m-K}
+    540.0000,                !- Density {kg/m3}
+    1210,                    !- Specific Heat {J/kg-K}
+    0.9000000,               !- Thermal Absorptance
+    0.7000000,               !- Solar Absorptance
+    0.7000000;               !- Visible Absorptance
+
   Schedule:Compact,
     BLDG_ELEVATORS,          !- Name
     Fraction,                !- Schedule Type Limits Name
@@ -398,7 +420,7 @@ Schedule:Compact,
   6,                                     !- End Month
   30,                                     !- End Day of Month
   ,                                   !- End Year
-  Tuesday,                               !- Day of Week for Start Day
+  Thursday,                               !- Day of Week for Start Day
   No,                                     !- Use Weather File Holidays and Special Days
   No,                                     !- Use Weather File Daylight Saving Period
   No,                                     !- Apply Weekend Holiday Rule
@@ -3812,7 +3834,7 @@ Coil:Cooling:DX:TwoSpeed,
   ALWAYS_ON,                                                        !- Availability Schedule Name
   autosize,                                                !- Rated High Speed Total Cooling Capacity
   autosize,                                                !- Rated High Speed Sensible Heat Ratio
-  2.8,                                                       !- Rated High Speed COP
+  3.23372055845678,                                                       !- Rated High Speed COP
   autosize,                                                !- Rated High Speed Air Flow Rate
   ,                                                        !- Unit Internal Static Air Pressure
   DXVAV Sys 1 Mixed Air Outlet,                            !- Air Inlet Node Name
@@ -3824,7 +3846,7 @@ Measured_CoolCStandard10Ton_EIRFFF,  !- Energy Input Ratio Function of Flow Frac
 No_PLR_Degredation,      !- Part Load Fraction Correlation Curve Name
 AUTOSIZE,                !- Low Speed Gross Rated Total Cooling Capacity {W}
 AUTOSIZE,                !- Low Speed Gross Rated Sensible Heat Ratio
- 2.8,        !- Low Speed Gross Rated Cooling COP {W/W}
+ 3.28186528141147,        !- Low Speed Gross Rated Cooling COP {W/W}
 AUTOSIZE,                !- Low Speed Rated Air Flow Rate {m3/s}
 Measured_LowSpeedCoolCapLSFT,  !- Low Speed Total Cooling Capacity Function of Temperature Curve Name
 Measured_LowSpeedCoolEIRLSFT,  !- Low Speed Energy Input Ratio Function of Temperature Curve Name
