@@ -1,3 +1,25 @@
+InternalMass,
+    Thermal Zone 1 Internal Mass,  !- Name
+    InteriorFurnishings,     !- Construction Name
+    Thermal Zone 1,             !- Zone or ZoneList Name
+    ,                        !- Space or SpaceList Name
+    9957;               !- Surface Area {m2}
+
+    Construction,
+    InteriorFurnishings,     !- Name
+    Std Wood 6inch;          !- Outside Layer
+
+    Material,
+    Std Wood 6inch,          !- Name
+    MediumSmooth,            !- Roughness
+    0.15,                    !- Thickness {m}
+    0.12,                    !- Conductivity {W/m-K}
+    540.0000,                !- Density {kg/m3}
+    1210,                    !- Specific Heat {J/kg-K}
+    0.9000000,               !- Thermal Absorptance
+    0.7000000,               !- Solar Absorptance
+    0.7000000;               !- Visible Absorptance
+
   Schedule:Compact,
     BLDG_ELEVATORS,          !- Name
     Fraction,                !- Schedule Type Limits Name
