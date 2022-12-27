@@ -69,7 +69,7 @@ def mixed_variable(sensitivity_file_name):
     ctl_values_2 = [i for i in config['Bypass']['control_values_2'].split(',')]
     ctl_viriable_3 = config['Bypass']['control_variable_3']
     ctl_values_3 = [i for i in config['Bypass']['control_values_3'].split(',')]
-    nbr_of_parallel = 4
+    nbr_of_parallel = 3
     all_process = []
     for value_1 in ctl_values_1:
         for value_2 in ctl_values_2:
