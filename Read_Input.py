@@ -128,7 +128,7 @@ def read_VCWG_param(VCWG_param_file_path):
     '''
     theta_canyon/ctl_value: 90/0, 0/90, -90/180,0/270,-45/45 
     '''
-    ctl_value_to_theta_canyon = {0: 90, 90: 0, 180: -90, 270: 0, 45: -45}
+    ctl_value_to_theta_canyon = {0: 90, 90: 0, 180: -90, 270: 0, 45: -45, 40:-50}
     if coordination.nbr_control_variables == 3:
         ipd_vcwg['fveg_G'] = float(coordination.value_2)
         ipd_vcwg['fimp_G'] = 1 - float(coordination.value_2)

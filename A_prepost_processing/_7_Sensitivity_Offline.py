@@ -95,7 +95,7 @@ def date_time_to_epw_ith_row_in_normal_year(date_time):
 def generate_epw(experiment):
     state = ep_api.state_manager.new_state()
     psychrometric = ep_api.functional.psychrometrics(state)
-    vcwg_outputs = pd.read_csv(os.path.join(experiments_folder,experiment), index_col=0, parse_dates=True)
+    vcwg_outputs = pd.read_csv(os.path.join(experiments_folder,experiment), header=0, index_col=0, parse_dates=True)
     vcwg_outputs_hourly = vcwg_outputs.resample('H').mean()
     '''
     VCWG hour is 0-23, while epw hour is 1-24
@@ -195,15 +195,14 @@ def main():
     global experiments_folder, epw_template,ep_api
     from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
-    experiments_folder = 'Chicago_MedOffice_Sensitivity_OnlyVCWG'
+    experiments_folder = 'Chicago_MedOffice_Sensitivity'
     epw_template = os.path.join('..','resources','epw','USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw')
     experiments = []
     for experiment in os.listdir(experiments_folder):
-        if experiment.endswith('.csv'):
+        if experiment.endswith('.csv') and 'OnlyVCWG' in experiment:
             experiments.append(experiment)
-    experiments = ['OnlyVCWG_Width_canyon_44.4_fveg_G_0_building_orientation_0.csv']
     for experiment in experiments:
-        generate_epw(experiment)
+        # generate_epw(experiment)
         run_energyplus(experiment)
 
     # get_offline_comparison(experiments)

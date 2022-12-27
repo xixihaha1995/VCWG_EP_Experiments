@@ -624,7 +624,7 @@ class VCWG_Hydro(object):
                 # Calculate one-point temperature and humidity in the canyon: Using 1-D profiles in the canyon
                 canTemp = numpy.mean(self.UCM.VerticalProfUrban.th[0:self.Geometry_m.nz_u])
                 canHum = numpy.mean(self.UCM.VerticalProfUrban.qn[0:self.Geometry_m.nz_u])
-                if 'OnlyVCWG' in coordination.csv_file_name:
+                if 'OnlyVCWG' in coordination.csv_file_name or 'PartialVCWG' in coordination.csv_file_name:
                     self.BEM[i].building.BEMCalc(canTemp, canHum, self.BEM[i], MeteoData, ParCalculation, self.simTime,
                                                  self.Geometry_m,
                                                  self.FractionsRoof, self.EBCanyon.SWR, self.UCM.VerticalProfUrban,it)
@@ -639,15 +639,16 @@ class VCWG_Hydro(object):
 
                 # Update surface temperature of building surfaces
                 # Mass
-                if 'OnlyVCWG' in coordination.csv_file_name:
+                if 'OnlyVCWG' in coordination.csv_file_name or 'PartialVCWG' in coordination.csv_file_name:
                     self.BEM[i].mass.Element(0,0,0,0,self.TimeParam.dts,0.,1,self.BEM[i].building.fluxMass,self.BEM[i].building.fluxMass)
                     # Roof
-                    if self.FractionsRoof.fimp > 0:
-                        self.BEM[i].roofImp.Element(self.EBRoof.SWR.SWRabsRoofImp,self.EBRoof.LWR.LWRabsRoofImp,self.EBRoof.LEflux.LEfluxRoofImp,
-                                                    self.EBRoof.Hflux.HfluxRoofImp,self.TimeParam.dts,0.,1,None,self.BEM[i].building.fluxRoof)
-                    if self.FractionsRoof.fveg > 0:
-                        self.BEM[i].roofVeg.Element(self.EBRoof.SWR.SWRabsRoofVeg,self.EBRoof.LWR.LWRabsRoofVeg,self.EBRoof.LEflux.LEfluxRoofVeg,
-                                                    self.EBRoof.Hflux.HfluxRoofVeg,self.TimeParam.dts,0.,1,None,self.BEM[i].building.fluxRoof)
+                    if 'OnlyVCWG' in coordination.csv_file_name:
+                        if self.FractionsRoof.fimp > 0:
+                            self.BEM[i].roofImp.Element(self.EBRoof.SWR.SWRabsRoofImp,self.EBRoof.LWR.LWRabsRoofImp,self.EBRoof.LEflux.LEfluxRoofImp,
+                                                        self.EBRoof.Hflux.HfluxRoofImp,self.TimeParam.dts,0.,1,None,self.BEM[i].building.fluxRoof)
+                        if self.FractionsRoof.fveg > 0:
+                            self.BEM[i].roofVeg.Element(self.EBRoof.SWR.SWRabsRoofVeg,self.EBRoof.LWR.LWRabsRoofVeg,self.EBRoof.LEflux.LEfluxRoofVeg,
+                                                        self.EBRoof.Hflux.HfluxRoofVeg,self.TimeParam.dts,0.,1,None,self.BEM[i].building.fluxRoof)
                     # Walls
                     self.BEM[i].wallSun.Element(self.EBCanyon.SWR.SWRabs.SWRabsWallSun,self.EBCanyon.LWR.LWRabs.LWRabsWallSun,
                                                 self.EBCanyon.LEflux.LEfluxWallSun,self.EBCanyon.Hflux.HfluxWallSun,self.TimeParam.dts,
@@ -655,6 +656,11 @@ class VCWG_Hydro(object):
                     self.BEM[i].wallShade.Element(self.EBCanyon.SWR.SWRabs.SWRabsWallShade,self.EBCanyon.LWR.LWRabs.LWRabsWallShade,
                                                   self.EBCanyon.LEflux.LEfluxWallShade,self.EBCanyon.Hflux.HfluxWallShade,self.TimeParam.dts,
                                                   0.,1,None,self.BEM[i].building.fluxWall)
+                print(f'SWR:{self.EBRoof.SWR.SWRabsRoofImp}, LWR:{self.EBRoof.LWR.LWRabsRoofImp}, '
+                      f'LEflux:{self.EBRoof.LEflux.LEfluxRoofImp}, Hflux:{self.EBRoof.Hflux.HfluxRoofImp},'
+                      f'fluxRoof:{self.BEM[i].building.fluxRoof}, '
+                      f'Net: {self.EBRoof.SWR.SWRabsRoofImp+self.EBRoof.LWR.LWRabsRoofImp - self.EBRoof.LEflux.LEfluxRoofImp - self.EBRoof.Hflux.HfluxRoofImp -self.BEM[i].building.fluxRoof}')
+                print(f' Roof Imp: {self.BEM[i].roofImp.Text - 273.15}')
 
             # -----------------------------------
             # Update outdoor surface temperatures
