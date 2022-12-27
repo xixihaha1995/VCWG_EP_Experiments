@@ -3629,27 +3629,114 @@ CoilSystem:Cooling:DX,
   Yes,                                                     !- Run on Sensible Load
   No;                                                      !- Run on Latent Load
 
+  Schedule:Compact,
+    ALWAYS_ON,               !- Name
+    On/Off,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,1;          !- Field 3
+
 Coil:Cooling:DX:TwoSpeed,
   DXVAV Sys 1 Cooling Coil,                                !- Name
-  ,                                                        !- Availability Schedule Name
+  ALWAYS_ON,                                                        !- Availability Schedule Name
   autosize,                                                !- Rated High Speed Total Cooling Capacity
   autosize,                                                !- Rated High Speed Sensible Heat Ratio
-  3,                                                       !- Rated High Speed COP
+  3.23372055845678,                                                       !- Rated High Speed COP
   autosize,                                                !- Rated High Speed Air Flow Rate
   ,                                                        !- Unit Internal Static Air Pressure
   DXVAV Sys 1 Mixed Air Outlet,                            !- Air Inlet Node Name
   DXVAV Sys 1 Cooling Coil Outlet,                         !- Air Outlet Node Name
-  DXVAV Sys 1 DX Coil Cap-FT,                              !- Total Cooling Capacity Function of Temperature Curve Name
-  DXVAV Sys 1 DX Coil Cap-FF,                              !- Total Cooling Capacity Function of Flow Fraction Curve Name
-  DXVAV Sys 1 DX Coil EIR-FT,                              !- Energy Input Ratio Function of Temperature Curve Name
-  DXVAV Sys 1 DX Coil EIR-FF,                              !- Energy Input Ratio Function of Flow Fraction Curve Name
-  DXVAV Sys 1 DX Coil PLF,                                 !- Part Load Fraction Correlation Curve Name
-  Autosize,                                                !- Rated Low Speed Total Cooling Capacity
-  autosize,                                                !- Rated Low Speed Sensible Heat Ratio
-  4.500000,                                                !- Rated Low Speed COP
-  Autosize,                                                !- Rated Low Speed Air Flow Rate
-  DXVAV Sys 1 DX Coil Low Cap-FT,                          !- Low Speed Total Cooling Capacity Function of Temperature Curve Name
-  DXVAV Sys 1 DX Coil Low EIR-FT;                          !- Low Speed Energy Input Ratio Function of Temperature Curve Name
+    Measured_CoolCStandard10Ton_CapFT,  !- Total Cooling Capacity Function of Temperature Curve Name
+    Measured_CoolCStandard10Ton_CapFF,  !- Total Cooling Capacity Function of Flow Fraction Curve Name
+    Measured_CoolCStandard10Ton_EIRFT,  !- Energy Input Ratio Function of Temperature Curve Name
+    Measured_CoolCStandard10Ton_EIRFFF,  !- Energy Input Ratio Function of Flow Fraction Curve Name
+    No_PLR_Degredation,      !- Part Load Fraction Correlation Curve Name
+    AUTOSIZE,                !- Low Speed Gross Rated Total Cooling Capacity {W}
+    AUTOSIZE,                !- Low Speed Gross Rated Sensible Heat Ratio
+    3.28186528141147,        !- Low Speed Gross Rated Cooling COP {W/W}
+    AUTOSIZE,                !- Low Speed Rated Air Flow Rate {m3/s}
+    Measured_LowSpeedCoolCapLSFT,  !- Low Speed Total Cooling Capacity Function of Temperature Curve Name
+    Measured_LowSpeedCoolEIRLSFT,  !- Low Speed Energy Input Ratio Function of Temperature Curve Name
+    ;                        !- Condenser Air Inlet Node Name
+
+
+    Curve:Biquadratic,
+    Measured_LowSpeedCoolEIRLSFT,  !- Name
+    1.1389,                  !- Coefficient1 Constant
+    -0.04518,                !- Coefficient2 x
+    0.0014298,               !- Coefficient3 x**2
+    0.006044,                !- Coefficient4 y
+    0.0006745,               !- Coefficient5 y**2
+    -0.0012325,              !- Coefficient6 x*y
+    11.1,                    !- Minimum Value of x
+    29.4,                    !- Maximum Value of x
+    10.0,                    !- Minimum Value of y
+    50.3;                    !- Maximum Value of y
+
+    Curve:Biquadratic,
+    Measured_LowSpeedCoolCapLSFT,  !- Name
+    0.4136,                  !- Coefficient1 Constant
+    0.03105,                 !- Coefficient2 x
+    0,                       !- Coefficient3 x**2
+    0.006952,                !- Coefficient4 y
+    -0.00021280,             !- Coefficient5 y**2
+    0,                       !- Coefficient6 x*y
+    11.1,                    !- Minimum Value of x
+    29.4,                    !- Maximum Value of x
+    10.0,                    !- Minimum Value of y
+    50.3;                    !- Maximum Value of y
+
+
+    Curve:Quadratic,
+    No_PLR_Degredation,      !- Name
+    1.0,                     !- Coefficient1 Constant
+    0,                       !- Coefficient2 x
+    0,                       !- Coefficient3 x**2
+    0.0,                     !- Minimum Value of x
+    1.0;                     !- Maximum Value of x
+
+    Curve:Quadratic,
+    Measured_CoolCStandard10Ton_EIRFFF,  !- Name
+    1.192,                   !- Coefficient1 Constant
+    -0.1917,                 !- Coefficient2 x
+    0,                       !- Coefficient3 x**2
+    0.776,                   !- Minimum Value of x
+    1.197;                   !- Maximum Value of x
+
+    Curve:Biquadratic,
+    Measured_CoolCStandard10Ton_EIRFT,  !- Name
+    0.9847,                  !- Coefficient1 Constant
+    -0.04285,                !- Coefficient2 x
+    0.0013562,               !- Coefficient3 x**2
+    0.009934,                !- Coefficient4 y
+    0.0006398,               !- Coefficient5 y**2
+    -0.0011690,              !- Coefficient6 x*y
+    11.1,                    !- Minimum Value of x
+    29.4,                    !- Maximum Value of x
+    10.0,                    !- Minimum Value of y
+    50.3;                    !- Maximum Value of y
+
+  Curve:Biquadratic,
+    Measured_CoolCStandard10Ton_CapFT,  !- Name
+    0.52357,                 !- Coefficient1 Constant
+    0.03478,                 !- Coefficient2 x
+    0,                       !- Coefficient3 x**2
+    -0.001915,               !- Coefficient4 y
+    -0.00010838,             !- Coefficient5 y**2
+    0,                       !- Coefficient6 x*y
+    11.1,                    !- Minimum Value of x
+    29.4,                    !- Maximum Value of x
+    10.0,                    !- Minimum Value of y
+    50.3;                    !- Maximum Value of y
+
+
+  Curve:Quadratic,
+    Measured_CoolCStandard10Ton_CapFF,  !- Name
+    0.7685,                  !- Coefficient1 Constant
+    0.2315,                  !- Coefficient2 x
+    0,                       !- Coefficient3 x**2
+    0.776,                   !- Minimum Value of x
+    1.197;                   !- Maximum Value of x
 
 Curve:Biquadratic,
 ! DOE-2.1E, SDL-C4
@@ -3749,7 +3836,7 @@ NodeList,
 
 Coil:Heating:Fuel,
   DXVAV Sys 1 Heating Coil,                                !- Name
-  ,                                                        !- Availability Schedule Name
+  ALWAYS_ON,                                                        !- Availability Schedule Name
   NaturalGas,                                              !- Fuel Type
   0.8,                                                     !- Gas Burner Efficiency
   autosize,                                                !- Nominal Capacity of the Coil {W}
@@ -3793,22 +3880,37 @@ SetpointManager:MixedAir,
   DXVAV Sys 1 Supply Fan Outlet,                           !- Fan Outlet Node Name
   DXVAV Sys 1 Heating Coil Outlet;                         !- Setpoint Node or NodeList Name
 
+  Schedule:Compact,
+    HVACOperationSchd,       !- Name
+    On/Off,                  !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays SummerDesignDay, !- Field 2
+    Until: 06:00,0.0,        !- Field 3
+    Until: 22:00,1.0,        !- Field 5
+    Until: 24:00,0.0,        !- Field 7
+    For: Saturday WinterDesignDay, !- Field 9
+    Until: 06:00,0.0,        !- Field 10
+    Until: 18:00,1.0,        !- Field 12
+    Until: 24:00,0.0,        !- Field 14
+    For: AllOtherDays,       !- Field 16
+    Until: 24:00,0.0;        !- Field 17
+
 Fan:VariableVolume,
   DXVAV Sys 1 Supply Fan,                                  !- Name
-  FanAvailSched,                                           !- Availability Schedule Name
-  0.7,                                                     !- Fan Efficiency
-  1000,                                                    !- Pressure Rise {Pa}
+  HVACOperationSchd,                                           !- Availability Schedule Name
+  0.5915,                                                     !- Fan Efficiency
+  1109.648,                                                    !- Pressure Rise {Pa}
   autosize,                                                !- Maximum Flow Rate {m3/s}
-  Fraction,                                                !- Fan Power Minimum Flow Rate Input Method
-  0.25,                                                    !- Fan Power Minimum Flow Fraction
-  ,                                                        !- Fan Power Minimum Air Flow Rate {m3/s}
-  0.9,                                                     !- Motor Efficiency
+  FixedFlowRate,                                                !- Fan Power Minimum Flow Rate Input Method
+  ,                                                    !- Fan Power Minimum Flow Fraction
+  0,                                                        !- Fan Power Minimum Air Flow Rate {m3/s}
+  0.91,                                                     !- Motor Efficiency
   1,                                                       !- Motor in Airstream Fraction
-  0.35071223,                                              !- Fan Power Coefficient 1
-  0.30850535,                                              !- Fan Power Coefficient 2
-  -0.54137364,                                             !- Fan Power Coefficient 3
-  0.87198823,                                              !- Fan Power Coefficient 4
-  0,                                                       !- Fan Power Coefficient 5
+    0.0407598940,            !- Fan Power Coefficient 1
+    0.08804497,              !- Fan Power Coefficient 2
+    -0.072926120,            !- Fan Power Coefficient 3
+    0.9437398230,            !- Fan Power Coefficient 4
+    0,                       !- Fan Power Coefficient 5
   DXVAV Sys 1 Heating Coil Outlet,                         !- Air Inlet Node Name
   DXVAV Sys 1 Supply Fan Outlet;                           !- Air Outlet Node Name
 
