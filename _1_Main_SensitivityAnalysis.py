@@ -46,7 +46,7 @@ def one_control_variable(sensitivity_file_name):
     ctl_viriable_1 = config['Bypass']['control_variable_1']
     ctl_values_1 = [i for i in config['Bypass']['control_values_1'].split(',')]
     this_ini_process = []
-    nbr_of_parallel = 4
+    nbr_of_parallel = 3
     batch_value_list = [ctl_values_1[i:i + nbr_of_parallel] for i in range(0, len(ctl_values_1), nbr_of_parallel)]
     for batch_nbr, batch_value in enumerate(batch_value_list):
         for value in batch_value:

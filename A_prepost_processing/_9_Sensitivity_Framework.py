@@ -80,9 +80,11 @@ def read_csv_energy(csv_file):
     df = pd.read_csv(os.path.join(experiments_folder, csv_file), index_col=0, parse_dates=True)
     #sum over all the desired columns
     elecTotal = df['ElecTotal[J]'].sum()
+    gasTotal = df['GasTotal[J]'].sum()
     coolConsump = df['coolConsump[J]'].sum()
     heatConsump = df['heatConsump[J]'].sum()
-    return round(elecTotal/1e9, 2), round(coolConsump/1e9, 2), round(heatConsump/1e9, 2)
+    total = elecTotal + gasTotal
+    return round(total/1e9, 2), round(coolConsump/1e9, 2), round(heatConsump/1e9, 2)
 
 plot_fontsize = 12
 experiments_folder = 'Chicago_MedOffice_Sensitivity'
@@ -137,9 +139,7 @@ def get_col_and_index(csv_file_name):
     if 'ByPass' in csv_file_name:
         return 'ByPass', csv_file_name[7:]
     elif 'OnlyVCWG' in csv_file_name:
-        return 'OnlyVCWG/PartialVCWG', csv_file_name[9:]
-    elif 'PartialVCWG' in csv_file_name:
-        return 'OnlyVCWG/PartialVCWG', csv_file_name[12:]
+        return 'OnlyVCWG', csv_file_name[9:]
 # 'CanTempComparison_CVRMSE'
 df_canTemp_comparison_sheet = pd.DataFrame(index=indices)
 for csv_file in all_csv_files:
@@ -184,31 +184,3 @@ df_cooling_sheet.to_excel(all_sensitivity, sheet_name='Cooling_GJ')
 df_heating_sheet.to_excel(all_sensitivity, sheet_name='Heating_GJ')
 df_total_sheet.to_excel(all_sensitivity, sheet_name='Total_GJ')
 all_sensitivity.save()
-
-
-# energy_sql_dict = {}
-# energy_sql_dict['Baseline'] = read_sql(baseline)
-# for csv_file in all_csv_files:
-#     if csv_file == baseline:
-#         continue
-#     else:
-#         energy_sql_dict[csv_file] = (read_csv_energy(csv_file))
-# # ElecTotal[J] coolConsump[J]	heatConsump[J]
-# df_energy = pd.DataFrame.from_dict(energy_sql_dict, orient='index', columns=['ElecTotal [GJ]',
-#                                                                        'coolConsump[GJ]',
-#                                                                           'heatConsump[GJ]'])
-# df_energy.to_excel(all_sensitivity, sheet_name=sheet_names[0])
-#
-#
-#
-# df_canTemp_comparison_sheet.loc['Baseline', 'NMBE(%)'] = 0
-# # move the 'Baseline' to the first row
-# df_canTemp_comparison_sheet = df_canTemp_comparison_sheet.reindex(['Baseline'] + all_csv_files[1:])
-# for csv_file in all_csv_files:
-#     if csv_file == baseline:
-#         continue
-#     df_canTemp_comparison_sheet.loc[csv_file, 'CVRMSE(%)'] = cvrmse_percentage(df_canTemp_c_sheet['Baseline'], df_canTemp_c_sheet[csv_file])
-#     df_canTemp_comparison_sheet.loc[csv_file, 'NMBE(%)'] = normalized_mean_bias_error_percentage(df_canTemp_c_sheet['Baseline'], df_canTemp_c_sheet[csv_file])
-#
-# df_canTemp_comparison_sheet.to_excel(all_sensitivity, sheet_name=sheet_names[2])
-# all_sensitivity.save()
