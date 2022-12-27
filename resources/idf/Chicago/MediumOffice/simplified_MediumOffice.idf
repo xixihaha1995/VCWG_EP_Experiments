@@ -1,9 +1,570 @@
+  Construction,
+    INT-FLOOR-TOPSIDE,       !- Name
+    MAT-CC05 4 HW CONCRETE,  !- Outside Layer
+    CP02 CARPET PAD;         !- Layer 2
+
+  Construction,
+    INT-FLOOR-UNDERSIDE,     !- Name
+    CP02 CARPET PAD,         !- Outside Layer
+    MAT-CC05 4 HW CONCRETE;  !- Layer 2
+
+ZoneList,
+  189.1-2009 - Office - OpenOffice - CZ4-8, !- Name
+  Thermal Zone 1,                         !- Zone Name 1
+  Thermal Zone 2,                         !- Zone Name 2
+  Thermal Zone 3;                         !- Zone Name 3
+
+Zone,
+  Thermal Zone 1,                         !- Name
+  -0,                                     !- Direction of Relative North {deg}
+  0,                                      !- X Origin {m}
+  0,                                      !- Y Origin {m}
+  0,                                      !- Z Origin {m}
+  ,                                       !- Type
+  1,                                      !- Multiplier
+  ,                                       !- Ceiling Height {m}
+  ,                                       !- Volume {m3}
+  ,                                       !- Floor Area {m2}
+  ,                                       !- Zone Inside Convection Algorithm
+  ,                                       !- Zone Outside Convection Algorithm
+  Yes;                                    !- Part of Total Floor Area
+
+Zone,
+  Thermal Zone 2,                         !- Name
+  -0,                                     !- Direction of Relative North {deg}
+  0,                                      !- X Origin {m}
+  0,                                      !- Y Origin {m}
+  3.9624,                                 !- Z Origin {m}
+  ,                                       !- Type
+  1,                                      !- Multiplier
+  ,                                       !- Ceiling Height {m}
+  ,                                       !- Volume {m3}
+  ,                                       !- Floor Area {m2}
+  ,                                       !- Zone Inside Convection Algorithm
+  ,                                       !- Zone Outside Convection Algorithm
+  Yes;                                    !- Part of Total Floor Area
+
+Zone,
+  Thermal Zone 3,                         !- Name
+  -0,                                     !- Direction of Relative North {deg}
+  0,                                      !- X Origin {m}
+  0,                                      !- Y Origin {m}
+  7.9248,                                 !- Z Origin {m}
+  ,                                       !- Type
+  1,                                      !- Multiplier
+  ,                                       !- Ceiling Height {m}
+  ,                                       !- Volume {m3}
+  ,                                       !- Floor Area {m2}
+  ,                                       !- Zone Inside Convection Algorithm
+  ,                                       !- Zone Outside Convection Algorithm
+  Yes;                                    !- Part of Total Floor Area
+
+BuildingSurface:Detailed,
+  Surface 1,                              !- Name
+  Floor,                                  !- Surface Type
+  ext-slab,                                       !- Construction Name
+  Thermal Zone 1,                         !- Zone Name
+  ,                                       !- Space Name
+  Ground,                                 !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 33.2232, 0,                    !- X,Y,Z Vertex 1 {m}
+  49.9872, 0, 0,                          !- X,Y,Z Vertex 2 {m}
+  0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
+  0, 33.2232, 0;                          !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 2,                              !- Name
+    Ceiling,                 !- Surface Type
+    INT-FLOOR-UNDERSIDE,             !- Construction Name
+  Thermal Zone 1,                         !- Zone Name
+  ,                                       !- Space Name
+  Surface,                                !- Outside Boundary Condition
+  Surface 7,                              !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 0, 3.9624,                     !- X,Y,Z Vertex 1 {m}
+  49.9872, 33.2232, 3.9624,               !- X,Y,Z Vertex 2 {m}
+  0, 33.2232, 3.9624,                     !- X,Y,Z Vertex 3 {m}
+  0, 0, 3.9624;                           !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 3,                              !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 1,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 33.2232, 3.9624,               !- X,Y,Z Vertex 1 {m}
+  49.9872, 33.2232, 0,                    !- X,Y,Z Vertex 2 {m}
+  0, 33.2232, 0,                          !- X,Y,Z Vertex 3 {m}
+  0, 33.2232, 3.9624;                     !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 2,                          !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 3,                              !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  49.9618, 33.2232, 2.61592220549339,     !- X,Y,Z Vertex 1 {m}
+  49.9618, 33.2232, 1.307,                !- X,Y,Z Vertex 2 {m}
+  0.0254000000000048, 33.2232, 1.307,     !- X,Y,Z Vertex 3 {m}
+  0.0254000000000048, 33.2232, 2.61592220549339; !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 4,                              !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 1,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  0, 33.2232, 3.9624,                     !- X,Y,Z Vertex 1 {m}
+  0, 33.2232, 0,                          !- X,Y,Z Vertex 2 {m}
+  0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
+  0, 0, 3.9624;                           !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 1,                          !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 4,                              !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  0, 33.1978, 2.61659443797856,           !- X,Y,Z Vertex 1 {m}
+  0, 33.1978, 1.307,                      !- X,Y,Z Vertex 2 {m}
+  0, 0.0254000000000048, 1.307,           !- X,Y,Z Vertex 3 {m}
+  0, 0.0254000000000048, 2.61659443797856; !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 5,                              !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 1,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 0, 3.9624,                     !- X,Y,Z Vertex 1 {m}
+  49.9872, 0, 0,                          !- X,Y,Z Vertex 2 {m}
+  49.9872, 33.2232, 0,                    !- X,Y,Z Vertex 3 {m}
+  49.9872, 33.2232, 3.9624;               !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 3,                          !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 5,                              !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  49.9872, 0.0254, 2.61659443797856,      !- X,Y,Z Vertex 1 {m}
+  49.9872, 0.0254, 1.307,                 !- X,Y,Z Vertex 2 {m}
+  49.9872, 33.1978, 1.307,                !- X,Y,Z Vertex 3 {m}
+  49.9872, 33.1978, 2.61659443797856;     !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 6,                              !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 1,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  0, 0, 3.9624,                           !- X,Y,Z Vertex 1 {m}
+  0, 0, 0,                                !- X,Y,Z Vertex 2 {m}
+  49.9872, 0, 0,                          !- X,Y,Z Vertex 3 {m}
+  49.9872, 0, 3.9624;                     !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 4,                          !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 6,                              !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  0.0254, 0, 2.61592220549339,            !- X,Y,Z Vertex 1 {m}
+  0.0254, 0, 1.307,                       !- X,Y,Z Vertex 2 {m}
+  49.9618, 0, 1.307,                      !- X,Y,Z Vertex 3 {m}
+  49.9618, 0, 2.61592220549339;           !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 10,                             !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 2,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  0, 0, 3.9624,                           !- X,Y,Z Vertex 1 {m}
+  0, 0, 0,                                !- X,Y,Z Vertex 2 {m}
+  49.9872, 0, 0,                          !- X,Y,Z Vertex 3 {m}
+  49.9872, 0, 3.9624;                     !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 8,                          !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 10,                             !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  0.0254, 0, 2.61592220549339,            !- X,Y,Z Vertex 1 {m}
+  0.0254, 0, 1.307,                       !- X,Y,Z Vertex 2 {m}
+  49.9618, 0, 1.307,                      !- X,Y,Z Vertex 3 {m}
+  49.9618, 0, 2.61592220549339;           !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 11,                             !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 2,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 0, 3.9624,                     !- X,Y,Z Vertex 1 {m}
+  49.9872, 0, 0,                          !- X,Y,Z Vertex 2 {m}
+  49.9872, 33.2232, 0,                    !- X,Y,Z Vertex 3 {m}
+  49.9872, 33.2232, 3.9624;               !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 7,                          !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 11,                             !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  49.9872, 0.0254, 2.61659443797856,      !- X,Y,Z Vertex 1 {m}
+  49.9872, 0.0254, 1.307,                 !- X,Y,Z Vertex 2 {m}
+  49.9872, 33.1978, 1.307,                !- X,Y,Z Vertex 3 {m}
+  49.9872, 33.1978, 2.61659443797856;     !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 12,                             !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 2,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 33.2232, 3.9624,               !- X,Y,Z Vertex 1 {m}
+  49.9872, 33.2232, 0,                    !- X,Y,Z Vertex 2 {m}
+  0, 33.2232, 0,                          !- X,Y,Z Vertex 3 {m}
+  0, 33.2232, 3.9624;                     !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 6,                          !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 12,                             !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  49.9618, 33.2232, 2.61592220549339,     !- X,Y,Z Vertex 1 {m}
+  49.9618, 33.2232, 1.307,                !- X,Y,Z Vertex 2 {m}
+  0.0254000000000048, 33.2232, 1.307,     !- X,Y,Z Vertex 3 {m}
+  0.0254000000000048, 33.2232, 2.61592220549339; !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 7,                              !- Name
+  Floor,                                  !- Surface Type
+  INT-FLOOR-TOPSIDE,                                       !- Construction Name
+  Thermal Zone 2,                         !- Zone Name
+  ,                                       !- Space Name
+  Surface,                                !- Outside Boundary Condition
+  Surface 2,                              !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 33.2232, 0,                    !- X,Y,Z Vertex 1 {m}
+  49.9872, 0, 0,                          !- X,Y,Z Vertex 2 {m}
+  0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
+  0, 33.2232, 0;                          !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 8,                              !- Name
+    Ceiling,                 !- Surface Type
+    INT-FLOOR-UNDERSIDE,             !- Construction Name
+  Thermal Zone 2,                         !- Zone Name
+  ,                                       !- Space Name
+  Surface,                                !- Outside Boundary Condition
+  Surface 13,                             !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 0, 3.9624,                     !- X,Y,Z Vertex 1 {m}
+  49.9872, 33.2232, 3.9624,               !- X,Y,Z Vertex 2 {m}
+  0, 33.2232, 3.9624,                     !- X,Y,Z Vertex 3 {m}
+  0, 0, 3.9624;                           !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 9,                              !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 2,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  0, 33.2232, 3.9624,                     !- X,Y,Z Vertex 1 {m}
+  0, 33.2232, 0,                          !- X,Y,Z Vertex 2 {m}
+  0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
+  0, 0, 3.9624;                           !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 5,                          !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 9,                              !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  0, 33.1978, 2.61659443797856,           !- X,Y,Z Vertex 1 {m}
+  0, 33.1978, 1.307,                      !- X,Y,Z Vertex 2 {m}
+  0, 0.0254000000000048, 1.307,           !- X,Y,Z Vertex 3 {m}
+  0, 0.0254000000000048, 2.61659443797856; !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 13,                             !- Name
+  Floor,                                  !- Surface Type
+  INT-FLOOR-TOPSIDE,                                       !- Construction Name
+  Thermal Zone 3,                         !- Zone Name
+  ,                                       !- Space Name
+  Surface,                                !- Outside Boundary Condition
+  Surface 8,                              !- Outside Boundary Condition Object
+  NoSun,                                  !- Sun Exposure
+  NoWind,                                 !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 33.2232, 0,                    !- X,Y,Z Vertex 1 {m}
+  49.9872, 0, 0,                          !- X,Y,Z Vertex 2 {m}
+  0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
+  0, 33.2232, 0;                          !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 14,                             !- Name
+  Roof,                                   !- Surface Type
+  IEAD Non-res Roof,                                       !- Construction Name
+  Thermal Zone 3,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 0, 3.9624,                     !- X,Y,Z Vertex 1 {m}
+  49.9872, 33.2232, 3.9624,               !- X,Y,Z Vertex 2 {m}
+  0, 33.2232, 3.9624,                     !- X,Y,Z Vertex 3 {m}
+  0, 0, 3.9624;                           !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 15,                             !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 3,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  0, 33.2232, 3.9624,                     !- X,Y,Z Vertex 1 {m}
+  0, 33.2232, 0,                          !- X,Y,Z Vertex 2 {m}
+  0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
+  0, 0, 3.9624;                           !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 9,                          !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 15,                             !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  0, 33.1978, 2.61659443797856,           !- X,Y,Z Vertex 1 {m}
+  0, 33.1978, 1.307,                      !- X,Y,Z Vertex 2 {m}
+  0, 0.0254000000000048, 1.307,           !- X,Y,Z Vertex 3 {m}
+  0, 0.0254000000000048, 2.61659443797856; !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 16,                             !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 3,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  0, 0, 3.9624,                           !- X,Y,Z Vertex 1 {m}
+  0, 0, 0,                                !- X,Y,Z Vertex 2 {m}
+  49.9872, 0, 0,                          !- X,Y,Z Vertex 3 {m}
+  49.9872, 0, 3.9624;                     !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 12,                         !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 16,                             !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  0.0254, 0, 2.61592220549339,            !- X,Y,Z Vertex 1 {m}
+  0.0254, 0, 1.307,                       !- X,Y,Z Vertex 2 {m}
+  49.9618, 0, 1.307,                      !- X,Y,Z Vertex 3 {m}
+  49.9618, 0, 2.61592220549339;           !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 17,                             !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 3,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 0, 3.9624,                     !- X,Y,Z Vertex 1 {m}
+  49.9872, 0, 0,                          !- X,Y,Z Vertex 2 {m}
+  49.9872, 33.2232, 0,                    !- X,Y,Z Vertex 3 {m}
+  49.9872, 33.2232, 3.9624;               !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 11,                         !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 17,                             !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  49.9872, 0.0254, 2.61659443797856,      !- X,Y,Z Vertex 1 {m}
+  49.9872, 0.0254, 1.307,                 !- X,Y,Z Vertex 2 {m}
+  49.9872, 33.1978, 1.307,                !- X,Y,Z Vertex 3 {m}
+  49.9872, 33.1978, 2.61659443797856;     !- X,Y,Z Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Surface 18,                             !- Name
+  Wall,                                   !- Surface Type
+  Steel Frame Non-res Ext Wall,                                       !- Construction Name
+  Thermal Zone 3,                         !- Zone Name
+  ,                                       !- Space Name
+  Outdoors,                               !- Outside Boundary Condition
+  ,                                       !- Outside Boundary Condition Object
+  SunExposed,                             !- Sun Exposure
+  WindExposed,                            !- Wind Exposure
+  ,                                       !- View Factor to Ground
+  ,                                       !- Number of Vertices
+  49.9872, 33.2232, 3.9624,               !- X,Y,Z Vertex 1 {m}
+  49.9872, 33.2232, 0,                    !- X,Y,Z Vertex 2 {m}
+  0, 33.2232, 0,                          !- X,Y,Z Vertex 3 {m}
+  0, 33.2232, 3.9624;                     !- X,Y,Z Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Sub Surface 10,                         !- Name
+  Window,                                 !- Surface Type
+  Window Non-res Fixed,                                       !- Construction Name
+  Surface 18,                             !- Building Surface Name
+  ,                                       !- Outside Boundary Condition Object
+  ,                                       !- View Factor to Ground
+  ,                                       !- Frame and Divider Name
+  ,                                       !- Multiplier
+  ,                                       !- Number of Vertices
+  49.9618, 33.2232, 2.61592220549339,     !- X,Y,Z Vertex 1 {m}
+  49.9618, 33.2232, 1.307,                !- X,Y,Z Vertex 2 {m}
+  0.0254000000000048, 33.2232, 1.307,     !- X,Y,Z Vertex 3 {m}
+  0.0254000000000048, 33.2232, 2.61592220549339; !- X,Y,Z Vertex 4 {m}
+
 InternalMass,
     Thermal Zone 1 Internal Mass,  !- Name
     InteriorFurnishings,     !- Construction Name
     Thermal Zone 1,             !- Zone or ZoneList Name
     ,                        !- Space or SpaceList Name
-    9957;               !- Surface Area {m2}
+    3319;               !- Surface Area {m2}
+
+InternalMass,
+    Thermal Zone 2 Internal Mass,  !- Name
+    InteriorFurnishings,     !- Construction Name
+    Thermal Zone 2,             !- Zone or ZoneList Name
+    ,                        !- Space or SpaceList Name
+    3319;               !- Surface Area {m2}
+
+InternalMass,
+    Thermal Zone 3 Internal Mass,  !- Name
+    InteriorFurnishings,     !- Construction Name
+    Thermal Zone 3,             !- Zone or ZoneList Name
+    ,                        !- Space or SpaceList Name
+    3319;               !- Surface Area {m2}
 
     Construction,
     InteriorFurnishings,     !- Name
@@ -335,8 +896,198 @@ Schedule:Compact,
     50.0,                    !- Zone Heating Design Supply Air Temperature {C}
     ;                        !- Zone Heating Design Supply Air Temperature Difference {deltaC}
 
+  HVACTemplate:Zone:VAV,
+    Thermal Zone 2,                !- Zone Name
+    DXVAV Sys 2,             !- Template VAV System Name
+    All Zones,               !- Template Thermostat Name
+    autosize,                !- Supply Air Maximum Flow Rate {m3/s}
+    ,                        !- Zone Heating Sizing Factor
+    ,                        !- Zone Cooling Sizing Factor
+    Constant,                !- Zone Minimum Air Flow Input Method
+    0.3,                     !- Constant Minimum Air Flow Fraction
+    ,                        !- Fixed Minimum Air Flow Rate {m3/s}
+    ,                        !- Minimum Air Flow Fraction Schedule Name
+    flow/person,             !- Outdoor Air Method
+    0.0375,                 !- Outdoor Air Flow Rate per Person {m3/s}
+    0.0,                     !- Outdoor Air Flow Rate per Zone Floor Area {m3/s-m2}
+    0.0,                     !- Outdoor Air Flow Rate per Zone {m3/s}
+    Electric,                !- Reheat Coil Type
+    ,                        !- Reheat Coil Availability Schedule Name
+    NORMAL,                 !- Damper Heating Action
+    ,                        !- Maximum Flow per Zone Floor Area During Reheat {m3/s-m2}
+    ,                        !- Maximum Flow Fraction During Reheat
+    ,                        !- Maximum Reheat Air Temperature {C}
+    ,                        !- Design Specification Outdoor Air Object Name for Control
+    ,                        !- Supply Plenum Name
+    ,                        !- Return Plenum Name
+    None,                    !- Baseboard Heating Type
+    ,                        !- Baseboard Heating Availability Schedule Name
+    autosize,                !- Baseboard Heating Capacity {W}
+    SystemSupplyAirTemperature,  !- Zone Cooling Design Supply Air Temperature Input Method
+    12.8,                        !- Zone Cooling Design Supply Air Temperature {C}
+    ,                        !- Zone Cooling Design Supply Air Temperature Difference {deltaC}
+    SupplyAirTemperature,    !- Zone Heating Design Supply Air Temperature Input Method
+    50.0,                    !- Zone Heating Design Supply Air Temperature {C}
+    ;                        !- Zone Heating Design Supply Air Temperature Difference {deltaC}
+
+  HVACTemplate:Zone:VAV,
+    Thermal Zone 3,                !- Zone Name
+    DXVAV Sys 3,             !- Template VAV System Name
+    All Zones,               !- Template Thermostat Name
+    autosize,                !- Supply Air Maximum Flow Rate {m3/s}
+    ,                        !- Zone Heating Sizing Factor
+    ,                        !- Zone Cooling Sizing Factor
+    Constant,                !- Zone Minimum Air Flow Input Method
+    0.3,                     !- Constant Minimum Air Flow Fraction
+    ,                        !- Fixed Minimum Air Flow Rate {m3/s}
+    ,                        !- Minimum Air Flow Fraction Schedule Name
+    flow/person,             !- Outdoor Air Method
+    0.0375,                 !- Outdoor Air Flow Rate per Person {m3/s}
+    0.0,                     !- Outdoor Air Flow Rate per Zone Floor Area {m3/s-m2}
+    0.0,                     !- Outdoor Air Flow Rate per Zone {m3/s}
+    Electric,                !- Reheat Coil Type
+    ,                        !- Reheat Coil Availability Schedule Name
+    NORMAL,                 !- Damper Heating Action
+    ,                        !- Maximum Flow per Zone Floor Area During Reheat {m3/s-m2}
+    ,                        !- Maximum Flow Fraction During Reheat
+    ,                        !- Maximum Reheat Air Temperature {C}
+    ,                        !- Design Specification Outdoor Air Object Name for Control
+    ,                        !- Supply Plenum Name
+    ,                        !- Return Plenum Name
+    None,                    !- Baseboard Heating Type
+    ,                        !- Baseboard Heating Availability Schedule Name
+    autosize,                !- Baseboard Heating Capacity {W}
+    SystemSupplyAirTemperature,  !- Zone Cooling Design Supply Air Temperature Input Method
+    12.8,                        !- Zone Cooling Design Supply Air Temperature {C}
+    ,                        !- Zone Cooling Design Supply Air Temperature Difference {deltaC}
+    SupplyAirTemperature,    !- Zone Heating Design Supply Air Temperature Input Method
+    50.0,                    !- Zone Heating Design Supply Air Temperature {C}
+    ;                        !- Zone Heating Design Supply Air Temperature Difference {deltaC}
+
  HVACTemplate:System:PackagedVAV,
     DXVAV Sys 1,             !- Name
+    FanAvailSched,           !- System Availability Schedule Name
+    autosize,                !- Supply Fan Maximum Flow Rate {m3/s}
+    autosize,                !- Supply Fan Minimum Flow Rate {m3/s}
+    DrawThrough,             !- Supply Fan Placement
+    0.7,                     !- Supply Fan Total Efficiency
+    1000,                    !- Supply Fan Delta Pressure {Pa}
+    0.9,                     !- Supply Fan Motor Efficiency
+    1,                       !- Supply Fan Motor in Air Stream Fraction
+    TwoSpeedDX,              !- Cooling Coil Type
+    ,                        !- Cooling Coil Availability Schedule Name
+    ,                        !- Cooling Coil Setpoint Schedule Name
+    12.8,                    !- Cooling Coil Design Setpoint {C}
+    autosize,                !- Cooling Coil Gross Rated Total Capacity {W}
+    autosize,                !- Cooling Coil Gross Rated Sensible Heat Ratio
+    3,                       !- Cooling Coil Gross Rated COP {W/W}
+    Gas,                     !- Heating Coil Type
+    ,                        !- Heating Coil Availability Schedule Name
+    ,                        !- Heating Coil Setpoint Schedule Name
+    10,                      !- Heating Coil Design Setpoint {C}
+    autosize,                !- Heating Coil Capacity {W}
+    0.8,                     !- Gas Heating Coil Efficiency
+    ,                        !- Gas Heating Coil Parasitic Electric Load {W}
+    autosize,                !- Maximum Outdoor Air Flow Rate {m3/s}
+    autosize,                !- Minimum Outdoor Air Flow Rate {m3/s}
+    ProportionalMinimum,     !- Minimum Outdoor Air Control Type
+    Min OA Sched,            !- Minimum Outdoor Air Schedule Name
+    DifferentialDryBulb,     !- Economizer Type
+    NoLockout,               !- Economizer Lockout
+    28.0,                      !- Economizer Maximum Limit Dry-Bulb Temperature {C}
+    64000.0,                        !- Economizer Maximum Limit Enthalpy {J/kg}
+    ,                        !- Economizer Maximum Limit Dewpoint Temperature {C}
+    -100,                       !- Economizer Minimum Limit Dry-Bulb Temperature {C}
+    ,                        !- Supply Plenum Name
+    ,                !- Return Plenum Name
+    InletVaneDampers,        !- Supply Fan Part-Load Power Coefficients
+    CycleOnAny,              !- Night Cycle Control
+    ,                        !- Night Cycle Control Zone Name
+    None,                    !- Heat Recovery Type
+    0.7,                     !- Sensible Heat Recovery Effectiveness
+    0.65,                    !- Latent Heat Recovery Effectiveness
+    None,                    !- Cooling Coil Setpoint Reset Type
+    None,                    !- Heating Coil Setpoint Reset Type
+    None,                    !- Dehumidification Control Type
+    ,                        !- Dehumidification Control Zone Name
+    60,                      !- Dehumidification Setpoint {percent}
+    None,                    !- Humidifier Type
+    ,                        !- Humidifier Availability Schedule Name
+    0.000001,                !- Humidifier Rated Capacity {m3/s}
+    2690,                    !- Humidifier Rated Electric Power {W}
+    ,                        !- Humidifier Control Zone Name
+    30,                      !- Humidifier Setpoint {percent}
+    NonCoincident,           !- Sizing Option
+    ,                        !- Return Fan
+    ,                        !- Return Fan Total Efficiency
+    ,                        !- Return Fan Delta Pressure {Pa}
+    ,                        !- Return Fan Motor Efficiency
+    ,                        !- Return Fan Motor in Air Stream Fraction
+    ;                        !- Return Fan Part-Load Power Coefficients
+
+ HVACTemplate:System:PackagedVAV,
+    DXVAV Sys 2,             !- Name
+    FanAvailSched,           !- System Availability Schedule Name
+    autosize,                !- Supply Fan Maximum Flow Rate {m3/s}
+    autosize,                !- Supply Fan Minimum Flow Rate {m3/s}
+    DrawThrough,             !- Supply Fan Placement
+    0.7,                     !- Supply Fan Total Efficiency
+    1000,                    !- Supply Fan Delta Pressure {Pa}
+    0.9,                     !- Supply Fan Motor Efficiency
+    1,                       !- Supply Fan Motor in Air Stream Fraction
+    TwoSpeedDX,              !- Cooling Coil Type
+    ,                        !- Cooling Coil Availability Schedule Name
+    ,                        !- Cooling Coil Setpoint Schedule Name
+    12.8,                    !- Cooling Coil Design Setpoint {C}
+    autosize,                !- Cooling Coil Gross Rated Total Capacity {W}
+    autosize,                !- Cooling Coil Gross Rated Sensible Heat Ratio
+    3,                       !- Cooling Coil Gross Rated COP {W/W}
+    Gas,                     !- Heating Coil Type
+    ,                        !- Heating Coil Availability Schedule Name
+    ,                        !- Heating Coil Setpoint Schedule Name
+    10,                      !- Heating Coil Design Setpoint {C}
+    autosize,                !- Heating Coil Capacity {W}
+    0.8,                     !- Gas Heating Coil Efficiency
+    ,                        !- Gas Heating Coil Parasitic Electric Load {W}
+    autosize,                !- Maximum Outdoor Air Flow Rate {m3/s}
+    autosize,                !- Minimum Outdoor Air Flow Rate {m3/s}
+    ProportionalMinimum,     !- Minimum Outdoor Air Control Type
+    Min OA Sched,            !- Minimum Outdoor Air Schedule Name
+    DifferentialDryBulb,     !- Economizer Type
+    NoLockout,               !- Economizer Lockout
+    28.0,                      !- Economizer Maximum Limit Dry-Bulb Temperature {C}
+    64000.0,                        !- Economizer Maximum Limit Enthalpy {J/kg}
+    ,                        !- Economizer Maximum Limit Dewpoint Temperature {C}
+    -100,                       !- Economizer Minimum Limit Dry-Bulb Temperature {C}
+    ,                        !- Supply Plenum Name
+    ,                !- Return Plenum Name
+    InletVaneDampers,        !- Supply Fan Part-Load Power Coefficients
+    CycleOnAny,              !- Night Cycle Control
+    ,                        !- Night Cycle Control Zone Name
+    None,                    !- Heat Recovery Type
+    0.7,                     !- Sensible Heat Recovery Effectiveness
+    0.65,                    !- Latent Heat Recovery Effectiveness
+    None,                    !- Cooling Coil Setpoint Reset Type
+    None,                    !- Heating Coil Setpoint Reset Type
+    None,                    !- Dehumidification Control Type
+    ,                        !- Dehumidification Control Zone Name
+    60,                      !- Dehumidification Setpoint {percent}
+    None,                    !- Humidifier Type
+    ,                        !- Humidifier Availability Schedule Name
+    0.000001,                !- Humidifier Rated Capacity {m3/s}
+    2690,                    !- Humidifier Rated Electric Power {W}
+    ,                        !- Humidifier Control Zone Name
+    30,                      !- Humidifier Setpoint {percent}
+    NonCoincident,           !- Sizing Option
+    ,                        !- Return Fan
+    ,                        !- Return Fan Total Efficiency
+    ,                        !- Return Fan Delta Pressure {Pa}
+    ,                        !- Return Fan Motor Efficiency
+    ,                        !- Return Fan Motor in Air Stream Fraction
+    ;                        !- Return Fan Part-Load Power Coefficients
+
+ HVACTemplate:System:PackagedVAV,
+    DXVAV Sys 3,             !- Name
     FanAvailSched,           !- System Availability Schedule Name
     autosize,                !- Supply Fan Maximum Flow Rate {m3/s}
     autosize,                !- Supply Fan Minimum Flow Rate {m3/s}
@@ -428,7 +1179,7 @@ Schedule:Compact,
   Yes;                                    !- Use Weather File Snow Indicators
 
    Building,
-    shoeBox_Ref Bldg Medium Office New2004_v1.3_5.0,  !- Name
+    simplified Bldg Medium Office New2004_v1.3_5.0,  !- Name
     0.0000,                  !- North Axis {deg}
     City,                    !- Terrain
     0.0400,                  !- Loads Convergence Tolerance Value {W}
@@ -444,9 +1195,7 @@ Schedule:Compact,
     -6.00,                   !- Time Zone {hr}
     190;                     !- Elevation {m}
 
-ZoneList,
-  189.1-2009 - Office - OpenOffice - CZ4-8, !- Name
-  Thermal Zone 1;                         !- Zone Name 1
+
 
   Lights,
     Core_bottom_Lights,      !- Name
@@ -454,7 +1203,7 @@ ZoneList,
     BLDG_LIGHT_SCH,          !- Schedule Name
     Watts/Area,              !- Design Level Calculation Method
     ,                        !- Lighting Level {W}
-    32.28,                   !- Watts per Zone Floor Area {W/m2}
+    10.76,                   !- Watts per Zone Floor Area {W/m2}
     ,                        !- Watts per Person {W/person}
     0.4000,                  !- Return Air Fraction
     0.4000,                  !- Fraction Radiant
@@ -559,7 +1308,7 @@ Schedule:Compact,
     Area/Person,             !- Number of People Calculation Method
     ,                        !- Number of People
     ,                        !- People per Floor Area {person/m2}
-    6.19,                   !- Floor Area per Person {m2/person}
+    18.58,                   !- Floor Area per Person {m2/person}
     0.3000,                  !- Fraction Radiant
     AUTOCALCULATE,           !- Sensible Heat Fraction
     ACTIVITY_SCH,            !- Activity Level Schedule Name
@@ -580,7 +1329,7 @@ Schedule:Compact,
     BLDG_EQUIP_SCH,          !- Schedule Name
     Watts/Area,              !- Design Level Calculation Method
     ,                        !- Design Level {W}
-    32.28,                   !- Watts per Zone Floor Area {W/m2}
+    10.76,                   !- Watts per Zone Floor Area {W/m2}
     ,                        !- Watts per Person {W/person}
     0.0000,                  !- Fraction Latent
     0.5000,                  !- Fraction Radiant
@@ -960,187 +1709,6 @@ LifeCycleCost:UsePriceEscalation,
   1.0920,                                 !- Year Escalation 29
   1.0950;                                 !- Year Escalation 30
 
-
-
-Zone,
-  Thermal Zone 1,                         !- Name
-  -0,                                     !- Direction of Relative North {deg}
-  0,                                      !- X Origin {m}
-  0,                                      !- Y Origin {m}
-  0,                                      !- Z Origin {m}
-  ,                                       !- Type
-  1,                                      !- Multiplier
-  ,                                       !- Ceiling Height {m}
-  ,                                       !- Volume {m3}
-  ,                                       !- Floor Area {m2}
-  ,                                       !- Zone Inside Convection Algorithm
-  ,                                       !- Zone Outside Convection Algorithm
-  Yes;                                    !- Part of Total Floor Area
-
-BuildingSurface:Detailed,
-  east,                                   !- Name
-  Wall,                                   !- Surface Type
-  Steel Frame Non-res Ext Wall,                                       !- Construction Name
-  Thermal Zone 1,                         !- Zone Name
-  ,                                       !- Space Name
-  Outdoors,                               !- Outside Boundary Condition
-  ,                                       !- Outside Boundary Condition Object
-  SunExposed,                             !- Sun Exposure
-  WindExposed,                            !- Wind Exposure
-  ,                                       !- View Factor to Ground
-  ,                                       !- Number of Vertices
-  49.911, 0, 11.8872,                     !- X,Y,Z Vertex 1 {m}
-  49.911, 0, 0,                           !- X,Y,Z Vertex 2 {m}
-  49.911, 33.274, 0,                      !- X,Y,Z Vertex 3 {m}
-  49.911, 33.274, 11.8872;                !- X,Y,Z Vertex 4 {m}
-
-FenestrationSurface:Detailed,
-  east_window,                            !- Name
-  Window,                                 !- Surface Type
-  Window Non-res Fixed,                                       !- Construction Name
-  east,                                   !- Building Surface Name
-  ,                                       !- Outside Boundary Condition Object
-  ,                                       !- View Factor to Ground
-  ,                                       !- Frame and Divider Name
-  ,                                       !- Multiplier
-  ,                                       !- Number of Vertices
-  49.911, 0.0254, 7.89117412844037,       !- X,Y,Z Vertex 1 {m}
-  49.911, 0.0254, 3.9624,                 !- X,Y,Z Vertex 2 {m}
-  49.911, 33.2486, 3.9624,                !- X,Y,Z Vertex 3 {m}
-  49.911, 33.2486, 7.89117412844037;      !- X,Y,Z Vertex 4 {m}
-
-BuildingSurface:Detailed,
-  floor,                                  !- Name
-  Floor,                                  !- Surface Type
-  ext-slab,                                       !- Construction Name
-  Thermal Zone 1,                         !- Zone Name
-  ,                                       !- Space Name
-  Ground,                                 !- Outside Boundary Condition
-  ,                                       !- Outside Boundary Condition Object
-  NoSun,                                  !- Sun Exposure
-  NoWind,                                 !- Wind Exposure
-  ,                                       !- View Factor to Ground
-  ,                                       !- Number of Vertices
-  49.911, 33.274, 0,                      !- X,Y,Z Vertex 1 {m}
-  49.911, 0, 0,                           !- X,Y,Z Vertex 2 {m}
-  0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
-  0, 33.274, 0;                           !- X,Y,Z Vertex 4 {m}
-
-BuildingSurface:Detailed,
-  north,                                  !- Name
-  Wall,                                   !- Surface Type
-  Steel Frame Non-res Ext Wall,                                       !- Construction Name
-  Thermal Zone 1,                         !- Zone Name
-  ,                                       !- Space Name
-  Outdoors,                               !- Outside Boundary Condition
-  ,                                       !- Outside Boundary Condition Object
-  SunExposed,                             !- Sun Exposure
-  WindExposed,                            !- Wind Exposure
-  ,                                       !- View Factor to Ground
-  ,                                       !- Number of Vertices
-  49.911, 33.274, 11.8872,                !- X,Y,Z Vertex 1 {m}
-  49.911, 33.274, 0,                      !- X,Y,Z Vertex 2 {m}
-  0, 33.274, 0,                           !- X,Y,Z Vertex 3 {m}
-  0, 33.274, 11.8872;                     !- X,Y,Z Vertex 4 {m}
-
-FenestrationSurface:Detailed,
-  north_window,                           !- Name
-  Window,                                 !- Surface Type
-  Window Non-res Fixed,                                       !- Construction Name
-  north,                                  !- Building Surface Name
-  ,                                       !- Outside Boundary Condition Object
-  ,                                       !- View Factor to Ground
-  ,                                       !- Frame and Divider Name
-  ,                                       !- Multiplier
-  ,                                       !- Number of Vertices
-  49.8856, 33.274, 7.88917271523179,      !- X,Y,Z Vertex 1 {m}
-  49.8856, 33.274, 3.9624,                !- X,Y,Z Vertex 2 {m}
-  0.0254000000000048, 33.274, 3.9624,     !- X,Y,Z Vertex 3 {m}
-  0.0254000000000048, 33.274, 7.88917271523179; !- X,Y,Z Vertex 4 {m}
-
-BuildingSurface:Detailed,
-  roof,                                   !- Name
-  Roof,                                   !- Surface Type
-  IEAD Non-res Roof,                                       !- Construction Name
-  Thermal Zone 1,                         !- Zone Name
-  ,                                       !- Space Name
-  Outdoors,                               !- Outside Boundary Condition
-  ,                                       !- Outside Boundary Condition Object
-  SunExposed,                             !- Sun Exposure
-  WindExposed,                            !- Wind Exposure
-  ,                                       !- View Factor to Ground
-  ,                                       !- Number of Vertices
-  49.911, 0, 11.8872,                     !- X,Y,Z Vertex 1 {m}
-  49.911, 33.274, 11.8872,                !- X,Y,Z Vertex 2 {m}
-  0, 33.274, 11.8872,                     !- X,Y,Z Vertex 3 {m}
-  0, 0, 11.8872;                          !- X,Y,Z Vertex 4 {m}
-
-BuildingSurface:Detailed,
-  south,                                  !- Name
-  Wall,                                   !- Surface Type
-  Steel Frame Non-res Ext Wall,                                       !- Construction Name
-  Thermal Zone 1,                         !- Zone Name
-  ,                                       !- Space Name
-  Outdoors,                               !- Outside Boundary Condition
-  ,                                       !- Outside Boundary Condition Object
-  SunExposed,                             !- Sun Exposure
-  WindExposed,                            !- Wind Exposure
-  ,                                       !- View Factor to Ground
-  ,                                       !- Number of Vertices
-  0, 0, 11.8872,                          !- X,Y,Z Vertex 1 {m}
-  0, 0, 0,                                !- X,Y,Z Vertex 2 {m}
-  49.911, 0, 0,                           !- X,Y,Z Vertex 3 {m}
-  49.911, 0, 11.8872;                     !- X,Y,Z Vertex 4 {m}
-
-FenestrationSurface:Detailed,
-  south_window,                           !- Name
-  Window,                                 !- Surface Type
-  Window Non-res Fixed,                                       !- Construction Name
-  south,                                  !- Building Surface Name
-  ,                                       !- Outside Boundary Condition Object
-  ,                                       !- View Factor to Ground
-  ,                                       !- Frame and Divider Name
-  ,                                       !- Multiplier
-  ,                                       !- Number of Vertices
-  0.0254, 0, 7.88917271523179,            !- X,Y,Z Vertex 1 {m}
-  0.0254, 0, 3.9624,                      !- X,Y,Z Vertex 2 {m}
-  49.8856, 0, 3.9624,                     !- X,Y,Z Vertex 3 {m}
-  49.8856, 0, 7.88917271523179;           !- X,Y,Z Vertex 4 {m}
-
-BuildingSurface:Detailed,
-  west,                                   !- Name
-  Wall,                                   !- Surface Type
-  Steel Frame Non-res Ext Wall,                                       !- Construction Name
-  Thermal Zone 1,                         !- Zone Name
-  ,                                       !- Space Name
-  Outdoors,                               !- Outside Boundary Condition
-  ,                                       !- Outside Boundary Condition Object
-  SunExposed,                             !- Sun Exposure
-  WindExposed,                            !- Wind Exposure
-  ,                                       !- View Factor to Ground
-  ,                                       !- Number of Vertices
-  0, 33.274, 11.8872,                     !- X,Y,Z Vertex 1 {m}
-  0, 33.274, 0,                           !- X,Y,Z Vertex 2 {m}
-  0, 0, 0,                                !- X,Y,Z Vertex 3 {m}
-  0, 0, 11.8872;                          !- X,Y,Z Vertex 4 {m}
-
-FenestrationSurface:Detailed,
-  west_window,                            !- Name
-  Window,                                 !- Surface Type
-  Window Non-res Fixed,                                       !- Construction Name
-  west,                                   !- Building Surface Name
-  ,                                       !- Outside Boundary Condition Object
-  ,                                       !- View Factor to Ground
-  ,                                       !- Frame and Divider Name
-  ,                                       !- Multiplier
-  ,                                       !- Number of Vertices
-  0, 33.2486, 7.89117412844037,           !- X,Y,Z Vertex 1 {m}
-  0, 33.2486, 3.9624,                     !- X,Y,Z Vertex 2 {m}
-  0, 0.0254000000000048, 3.9624,          !- X,Y,Z Vertex 3 {m}
-  0, 0.0254000000000048, 7.89117412844037; !- X,Y,Z Vertex 4 {m}
-
-
-
 ConvergenceLimits,
   1;                                      !- Minimum System Timestep {minutes}
 
@@ -1192,16 +1760,17 @@ GlobalGeometryRules,
   Relative,                               !- Daylighting Reference Point Coordinate System
   Relative;                               !- Rectangular Surface Coordinate System
 
-Material,
-  MAT-CC05 4 HW CONCRETE,                 !- Name
-  Rough,                                  !- Roughness
-  0.1016,                                 !- Thickness {m}
-  1.311,                                  !- Conductivity {W/m-K}
-  2240,                                   !- Density {kg/m3}
-  836.800000000001,                       !- Specific Heat {J/kg-K}
-  0.9,                                    !- Thermal Absorptance
-  0.85,                                   !- Solar Absorptance
-  0.85;                                   !- Visible Absorptance
+  Material,
+    MAT-CC05 4 HW CONCRETE,  !- Name
+    Rough,                   !- Roughness
+    0.1016,                  !- Thickness {m}
+    1.3110,                  !- Conductivity {W/m-K}
+    2240.0000,               !- Density {kg/m3}
+    836.8000,                !- Specific Heat {J/kg-K}
+    0.9000,                  !- Thermal Absorptance
+    0.7000,                  !- Solar Absorptance
+    0.7000;                  !- Visible Absorptance
+
 ScheduleTypeLimits,
   ActivityLevel,                          !- Name
   0,                                      !- Lower Limit Value {BasedOnField A3}
