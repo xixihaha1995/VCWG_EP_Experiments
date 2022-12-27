@@ -39,6 +39,7 @@ def read_ini(config_file_name):
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
     config_path = os.path.join(project_path, 'A_prepost_processing','configs','MedOffice_Sensitivity',config_file_name)
+    # config_path = os.path.join(project_path, 'A_prepost_processing','configs','Only_VCWG',config_file_name)
     config.read(config_path)
 
 def one_control_variable(sensitivity_file_name):
@@ -74,17 +75,17 @@ def mixed_variable(sensitivity_file_name):
         for value_2 in ctl_values_2:
             for value_3 in ctl_values_3:
                 if 'OnlyVCWG' in framework:
-                    ByPass.run_vcwg(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2,
-                                    value_2, ctl_viriable_3, value_3)
-                    # all_process.append(
-                    #     Process(target=ByPass.run_vcwg, args=(sensitivity_file_name, config,
-                    #                                           ctl_viriable_1, value_1,
-                    #                                           ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
-                else:
-                    # ByPass.run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2,
-                    #                   value_2, ctl_viriable_3, value_3)
+                    # ByPass.run_vcwg(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2,
+                    #                 value_2, ctl_viriable_3, value_3)
                     all_process.append(
-                        Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
+                        Process(target=ByPass.run_vcwg, args=(sensitivity_file_name, config,
+                                                              ctl_viriable_1, value_1,
+                                                              ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
+                else:
+                    ByPass.run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2,
+                                      value_2, ctl_viriable_3, value_3)
+                    # all_process.append(
+                    #     Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
     for i in range(0, len(all_process), nbr_of_parallel):
         for process in all_process[i:i + nbr_of_parallel]:
             process.start()
@@ -105,5 +106,7 @@ if __name__ == '__main__':
     # for_loop_all_ini()
     # one_ini('Chicago_MedOffice_Density.ini')
     # one_ini('Chicago_MedOffice_Orientation.ini')
-    one_ini('Chicago_MedOffice_MixedVariable.ini')
+    # one_ini('Chicago_MedOffice_MixedVariable.ini')
     # one_ini('Chicago_MedOffice_MixedVariable_PartialVCWG.ini')
+    one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
+    # one_ini('CAPITOUL_WithCooling.ini')

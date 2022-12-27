@@ -50,6 +50,7 @@ def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1,
     output_path = coordination.ep_trivial_path
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
     idfFilePath = os.path.join(f'.\\resources\\idf\\Chicago\\MediumOffice', idfFileName)
+    # idfFilePath = os.path.join(f'.\\resources\\idf\\AllCases', idfFileName)
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
     coordination.ep_api.runtime.run_energyplus(state, sys_args)
 
