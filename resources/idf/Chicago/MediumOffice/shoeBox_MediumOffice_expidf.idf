@@ -4087,20 +4087,20 @@ SetpointManager:MixedAir,
 
 Fan:VariableVolume,
   DXVAV Sys 1 Supply Fan,                                  !- Name
-  HVACOperationSchd,                                           !- Availability Schedule Name
-  0.5915,                                                     !- Fan Efficiency
-  1109.648,                                                    !- Pressure Rise {Pa}
+  FanAvailSched,                                           !- Availability Schedule Name
+  0.7,                                                     !- Fan Efficiency
+  1000,                                                    !- Pressure Rise {Pa}
   autosize,                                                !- Maximum Flow Rate {m3/s}
-  FixedFlowRate,                                                !- Fan Power Minimum Flow Rate Input Method
-  ,                                                    !- Fan Power Minimum Flow Fraction
-  0,                                                        !- Fan Power Minimum Air Flow Rate {m3/s}
-  0.91,                                                     !- Motor Efficiency
+  Fraction,                                                !- Fan Power Minimum Flow Rate Input Method
+  0.25,                                                    !- Fan Power Minimum Flow Fraction
+  ,                                                        !- Fan Power Minimum Air Flow Rate {m3/s}
+  0.9,                                                     !- Motor Efficiency
   1,                                                       !- Motor in Airstream Fraction
-    0.0407598940,            !- Fan Power Coefficient 1
-    0.08804497,              !- Fan Power Coefficient 2
-    -0.072926120,            !- Fan Power Coefficient 3
-    0.9437398230,            !- Fan Power Coefficient 4
-    0,                       !- Fan Power Coefficient 5
+  0.35071223,                                              !- Fan Power Coefficient 1
+  0.30850535,                                              !- Fan Power Coefficient 2
+  -0.54137364,                                             !- Fan Power Coefficient 3
+  0.87198823,                                              !- Fan Power Coefficient 4
+  0,                                                       !- Fan Power Coefficient 5
   DXVAV Sys 1 Heating Coil Outlet,                         !- Air Inlet Node Name
   DXVAV Sys 1 Supply Fan Outlet;                           !- Air Outlet Node Name
 
