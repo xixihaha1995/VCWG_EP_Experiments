@@ -45,7 +45,7 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
         nbr_control_variables = 1
         csv_file_name += ctl_virable_1 + '_' + str(value_1)
     print(f'csv_file_name = {csv_file_name}')
-    bld_type = config['Bypass']['bld_type']
+    bld_type = csv_file_name
     experiments_theme = config['Bypass']['experiments_theme']
     save_path_clean = False
     sensor_heights = [float(i) for i in config['Bypass']['sensor_height_meter'].split(',')]
