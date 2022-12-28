@@ -1010,7 +1010,7 @@ class Ressitance_Calculations(object):
             fh = 1 - b * Ri / (1 + c * (-Ri) ** 0.5)
 
         ra = R / ((a ** 2) * Utot * fh)
-
+        # print(f'ra = {ra}, Ri = {Ri}, Utot = {Utot}, z0 = {z0}, fh = {fh}, a = {a}')
         return ra
 
 

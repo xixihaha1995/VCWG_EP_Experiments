@@ -656,12 +656,13 @@ class VCWG_Hydro(object):
                     self.BEM[i].wallShade.Element(self.EBCanyon.SWR.SWRabs.SWRabsWallShade,self.EBCanyon.LWR.LWRabs.LWRabsWallShade,
                                                   self.EBCanyon.LEflux.LEfluxWallShade,self.EBCanyon.Hflux.HfluxWallShade,self.TimeParam.dts,
                                                   0.,1,None,self.BEM[i].building.fluxWall)
-                print(f'SWR:{self.EBRoof.SWR.SWRabsRoofImp}, LWR:{self.EBRoof.LWR.LWRabsRoofImp}, '
-                      f'LEflux:{self.EBRoof.LEflux.LEfluxRoofImp}, Hflux:{self.EBRoof.Hflux.HfluxRoofImp},'
-                      f'fluxRoof:{self.BEM[i].building.fluxRoof}, '
-                      f'Net: {self.EBRoof.SWR.SWRabsRoofImp+self.EBRoof.LWR.LWRabsRoofImp - self.EBRoof.LEflux.LEfluxRoofImp - self.EBRoof.Hflux.HfluxRoofImp -self.BEM[i].building.fluxRoof}')
-                print(f' Roof Imp: {self.BEM[i].roofImp.Text - 273.15}')
-
+                # print(f'SWR:{self.EBRoof.SWR.SWRabsRoofImp}, LWR:{self.EBRoof.LWR.LWRabsRoofImp}, '
+                #       f'LEflux:{self.EBRoof.LEflux.LEfluxRoofImp}, Hflux:{self.EBRoof.Hflux.HfluxRoofImp},'
+                #       f'fluxRoof:{self.BEM[i].building.fluxRoof}, '
+                #       f'Net: {self.EBRoof.SWR.SWRabsRoofImp+self.EBRoof.LWR.LWRabsRoofImp - self.EBRoof.LEflux.LEfluxRoofImp - self.EBRoof.Hflux.HfluxRoofImp -self.BEM[i].building.fluxRoof}')
+                print(f'WallSun: {self.BEM[i].wallSun.Text - 273.15}, '
+                      f'WallShade: {self.BEM[i].wallShade.Text - 273.15},'
+                      f'RoofImp: {self.BEM[i].roofImp.Text - 273.15}')
             # -----------------------------------
             # Update outdoor surface temperatures
             # -----------------------------------
