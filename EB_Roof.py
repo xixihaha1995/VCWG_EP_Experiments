@@ -567,7 +567,6 @@ class EnergyBalanceRoof_Def(object):
 
         # Latent heat from runon water on impervious area [W m^-2]
         LEroof_imp = L_heat * Eroof_imp
-        LEroof_imp = 0
         # Latent heat from intercepted water on vegetation [W m^-2]
         LEroof_veg = L_heat * Eroof_veg
         # Latent heat from runon water on ground under vegetation [W m^-2]
