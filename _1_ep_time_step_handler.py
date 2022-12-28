@@ -34,7 +34,8 @@ def overwrite_ep_weather(state):
     if "SmallOffice" in coordination.bld_type:
         global Attic_roof_west_hConv_actuator_handle, Attic_roof_east_hConv_actuator_handle, \
             Attic_roof_north_hConv_actuator_handle, Attic_roof_south_hConv_actuator_handle
-    elif "MediumOffice" in coordination.bld_type or 'ShoeBoxMedOffi' in coordination.bld_type:
+    elif "MediumOffice" in coordination.bld_type or \
+            'MedOffice' in coordination.bld_type:
         global roof_hConv_actuator_handle
     elif "MidriseApartment" in coordination.bld_type:
         global tRoofSWA_hConv_actuator_handle, tRoofNWA_hConv_actuator_handle, tRoofSEA_hConv_actuator_handle, \
@@ -62,14 +63,18 @@ def overwrite_ep_weather(state):
             Attic_roof_south_hConv_actuator_handle = coordination.ep_api.exchange. \
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient",
                                     "Attic_roof_south")
-        elif "MediumOffice" in coordination.bld_type:
+        elif "MediumOffice" in coordination.bld_type or 'Detailed_MedOffice' in coordination.bld_type:
             roof_hConv_actuator_handle = coordination.ep_api.exchange. \
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
                                     "BUILDING_ROOF")
-        elif 'ShoeBoxMedOffi' in coordination.bld_type:
+        elif "ShoeBox_MedOffice" in coordination.bld_type:
             roof_hConv_actuator_handle = coordination.ep_api.exchange. \
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
                                     "roof")
+        elif 'Simplified_MedOffice' in coordination.bld_type:
+            roof_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "Surface 14")
         elif "MidriseApartment" in coordination.bld_type:
             # global tRoofSWA_hConv_actuator_handle, tRoofNWA_hConv_actuator_handle, tRoofSEA_hConv_actuator_handle, \
             #     tRoofNEA_hConv_actuator_handle, tRoofN1A_hConv_actuator_handle, tRoofN2A_hConv_actuator_handle, \
@@ -112,7 +117,7 @@ def overwrite_ep_weather(state):
                 print('ovewrite_ep_weather():  SmallOffice, some roofhConv handle not available')
                 os.getpid()
                 os.kill(os.getpid(), signal.SIGTERM)
-        elif "MediumOffice" in coordination.bld_type or 'ShoeBoxMedOffi' in coordination.bld_type:
+        elif "MediumOffice" in coordination.bld_type or 'MedOffice' in coordination.bld_type:
             if roof_hConv_actuator_handle < 0:
                 print('ovewrite_ep_weather():  MediumOffice, some roofhConv handle not available')
                 os.getpid()
@@ -143,7 +148,7 @@ def overwrite_ep_weather(state):
             coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_east_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
             coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_north_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
             coordination.ep_api.exchange.set_actuator_value(state, Attic_roof_south_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
-        elif "MediumOffice" in coordination.bld_type or 'ShoeBoxMedOffi' in coordination.bld_type:
+        elif "MediumOffice" in coordination.bld_type or 'MedOffice' in coordination.bld_type:
             coordination.ep_api.exchange.set_actuator_value(state, roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
         elif "MidriseApartment" in coordination.bld_type:
             coordination.ep_api.exchange.set_actuator_value(state, tRoofSWA_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
@@ -655,7 +660,7 @@ def MediumOffice_get_ep_results(state):
 
         coordination.sem3.release()
 
-def ShoeBoxMedOffi_get_ep_results(state):
+def ShoeBox_MedOffice_get_ep_results(state):
     global get_ep_results_inited_handle,\
         hvac_heat_rejection_sensor_handle, \
         flr_Text_handle, roof_Text_handle, \
@@ -716,6 +721,91 @@ def ShoeBoxMedOffi_get_ep_results(state):
 
         coordination.sem3.release()
 
+
+def Simplified_MedOffice_get_ep_results(state):
+    global get_ep_results_inited_handle, \
+        hvac_heat_rejection_sensor_handle, \
+        flr_Text_handle, roof_Text_handle, \
+        s_wall_1_Text_handle, n_wall_1_Text_handle, \
+        s_wall_2_Text_handle, n_wall_2_Text_handle, \
+        s_wall_3_Text_handle, n_wall_3_Text_handle
+
+    if not get_ep_results_inited_handle:
+        if not coordination.ep_api.exchange.api_data_fully_ready(state):
+            return
+        get_ep_results_inited_handle = True
+        hvac_heat_rejection_sensor_handle = \
+            coordination.ep_api.exchange.get_variable_handle(state, \
+                                                             "HVAC System Total Heat Rejection Energy", \
+                                                             "SIMHVAC")
+        flr_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                           "Surface Outside Face Temperature",
+                                                                           "Surface 1")
+        roof_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                            "Surface Outside Face Temperature",
+                                                                            "Surface 14")
+        s_wall_1_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                              "Surface Outside Face Temperature",
+                                                                              "Surface 6")
+        s_wall_2_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                                "Surface Outside Face Temperature",
+                                                                                "Surface 10")
+        s_wall_3_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                                "Surface Outside Face Temperature",
+                                                                                "Surface 16")
+        n_wall_1_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                              "Surface Outside Face Temperature",
+                                                                              "Surface 3")
+        n_wall_2_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                                "Surface Outside Face Temperature",
+                                                                                "Surface 12")
+        n_wall_3_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                                "Surface Outside Face Temperature",
+                                                                                "Surface 18")
+        if (hvac_heat_rejection_sensor_handle == -1 or \
+                flr_Text_handle == -1 or roof_Text_handle == -1 or
+                s_wall_1_Text_handle == -1 or n_wall_1_Text_handle == -1 or
+        s_wall_2_Text_handle == -1 or n_wall_2_Text_handle == -1 or
+        s_wall_3_Text_handle == -1 or n_wall_3_Text_handle == -1):
+            print('Simplified_MedOffice_get_ep_results(): some handle not available')
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+    # get EP results, upload to coordination
+    if called_vcwg_bool:
+        global ep_last_call_time_seconds
+        coordination.sem2.acquire()
+        curr_sim_time_in_hours = coordination.ep_api.exchange.current_sim_time(state)
+        curr_sim_time_in_seconds = curr_sim_time_in_hours * 3600  # Should always accumulate, since system time always advances
+        accumulated_time_in_seconds = curr_sim_time_in_seconds - ep_last_call_time_seconds
+        ep_last_call_time_seconds = curr_sim_time_in_seconds
+        hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state,
+                                                                                hvac_heat_rejection_sensor_handle)
+        hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
+        coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
+
+        time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)
+
+        if not time_index_alignment_bool:
+            coordination.sem2.release()
+            return
+
+        flr_Text_c = coordination.ep_api.exchange.get_variable_value(state, flr_Text_handle)
+        roof_Text_c = coordination.ep_api.exchange.get_variable_value(state, roof_Text_handle)
+        s_wall_1_Text_c = coordination.ep_api.exchange.get_variable_value(state, s_wall_1_Text_handle)
+        n_wall_1_Text_c = coordination.ep_api.exchange.get_variable_value(state, n_wall_1_Text_handle)
+        s_wall_2_Text_c = coordination.ep_api.exchange.get_variable_value(state, s_wall_2_Text_handle)
+        n_wall_2_Text_c = coordination.ep_api.exchange.get_variable_value(state, n_wall_2_Text_handle)
+        s_wall_3_Text_c = coordination.ep_api.exchange.get_variable_value(state, s_wall_3_Text_handle)
+        n_wall_3_Text_c = coordination.ep_api.exchange.get_variable_value(state, n_wall_3_Text_handle)
+        s_wall_Text_c = (s_wall_1_Text_c + s_wall_2_Text_c + s_wall_3_Text_c) / 3
+        n_wall_Text_c = (n_wall_1_Text_c + n_wall_2_Text_c + n_wall_3_Text_c) / 3
+
+        coordination.ep_floor_Text_K = flr_Text_c + 273.15
+        coordination.ep_roof_Text_K = roof_Text_c + 273.15
+        coordination.ep_wallSun_Text_K = s_wall_Text_c + 273.15
+        coordination.ep_wallShade_Text_K = n_wall_Text_c + 273.15
+
+        coordination.sem3.release()
 def LargeOffice_get_ep_results(state):
     global get_ep_results_inited_handle, \
         hvac_heat_rejection_sensor_handle, zone_indor_temp_sensor_handle, zone_indor_spe_hum_sensor_handle, \
@@ -1222,6 +1312,7 @@ def MidriseApartment_get_ep_results(state):
         coordination.ep_wallShade_Tint_K = n_wall_Tint_C + 273.15
 
         coordination.sem3.release()
+
 
 def general_get_ep_results(state):
     global get_ep_results_inited_handle, \

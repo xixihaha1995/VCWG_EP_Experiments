@@ -15,12 +15,15 @@ def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1,
     coordination.psychrometric=coordination.ep_api.functional.psychrometrics(state)
     coordination.ep_api.runtime.callback_begin_zone_timestep_before_set_current_weather(state,
                                                                                         time_step_handlers.overwrite_ep_weather)
-    if 'MediumOffice' in coordination.bld_type:
+    if 'MediumOffice' in coordination.bld_type or 'Detailed_MedOffice' in coordination.bld_type:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers.MediumOffice_get_ep_results)
-    elif 'ShoeBoxMedOffi' in coordination.bld_type:
+    elif 'ShoeBox_MedOffice' in coordination.bld_type:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
-                                                                                      time_step_handlers.ShoeBoxMedOffi_get_ep_results)
+                                                                                      time_step_handlers.ShoeBox_MedOffice_get_ep_results)
+    elif 'Simplified_MedOffice' in coordination.bld_type:
+        coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
+                                                                                      time_step_handlers.Simplified_MedOffice_get_ep_results)
     elif 'SmallOffice' in coordination.bld_type:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers.SmallOffice_get_ep_results)

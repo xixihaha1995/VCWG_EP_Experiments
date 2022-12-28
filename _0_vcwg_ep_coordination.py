@@ -44,6 +44,7 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
     else:
         nbr_control_variables = 1
         csv_file_name += ctl_virable_1 + '_' + str(value_1)
+    csv_file_name += '_'+ config['Bypass']['idfFileName'][0:-4]
     print(f'csv_file_name = {csv_file_name}')
     bld_type = csv_file_name
     experiments_theme = config['Bypass']['experiments_theme']
@@ -73,7 +74,7 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
 
     if "SmallOffice" in bld_type:
         footprint_area_m2 = 5500 * 0.09290304 / 1
-    elif "MediumOffice" in bld_type or 'ShoeBoxMedOffi' in bld_type:
+    elif "MediumOffice" in bld_type or 'MedOffice' in bld_type:
         footprint_area_m2 = 53628 * 0.09290304 / 3
     elif "LargeOffice" in bld_type:
         footprint_area_m2 = 498588 * 0.09290304 / 12

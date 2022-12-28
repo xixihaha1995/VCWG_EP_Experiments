@@ -50,9 +50,9 @@ def one_control_variable(sensitivity_file_name):
     batch_value_list = [ctl_values_1[i:i + nbr_of_parallel] for i in range(0, len(ctl_values_1), nbr_of_parallel)]
     for batch_nbr, batch_value in enumerate(batch_value_list):
         for value in batch_value:
-            # ByPass.run_ep_api(sensitivity_file_name,config, ctl_viriable_1, value)
-            this_ini_process.append(
-                Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value)))
+            ByPass.run_ep_api(sensitivity_file_name,config, ctl_viriable_1, value)
+            # this_ini_process.append(
+            #     Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value)))
 def mixed_variable(sensitivity_file_name):
     #three control variables (4 * 4 * 3 = 48)
     #nbr_of_parallel = 4
