@@ -126,14 +126,8 @@ def generate_epw(experiment):
         f.writelines(lines)
 def run_energyplus(experiment):
     #/home/xiaoai/VCWG_EP_Experiments/resources/idf/Chicago/MediumOffice/RefBldgMediumOfficeNew2004_v1.4_7.2_5A_USA_IL_CHICAGO-OHARE_Ori0.idf
-    idf_template_name = 'RefBldgMediumOfficeNew2004_v1.4_7.2_5A_USA_IL_CHICAGO-OHARE'
-    if 'orientation_0' in experiment:
-        idf_template_name += '_Ori0.idf'
-    elif 'orientation_90' in experiment:
-        idf_template_name += '_Ori90.idf'
-    elif 'orientation_45' in experiment:
-        idf_template_name += '_Ori45.idf'
-
+    'remove OnlyVCWG_IDFComplexity_'
+    idf_template_name = experiment.replace('OnlyVCWG_IDFComplexity_', '')[:-4] + '.idf'
 
     output_path = os.path.join(experiments_folder,
                                f'{experiment[:-4]}_ep_trivial_outputs')
