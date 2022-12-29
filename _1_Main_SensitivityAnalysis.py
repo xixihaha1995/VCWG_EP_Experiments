@@ -45,14 +45,19 @@ def read_ini(config_file_name):
 def one_control_variable(sensitivity_file_name):
     ctl_viriable_1 = config['Bypass']['control_variable_1']
     ctl_values_1 = [i for i in config['Bypass']['control_values_1'].split(',')]
+    framework = config['Bypass']['framework']
     this_ini_process = []
     nbr_of_parallel = 3
     batch_value_list = [ctl_values_1[i:i + nbr_of_parallel] for i in range(0, len(ctl_values_1), nbr_of_parallel)]
     for batch_nbr, batch_value in enumerate(batch_value_list):
         for value in batch_value:
-            # ByPass.run_ep_api(sensitivity_file_name,config, ctl_viriable_1, value)
-            this_ini_process.append(
-                Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value)))
+            if 'OnlyVCWG' in framework:
+                this_ini_process.append(
+                    Process(target=ByPass.run_vcwg, args=(sensitivity_file_name, config, ctl_viriable_1, value)))
+            else:
+                # ByPass.run_ep_api(sensitivity_file_name,config, ctl_viriable_1, value)
+                this_ini_process.append(
+                    Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value)))
     for p in this_ini_process:
         p.start()
 def mixed_variable(sensitivity_file_name):
@@ -99,4 +104,5 @@ def one_ini(sensitivity_file_name):
 if __name__ == '__main__':
     # one_ini('Chicago_MedOffice_MixedVariable.ini')
     # one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
-    one_ini('Chicago_MedOffice_IDFComplexity.ini')
+    # one_ini('Chicago_MedOffice_IDFComplexity.ini')
+    one_ini('Chicago_MedOffice_IDFComplexity_OnlyVCWG.ini')

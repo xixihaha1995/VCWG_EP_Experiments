@@ -196,14 +196,15 @@ def main():
     from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
     experiments_folder = 'Chicago_MedOffice_Sensitivity'
+    experiments_folder = 'Chicago_MedOffice_IDFComplexity'
     epw_template = os.path.join('..','resources','epw','USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw')
     experiments = []
     for experiment in os.listdir(experiments_folder):
         if experiment.endswith('.csv') and 'OnlyVCWG' in experiment:
             experiments.append(experiment)
     for experiment in experiments:
-        # generate_epw(experiment)
-        run_energyplus(experiment)
+        generate_epw(experiment)
+        # run_energyplus(experiment)
 
     # get_offline_comparison(experiments)
 
