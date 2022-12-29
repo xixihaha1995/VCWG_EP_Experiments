@@ -196,7 +196,7 @@ def main():
     from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
     experiments_folder = 'Chicago_MedOffice_Sensitivity'
-    experiments_folder = 'Chicago_MedOffice_IDFComplexity'
+    # experiments_folder = 'Chicago_MedOffice_IDFComplexity'
     epw_template = os.path.join('..','resources','epw','USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw')
     experiments = []
     for experiment in os.listdir(experiments_folder):

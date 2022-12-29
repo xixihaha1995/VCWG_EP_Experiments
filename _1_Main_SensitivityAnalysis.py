@@ -55,9 +55,9 @@ def one_control_variable(sensitivity_file_name):
                 this_ini_process.append(
                     Process(target=ByPass.run_vcwg, args=(sensitivity_file_name, config, ctl_viriable_1, value)))
             else:
-                # ByPass.run_ep_api(sensitivity_file_name,config, ctl_viriable_1, value)
-                this_ini_process.append(
-                    Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value)))
+                ByPass.run_ep_api(sensitivity_file_name,config, ctl_viriable_1, value)
+                # this_ini_process.append(
+                #     Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value)))
     for p in this_ini_process:
         p.start()
 def mixed_variable(sensitivity_file_name):
@@ -104,5 +104,5 @@ def one_ini(sensitivity_file_name):
 if __name__ == '__main__':
     # one_ini('Chicago_MedOffice_MixedVariable.ini')
     # one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
-    # one_ini('Chicago_MedOffice_IDFComplexity.ini')
-    one_ini('Chicago_MedOffice_IDFComplexity_OnlyVCWG.ini')
+    one_ini('Chicago_MedOffice_IDFComplexity.ini')
+    # one_ini('Chicago_MedOffice_IDFComplexity_OnlyVCWG.ini')
