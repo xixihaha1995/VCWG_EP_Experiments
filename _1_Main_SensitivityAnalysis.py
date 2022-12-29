@@ -86,7 +86,8 @@ def mixed_variable(sensitivity_file_name):
                     #                   value_2, ctl_viriable_3, value_3)
                     all_process.append(
                         Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value_1, ctl_viriable_2, value_2, ctl_viriable_3, value_3)))
-    for i in range(0, len(all_process), nbr_of_parallel):
+
+    for i in range(24, len(all_process), nbr_of_parallel):
         for process in all_process[i:i + nbr_of_parallel]:
             process.start()
         for process in all_process[i:i + nbr_of_parallel]:
@@ -101,5 +102,5 @@ def one_ini(sensitivity_file_name):
 
 
 if __name__ == '__main__':
-    # one_ini('Chicago_MedOffice_MixedVariable.ini')
-    one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
+    one_ini('Chicago_MedOffice_MixedVariable.ini')
+    # one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
