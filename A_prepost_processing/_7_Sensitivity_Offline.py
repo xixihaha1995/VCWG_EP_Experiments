@@ -196,7 +196,8 @@ def main():
     from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
     experiments_folder = 'Chicago_MedOffice_Sensitivity'
-    epw_template = os.path.join('..','resources','epw','USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw')
+    epw_template = os.path.join('..','resources','epw',
+                                'USA_IL_Chicago-OHare.Intl.AP.725300_TMY3_No_Precipitable_Water.epw')
     experiments = []
     for experiment in os.listdir(experiments_folder):
         if experiment.endswith('.csv') and 'OnlyVCWG' in experiment:
