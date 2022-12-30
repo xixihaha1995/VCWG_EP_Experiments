@@ -147,6 +147,12 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     # -----------------------------------------
     # Calculate turbulent diffusion coefficient (Km) [m^2 s^-1]
     Km = TurbCoeff(Geometry_m.nz, Ck, tke, dlk)
+    print('Km = ', Km,)
+    # Km equals inverse
+    # Km_new = numpy.asarray(Km)
+    # for i in range(len(Km)):
+    #     Km_new[i] = Km[len(Km)-i-1]
+    # Km = Km_new
 
     # Calculate shear production [m^2 s^-3] in TKE equation. (Term II of equation 5.2, Krayenhoff 2014, PhD thesis)
     sh = ShearProd(ColParam.cdmin,Geometry_m.nz, Geometry_m.dz, vx, vy, Km)
@@ -244,7 +250,7 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     tke_new,wtke,dwtkedz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,tke_bc_bottom,tke_bc_top,dts,rho,tke,Km,srim_tke,srex_tke,sf,vol,Geometry_m.dz)
     # Solve temperature equation
     th_new,wth,dwthdz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,T_bc_bottom,T_bc_top,dts,rho,th,Km/ColParam.prandtl,srim_th,srex_th,sf,vol,Geometry_m.dz)
-    # print(f'th_new[:Geometry_.nz_u + 1] = {th_new[:Geometry_m.nz_u + 1] - 273.15}')
+    print(f'th_new = {th_new - 273.15}')
     # Solve specific humidity equation
     qn_new,wqn,dwqndz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,q_bc_bottom,q_bc_top,dts,rho,qn,Km/ColParam.schmidt,srim_qn,srex_qn,sf,vol,Geometry_m.dz)
 
