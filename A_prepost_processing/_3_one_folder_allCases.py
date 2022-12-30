@@ -355,10 +355,9 @@ def process_one_theme(csv_filename):
 def iterate_all_cases(experiments_folder):
     csv_files = []
     for file in os.listdir(experiments_folder):
-        if file.endswith('.csv') and 'OnlyVCWG' not in file and 'WithoutShading' in file:
+        if file.endswith('.csv') and 'OnlyVCWG' not in file :
             csv_files.append(file)
             process_one_theme(file,)
-
 def main():
     global sql_report_name, sql_table_name, sql_row_name, sql_col_name
     global experiments_folder
