@@ -38,10 +38,8 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
                                     experiments_theme,f'{csv_file_name}.csv')
     ep_trivial_path = os.path.join(project_path, 'A_prepost_processing',
                                    experiments_theme, f"{csv_file_name}_ep_trivial_outputs")
-    if config['Default']['operating_system'] == 'windows':
-        sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
-    else:
-        sys.path.insert(0, '/usr/local/EnergyPlus-22-1-0/'),
+    sys.path.insert(0, '/usr/local/EnergyPlus-22-1-0/')
+    sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
     from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
     psychrometric = None

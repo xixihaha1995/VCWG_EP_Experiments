@@ -215,12 +215,17 @@ def overwrite_ep_weather(state):
             os.getpid()
             os.kill(os.getpid(), signal.SIGTERM)
         if "MediumOffice" in coordination.bld_type:
-            if roof_hConv_actuator_handle < 0 or \
-                odb_bot_actuator_handle < 0 or owb_bot_actuator_handle < 0 or odb_mid_actuator_handle < 0 or \
-                owb_mid_actuator_handle < 0 or odb_top_actuator_handle < 0 or owb_top_actuator_handle < 0:
+            if roof_hConv_actuator_handle < 0:
                 print('ovewrite_ep_weather(): MediumOffice,some handle not available')
                 os.getpid()
                 os.kill(os.getpid(), signal.SIGTERM)
+            if 'vector' in coordination.value and (odb_bot_actuator_handle < 0 or \
+                    owb_bot_actuator_handle < 0 or odb_mid_actuator_handle < 0 or \
+                    owb_mid_actuator_handle < 0 or odb_top_actuator_handle < 0 or owb_top_actuator_handle < 0):
+                print('ovewrite_ep_weather(): MediumOffice,some handle not available')
+                os.getpid()
+                os.kill(os.getpid(), signal.SIGTERM)
+
         if "20Stories" in coordination.bld_type:
             if Surface_576_roof_hConv_actuator_handle < 0 or \
                 Surface_582_roof_hConv_actuator_handle < 0 or Surface_588_roof_hConv_actuator_handle < 0 or \
