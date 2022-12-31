@@ -117,7 +117,7 @@ def write_epw(TopForcingFile,epw_precision,climate_file,timeInitial,climate_file
 
 
     # Writing new EPW file
-    TopForcing_EPW = EPW_path+r'\TopForcing.epw'
+    TopForcing_EPW = os.path.join(EPW_path, 'TopForcing.epw')
     epw_new_id = open(TopForcing_EPW, "w")
 
     for i in range(8):
