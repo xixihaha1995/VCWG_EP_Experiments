@@ -148,7 +148,7 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     # Calculate turbulent diffusion coefficient (Km) [m^2 s^-1]
     print(f'dlk: {dlk}')
     for i in range(0, Geometry_m.nz_u):
-        dlk[i] = dlk[i] * 5e-1
+        dlk[i] = dlk[i] * 2e-1
     # dlk[Geometry_m.nz_u] = dlk[Geometry_m.nz_u] * 1e-2
     # for i in range(Geometry_m.nz_u, Geometry_m.nz):
     #     # dlk[i] = dlk[Geometry_m.nz_u] * 2e0

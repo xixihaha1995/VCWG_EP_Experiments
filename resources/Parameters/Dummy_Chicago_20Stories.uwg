@@ -259,7 +259,7 @@ Ri_b_cr,0.1,           # Critical bulk Richardson number in the urban area used 
 z0_roof,0.02,          # Roof roughness [m] ## Check make sure roughness length are not computed multiple times inconsistently, delete
 z0_road,0.02,          # Road roughness [m] ## Check make sure roughness length are not computed multiple times inconsistently, delete
 cdmin,0.01,            # Minimum diffusion coefficient
-prandtl,0.5,           # Turbulent Prandtl number
+prandtl,0.8,           # Turbulent Prandtl number
 schmidt,1,             # Turbulent Schmidt number
 HVAC_atm_frac,1,       # Fraction of sensible waste heat from building released into the atmosphere
 HVAC_street_frac,0,    # Fraction of Sensible waste heat from building released into the atmosphere at street level
