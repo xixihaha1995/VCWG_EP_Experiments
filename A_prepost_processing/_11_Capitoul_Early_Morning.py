@@ -23,8 +23,8 @@ def normalized_mean_bias_error(measurements, predictions):
 
 plot_fontsize = 12
 experiments_folder = 'AllCases'
-experiment_csv = 'CAPITOUL_WithShading_WithCooling.csv'
-organized_xlsx = 'CAPITOUL_WithShading_WithCoolingcomparison.xlsx'
+experiment_csv = 'CAPITOUL_WithShading_WithoutCooling.csv'
+organized_xlsx = 'CAPITOUL_WithShading_WithoutCoolingcomparison.xlsx'
 all_data = pd.read_excel(os.path.join(experiments_folder, organized_xlsx), sheet_name='comparison', index_col=0)
 themes = ['sensor_idx_20.0','sensWaste','ForcTemp_K', 'wallSun_K', 'wallShade_K', 'roof_K']
 
