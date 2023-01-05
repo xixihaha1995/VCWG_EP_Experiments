@@ -23,6 +23,7 @@ def normalized_mean_bias_error(measurements, predictions):
 
 plot_fontsize = 12
 experiments_folder = 'CAPITOUL_ByPass_Improvements_Investigation'
+experiments_folder = ['AllCases']
 all_data_name = "comparison.xlsx"
 all_data = pd.read_excel(os.path.join(experiments_folder, all_data_name), sheet_name='comparison', index_col=0)
 # comparison['sensWaste_' + csv_file] = df['sensWaste']
@@ -34,11 +35,12 @@ all_data = pd.read_excel(os.path.join(experiments_folder, all_data_name), sheet_
 # get all the csv file names
 # all_csv_files = [f for f in os.listdir(experiments_folder) if f.endswith('.csv')]
 all_csv_files = [ 'Oct_Bypass.csv','Bypassing_EPW.csv', 'Bypassing_IDF.csv', 'Dec_Bypass.csv',]
+all_csv_files = ['CAPITOUL_WithShading_WithCooling.csv',]
 themes = ['sensor_idx_20.0','ForcTemp_K','sensWaste', 'wallSun_K', 'wallShade_K', 'roof_K']
 # create new excel files, with the following sheets name:
 # 'sensWaste', 'wallSun_K', 'wallShade_K', 'roof_K', 'ForcTemp_K', sensor_idx_20.0
 cvrmse_nmb_dict = {}
-reorganized_excel = pd.ExcelWriter(os.path.join(experiments_folder, 'reorganized.xlsx'))
+reorganized_excel = pd.ExcelWriter(os.path.join(experiments_folder, 'CAPITOUL_WithShading_WithCoolingcomparison.xlsx'))
 # copy the "cvrmse" sheet from the original excel file
 old_cvrmse_sheet = pd.read_excel(os.path.join(experiments_folder, all_data_name), sheet_name='cvrmse', index_col=0)
 old_cvrmse_sheet.to_excel(reorganized_excel, sheet_name='cvrmse')
