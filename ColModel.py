@@ -152,8 +152,9 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     # dlk[Geometry_m.nz_u] = dlk[Geometry_m.nz_u] * 1e-2
     # for i in range(Geometry_m.nz_u, Geometry_m.nz):
     #     # dlk[i] = dlk[Geometry_m.nz_u] * 2e0
-    #     dlk[i] = 36
+    #     dlk[i] = 20
     Km = TurbCoeff(Geometry_m.nz, Ck, tke, dlk)
+    # print(f'Km: {Km}')
     # Calculate shear production [m^2 s^-3] in TKE equation. (Term II of equation 5.2, Krayenhoff 2014, PhD thesis)
     sh = ShearProd(ColParam.cdmin,Geometry_m.nz, Geometry_m.dz, vx, vy, Km)
 
