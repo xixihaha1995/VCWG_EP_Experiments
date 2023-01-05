@@ -146,9 +146,14 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     # Calculate Turbulent Diffusion Coefficient
     # -----------------------------------------
     # Calculate turbulent diffusion coefficient (Km) [m^2 s^-1]
-    print(f'dlk: {dlk}')
+
     for i in range(0, Geometry_m.nz_u):
         dlk[i] = dlk[i] * 2e-1
+    print('dlk')
+    for i in dlk:
+        # print without new line
+        print(i, end=',')
+    print()
     # dlk[Geometry_m.nz_u] = dlk[Geometry_m.nz_u] * 1e-2
     # for i in range(Geometry_m.nz_u, Geometry_m.nz):
     #     # dlk[i] = dlk[Geometry_m.nz_u] * 2e0
@@ -253,7 +258,11 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     tke_new,wtke,dwtkedz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,tke_bc_bottom,tke_bc_top,dts,rho,tke,Km,srim_tke,srex_tke,sf,vol,Geometry_m.dz)
     # Solve temperature equation
     th_new,wth,dwthdz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,T_bc_bottom,T_bc_top,dts,rho,th,Km/ColParam.prandtl,srim_th,srex_th,sf,vol,Geometry_m.dz)
-    print(f'th_new = {th_new - 273.15}')
+    print('th_new')
+    for i in th_new:
+        # print without new line
+        print(i - 273.15, end=',')
+    print()
     # Solve specific humidity equation
     qn_new,wqn,dwqndz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,q_bc_bottom,q_bc_top,dts,rho,qn,Km/ColParam.schmidt,srim_qn,srex_qn,sf,vol,Geometry_m.dz)
 
