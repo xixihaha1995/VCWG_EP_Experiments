@@ -887,46 +887,274 @@ def LargeOffice_get_ep_results(state):
                                                                                    zone_indor_spe_hum_sensor_handle)
         coordination.sem3.release()
 
+def batch_get_energy_handles(state):
+    '''
+    Zone Packaged Terminal Heat Pump Total Heating Energy
+    Zone Packaged Terminal Heat Pump Total Cooling Energy
+    Zone Packaged Terminal Heat Pump Electricity Energy
+    'PTHP 1' ... 'PTHP 100'
+    '''
+    pass
+    dict = {}
+    for i in range(1, 101):
+        dict['PTHP ' + str(i)] = []
+        dict['PTHP ' + str(i)].append(
+            coordination.ep_api.exchange.get_variable_handle(state,
+                                                             "Zone Packaged Terminal Heat Pump Total Heating Energy",
+                                                             'PTHP ' + str(i)))
+        dict['PTHP ' + str(i)].append(
+            coordination.ep_api.exchange.get_variable_handle(state,
+                                                             "Zone Packaged Terminal Heat Pump Total Cooling Energy",
+                                                             'PTHP ' + str(i)))
+        dict['PTHP ' + str(i)].append(
+            coordination.ep_api.exchange.get_variable_handle(state,
+                                                             "Zone Packaged Terminal Heat Pump Electricity Energy",
+                                                             'PTHP ' + str(i)))
+    return dict
+
+def batch_check_handles(dict):
+    for i in range(1, 101):
+        if -1 in dict['PTHP ' + str(i)]:
+            print('batch_check_handles(): some handle not available')
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+
+def get_zone_to_pthp_dict():
+    zone_pthp_dict = {}
+    zone_pthp_dict[1] = 56
+    zone_pthp_dict[10] = 65
+    zone_pthp_dict[100] = 6
+    zone_pthp_dict[11] = 66
+    zone_pthp_dict[12] = 67
+    zone_pthp_dict[13] = 68
+    zone_pthp_dict[14] = 69
+    zone_pthp_dict[15] = 70
+    zone_pthp_dict[16] = 71
+    zone_pthp_dict[17] = 72
+    zone_pthp_dict[18] = 73
+    zone_pthp_dict[19] = 74
+    zone_pthp_dict[2] = 57
+    zone_pthp_dict[20] = 75
+    zone_pthp_dict[21] = 76
+    zone_pthp_dict[22] = 77
+    zone_pthp_dict[23] = 78
+    zone_pthp_dict[24] = 79
+    zone_pthp_dict[25] = 80
+    zone_pthp_dict[26] = 81
+    zone_pthp_dict[27] = 82
+    zone_pthp_dict[28] = 83
+    zone_pthp_dict[29] = 84
+    zone_pthp_dict[3] = 58
+    zone_pthp_dict[30] = 85
+    zone_pthp_dict[31] = 86
+    zone_pthp_dict[32] = 87
+    zone_pthp_dict[33] = 88
+    zone_pthp_dict[34] = 89
+    zone_pthp_dict[35] = 90
+    zone_pthp_dict[36] = 91
+    zone_pthp_dict[37] = 92
+    zone_pthp_dict[38] = 93
+    zone_pthp_dict[39] = 94
+    zone_pthp_dict[4] = 59
+    zone_pthp_dict[40] = 95
+    zone_pthp_dict[41] = 96
+    zone_pthp_dict[42] = 97
+    zone_pthp_dict[43] = 98
+    zone_pthp_dict[44] = 99
+    zone_pthp_dict[45] = 100
+    zone_pthp_dict[46] = 38
+    zone_pthp_dict[47] = 39
+    zone_pthp_dict[48] = 40
+    zone_pthp_dict[49] = 41
+    zone_pthp_dict[5] = 60
+    zone_pthp_dict[50] = 42
+    zone_pthp_dict[51] = 43
+    zone_pthp_dict[52] = 44
+    zone_pthp_dict[53] = 45
+    zone_pthp_dict[54] = 46
+    zone_pthp_dict[55] = 47
+    zone_pthp_dict[56] = 48
+    zone_pthp_dict[57] = 49
+    zone_pthp_dict[58] = 50
+    zone_pthp_dict[59] = 51
+    zone_pthp_dict[6] = 61
+    zone_pthp_dict[60] = 52
+    zone_pthp_dict[61] = 53
+    zone_pthp_dict[62] = 54
+    zone_pthp_dict[63] = 55
+    zone_pthp_dict[64] = 36
+    zone_pthp_dict[65] = 37
+    zone_pthp_dict[66] = 34
+    zone_pthp_dict[67] = 35
+    zone_pthp_dict[68] = 25
+    zone_pthp_dict[69] = 26
+    zone_pthp_dict[7] = 62
+    zone_pthp_dict[70] = 27
+    zone_pthp_dict[71] = 28
+    zone_pthp_dict[72] = 29
+    zone_pthp_dict[73] = 30
+    zone_pthp_dict[74] = 31
+    zone_pthp_dict[75] = 32
+    zone_pthp_dict[76] = 33
+    zone_pthp_dict[77] = 23
+    zone_pthp_dict[78] = 24
+    zone_pthp_dict[79] = 18
+    zone_pthp_dict[8] = 63
+    zone_pthp_dict[80] = 19
+    zone_pthp_dict[81] = 20
+    zone_pthp_dict[82] = 21
+    zone_pthp_dict[83] = 22
+    zone_pthp_dict[84] = 16
+    zone_pthp_dict[85] = 17
+    zone_pthp_dict[86] = 14
+    zone_pthp_dict[87] = 15
+    zone_pthp_dict[88] = 12
+    zone_pthp_dict[89] = 13
+    zone_pthp_dict[9] = 64
+    zone_pthp_dict[90] = 11
+    zone_pthp_dict[91] = 7
+    zone_pthp_dict[92] = 8
+    zone_pthp_dict[93] = 9
+    zone_pthp_dict[94] = 10
+    zone_pthp_dict[95] = 1
+    zone_pthp_dict[96] = 2
+    zone_pthp_dict[97] = 3
+    zone_pthp_dict[98] = 4
+    zone_pthp_dict[99] = 5
+    return zone_pthp_dict
+
+def batch_get_energy_results(state, dict, accumulated_time_in_seconds):
+    '''
+    Zone Packaged Terminal Heat Pump Total Heating Energy
+    Zone Packaged Terminal Heat Pump Total Cooling Energy
+    Zone Packaged Terminal Heat Pump Electricity Energy
+    'PTHP 1' ... 'PTHP 100'
+    '''
+
+    energy_dict = {}
+    heating_total = 0
+    cooling_total = 0
+    electricity_total = 0
+    for i in range(1, 101):
+        energy_dict['PTHP ' + str(i)] = []
+        tmp_heating = coordination.ep_api.exchange.get_variable_value(state, dict['PTHP ' + str(i)][0])
+        tmp_cooling = coordination.ep_api.exchange.get_variable_value(state, dict['PTHP ' + str(i)][1])
+        tmp_electricity = coordination.ep_api.exchange.get_variable_value(state, dict['PTHP ' + str(i)][2])
+        energy_dict['PTHP ' + str(i)].append(tmp_heating)
+        energy_dict['PTHP ' + str(i)].append(tmp_cooling)
+        energy_dict['PTHP ' + str(i)].append(tmp_electricity)
+        heating_total += tmp_heating
+        cooling_total += tmp_cooling
+        electricity_total += tmp_electricity
+
+    zone_to_pthp = get_zone_to_pthp_dict()
+    # to get 20 floors energy,
+    # for each floor, sum up the energy of 5 zones,
+    # for each zone, sum up heating, cooling, electricity
+    for i in range(1, 21):
+        for j in range(1, 6):
+            tmp_zone = zone_to_pthp[(i - 1) * 5 + j]
+            coordination.EP_floor_energy_lst[i-1] += energy_dict['PTHP ' + str(tmp_zone)][0]
+            coordination.EP_floor_energy_lst[i-1] += energy_dict['PTHP ' + str(tmp_zone)][1]
+            coordination.EP_floor_energy_lst[i-1] += energy_dict['PTHP ' + str(tmp_zone)][2]
+        coordination.EP_floor_energy_lst[i - 1] /= accumulated_time_in_seconds
+        coordination.EP_floor_energy_lst[i - 1] /= coordination.footprint_area_m2
+    return energy_dict, heating_total, cooling_total, electricity_total
+
+def batch_wall_handles(state):
+    pass
+    '''
+    surface92_south_wall_Text_c_handle, surface122_south_wall_Text_c_handle, surface152_south_wall_Text_c_handle, \
+        surface182_south_wall_Text_c_handle, surface212_south_wall_Text_c_handle, surface242_south_wall_Text_c_handle, \
+        surface272_south_wall_Text_c_handle, surface302_south_wall_Text_c_handle, surface332_south_wall_Text_c_handle, \
+        surface362_south_wall_Text_c_handle, surface392_south_wall_Text_c_handle, surface422_south_wall_Text_c_handle, \
+        surface452_south_wall_Text_c_handle, surface482_south_wall_Text_c_handle, surface512_south_wall_Text_c_handle, \
+        surface542_south_wall_Text_c_handle, surface572_south_wall_Text_c_handle,\
+        surface26_north_wall_Text_c_handle, surface56_north_wall_Text_c_handle, surface86_north_wall_Text_c_handle, \
+        surface116_north_wall_Text_c_handle, surface146_north_wall_Text_c_handle, surface176_north_wall_Text_c_handle, \
+        surface206_north_wall_Text_c_handle, surface236_north_wall_Text_c_handle, surface266_north_wall_Text_c_handle, \
+        surface296_north_wall_Text_c_handle, surface326_north_wall_Text_c_handle, surface356_north_wall_Text_c_handle, \
+        surface386_north_wall_Text_c_handle, surface416_north_wall_Text_c_handle, surface446_north_wall_Text_c_handle, \
+        surface476_north_wall_Text_c_handle, surface506_north_wall_Text_c_handle, surface536_north_wall_Text_c_handle, \
+        surface566_north_wall_Text_c_handle, surface596_north_wall_Text_c_handle,\
+        surface14_east_wall_Text_c_handle, surface44_east_wall_Text_c_handle, surface74_east_wall_Text_c_handle, \
+        surface104_east_wall_Text_c_handle, surface134_east_wall_Text_c_handle, surface164_east_wall_Text_c_handle, \
+        surface194_east_wall_Text_c_handle, surface224_east_wall_Text_c_handle, surface254_east_wall_Text_c_handle, \
+        surface284_east_wall_Text_c_handle, surface314_east_wall_Text_c_handle, surface344_east_wall_Text_c_handle, \
+        surface374_east_wall_Text_c_handle, surface404_east_wall_Text_c_handle, surface434_east_wall_Text_c_handle, \
+        surface464_east_wall_Text_c_handle, surface494_east_wall_Text_c_handle, surface524_east_wall_Text_c_handle, \
+        surface554_east_wall_Text_c_handle, surface584_east_wall_Text_c_handle,\
+        surface10_west_wall_Text_c_handle, surface40_west_wall_Text_c_handle, surface70_west_wall_Text_c_handle, \
+        surface100_west_wall_Text_c_handle, surface130_west_wall_Text_c_handle, surface160_west_wall_Text_c_handle, \
+        surface190_west_wall_Text_c_handle, surface220_west_wall_Text_c_handle, surface250_west_wall_Text_c_handle, \
+        surface280_west_wall_Text_c_handle, surface310_west_wall_Text_c_handle, surface340_west_wall_Text_c_handle, \
+        surface370_west_wall_Text_c_handle, surface400_west_wall_Text_c_handle, surface430_west_wall_Text_c_handle, \
+        surface460_west_wall_Text_c_handle, surface490_west_wall_Text_c_handle, surface520_west_wall_Text_c_handle, \
+        surface550_west_wall_Text_c_handle, surface580_west_wall_Text_c_handle'''
+    wall_handles_dict = {}
+    wall_handles_dict['south'] = []
+    wall_handles_dict['north'] = []
+    wall_handles_dict['east'] = []
+    wall_handles_dict['west'] = []
+    for i in range(1, 21):
+        tmp_south = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
+                                                                                                "Surface " + str(2 + (i - 1) * 30))
+        tmp_north = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
+                                                                                                "Surface " + str(26 + (i - 1) * 30))
+        tmp_east = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
+                                                                                                "Surface " + str(14 + (i - 1) * 30))
+        tmp_west = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
+                                                                                                "Surface " + str(10 + (i - 1) * 30))
+        wall_handles_dict['south'].append(tmp_south)
+        wall_handles_dict['north'].append(tmp_north)
+        wall_handles_dict['east'].append(tmp_east)
+        wall_handles_dict['west'].append(tmp_west)
+    return wall_handles_dict
+
+def batch_check_wall_handles(wall_handles_dict):
+    for key in wall_handles_dict.keys():
+        for i in range(len(wall_handles_dict[key])):
+            if wall_handles_dict[key][i] == -1:
+                print('batch_check_wall_handles(): some handle not available')
+                os.getpid()
+                os.kill(os.getpid(), signal.SIGTERM)
+
+def batch_get_wall_temperatures(state, wall_handles_dict):
+    #coordination.ep_api.exchange.get_variable_value(state, surface576_roof_Text_c_handle)
+    wall_temperatures_dict = {}
+    wall_temperatures_dict['south'] = []
+    wall_temperatures_dict['north'] = []
+    wall_temperatures_dict['east'] = []
+    wall_temperatures_dict['west'] = []
+
+    for key in wall_handles_dict.keys():
+        for i in range(len(wall_handles_dict[key])):
+            tmp = coordination.ep_api.exchange.get_variable_value(state, wall_handles_dict[key][i]) + 273.15
+            wall_temperatures_dict[key].append(tmp)
+    south_wall_Text_K = 0
+    north_wall_Text_K = 0
+    for i in range(len(wall_temperatures_dict['south'])):
+        south_wall_Text_K += wall_temperatures_dict['south'][i]
+        north_wall_Text_K += wall_temperatures_dict['north'][i]
+    south_wall_Text_K /= len(wall_temperatures_dict['south'])
+    north_wall_Text_K /= len(wall_temperatures_dict['north'])
+    return wall_temperatures_dict, south_wall_Text_K - 273.15, north_wall_Text_K - 273.15
 def _20Stories_get_ep_results(state):
     global get_ep_results_inited_handle, \
         hvac_heat_rejection_sensor_handle,\
         surface576_roof_Text_c_handle, surface582_roof_Text_c_handle, surface588_roof_Text_c_handle, \
         surface594_roof_Text_c_handle, surface600_roof_Text_c_handle, surface1_floor_Text_c_handle, \
         surface7_floor_Text_c_handle, surface13_floor_Text_c_handle, surface19_floor_Text_c_handle, \
-        surface25_floor_Text_c_handle, \
-        surface2_south_wall_Text_c_handle, surface32_south_wall_Text_c_handle, surface62_south_wall_Text_c_handle, \
-    surface92_south_wall_Text_c_handle, surface122_south_wall_Text_c_handle, surface152_south_wall_Text_c_handle, \
-    surface182_south_wall_Text_c_handle, surface212_south_wall_Text_c_handle, surface242_south_wall_Text_c_handle, \
-    surface272_south_wall_Text_c_handle, surface302_south_wall_Text_c_handle, surface332_south_wall_Text_c_handle, \
-    surface362_south_wall_Text_c_handle, surface392_south_wall_Text_c_handle, surface422_south_wall_Text_c_handle, \
-    surface452_south_wall_Text_c_handle, surface482_south_wall_Text_c_handle, surface512_south_wall_Text_c_handle, \
-    surface542_south_wall_Text_c_handle, surface572_south_wall_Text_c_handle,\
-    surface26_north_wall_Text_c_handle, surface56_north_wall_Text_c_handle, surface86_north_wall_Text_c_handle, \
-    surface116_north_wall_Text_c_handle, surface146_north_wall_Text_c_handle, surface176_north_wall_Text_c_handle, \
-    surface206_north_wall_Text_c_handle, surface236_north_wall_Text_c_handle, surface266_north_wall_Text_c_handle, \
-    surface296_north_wall_Text_c_handle, surface326_north_wall_Text_c_handle, surface356_north_wall_Text_c_handle, \
-    surface386_north_wall_Text_c_handle, surface416_north_wall_Text_c_handle, surface446_north_wall_Text_c_handle, \
-    surface476_north_wall_Text_c_handle, surface506_north_wall_Text_c_handle, surface536_north_wall_Text_c_handle, \
-    surface566_north_wall_Text_c_handle, surface596_north_wall_Text_c_handle,\
-    surface14_east_wall_Text_c_handle, surface44_east_wall_Text_c_handle, surface74_east_wall_Text_c_handle, \
-    surface104_east_wall_Text_c_handle, surface134_east_wall_Text_c_handle, surface164_east_wall_Text_c_handle, \
-    surface194_east_wall_Text_c_handle, surface224_east_wall_Text_c_handle, surface254_east_wall_Text_c_handle, \
-    surface284_east_wall_Text_c_handle, surface314_east_wall_Text_c_handle, surface344_east_wall_Text_c_handle, \
-    surface374_east_wall_Text_c_handle, surface404_east_wall_Text_c_handle, surface434_east_wall_Text_c_handle, \
-    surface464_east_wall_Text_c_handle, surface494_east_wall_Text_c_handle, surface524_east_wall_Text_c_handle, \
-    surface554_east_wall_Text_c_handle, surface584_east_wall_Text_c_handle,\
-    surface10_west_wall_Text_c_handle, surface40_west_wall_Text_c_handle, surface70_west_wall_Text_c_handle, \
-    surface100_west_wall_Text_c_handle, surface130_west_wall_Text_c_handle, surface160_west_wall_Text_c_handle, \
-    surface190_west_wall_Text_c_handle, surface220_west_wall_Text_c_handle, surface250_west_wall_Text_c_handle, \
-    surface280_west_wall_Text_c_handle, surface310_west_wall_Text_c_handle, surface340_west_wall_Text_c_handle, \
-    surface370_west_wall_Text_c_handle, surface400_west_wall_Text_c_handle, surface430_west_wall_Text_c_handle, \
-    surface460_west_wall_Text_c_handle, surface490_west_wall_Text_c_handle, surface520_west_wall_Text_c_handle, \
-    surface550_west_wall_Text_c_handle, surface580_west_wall_Text_c_handle
+        surface25_floor_Text_c_handle, wall_handles_dict, pthp_energy_handles_dict
 
     if not get_ep_results_inited_handle:
         if not coordination.ep_api.exchange.api_data_fully_ready(state):
             return
         get_ep_results_inited_handle = True
+        pthp_energy_handles_dict = batch_get_energy_handles(state)
+        batch_check_handles(pthp_energy_handles_dict)
+        wall_handles_dict = batch_wall_handles(state)
+        batch_check_wall_handles(wall_handles_dict)
         hvac_heat_rejection_sensor_handle = \
             coordination.ep_api.exchange.get_variable_handle(state,\
                                                              "HVAC System Total Heat Rejection Energy",\
@@ -959,217 +1187,17 @@ def _20Stories_get_ep_results(state):
         surface25_floor_Text_c_handle = coordination.ep_api.exchange.\
             get_variable_handle(state, "Surface Outside Face Temperature", \
                                 "Surface 25")
-        surface2_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 2")
-        surface32_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 32")
-        surface62_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 62")
-        surface92_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 92")
-        surface122_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 122")
-        surface152_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 152")
-        surface182_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 182")
-        surface212_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 212")
-        surface242_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 242")
-        surface272_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 272")
-        surface302_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 302")
-        surface332_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 332")
-        surface362_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 362")
-        surface392_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 392")
-        surface422_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 422")
-        surface452_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 452")
-        surface482_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 482")
-        surface512_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 512")
-        surface542_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 542")
-        surface572_south_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 572")
-        surface26_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 26")
-        surface56_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 56")
-        surface86_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 86")
-        surface116_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 116")
-        surface146_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 146")
-        surface176_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 176")
-        surface206_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 206")
-        surface236_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 236")
-        surface266_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 266")
-        surface296_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 296")
-        surface326_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 326")
-        surface356_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 356")
-        surface386_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 386")
-        surface416_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 416")
-        surface446_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 446")
-        surface476_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 476")
-        surface506_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 506")
-        surface536_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 536")
-        surface566_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 566")
-        surface596_north_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 596")
-        surface14_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 14")
-        surface44_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 44")
-        surface74_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 74")
-        surface104_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 104")
-        surface134_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 134")
-        surface164_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 164")
-        surface194_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 194")
-        surface224_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 224")
-        surface254_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 254")
-        surface284_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 284")
-        surface314_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 314")
-        surface344_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 344")
-        surface374_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 374")
-        surface404_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 404")
-        surface434_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 434")
-        surface464_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 464")
-        surface494_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 494")
-        surface524_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 524")
-        surface554_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 554")
-        surface584_east_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 584")
-        surface10_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 10")
-        surface40_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 40")
-        surface70_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 70")
-        surface100_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 100")
-        surface130_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 130")
-        surface160_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 160")
-        surface190_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 190")
-        surface220_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 220")
-        surface250_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 250")
-        surface280_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 280")
-        surface310_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 310")
-        surface340_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 340")
-        surface370_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 370")
-        surface400_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 400")
-        surface430_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 430")
-        surface460_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 460")
-        surface490_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 490")
-        surface520_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 520")
-        surface550_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 550")
-        surface580_west_wall_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", "Surface 580")
 
         if (hvac_heat_rejection_sensor_handle == -1 or \
                 surface576_roof_Text_c_handle == -1 or surface582_roof_Text_c_handle == -1 or \
                 surface588_roof_Text_c_handle == -1 or surface594_roof_Text_c_handle == -1 or \
                 surface600_roof_Text_c_handle == -1 or surface1_floor_Text_c_handle == -1 or \
                 surface7_floor_Text_c_handle == -1 or surface13_floor_Text_c_handle == -1 or \
-                surface19_floor_Text_c_handle == -1 or surface25_floor_Text_c_handle == -1 or \
-            surface2_south_wall_Text_c_handle == -1 or surface32_south_wall_Text_c_handle == -1 or \
-            surface62_south_wall_Text_c_handle == -1 or surface92_south_wall_Text_c_handle == -1 or \
-            surface122_south_wall_Text_c_handle == -1 or surface152_south_wall_Text_c_handle == -1 or \
-            surface182_south_wall_Text_c_handle == -1 or surface212_south_wall_Text_c_handle == -1 or \
-            surface242_south_wall_Text_c_handle == -1 or surface272_south_wall_Text_c_handle == -1 or \
-            surface302_south_wall_Text_c_handle == -1 or surface332_south_wall_Text_c_handle == -1 or \
-            surface362_south_wall_Text_c_handle == -1 or surface392_south_wall_Text_c_handle == -1 or \
-            surface422_south_wall_Text_c_handle == -1 or surface452_south_wall_Text_c_handle == -1 or \
-            surface482_south_wall_Text_c_handle == -1 or surface512_south_wall_Text_c_handle == -1 or \
-            surface542_south_wall_Text_c_handle == -1 or surface572_south_wall_Text_c_handle == -1 or \
-            surface26_north_wall_Text_c_handle == -1 or surface56_north_wall_Text_c_handle == -1 or \
-            surface86_north_wall_Text_c_handle == -1 or surface116_north_wall_Text_c_handle == -1 or \
-            surface146_north_wall_Text_c_handle == -1 or surface176_north_wall_Text_c_handle == -1 or \
-            surface206_north_wall_Text_c_handle == -1 or surface236_north_wall_Text_c_handle == -1 or \
-            surface266_north_wall_Text_c_handle == -1 or surface296_north_wall_Text_c_handle == -1 or \
-            surface326_north_wall_Text_c_handle == -1 or surface356_north_wall_Text_c_handle == -1 or \
-            surface386_north_wall_Text_c_handle == -1 or surface416_north_wall_Text_c_handle == -1 or \
-            surface446_north_wall_Text_c_handle == -1 or surface476_north_wall_Text_c_handle == -1 or \
-            surface506_north_wall_Text_c_handle == -1 or surface536_north_wall_Text_c_handle == -1 or \
-            surface566_north_wall_Text_c_handle == -1 or surface596_north_wall_Text_c_handle == -1 or \
-            surface14_east_wall_Text_c_handle == -1 or surface44_east_wall_Text_c_handle == -1 or \
-            surface74_east_wall_Text_c_handle == -1 or surface104_east_wall_Text_c_handle == -1 or \
-            surface134_east_wall_Text_c_handle == -1 or surface164_east_wall_Text_c_handle == -1 or \
-            surface194_east_wall_Text_c_handle == -1 or surface224_east_wall_Text_c_handle == -1 or \
-            surface254_east_wall_Text_c_handle == -1 or surface284_east_wall_Text_c_handle == -1 or \
-            surface314_east_wall_Text_c_handle == -1 or surface344_east_wall_Text_c_handle == -1 or \
-            surface374_east_wall_Text_c_handle == -1 or surface404_east_wall_Text_c_handle == -1 or \
-            surface434_east_wall_Text_c_handle == -1 or surface464_east_wall_Text_c_handle == -1 or \
-            surface494_east_wall_Text_c_handle == -1 or surface524_east_wall_Text_c_handle == -1 or \
-            surface554_east_wall_Text_c_handle == -1 or surface584_east_wall_Text_c_handle == -1 or \
-            surface10_west_wall_Text_c_handle == -1 or surface40_west_wall_Text_c_handle == -1 or \
-            surface70_west_wall_Text_c_handle == -1 or surface100_west_wall_Text_c_handle == -1 or \
-            surface130_west_wall_Text_c_handle == -1 or surface160_west_wall_Text_c_handle == -1 or \
-            surface190_west_wall_Text_c_handle == -1 or surface220_west_wall_Text_c_handle == -1 or \
-            surface250_west_wall_Text_c_handle == -1 or surface280_west_wall_Text_c_handle == -1 or \
-            surface310_west_wall_Text_c_handle == -1 or surface340_west_wall_Text_c_handle == -1 or \
-            surface370_west_wall_Text_c_handle == -1 or surface400_west_wall_Text_c_handle == -1 or \
-            surface430_west_wall_Text_c_handle == -1 or surface460_west_wall_Text_c_handle == -1 or \
-            surface490_west_wall_Text_c_handle == -1 or surface520_west_wall_Text_c_handle == -1 or \
-            surface550_west_wall_Text_c_handle == -1 or surface580_west_wall_Text_c_handle == -1):
-
+                surface19_floor_Text_c_handle == -1 or surface25_floor_Text_c_handle == -1 ):
             print('20Stories_get_ep_results(): some handle not available')
             os.getpid()
             os.kill(os.getpid(), signal.SIGTERM)
+
     # get EP results, upload to coordination
     warm_up = coordination.ep_api.exchange.warmup_flag(state)
     if not warm_up and called_vcwg_bool:
@@ -1182,12 +1210,15 @@ def _20Stories_get_ep_results(state):
         hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state,hvac_heat_rejection_sensor_handle)
         hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
-
+        pthp_energy_dict, pthp_heating_total, pthp_cooling_total, pthp_electricity_total =\
+            batch_get_energy_results(state, pthp_energy_handles_dict, accumulated_time_in_seconds)
+        print(f'coordination.ep_sensWaste_w_m2_per_footprint_area = {coordination.ep_sensWaste_w_m2_per_footprint_area},'
+              f'coordination.EP_floor_energy_lst = {sum(coordination.EP_floor_energy_lst)}')
         time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)
-
         if not time_index_alignment_bool:
             coordination.sem2.release()
             return
+
         surface576_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface576_roof_Text_c_handle)
         surface582_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface582_roof_Text_c_handle)
         surface588_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface588_roof_Text_c_handle)
@@ -1203,52 +1234,8 @@ def _20Stories_get_ep_results(state):
         surface25_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface25_floor_Text_c_handle)
 
         floor_Text_c = (surface1_floor_Text_c + surface7_floor_Text_c + surface13_floor_Text_c + surface19_floor_Text_c + surface25_floor_Text_c) / 5
-
-        surface2_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface2_south_wall_Text_c_handle)
-        surface32_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface32_south_wall_Text_c_handle)
-        surface62_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface62_south_wall_Text_c_handle)
-        surface92_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface92_south_wall_Text_c_handle)
-        surface122_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface122_south_wall_Text_c_handle)
-        surface152_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface152_south_wall_Text_c_handle)
-        surface182_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface182_south_wall_Text_c_handle)
-        surface212_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface212_south_wall_Text_c_handle)
-        surface242_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface242_south_wall_Text_c_handle)
-        surface272_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface272_south_wall_Text_c_handle)
-        surface302_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface302_south_wall_Text_c_handle)
-        surface332_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface332_south_wall_Text_c_handle)
-        surface362_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface362_south_wall_Text_c_handle)
-        surface392_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface392_south_wall_Text_c_handle)
-        surface422_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface422_south_wall_Text_c_handle)
-        surface452_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface452_south_wall_Text_c_handle)
-        surface482_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface482_south_wall_Text_c_handle)
-        surface512_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface512_south_wall_Text_c_handle)
-        surface542_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface542_south_wall_Text_c_handle)
-        surface572_south_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface572_south_wall_Text_c_handle)
-
-        south_wall_Text_c = (surface2_south_wall_Text_c + surface32_south_wall_Text_c + surface62_south_wall_Text_c + surface92_south_wall_Text_c + surface122_south_wall_Text_c + surface152_south_wall_Text_c + surface182_south_wall_Text_c + surface212_south_wall_Text_c + surface242_south_wall_Text_c + surface272_south_wall_Text_c + surface302_south_wall_Text_c + surface332_south_wall_Text_c + surface362_south_wall_Text_c + surface392_south_wall_Text_c + surface422_south_wall_Text_c + surface452_south_wall_Text_c + surface482_south_wall_Text_c + surface512_south_wall_Text_c + surface542_south_wall_Text_c + surface572_south_wall_Text_c) / 20
-
-        surface26_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface26_north_wall_Text_c_handle)
-        surface56_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface56_north_wall_Text_c_handle)
-        surface86_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface86_north_wall_Text_c_handle)
-        surface116_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface116_north_wall_Text_c_handle)
-        surface146_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface146_north_wall_Text_c_handle)
-        surface176_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface176_north_wall_Text_c_handle)
-        surface206_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface206_north_wall_Text_c_handle)
-        surface236_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface236_north_wall_Text_c_handle)
-        surface266_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface266_north_wall_Text_c_handle)
-        surface296_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface296_north_wall_Text_c_handle)
-        surface326_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface326_north_wall_Text_c_handle)
-        surface356_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface356_north_wall_Text_c_handle)
-        surface386_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface386_north_wall_Text_c_handle)
-        surface416_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface416_north_wall_Text_c_handle)
-        surface446_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface446_north_wall_Text_c_handle)
-        surface476_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface476_north_wall_Text_c_handle)
-        surface506_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface506_north_wall_Text_c_handle)
-        surface536_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface536_north_wall_Text_c_handle)
-        surface566_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface566_north_wall_Text_c_handle)
-        surface596_north_wall_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface596_north_wall_Text_c_handle)
-
-        north_wall_Text_c = (surface26_north_wall_Text_c + surface56_north_wall_Text_c + surface86_north_wall_Text_c + surface116_north_wall_Text_c + surface146_north_wall_Text_c + surface176_north_wall_Text_c + surface206_north_wall_Text_c + surface236_north_wall_Text_c + surface266_north_wall_Text_c + surface296_north_wall_Text_c + surface326_north_wall_Text_c + surface356_north_wall_Text_c + surface386_north_wall_Text_c + surface416_north_wall_Text_c + surface446_north_wall_Text_c + surface476_north_wall_Text_c + surface506_north_wall_Text_c + surface536_north_wall_Text_c + surface566_north_wall_Text_c + surface596_north_wall_Text_c) / 20
+        coordination.EP_wall_temperatures_K_dict, south_wall_Text_c, north_wall_Text_c \
+            = batch_get_wall_temperatures(state, wall_handles_dict)
 
         coordination.ep_floor_Text_K = floor_Text_c + 273.15
         coordination.ep_roof_Text_K = roof_Text_c + 273.15

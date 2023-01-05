@@ -34359,6 +34359,21 @@ Schedule:Compact,
   OutputControl:Table:Style,
     HTML;                    !- Column Separator
 
+Output:Variable,
+    *,                       !- Key Value
+    Zone Packaged Terminal Heat Pump Total Heating Energy,  !- Variable Name
+    timestep;                !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Packaged Terminal Heat Pump Total Cooling Energy,  !- Variable Name
+    timestep;                !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Zone Packaged Terminal Heat Pump Electricity Energy,  !- Variable Name
+    timestep;                !- Reporting Frequency
+
   Output:Variable,*,Site Outdoor Air Drybulb Temperature,Hourly;
 
   Output:Variable,*,Zone Outdoor Air Drybulb Temperature,Hourly;

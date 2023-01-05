@@ -146,14 +146,10 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     # Calculate Turbulent Diffusion Coefficient
     # -----------------------------------------
     # Calculate turbulent diffusion coefficient (Km) [m^2 s^-1]
+    print(f'dlk: {dlk}')
+    for i in range(Geometry_m.nz_u, Geometry_m.nz):
+        dlk[i] = dlk[60 + 1]
     Km = TurbCoeff(Geometry_m.nz, Ck, tke, dlk)
-    print('Km = ', Km,)
-    # Km equals inverse
-    # Km_new = numpy.asarray(Km)
-    # for i in range(len(Km)):
-    #     Km_new[i] = Km[len(Km)-i-1]
-    # Km = Km_new
-
     # Calculate shear production [m^2 s^-3] in TKE equation. (Term II of equation 5.2, Krayenhoff 2014, PhD thesis)
     sh = ShearProd(ColParam.cdmin,Geometry_m.nz, Geometry_m.dz, vx, vy, Km)
 
@@ -181,6 +177,8 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
 
     # Drag coefficient for vegetation foliage
     cdv = 0.2
+    print(f'srex_th_h = {BuildingCoef.srex_th_h[:Geometry_m.nz_u + 1]},'
+          f'srex_th_v = {BuildingCoef.srex_th_v[:Geometry_m.nz_u + 1]}')
 
     # Calculate source and sink terms caused by trees and then calculate total source and sink terms
     for i in range(0, Geometry_m.nz):
@@ -250,7 +248,7 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     tke_new,wtke,dwtkedz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,tke_bc_bottom,tke_bc_top,dts,rho,tke,Km,srim_tke,srex_tke,sf,vol,Geometry_m.dz)
     # Solve temperature equation
     th_new,wth,dwthdz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,T_bc_bottom,T_bc_top,dts,rho,th,Km/ColParam.prandtl,srim_th,srex_th,sf,vol,Geometry_m.dz)
-    print(f'th_new = {th_new - 273.15}')
+    print(f'th_new = {th_new[:Geometry_m.nz_u] - 273.15}')
     # Solve specific humidity equation
     qn_new,wqn,dwqndz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,q_bc_bottom,q_bc_top,dts,rho,qn,Km/ColParam.schmidt,srim_qn,srex_qn,sf,vol,Geometry_m.dz)
 

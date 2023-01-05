@@ -16,8 +16,10 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
         ep_floor_Text_K, ep_floor_Tint_K, ep_roof_Text_K, ep_roof_Tint_K, \
         ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K, \
         mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
-        footprint_area_m2, ForcTemp_K, vcwg_hConv_w_m2_per_K, EP_nFloor
+        footprint_area_m2, ForcTemp_K, vcwg_hConv_w_m2_per_K, EP_nFloor, EP_floor_energy_lst, EP_wall_temperatures_K_dict
     # find the project path
+    EP_floor_energy_lst = []
+    EP_wall_temperatures_K_dict = {}
     value = _value
     ForcTemp_K = 293.15
     vcwg_hConv_w_m2_per_K = 10
@@ -73,9 +75,19 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
     elif "20Stories" in bld_type:
         EP_nFloor = 20
         footprint_area_m2 = 30 * 15
+        EP_floor_energy_lst = [0.0] * EP_nFloor
+        EP_wall_temperatures_K_dict['south'] = [300] * EP_nFloor
+        EP_wall_temperatures_K_dict['north'] = [300] * EP_nFloor
+        EP_wall_temperatures_K_dict['east'] = [300] * EP_nFloor
+        EP_wall_temperatures_K_dict['west'] = [300] * EP_nFloor
     elif 'SimplifiedHighBld' in bld_type:
         EP_nFloor = 3
         footprint_area_m2 = 30 * 15
+        EP_floor_energy_lst = [0.0] * EP_nFloor
+        EP_wall_temperatures_K_dict['south'] = [300] * EP_nFloor
+        EP_wall_temperatures_K_dict['north'] = [300] * EP_nFloor
+        EP_wall_temperatures_K_dict['east'] = [300] * EP_nFloor
+        EP_wall_temperatures_K_dict['west'] = [300] * EP_nFloor
     vcwg_canTemp_K_list = [ 300 for i in range(EP_nFloor)]
     vcwg_canSpecHum_Ratio_list = [ 0 for i in range(EP_nFloor)]
     vcwg_canPress_Pa_list = [ 0 for i in range(EP_nFloor)]
@@ -120,12 +132,11 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     '''
     for i in range(EP_nFloor):
         if '20Stories' in bld_type:
-            vcwg_canTemp_K_list[i] =numpy.mean(
-                canTempProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
-            vcwg_canSpecHum_Ratio_list[i] =numpy.mean(
-                canSpecHumProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
-            vcwg_canPress_Pa_list[i] =numpy.mean(
-                canPressProf_cur[int(i * Geometry_m.nz_u / EP_nFloor):int((i + 1) * Geometry_m.nz_u / EP_nFloor)])
+            #canTempProf_cur has EP_nFloor floors, and total Geometry_m.nz_u grid points
+            nbr_grid_points_per_floor = int(Geometry_m.nz_u/EP_nFloor)
+            vcwg_canTemp_K_list[i] = numpy.mean(canTempProf_cur[i*nbr_grid_points_per_floor:(i+1)*nbr_grid_points_per_floor])
+            vcwg_canSpecHum_Ratio_list[i] = numpy.mean(canSpecHumProf_cur[i*nbr_grid_points_per_floor:(i+1)*nbr_grid_points_per_floor])
+            vcwg_canPress_Pa_list[i] = numpy.mean(canPressProf_cur[i*nbr_grid_points_per_floor:(i+1)*nbr_grid_points_per_floor])
         elif 'SimplifiedHighBld' in bld_type:
             nbr_grid_points_per_floor = int(Geometry_m.nz_u / EP_nFloor)
             # index 0: is mean of floor 1

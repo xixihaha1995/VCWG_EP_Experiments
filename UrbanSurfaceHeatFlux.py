@@ -7,6 +7,8 @@ from Resistance_Functions import Ressitance_Calculations
 from SurfaceHeatFluxDef import ForceRestoreConductiveHeatImp,ForceRestoreConductiveHeatSoil
 import copy
 
+import _0_vcwg_ep_coordination as coordination
+
 '''
 Surface Energy Balance Model (SEBM): Calculate turbulent heat fluxes at the surface of urban elements
 Developed by Mohsen Moradi
@@ -337,14 +339,22 @@ class Surface_HeatFlux(object):
 
         Hwsun_z = []
         Hwshade_z = []
+
+        Twsun_dummy = [i  for i in coordination.EP_wall_temperatures_K_dict['south']]
+        Twshade_dummy = [i for i in coordination.EP_wall_temperatures_K_dict['north']]
+        # print(f'Twsun_dummy: {[i - 273.15 for i in Twsun_dummy]}')
+        # #Twsun_dummy is currently coordination.EP_nFloor, broadcat to Geometry_m.nz_u
+
         for i_z in range(Geometry_m.nz_u):
             # Calculate wall resistance [s m^-1]
             RES_w = ResistanceCal.Wall_Aerodynamic_Resistance(VerticalProfUrban,Geometry_m,ColParam.WindMin_Urban,cp_atm,
                                                               i_z,ParCalculation)
-            # Calculate sensible heat flux from sunlit wall [W m^-2]
-            Hwsun_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twsun-T_canyon[i_z]) / (RES_w))
-            # Calculate sensible heat flux from shaded wall [W m^-2]
-            Hwshade_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twshade-T_canyon[i_z]) / (RES_w))
+            # # # Calculate sensible heat flux from sunlit wall [W m^-2]
+            # Hwsun_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twsun-T_canyon[i_z]) / (RES_w))
+            # # Calculate sensible heat flux from shaded wall [W m^-2]
+            # Hwshade_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twshade-T_canyon[i_z]) / (RES_w))
+            Hwsun_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twsun_dummy[int(i_z/Geometry_m.nz_u*len(Twsun_dummy))]-T_canyon[i_z]) / (RES_w))
+            Hwshade_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twshade_dummy[int(i_z/Geometry_m.nz_u*len(Twshade_dummy))]-T_canyon[i_z]) / (RES_w))
 
         # Calculate total sensible heat flux as the area weighted average of sensible heat fluxes from wall layers [W m^-2]
         Hwsun = (Geometry_m.dz/Geometry_m.Height_canyon)*sum(Hwsun_z)

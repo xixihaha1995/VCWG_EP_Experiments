@@ -52,19 +52,22 @@ class BuildingCol:
         split them into EP_nFloor floors, each floor has (self.nz_u + 1)/EP_nFloor points
         The first floor has the first (self.nz_u + 1)/EP_nFloor points, 
         and the centroid idx is (self.nz_u + 1)/EP_nFloor/2 
+        coordination.EP_floor_energy_lst
         '''
         self.SensHt_HVAC_Floor = numpy.zeros(self.nz_u + 1)
+        if '20Stories' in coordination.bld_type:
+            centroid_spacing = (self.nz_u + 1) / coordination.EP_nFloor
+            _start = (self.nz_u + 1) / coordination.EP_nFloor / 2
+            _end = (self.nz_u + 1)
+            centroid_idices = numpy.arange(_start, _end, centroid_spacing)
+        if 'SimplifiedHighBld' in coordination.bld_type:
+            # Instead of 20 stories, we only use floor 1, 11, 20, with centroid heights 1.98, 32.46, 59.89
+            centroid_idices = numpy.array([1.98, 32.46, 59.89])
         for i in range(coordination.EP_nFloor):
-            if '20Stories' in coordination.bld_type:
-                centroid_idices = numpy.arange((self.nz_u + 1) / coordination.EP_nFloor / 2,
-                                               self.nz_u + 1, (self.nz_u + 1) / coordination.EP_nFloor)
-                self.SensHt_HVAC_Floor[int(centroid_idices[i])] = self.SensHt_HVAC / coordination.EP_nFloor * (i + 1)
-            if 'SimplifiedHighBld' in coordination.bld_type:
-                # Instead of 20 stories, we only use floor 1, 11, 20, with centroid heights 1.98, 32.46, 59.89
-                centroid_idices = numpy.array([1.98, 32.46, 59.89])
-                accumulated_multiplier = numpy.array([1, 19, 20])
-                self.SensHt_HVAC_Floor[int(centroid_idices[i])] = self.SensHt_HVAC / coordination.EP_nFloor \
-                                                                  * accumulated_multiplier[i]
+            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = sum(coordination.EP_floor_energy_lst[:i + 1])
+            # self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i]
+
+        coordination.EP_floor_energy_lst = [0 for i in range(coordination.EP_nFloor)]
         # print('self.SensHt_HVAC_Floor', self.SensHt_HVAC_Floor)
         self.HVAC_street_frac = HVAC_street_frac  # Fraction of Sensible waste heat from building released into the atmosphere at street level
         self.HVAC_atm_frac = HVAC_atm_frac        # Fraction of sensible waste heat from building released into the atmosphere
@@ -190,11 +193,17 @@ class BuildingCol:
         # ------------------
         # Fluxes from Walls
         # ------------------
+        Twsun_dummy = [i for i in coordination.EP_wall_temperatures_K_dict['south']]
+
         for i in range(0, self.nz_u):
 
-            # Calculate momentum and tke fluxes from wall
+            # # Calculate momentum and tke fluxes from wall
+            # uva, vva, _uvb_, _vvb_, _tva_, _tvb_, evb = \
+            #     self.Flux_Wall(self.vx[i], self.vy[i], self.th[i], self.Cdrag[i], TWallSun, self.rho[i],self.windMin)
+            # # int(i_z/Geometry_m.nz_u*len(Twshade_dummy))
             uva, vva, _uvb_, _vvb_, _tva_, _tvb_, evb = \
-                self.Flux_Wall(self.vx[i], self.vy[i], self.th[i], self.Cdrag[i], TWallSun, self.rho[i],self.windMin)
+                self.Flux_Wall(self.vx[i], self.vy[i], self.th[i], self.Cdrag[i],
+                               Twsun_dummy[int(i / self.nz_u * len(Twsun_dummy))], self.rho[i],self.windMin)
 
             # Term in momentum equation [s^-1]
             self.srim_vx_v[i] = uva * self.lambdaf * self.pb[i] / max(1e-6, self.hmean) / self.vol[i] / self.nd
