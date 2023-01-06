@@ -304,15 +304,15 @@ def process_one_theme(csv_filename):
     comparison['wallShade_K_' + csv_filename] = df['wallShade_K']
     comparison['roof_K_' + csv_filename] = df['roof_K']
     comparison['ForcTemp_K_' + csv_filename] = df['ForcTemp_K']
-    #OnlyVCWG
-    df_onlyVCWG = pd.read_csv(os.path.join(experiments_folder, 'OnlyVCWG_' + csv_file + '.csv'), index_col=0, parse_dates=True)
-    comparison['sensWaste_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['sensWaste']
-    comparison['wallSun_K_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['wallSun_K']
-    comparison['wallShade_K_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['wallShade_K']
-    comparison['roof_K_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['roof_K']
+    # #OnlyVCWG
+    # df_onlyVCWG = pd.read_csv(os.path.join(experiments_folder, 'OnlyVCWG_' + csv_file + '.csv'), index_col=0, parse_dates=True)
+    # comparison['sensWaste_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['sensWaste']
+    # comparison['wallSun_K_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['wallSun_K']
+    # comparison['wallShade_K_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['wallShade_K']
+    # comparison['roof_K_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['roof_K']
 
     temp_prof_cols, pres_prof_cols = find_height_indice(df)
-    _onlyVCWG_temp_prof_cols, _onlyVCWG_pres_prof_cols = find_height_indice(df_onlyVCWG)
+    # _onlyVCWG_temp_prof_cols, _onlyVCWG_pres_prof_cols = find_height_indice(df_onlyVCWG)
     for i in range(len(temp_prof_cols)):
         comparison[csv_file + '_'+temp_prof_cols[i]] = df[temp_prof_cols[i]]
         comparison[csv_file + '_'+pres_prof_cols[i]] = df[pres_prof_cols[i]]
@@ -320,11 +320,11 @@ def process_one_theme(csv_filename):
         comparison[csv_file + '_sensor_idx_' + height_idx] = (comparison[csv_file + '_'+temp_prof_cols[i]]) * \
                                                             (comparison[csv_file + '_'+pres_prof_cols[i]] / comparison['MeteoData.Pre']) \
                                                             ** 0.286 - 273.15
-        comparison['OnlyVCWG_' + csv_file + '_'+temp_prof_cols[i]] = df_onlyVCWG[temp_prof_cols[i]]
-        comparison['OnlyVCWG_' + csv_file + '_'+pres_prof_cols[i]] = df_onlyVCWG[pres_prof_cols[i]]
-        comparison['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx] = (comparison['OnlyVCWG_' + csv_file + '_'+temp_prof_cols[i]]) * \
-                                                            (comparison['OnlyVCWG_' + csv_file + '_'+pres_prof_cols[i]] / comparison['MeteoData.Pre']) \
-                                                            ** 0.286 - 273.15
+        # comparison['OnlyVCWG_' + csv_file + '_'+temp_prof_cols[i]] = df_onlyVCWG[temp_prof_cols[i]]
+        # comparison['OnlyVCWG_' + csv_file + '_'+pres_prof_cols[i]] = df_onlyVCWG[pres_prof_cols[i]]
+        # comparison['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx] = (comparison['OnlyVCWG_' + csv_file + '_'+temp_prof_cols[i]]) * \
+        #                                                     (comparison['OnlyVCWG_' + csv_file + '_'+pres_prof_cols[i]] / comparison['MeteoData.Pre']) \
+        #                                                     ** 0.286 - 273.15
 
         if 'CAPITOUL' in csv_filename \
                 or "Improvements" in csv_filename:
@@ -334,17 +334,17 @@ def process_one_theme(csv_filename):
         tempCVRMSE = cvrmse(comparison[_tmp_col],
                                        comparison[csv_file + '_sensor_idx_' + height_idx])
         cvrmse_dict[csv_file + '_sensor_idx_' + height_idx] = tempCVRMSE
-        _onlyVCWG_tempCVRMSE = cvrmse(comparison[_tmp_col],
-                                        comparison['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx])
-        cvrmse_dict['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx] = _onlyVCWG_tempCVRMSE
+        # _onlyVCWG_tempCVRMSE = cvrmse(comparison[_tmp_col],
+        #                                 comparison['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx])
+        # cvrmse_dict['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx] = _onlyVCWG_tempCVRMSE
         tempNMBE = normalized_mean_bias_error(comparison[_tmp_col],
                                               comparison[csv_file + '_sensor_idx_' + height_idx])
         nmbe_dict[csv_file + '_sensor_idx_' + height_idx] = tempNMBE
-        _onlyVCWG_tempNMBE = normalized_mean_bias_error(comparison[_tmp_col],
-                                                        comparison['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx])
-        nmbe_dict['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx] = _onlyVCWG_tempNMBE
+        # _onlyVCWG_tempNMBE = normalized_mean_bias_error(comparison[_tmp_col],
+        #                                                 comparison['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx])
+        # nmbe_dict['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx] = _onlyVCWG_tempNMBE
         print(f'cvrmse for {csv_file} at height idx:{height_idx} is {tempCVRMSE}, NMBE is {tempNMBE}')
-        print(f'cvrmse for OnlyVCWG_{csv_file} at height idx:{height_idx} is {_onlyVCWG_tempCVRMSE}, NMBE is {_onlyVCWG_tempNMBE}')
+        # print(f'cvrmse for OnlyVCWG_{csv_file} at height idx:{height_idx} is {_onlyVCWG_tempCVRMSE}, NMBE is {_onlyVCWG_tempNMBE}')
 
     # sql_dict[csv_file] = read_sql(csv_filename)
     # if os.path.exists(os.path.join(experiments_folder, csv_file + 'comparison.xlsx')):
@@ -362,7 +362,7 @@ def process_one_theme(csv_filename):
 def iterate_all_cases(experiments_folder):
     csv_files = []
     for file in os.listdir(experiments_folder):
-        if file.endswith('.csv') and 'OnlyVCWG' not in file and 'WithShading' in file:
+        if file.endswith('.csv') and 'OnlyVCWG' not in file and 'WithoutShading' in file:
             csv_files.append(file)
             process_one_theme(file,)
 
