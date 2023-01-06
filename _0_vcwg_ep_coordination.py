@@ -22,8 +22,8 @@ def ini_all(sensitivity_file_name):
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
     config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass','AllCases',sensitivity_file_name)
-    # config_path = os.path.join(project_path, 'A_prepost_processing', 'configs', 'Only_VCWG',
-    #                            sensitivity_file_name)
+    config_path = os.path.join(project_path, 'A_prepost_processing', 'configs', 'Only_VCWG',
+                               sensitivity_file_name)
     config.read(config_path)
     bld_type = config['Bypass']['bld_type']
     experiments_theme = config['Bypass']['experiments_theme']
