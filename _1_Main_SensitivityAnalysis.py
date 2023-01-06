@@ -99,5 +99,5 @@ def one_ini(sensitivity_file_name):
 if __name__ == '__main__':
     # for_loop_all_ini()
     # one_ini('Chicago_MedOffice_Density.ini')
-    # one_ini('Chicago_MedOffice_Orientation.ini')
-    one_ini('Chicago_MedOffice_MixedVariable.ini')
+    one_ini('Chicago_MedOffice_Orientation.ini')
+    # one_ini('Chicago_MedOffice_MixedVariable.ini')
