@@ -104,5 +104,5 @@ def one_ini(sensitivity_file_name):
 if __name__ == '__main__':
     # one_ini('Chicago_MedOffice_MixedVariable.ini')
     # one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
-    # one_ini('Chicago_MedOffice_IDFComplexity.ini')
-    one_ini('Chicago_MedOffice_IDFComplexity_OnlyVCWG.ini')
+    one_ini('Chicago_MedOffice_IDFComplexity.ini')
+    # one_ini('Chicago_MedOffice_IDFComplexity_OnlyVCWG.ini')
