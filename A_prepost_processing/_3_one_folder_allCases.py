@@ -152,7 +152,8 @@ def get_Vancouver_measurements(csv_filename):
     urban_30min = urban_30min[compare_start_time:compare_end_time]
 
     comparison = pd.DataFrame(index=urban_30min.index, columns=['Urban_DBT_C', 'Rural_DBT_C'])
-    comparison['Urban_DBT_C'] = urban_30min.iloc[:, 0]
+    comparison['Urban_DBT_C_1.2'] = urban_30min.iloc[:, 0]
+    comparison['Urban_DBT_C_20.0'] = urban_30min.iloc[:, 1]
 
 
     if 'TopForcing' in csv_filename:
@@ -278,14 +279,20 @@ def process_one_theme(csv_filename):
         print(f'cvrmse for Rural vs Urban(22.9) is {cvrmse_dict["Rural_22.9"]}, nmbe is {nmbe_dict["Rural_22.9"]}')
         print(f'cvrmse for Rural vs Urban(27.8) is {cvrmse_dict["Rural_27.8"]}, nmbe is {nmbe_dict["Rural_27.8"]}')
         print(f'cvrmse for Rural vs Urban(32.9) is {cvrmse_dict["Rural_32.9"]}, nmbe is {nmbe_dict["Rural_32.9"]}')
+    elif 'Vancouver' in csv_filename:
+        comparison = get_Vancouver_measurements(csv_filename)
+        cvrmse_dict['Rural_1.2'] = cvrmse(comparison['Urban_DBT_C_1.2'], comparison['Rural_DBT_C'])
+        cvrmse_dict['Rural_20.0'] = cvrmse(comparison['Urban_DBT_C_20.0'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_1.2'] = normalized_mean_bias_error(comparison['Urban_DBT_C_1.2'], comparison['Rural_DBT_C'])
+        nmbe_dict['Rural_20.0'] = normalized_mean_bias_error(comparison['Urban_DBT_C_20.0'], comparison['Rural_DBT_C'])
+        print(f'cvrmse for Rural vs Urban(1.2) is {cvrmse_dict["Rural_1.2"]}, nmbe is {nmbe_dict["Rural_1.2"]}')
+        print(f'cvrmse for Rural vs Urban(20.0) is {cvrmse_dict["Rural_20.0"]}, nmbe is {nmbe_dict["Rural_20.0"]}')
     else:
-        if "CAPITOUL" in csv_filename:
-            comparison = get_CAPITOUL_measurements()
-        else:
-            comparison = get_Vancouver_measurements(csv_filename)
+        comparison = get_CAPITOUL_measurements()
         cvrmse_dict['Rural'] = cvrmse(comparison['Urban_DBT_C'], comparison['Rural_DBT_C'])
         nmbe_dict['Rural'] = normalized_mean_bias_error(comparison['Urban_DBT_C'], comparison['Rural_DBT_C'])
         print(f'cvrmse for Rural is {cvrmse_dict["Rural"]}, nmbe for Rural is {nmbe_dict["Rural"]}')
+
 
     sql_dict = {}
     df = pd.read_csv(os.path.join(experiments_folder, csv_filename), index_col=0, parse_dates=True)
@@ -297,7 +304,7 @@ def process_one_theme(csv_filename):
     comparison['wallShade_K_' + csv_filename] = df['wallShade_K']
     comparison['roof_K_' + csv_filename] = df['roof_K']
     comparison['ForcTemp_K_' + csv_filename] = df['ForcTemp_K']
-    #OnlyVCWG
+    # #OnlyVCWG
     # df_onlyVCWG = pd.read_csv(os.path.join(experiments_folder, 'OnlyVCWG_' + csv_file + '.csv'), index_col=0, parse_dates=True)
     # comparison['sensWaste_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['sensWaste']
     # comparison['wallSun_K_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['wallSun_K']
@@ -319,7 +326,7 @@ def process_one_theme(csv_filename):
         #                                                     (comparison['OnlyVCWG_' + csv_file + '_'+pres_prof_cols[i]] / comparison['MeteoData.Pre']) \
         #                                                     ** 0.286 - 273.15
 
-        if 'CAPITOUL' in csv_filename or 'Vancouver' in csv_filename \
+        if 'CAPITOUL' in csv_filename \
                 or "Improvements" in csv_filename:
             _tmp_col = 'Urban_DBT_C'
         else:
