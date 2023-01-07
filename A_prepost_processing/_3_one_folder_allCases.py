@@ -210,7 +210,13 @@ def find_height_indice(df):
 def process_one_theme(csv_filename):
     global processed_folder, processed_file, \
         compare_start_time, compare_end_time
-    if "BUBBLE" in csv_filename:
+    if "Whole_Year" in experiments_folder:
+        compare_start_time = '2004-03-01 00:00:00'
+        compare_end_time = '2004-12-31 23:55:00'
+        processed_folder = os.path.join('_measurements', 'CAPITOUL')
+        processed_file = r'CAPITOUL_measurements_' + pd.to_datetime(compare_start_time).strftime('%Y-%m-%d') \
+                         + '_to_' + pd.to_datetime(compare_end_time).strftime('%Y-%m-%d') + '.csv'
+    elif "BUBBLE" in csv_filename:
         compare_start_time = '2002-06-10 00:10:00'
         compare_end_time = '2002-07-09 21:50:00'
         processed_folder =  os.path.join('_measurements','BUBBLE')
@@ -370,6 +376,7 @@ def main():
     global sql_report_name, sql_table_name, sql_row_name, sql_col_name
     global experiments_folder
     experiments_folder = 'AllCases'
+    experiments_folder = 'CAPITOUl_Whole_Year'
     sql_report_name = 'AnnualBuildingUtilityPerformanceSummary'
     sql_table_name = 'Site and Source Energy'
     sql_row_name = 'Total Site Energy'
