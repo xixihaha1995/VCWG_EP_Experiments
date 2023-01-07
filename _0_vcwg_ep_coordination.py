@@ -22,7 +22,8 @@ def ini_all(sensitivity_file_name):
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
     config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass','AllCases',sensitivity_file_name)
-    config_path = os.path.join(project_path, 'A_prepost_processing','configs','bypass','CAPITOUL_Whole_Year',sensitivity_file_name)
+    # config_path = os.path.join(project_path, 'A_prepost_processing', 'configs', 'Only_VCWG',
+    #                            sensitivity_file_name)
     config.read(config_path)
     bld_type = config['Bypass']['bld_type']
     experiments_theme = config['Bypass']['experiments_theme']
@@ -33,10 +34,8 @@ def ini_all(sensitivity_file_name):
                                     experiments_theme,f'{csv_file_name}.csv')
     ep_trivial_path = os.path.join(project_path, 'A_prepost_processing',
                                    experiments_theme, f"{csv_file_name}_ep_trivial_outputs")
-    if config['Default']['operating_system'] == 'windows':
-        sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
-    else:
-        sys.path.insert(0, '/usr/local/EnergyPlus-22-1-0/'),
+    sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
+    sys.path.insert(0, '/usr/local/EnergyPlus-22-1-0/'),
     from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
     psychrometric = None
