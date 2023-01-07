@@ -203,8 +203,8 @@ def main():
         if experiment.endswith('.csv') and 'OnlyVCWG' in experiment:
             experiments.append(experiment)
     for experiment in experiments:
-        # generate_epw(experiment)
-        run_energyplus(experiment)
+        generate_epw(experiment)
+        # run_energyplus(experiment)
 
     # get_offline_comparison(experiments)
 
