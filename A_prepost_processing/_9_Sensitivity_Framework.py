@@ -96,6 +96,40 @@ def sort_by_numbers(s):
     regex = r'(\d+\.?\d*)'
     return [float(x) for x in re.findall(regex, s)]
 
+def sort_by_orientation(s):
+    # the string list of csv files, for each string, it contains "orientation_xx"
+    # where xx can be 0, 45, 90
+    regex = r'orientation_(\d+)'
+    return [float(x) for x in re.findall(regex, s)]
+
+def excel_letters(idx):
+    #idx:0, letter:A
+    #idx:1, letter:B
+    #idx:25, letter:Z
+    #idx:26, letter:AA
+    if idx < 26:
+        return chr(idx + 65)
+    else:
+        return excel_letters(idx//26 - 1) + excel_letters(idx%26)
+
+def add_excel_formula(df_excel):
+    #for each column, B,C ...
+    # The first row is the header, so we start from the second row
+    # add three cells(with formula) at the bottom:
+    # 1. the average of the column
+    # 2. the max of the column
+    # 3. the min of the column
+    # 4. the standard deviation of the column
+    length = df_excel.shape[0] + 1
+    for idx, col in enumerate(df_excel.columns):
+        idx_letter = excel_letters(idx + 1)
+        df_excel.loc['Average', col] = f'=AVERAGE({idx_letter}2:{idx_letter}{length})'
+        df_excel.loc['Max', col] = f'=MAX({idx_letter}2:{idx_letter}{length})'
+        df_excel.loc['Min', col] = f'=MIN({idx_letter}2:{idx_letter}{length})'
+        df_excel.loc['Std', col] = f'=STDEV({idx_letter}2:{idx_letter}{length})'
+    return df_excel
+
+
 all_csv_files = [f for f in os.listdir(experiments_folder)
                  if f.endswith('.csv')]
 baseline = 'ByPass_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
@@ -129,6 +163,15 @@ for csv_file in all_csv_files:
         df_canTemp_c_sheet[csv_file] = all_dfs[csv_file]['canTemp'] - 273.15
     else:
         df_canTemp_c_sheet[csv_file] = all_dfs[csv_file]['canTemp_K'] - 273.15
+'''
+Fix the 'Baseline' column at first column
+For the rest of the columns, sort by "orentation, 0,45,90"
+'''
+all_cols = list(df_canTemp_c_sheet.columns)
+all_cols.remove('Baseline')
+all_cols.sort(key=sort_by_orientation)
+all_cols.insert(0, 'Baseline')
+df_canTemp_c_sheet = df_canTemp_c_sheet[all_cols]
 df_canTemp_c_sheet.to_excel(all_sensitivity, sheet_name='CanTempC')
 
 '''
@@ -183,4 +226,6 @@ for csv_file in all_csv_files:
 df_cooling_sheet.to_excel(all_sensitivity, sheet_name='Cooling_GJ')
 df_heating_sheet.to_excel(all_sensitivity, sheet_name='Heating_GJ')
 df_total_sheet.to_excel(all_sensitivity, sheet_name='Total_GJ')
+df_canTemp_c_sheet = add_excel_formula(df_canTemp_c_sheet)
+df_canTemp_c_sheet.to_excel(all_sensitivity, sheet_name='CanTempC')
 all_sensitivity.save()
