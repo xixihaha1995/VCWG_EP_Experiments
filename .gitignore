@@ -24,7 +24,9 @@ EPTEMP-00000001/
 *.mtr
 *.rvaudit
 *.sql
-!A_prepost_processing/CAPITOUl_Whole_Year/*/*.sql
+# sql contains 3_12 regex
+#regex
+#!A_prepost_processing/CAPITOUl_Whole_Year/*/*.sql
 *.svg
 *.html
 *.mdd
