@@ -115,7 +115,7 @@ def find_height_indice(df):
     temp_prof_cols = [col for col in cols if 'TempProf_cur' in col]
     pres_prof_cols = [col for col in cols if 'PresProf_cur' in col]
     return temp_prof_cols, pres_prof_cols
-def canyon_temp_performance(month, csv_filename):
+def canyon_temp_performance(month, csv_filename, cooling_system):
     cvrmse_dict = {}
     nmbe_dict = {}
     compare_start_time, compare_end_time = to_get_start_end_time(month)
@@ -162,7 +162,7 @@ def canyon_temp_performance(month, csv_filename):
     # ax.set_ylabel('Temperature (C)')
     # ax.legend()
     # plt.show()
-    comparison.to_csv(os.path.join(experiments_folder, month + '_comparison.csv'))
+    comparison.to_csv(os.path.join(experiments_folder, month + '_'+cooling_system+'_time_series.csv'))
     return cvrmse_dict['Rural'], nmbe_dict['Rural'], cvrmse_dict[month + '_sensor_idx_' + height_idx], nmbe_dict[month + '_sensor_idx_' + height_idx]
 
 def main():
@@ -170,24 +170,36 @@ def main():
     experiments_folder = 'CAPITOUl_Whole_Year'
     experiments = []
     for file in os.listdir(experiments_folder):
-        if file.endswith('.csv') and '345' in file:
+        if file.endswith('.csv') and '3_12' in file:
             experiments.append(file)
-    experiments = ['CAPITOUL_WithShading_WithCooling_345.csv']
-    months = [3, 4, 5]
+    months = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    months = [3, 10, 11, 12]
     energy_dict = {}
     prediction_dict = {}
     for experiment in experiments:
+        if 'WithCooling' in experiment:
+            cooling_system = 'WithCooling'
+        else:
+            cooling_system = 'WithoutCooling'
         for month in months:
-            monthly_elec_cooling_J_lst, monthly_elec_heating_J_lst, monthly_gas_heating_J_lst = read_sql(experiment, month)
+            monthly_elec_cooling_J_lst, monthly_elec_heating_J_lst, monthly_gas_heating_J_lst \
+                = read_sql(experiment, month)
             elec_cooling_GJ = sum(monthly_elec_cooling_J_lst) / 1e9
             elec_heating_GJ = sum(monthly_elec_heating_J_lst) / 1e9
             gas_heating_GJ = sum(monthly_gas_heating_J_lst) / 1e9
-            energy_dict[month] = [elec_cooling_GJ, elec_heating_GJ, gas_heating_GJ]
-            rural_cvrmse, rural_nmbe, sensor_idx_cvrmse, sensor_idx_nmbe = canyon_temp_performance(month, experiment)
-            prediction_dict[month] = [rural_cvrmse, rural_nmbe, sensor_idx_cvrmse, sensor_idx_nmbe]
-    pass
+            energy_dict[str(month) + '_' + cooling_system] = [elec_cooling_GJ, elec_heating_GJ, gas_heating_GJ]
+            rural_cvrmse, rural_nmbe, sensor_idx_cvrmse, sensor_idx_nmbe = canyon_temp_performance(month, experiment, cooling_system)
+            prediction_dict[str(month) + '_' + cooling_system] = [rural_cvrmse, rural_nmbe, sensor_idx_cvrmse, sensor_idx_nmbe]
 
-    print(energy_dict)
+    if os.path.exists(os.path.join(experiments_folder, 'Months_comparison.xlsx')):
+        os.remove(os.path.join(experiments_folder, 'Months_comparison.xlsx'))
+    writer = pd.ExcelWriter(os.path.join(experiments_folder, 'Months_comparison.xlsx'))
+    df = pd.DataFrame.from_dict(energy_dict, orient='index', columns=['Elec_cooling_GJ', 'Elec_heating_GJ', 'Gas_heating_GJ'])
+    df.to_excel(writer, sheet_name='Energy')
+    df = pd.DataFrame.from_dict(prediction_dict, orient='index', columns=['Rural_CVRMSE_Percent', 'Rural_NMBE_Percent',
+                                                                          'Sensor_idx_CVRMSE_Percent', 'Sensor_idx_NMBE_Percent'])
+    df.to_excel(writer, sheet_name='Prediction')
+    writer.save()
 
 if __name__ == '__main__':
     main()
