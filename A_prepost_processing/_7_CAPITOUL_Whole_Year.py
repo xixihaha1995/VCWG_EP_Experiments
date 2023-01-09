@@ -131,6 +131,7 @@ def canyon_temp_performance(month, csv_filename, cooling_system):
     df = pd.read_csv(os.path.join(experiments_folder, csv_filename), index_col=0, parse_dates=True)
     df = df[compare_start_time:compare_end_time]
     comparison['MeteoData.Pre'] = df['MeteoData.Pre']
+    comparison['sensWaste_' + csv_filename] = df['sensWaste']
     temp_prof_cols, pres_prof_cols = find_height_indice(df)
     # _onlyVCWG_temp_prof_cols, _onlyVCWG_pres_prof_cols = find_height_indice(df_onlyVCWG)
     month  = str(month)
@@ -153,15 +154,15 @@ def canyon_temp_performance(month, csv_filename, cooling_system):
                                               comparison[month + '_sensor_idx_' + height_idx])
         nmbe_dict[month + '_sensor_idx_' + height_idx] = tempNMBE
         print(f'cvrmse for {month} at height idx:{height_idx} is {tempCVRMSE}, NMBE is {tempNMBE}')
-    # #plot urban, rural sensor_idx
-    # fig, ax = plt.subplots(figsize=(10, 6))
-    # ax.plot(comparison['Urban_DBT_C'], label='Urban')
-    # ax.plot(comparison['Rural_DBT_C'], label='Rural')
-    # ax.plot(comparison[month + '_sensor_idx_' + height_idx], label = 'Predicted')
-    # ax.set_xlabel('Time')
-    # ax.set_ylabel('Temperature (C)')
-    # ax.legend()
-    # plt.show()
+    #plot urban, rural sensor_idx
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.plot(comparison['Urban_DBT_C'], label='Urban')
+    ax.plot(comparison['Rural_DBT_C'], label='Rural')
+    ax.plot(comparison[month + '_sensor_idx_' + height_idx], label = 'Predicted')
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Temperature (C)')
+    ax.legend()
+    plt.show()
     comparison.to_csv(os.path.join(experiments_folder, month + '_'+cooling_system+'_time_series.csv'))
     return cvrmse_dict['Rural'], nmbe_dict['Rural'], cvrmse_dict[month + '_sensor_idx_' + height_idx], nmbe_dict[month + '_sensor_idx_' + height_idx]
 
@@ -172,7 +173,7 @@ def main():
     for file in os.listdir(experiments_folder):
         if file.endswith('.csv') and '3_12' in file:
             experiments.append(file)
-    months = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    # months = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     months = [3, 10, 11, 12]
     energy_dict = {}
     prediction_dict = {}
