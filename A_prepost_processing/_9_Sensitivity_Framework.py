@@ -92,15 +92,23 @@ experiments_folder = 'Chicago_MedOffice_Sensitivity'
 read all csv files, containing OnlyVCWG or PartialVCWG, and create a new excel file with the following sheets:
 sheet_names = ['Energy Consumption','CanTempC', 'CanTempComparison']
 '''
-def sort_by_numbers(s):
-    regex = r'(\d+\.?\d*)'
-    return [float(x) for x in re.findall(regex, s)]
-
 def sort_by_orientation(s):
-    # the string list of csv files, for each string, it contains "orientation_xx"
-    # where xx can be 0, 45, 90
-    regex = r'orientation_(\d+)'
-    return [float(x) for x in re.findall(regex, s)]
+    #regex find decimal number in string
+    parts = re.findall(r'\d+(?:\.\d+)?', s)
+    orientation = int(parts[-1])
+    y = float(parts[-3])
+    z = float(parts[-2])
+    return (orientation, y, z)
+
+def sort_key_framework_orientation(string_lst):
+    '''
+    1. The first order is by framework: 'ByPass' will order first
+    2. The second order is by 'orientation', 0, 45, 90 will order acordingly
+    '''
+    bypass = "ByPass" not in string_lst
+    orientation = string_lst.split("_")[-1]
+    return (bypass, orientation)
+
 
 def excel_letters(idx):
     #idx:0, letter:A
@@ -133,7 +141,7 @@ def add_excel_formula(df_excel):
 all_csv_files = [f for f in os.listdir(experiments_folder)
                  if f.endswith('.csv')]
 baseline = 'ByPass_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
-all_csv_files.sort(key=sort_by_numbers)
+all_csv_files.sort(key=sort_by_orientation)
 sheet_names = ['CanTempComparison_CVRMSE', 'CanTempComparison_NMBE',
                'Total[GJ]', 'Cooling[GJ]', 'Heating[GJ]', 'CanTempC']
 '''
@@ -147,7 +155,7 @@ for csv_file in all_csv_files:
     csv_file = csv_file.replace('OnlyVCWG_', '')
     csv_file = csv_file.replace('PartialVCWG_', '')
     indices.add(csv_file)
-indices = sorted(indices, key=sort_by_numbers)
+indices = sorted(indices, key=sort_by_orientation)
 indices = [x for x in indices]
 all_dfs = {}
 for csv_file in all_csv_files:
@@ -169,7 +177,7 @@ For the rest of the columns, sort by "orentation, 0,45,90"
 '''
 all_cols = list(df_canTemp_c_sheet.columns)
 all_cols.remove('Baseline')
-all_cols.sort(key=sort_by_orientation)
+all_cols.sort(key=sort_key_framework_orientation)
 all_cols.insert(0, 'Baseline')
 df_canTemp_c_sheet = df_canTemp_c_sheet[all_cols]
 df_canTemp_c_sheet.to_excel(all_sensitivity, sheet_name='CanTempC')
@@ -207,6 +215,8 @@ df_canTemp_comparison_sheet.to_excel(all_sensitivity, sheet_name='CanTempCompari
 df_cooling_sheet = pd.DataFrame(index=indices)
 df_heating_sheet = pd.DataFrame(index=indices)
 df_total_sheet = pd.DataFrame(index=indices)
+df_cooling_baseline_sheet = pd.DataFrame(index=indices)
+baseline_energy = (read_sql(baseline))
 for csv_file in all_csv_files:
     _col, _index = get_col_and_index(csv_file)
     if 'ByPass' in csv_file:
@@ -214,15 +224,22 @@ for csv_file in all_csv_files:
         df_cooling_sheet.loc[_index, _col] = energy_tuple[1]
         df_heating_sheet.loc[_index, _col] = energy_tuple[2]
         df_total_sheet.loc[_index, _col] = energy_tuple[0]
+        tmp_cooling_per = round((energy_tuple[1] - baseline_energy[1]) / baseline_energy[1] * 100, 2)
+        df_cooling_baseline_sheet.loc[_index, _col] = tmp_cooling_per
     else:
         energy_tuple = (read_csv_energy(csv_file))
         df_cooling_sheet.loc[_index, _col] = energy_tuple[1]
         df_heating_sheet.loc[_index, _col] = energy_tuple[2]
         df_total_sheet.loc[_index, _col] = energy_tuple[0]
+        tmp_cooling_per = round((energy_tuple[1] - baseline_energy[1]) / baseline_energy[1] * 100, 2)
+        df_cooling_baseline_sheet.loc[_index, _col] = tmp_cooling_per
         _offline_energy = (read_sql(csv_file))
         df_cooling_sheet.loc[_index, 'Offline'] = _offline_energy[1]
         df_heating_sheet.loc[_index, 'Offline'] = _offline_energy[2]
         df_total_sheet.loc[_index, 'Offline'] = _offline_energy[0]
+        tmp_cooling_per = round((_offline_energy[1] - baseline_energy[1]) / baseline_energy[1] * 100, 2)
+        df_cooling_baseline_sheet.loc[_index, 'Offline'] = tmp_cooling_per
+df_cooling_baseline_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Baseline_Percent')
 df_cooling_sheet.to_excel(all_sensitivity, sheet_name='Cooling_GJ')
 df_heating_sheet.to_excel(all_sensitivity, sheet_name='Heating_GJ')
 df_total_sheet.to_excel(all_sensitivity, sheet_name='Total_GJ')
