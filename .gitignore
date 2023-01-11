@@ -24,7 +24,7 @@ EPTEMP-00000001/
 *.mtr
 *.rvaudit
 *.sql
-!A_prepost_processing/Chicago_MedOffice_Sensitivity/*/*.sql
+!A_prepost_processing/Chicago_MedOffice_Sensitivity/*/*.html
 *.svg
 *.html
 *.mdd
