@@ -115,7 +115,7 @@ def find_height_indice(df):
     temp_prof_cols = [col for col in cols if 'TempProf_cur' in col]
     pres_prof_cols = [col for col in cols if 'PresProf_cur' in col]
     return temp_prof_cols, pres_prof_cols
-def canyon_temp_performance(month, csv_filename, cooling_system):
+def canyon_temp_performance(month, csv_filename, cooling_system, framework, epw_file):
     cvrmse_dict = {}
     nmbe_dict = {}
     compare_start_time, compare_end_time = to_get_start_end_time(month)
@@ -124,14 +124,18 @@ def canyon_temp_performance(month, csv_filename, cooling_system):
                      + '_to_' + pd.to_datetime(compare_end_time).strftime('%Y-%m-%d') + '.csv'
     comparison = get_CAPITOUL_measurements(processed_folder, processed_file,
                                                 compare_start_time, compare_end_time)
-    cvrmse_dict['Rural'] = cvrmse(comparison['Urban_DBT_C'], comparison['Rural_DBT_C'])
-    nmbe_dict['Rural'] = normalized_mean_bias_error(comparison['Urban_DBT_C'], comparison['Rural_DBT_C'])
-    print(f'cvrmse for Rural is {cvrmse_dict["Rural"]}, nmbe for Rural is {nmbe_dict["Rural"]}')
+    # cvrmse_dict['Rural'] = cvrmse(comparison['Urban_DBT_C'], comparison['Rural_DBT_C'])
+    # nmbe_dict['Rural'] = normalized_mean_bias_error(comparison['Urban_DBT_C'], comparison['Rural_DBT_C'])
+    # print(f'cvrmse for Rural is {cvrmse_dict["Rural"]}, nmbe for Rural is {nmbe_dict["Rural"]}')
 
     df = pd.read_csv(os.path.join(experiments_folder, csv_filename), index_col=0, parse_dates=True)
     df = df[compare_start_time:compare_end_time]
     comparison['MeteoData.Pre'] = df['MeteoData.Pre']
     comparison['sensWaste_' + csv_filename] = df['sensWaste']
+    comparison['MeteoData.Tatm'] = df['MeteoData.Tatm'] - 273.15
+    cvrmse_dict['MeteoData.Tatm'] = cvrmse(comparison['Urban_DBT_C'], comparison['MeteoData.Tatm'])
+    nmbe_dict['MeteoData.Tatm'] = normalized_mean_bias_error(comparison['Urban_DBT_C'], comparison['MeteoData.Tatm'])
+    print(f'cvrmse for MeteoData.Tatm is {cvrmse_dict["MeteoData.Tatm"]}, nmbe for MeteoData.Tatm is {nmbe_dict["MeteoData.Tatm"]}')
     temp_prof_cols, pres_prof_cols = find_height_indice(df)
     # _onlyVCWG_temp_prof_cols, _onlyVCWG_pres_prof_cols = find_height_indice(df_onlyVCWG)
     month  = str(month)
@@ -163,40 +167,57 @@ def canyon_temp_performance(month, csv_filename, cooling_system):
     ax.set_ylabel('Temperature (C)')
     ax.legend()
     plt.show()
-    comparison.to_csv(os.path.join(experiments_folder, month + '_'+cooling_system+'_time_series.csv'))
-    return cvrmse_dict['Rural'], nmbe_dict['Rural'], cvrmse_dict[month + '_sensor_idx_' + height_idx], nmbe_dict[month + '_sensor_idx_' + height_idx]
+    comparison.to_csv(os.path.join(experiments_folder, month + '_'+cooling_system+'_'+framework+ '_' + epw_file +'_time_series.csv'))
+    return cvrmse_dict['MeteoData.Tatm'], nmbe_dict['MeteoData.Tatm'], cvrmse_dict[month + '_sensor_idx_' + height_idx], nmbe_dict[month + '_sensor_idx_' + height_idx]
 
 def main():
     global experiments_folder
     experiments_folder = 'CAPITOUl_Whole_Year'
     experiments = []
     for file in os.listdir(experiments_folder):
-        if file.endswith('.csv') and '3_12' in file:
+        if file.endswith('.csv') and '12_OnlyVCWG' in file:
             experiments.append(file)
     # months = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     months = [3, 10, 11, 12]
+    months = [12]
+    analysis_file_name = 'Months_comparison.xlsx'
+    analysis_file_name = '_temporary_12.xlsx'
     energy_dict = {}
     prediction_dict = {}
     for experiment in experiments:
+        print(experiment)
         if 'WithCooling' in experiment:
             cooling_system = 'WithCooling'
         else:
             cooling_system = 'WithoutCooling'
+        if 'OnlyVCWG' in experiment:
+            framework = 'OnlyVCWG'
+        else:
+            framework = 'Bypass'
+        if 'Bueno' in experiment:
+            epw_file = 'Bueno'
+        else:
+            epw_file = 'Lichen'
         for month in months:
-            monthly_elec_cooling_J_lst, monthly_elec_heating_J_lst, monthly_gas_heating_J_lst \
-                = read_sql(experiment, month)
-            elec_cooling_GJ = sum(monthly_elec_cooling_J_lst) / 1e9
-            elec_heating_GJ = sum(monthly_elec_heating_J_lst) / 1e9
-            gas_heating_GJ = sum(monthly_gas_heating_J_lst) / 1e9
-            energy_dict[str(month) + '_' + cooling_system] = [elec_cooling_GJ, elec_heating_GJ, gas_heating_GJ]
-            rural_cvrmse, rural_nmbe, sensor_idx_cvrmse, sensor_idx_nmbe = canyon_temp_performance(month, experiment, cooling_system)
-            prediction_dict[str(month) + '_' + cooling_system] = [rural_cvrmse, rural_nmbe, sensor_idx_cvrmse, sensor_idx_nmbe]
+            if 'OnlyVCWG' not in experiment:
+                monthly_elec_cooling_J_lst, monthly_elec_heating_J_lst, monthly_gas_heating_J_lst \
+                    = read_sql(experiment, month)
+                elec_cooling_GJ = sum(monthly_elec_cooling_J_lst) / 1e9
+                elec_heating_GJ = sum(monthly_elec_heating_J_lst) / 1e9
+                gas_heating_GJ = sum(monthly_gas_heating_J_lst) / 1e9
+                energy_dict[str(month) + '_' + cooling_system + '_' + framework + '_' + epw_file] \
+                    = [elec_cooling_GJ, elec_heating_GJ, gas_heating_GJ]
+            rural_cvrmse, rural_nmbe, sensor_idx_cvrmse, sensor_idx_nmbe = canyon_temp_performance(month, experiment,
+                                                                                                   cooling_system, framework, epw_file)
+            prediction_dict[str(month) + '_' + cooling_system + '_' + framework+ '_' + epw_file] = \
+                [rural_cvrmse, rural_nmbe, sensor_idx_cvrmse, sensor_idx_nmbe]
 
-    if os.path.exists(os.path.join(experiments_folder, 'Months_comparison.xlsx')):
-        os.remove(os.path.join(experiments_folder, 'Months_comparison.xlsx'))
-    writer = pd.ExcelWriter(os.path.join(experiments_folder, 'Months_comparison.xlsx'))
-    df = pd.DataFrame.from_dict(energy_dict, orient='index', columns=['Elec_cooling_GJ', 'Elec_heating_GJ', 'Gas_heating_GJ'])
-    df.to_excel(writer, sheet_name='Energy')
+    if os.path.exists(os.path.join(experiments_folder, analysis_file_name)):
+        os.remove(os.path.join(experiments_folder, analysis_file_name))
+    writer = pd.ExcelWriter(os.path.join(experiments_folder, analysis_file_name))
+    if energy_dict != {}:
+        df = pd.DataFrame.from_dict(energy_dict, orient='index', columns=['Elec_cooling_GJ', 'Elec_heating_GJ', 'Gas_heating_GJ'])
+        df.to_excel(writer, sheet_name='Energy')
     df = pd.DataFrame.from_dict(prediction_dict, orient='index', columns=['Rural_CVRMSE_Percent', 'Rural_NMBE_Percent',
                                                                           'Sensor_idx_CVRMSE_Percent', 'Sensor_idx_NMBE_Percent'])
     df.to_excel(writer, sheet_name='Prediction')
