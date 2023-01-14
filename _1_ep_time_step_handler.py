@@ -683,19 +683,23 @@ def MediumOffice_get_ep_results(state):
 
         est_c, wst_c = batch_get_wall_temperatures(state, e_w_handles)
 
-        coordination.ep_wallSun_Text_K = est_c + 273.15
-        coordination.ep_wallShade_Text_K = wst_c + 273.15
-
-        # if s_wall_Solar_w_m2 > n_wall_Solar_w_m2:
-        #     coordination.ep_wallSun_Text_K = s_wall_Text_c + 273.15
-        #     coordination.ep_wallSun_Tint_K = s_wall_Tint_c + 273.15
-        #     coordination.ep_wallShade_Text_K = n_wall_Text_c + 273.15
-        #     coordination.ep_wallShade_Tint_K = n_wall_Tint_c + 273.15
+        # if est_c > wst_c:
+        #     coordination.ep_wallSun_Text_K = est_c + 273.15
+        #     coordination.ep_wallShade_Text_K = wst_c + 273.15
         # else:
-        #     coordination.ep_wallSun_Text_K = n_wall_Text_c + 273.15
-        #     coordination.ep_wallSun_Tint_K = n_wall_Tint_c + 273.15
-        #     coordination.ep_wallShade_Text_K = s_wall_Text_c + 273.15
-        #     coordination.ep_wallShade_Tint_K = s_wall_Tint_c + 273.15
+        #     coordination.ep_wallSun_Text_K = wst_c + 273.15
+        #     coordination.ep_wallShade_Text_K = est_c + 273.15
+
+        if s_wall_Solar_w_m2 > n_wall_Solar_w_m2:
+            coordination.ep_wallSun_Text_K = s_wall_Text_c + 273.15
+            coordination.ep_wallSun_Tint_K = s_wall_Tint_c + 273.15
+            coordination.ep_wallShade_Text_K = n_wall_Text_c + 273.15
+            coordination.ep_wallShade_Tint_K = n_wall_Tint_c + 273.15
+        else:
+            coordination.ep_wallSun_Text_K = n_wall_Text_c + 273.15
+            coordination.ep_wallSun_Tint_K = n_wall_Tint_c + 273.15
+            coordination.ep_wallShade_Text_K = s_wall_Text_c + 273.15
+            coordination.ep_wallShade_Tint_K = s_wall_Tint_c + 273.15
 
         coordination.sem3.release()
 

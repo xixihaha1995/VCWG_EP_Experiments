@@ -100,7 +100,8 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
 def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
                     FractionsRoof):
     global ep_sensWaste_w_m2_per_footprint_area,save_path_clean,vcwg_needed_time_idx_in_seconds, \
-        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa
+        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, \
+        ep_wallSun_Text_K, ep_wallShade_Text_K, ep_sensWaste_w_m2_per_footprint_area
 
     sem0.acquire()
     vcwg_needed_time_idx_in_seconds = (it + 1) * simTime.dt
@@ -119,6 +120,17 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     sem1.release()
     
     sem3.acquire()
+    vcwg_needed_time_idx_in_seconds = it * simTime.dt
+    cur_datetime = datetime.datetime.strptime(config['__main__']['start_time'],
+                                              '%Y-%m-%d %H:%M:%S') + \
+                   datetime.timedelta(seconds=vcwg_needed_time_idx_in_seconds)
+    blean_time_start = '2004-06-08 09:45:00'
+    blean_time_end = '2004-06-08 13:15:00'
+    # if blean_time_start <= str(cur_datetime) <= blean_time_end:
+    #     ep_wallSun_Text_K  += 20
+    #     ep_wallShade_Text_K += 20
+    #     ep_sensWaste_w_m2_per_footprint_area += 100
+    print('current time: ', cur_datetime)
     BEM_Building = BEM.building
     BEM_Building.ElecTotal = 0
     if 'WithoutCooling' in csv_file_name:
@@ -147,18 +159,14 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
 
     TempProf_cur = VerticalProfUrban.th
     PresProf_cur = VerticalProfUrban.presProf
-    vcwg_needed_time_idx_in_seconds = it * simTime.dt
-    cur_datetime = datetime.datetime.strptime(config['__main__']['start_time'],
-                                              '%Y-%m-%d %H:%M:%S') + \
-                   datetime.timedelta(seconds=vcwg_needed_time_idx_in_seconds)
-    print('current time: ', cur_datetime)
+
     domain_height = len(TempProf_cur)
     vcwg_heights_profile = numpy.array([0.5 + i for i in range(domain_height)])
     mapped_indices = [numpy.argmin(numpy.abs(vcwg_heights_profile - i)) for i in sensor_heights]
 
+    roof_K = (FractionsRoof.fimp * BEM.roofImp.Text + FractionsRoof.fveg * BEM.roofVeg.Text)
     wallSun_K = BEM.wallSun.Text
     wallShade_K = BEM.wallShade.Text
-    roof_K = (FractionsRoof.fimp * BEM.roofImp.Text + FractionsRoof.fveg * BEM.roofVeg.Text)
 
     # dummy values overriding
     BEM_Building.sensCoolDemand = 0
