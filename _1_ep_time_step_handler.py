@@ -419,6 +419,41 @@ def SmallOffice_get_ep_results(state):
 
         coordination.sem3.release()
 
+def batch_get_e_w_wall_hanldes(state):
+    e_w_dict = {}
+    e_w_dict['east'] = []
+    e_w_dict['west'] = []
+    for i in ['bot', 'mid', 'top']:
+        #Perimeter_bot_ZN_3_Wall_North
+        _tmp_est = coordination.ep_api.exchange.get_variable_handle(state, \
+                                                                    "Surface Outside Face Temperature", \
+                                                                    "Perimeter_" + i + "_ZN_2_Wall_East")
+        _tmp_wst = coordination.ep_api.exchange.get_variable_handle(state, \
+                                                                    "Surface Outside Face Temperature", \
+                                                                    "Perimeter_" + i + "_ZN_4_Wall_West")
+        e_w_dict['east'].append(_tmp_est)
+        e_w_dict['west'].append(_tmp_wst)
+    return e_w_dict
+
+def batch_check_handles(wall_handles_dict):
+    for key in wall_handles_dict.keys():
+        for i in range(len(wall_handles_dict[key])):
+            if wall_handles_dict[key][i] == -1:
+                print('batch_check_handles(): some handle not available')
+                os.getpid()
+                os.kill(os.getpid(), signal.SIGTERM)
+
+def batch_get_wall_temperatures(state, dic):
+    # s_wall_bot_1_Text_c = coordination.ep_api.exchange.get_variable_value(state, s_wall_bot_1_Text_handle)
+    est_c = 0
+    wst_c = 0
+    for i in range(len(dic['east'])):
+        est_c += coordination.ep_api.exchange.get_variable_value(state, dic['east'][i])
+        wst_c += coordination.ep_api.exchange.get_variable_value(state, dic['west'][i])
+    est_c /= len(dic['east'])
+    wst_c /= len(dic['west'])
+    return est_c, wst_c
+
 def MediumOffice_get_ep_results(state):
     global get_ep_results_inited_handle, oat_sensor_handle, \
         hvac_heat_rejection_sensor_handle, elec_bld_meter_handle, zone_flr_area_handle, \
@@ -436,7 +471,8 @@ def MediumOffice_get_ep_results(state):
         flr_core_Tint_handle, \
         roof_Tint_handle, \
         s_wall_bot_1_Tint_handle, s_wall_mid_1_Tint_handle, s_wall_top_1_Tint_handle, \
-        n_wall_bot_1_Tint_handle, n_wall_mid_1_Tint_handle, n_wall_top_1_Tint_handle
+        n_wall_bot_1_Tint_handle, n_wall_mid_1_Tint_handle, n_wall_top_1_Tint_handle,\
+        e_w_handles
 
     if not get_ep_results_inited_handle:
         if not coordination.ep_api.exchange.api_data_fully_ready(state):
@@ -547,6 +583,7 @@ def MediumOffice_get_ep_results(state):
         n_wall_top_1_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state,\
                                                                                     "Surface Inside Face Temperature",\
                                                                                     "Perimeter_top_ZN_3_Wall_North")
+        e_w_handles = batch_get_e_w_wall_hanldes(state)
         if (oat_sensor_handle == -1 or hvac_heat_rejection_sensor_handle == -1 or zone_flr_area_handle == -1 or\
                 elec_bld_meter_handle == -1 or zone_indor_temp_sensor_handle == -1 or\
                 zone_indor_spe_hum_sensor_handle == -1 or\
@@ -565,6 +602,8 @@ def MediumOffice_get_ep_results(state):
             print('mediumOffice_get_ep_results(): some handle not available')
             os.getpid()
             os.kill(os.getpid(), signal.SIGTERM)
+
+        batch_check_handles(e_w_handles)
 
     # get EP results, upload to coordination
     if called_vcwg_bool:
@@ -642,16 +681,21 @@ def MediumOffice_get_ep_results(state):
         n_wall_Text_c = (n_wall_bot_1_Text_c + n_wall_mid_1_Text_c + n_wall_top_1_Text_c)/3
         n_wall_Tint_c = (n_wall_bot_1_Tint_c + n_wall_mid_1_Tint_c + n_wall_top_1_Tint_c)/3
 
-        if s_wall_Solar_w_m2 > n_wall_Solar_w_m2:
-            coordination.ep_wallSun_Text_K = s_wall_Text_c + 273.15
-            coordination.ep_wallSun_Tint_K = s_wall_Tint_c + 273.15
-            coordination.ep_wallShade_Text_K = n_wall_Text_c + 273.15
-            coordination.ep_wallShade_Tint_K = n_wall_Tint_c + 273.15
-        else:
-            coordination.ep_wallSun_Text_K = n_wall_Text_c + 273.15
-            coordination.ep_wallSun_Tint_K = n_wall_Tint_c + 273.15
-            coordination.ep_wallShade_Text_K = s_wall_Text_c + 273.15
-            coordination.ep_wallShade_Tint_K = s_wall_Tint_c + 273.15
+        est_c, wst_c = batch_get_wall_temperatures(state, e_w_handles)
+
+        coordination.ep_wallSun_Text_K = est_c + 273.15
+        coordination.ep_wallShade_Text_K = wst_c + 273.15
+
+        # if s_wall_Solar_w_m2 > n_wall_Solar_w_m2:
+        #     coordination.ep_wallSun_Text_K = s_wall_Text_c + 273.15
+        #     coordination.ep_wallSun_Tint_K = s_wall_Tint_c + 273.15
+        #     coordination.ep_wallShade_Text_K = n_wall_Text_c + 273.15
+        #     coordination.ep_wallShade_Tint_K = n_wall_Tint_c + 273.15
+        # else:
+        #     coordination.ep_wallSun_Text_K = n_wall_Text_c + 273.15
+        #     coordination.ep_wallSun_Tint_K = n_wall_Tint_c + 273.15
+        #     coordination.ep_wallShade_Text_K = s_wall_Text_c + 273.15
+        #     coordination.ep_wallShade_Tint_K = s_wall_Tint_c + 273.15
 
         coordination.sem3.release()
 
