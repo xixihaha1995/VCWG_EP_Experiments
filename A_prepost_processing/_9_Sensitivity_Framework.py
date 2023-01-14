@@ -70,7 +70,11 @@ def read_sql(csv_file):
                     f"AND ColumnName = 'Electricity'"
     heating_query_results = cursor.execute(heating_query).fetchall()
     heating_electricity = float(re.findall(regex, heating_query_results[0][1])[0])
-    return totalEnergy, cooling_electricity, heating_electricity
+
+    cooling_demand_query = f"SELECT * FROM TabularDataWithStrings WHERE TabularDataIndex = '{1389}'"
+    cooling_demand_query_results = cursor.execute(cooling_demand_query).fetchall()
+    cooling_demand = float(re.findall(regex, cooling_demand_query_results[0][1])[0])
+    return totalEnergy, cooling_electricity, heating_electricity, cooling_demand
 def read_csv_energy(csv_file):
     '''
     Returns:
@@ -216,6 +220,8 @@ df_cooling_sheet = pd.DataFrame(index=indices)
 df_heating_sheet = pd.DataFrame(index=indices)
 df_total_sheet = pd.DataFrame(index=indices)
 df_cooling_baseline_sheet = pd.DataFrame(index=indices)
+df_cooling_demand_sheet = pd.DataFrame(index=indices)
+df_cooling_demand_percent_sheet = pd.DataFrame(index=indices)
 baseline_energy = (read_sql(baseline))
 for csv_file in all_csv_files:
     _col, _index = get_col_and_index(csv_file)
@@ -226,6 +232,9 @@ for csv_file in all_csv_files:
         df_total_sheet.loc[_index, _col] = energy_tuple[0]
         tmp_cooling_per = round((energy_tuple[1] - baseline_energy[1]) / baseline_energy[1] * 100, 2)
         df_cooling_baseline_sheet.loc[_index, _col] = tmp_cooling_per
+        df_cooling_demand_sheet.loc[_index, _col] = energy_tuple[3]
+        tmp_cooling_demand_per = round((energy_tuple[3] - baseline_energy[3]) / baseline_energy[3] * 100, 2)
+        df_cooling_demand_percent_sheet.loc[_index, _col] = tmp_cooling_demand_per
     else:
         energy_tuple = (read_csv_energy(csv_file))
         df_cooling_sheet.loc[_index, _col] = energy_tuple[1]
@@ -239,10 +248,17 @@ for csv_file in all_csv_files:
         df_total_sheet.loc[_index, 'Offline'] = _offline_energy[0]
         tmp_cooling_per = round((_offline_energy[1] - baseline_energy[1]) / baseline_energy[1] * 100, 2)
         df_cooling_baseline_sheet.loc[_index, 'Offline'] = tmp_cooling_per
+        df_cooling_demand_sheet.loc[_index, 'Offline'] = _offline_energy[3]
+        tmp_cooling_demand_per = round((_offline_energy[3] - baseline_energy[3]) / baseline_energy[3] * 100, 2)
+        df_cooling_demand_percent_sheet.loc[_index, 'OnlyVCWG'] = tmp_cooling_demand_per
+        df_cooling_demand_percent_sheet.loc[_index, 'Offline'] = tmp_cooling_demand_per
+
 df_cooling_baseline_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Baseline_Percent')
 df_cooling_sheet.to_excel(all_sensitivity, sheet_name='Cooling_GJ')
 df_heating_sheet.to_excel(all_sensitivity, sheet_name='Heating_GJ')
 df_total_sheet.to_excel(all_sensitivity, sheet_name='Total_GJ')
 df_canTemp_c_sheet = add_excel_formula(df_canTemp_c_sheet)
 df_canTemp_c_sheet.to_excel(all_sensitivity, sheet_name='CanTempC')
+df_cooling_demand_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Demand_W')
+df_cooling_demand_percent_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Demand_Percent')
 all_sensitivity.save()
