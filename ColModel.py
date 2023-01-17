@@ -7,7 +7,6 @@ from Buoyancy import BuoProd
 from NumericalSolver import Diff
 from Invert import Invert
 import copy
-
 """
 Column Model for momentum, turbulent kinetic energy, temperature, and specific humidity in the urban environment
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -244,6 +243,8 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     # Solve temperature equation
     th_new,wth,dwthdz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,T_bc_bottom,T_bc_top,dts,rho,th,Km/ColParam.prandtl,srim_th,srex_th,sf,vol,Geometry_m.dz)
     # Solve specific humidity equation
+    print('th_new',th_new - 273.15)
+    # print('srex_th',srex_th)
     qn_new,wqn,dwqndz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,q_bc_bottom,q_bc_top,dts,rho,qn,Km/ColParam.schmidt,srim_qn,srex_qn,sf,vol,Geometry_m.dz)
 
     vx = copy.copy(vx_new)
