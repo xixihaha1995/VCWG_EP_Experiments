@@ -3,8 +3,6 @@ import datetime
 import threading, sys, os
 
 import numpy
-# coordination.ini_all(sensitivity_file_name, config, ctl_viriable_1, value_1,
-#                          ctl_viriable_2, value_2, ctl_viriable_3, value_3)
 
 def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
             _ctl_viriable_2=None, _value_2=None, _ctl_viriable_3=None, _value_3=None):
@@ -14,11 +12,12 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
         sem0, sem1, sem2, sem3, \
         vcwg_needed_time_idx_in_seconds, \
         vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, vcwg_wsp_mps, vcwg_wdir_deg, \
-        ep_indoorTemp_C, ep_sensWaste_w_m2_per_footprint_area, \
+        ep_indoorTemp_C, ep_sensWaste_w_m2_per_footprint_area, ep_sensWaste_w_m2_per_footprint_area_last,\
         ep_floor_Text_K, ep_floor_Tint_K, ep_roof_Text_K, ep_roof_Tint_K, \
         ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K, \
         mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
-        footprint_area_m2, ForcTemp_K, vcwg_hConv_w_m2_per_K
+        footprint_area_m2, ForcTemp_K, vcwg_hConv_w_m2_per_K, \
+        ep_wallSun_Text_K_last, ep_wallShade_Text_K_last, ep_roof_Text_K_last, dlk_last
     # find the project path
     ctl_virable_1 = _ctl_viriable_1
     value_1 = _value_1
@@ -88,6 +87,7 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
 
     ep_indoorTemp_C = 20
     ep_sensWaste_w_m2_per_footprint_area = 0
+    ep_sensWaste_w_m2_per_footprint_area_last = 0
     ep_floor_Text_K = 300
     ep_floor_Tint_K = 300
     ep_roof_Text_K = 300
@@ -96,12 +96,16 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
     ep_wallSun_Tint_K = 300
     ep_wallShade_Text_K = 300
     ep_wallShade_Tint_K = 300
-    
+
+    ep_wallSun_Text_K_last = 300
+    ep_wallShade_Text_K_last = 300
+    ep_roof_Text_K_last = 300
 def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
                     FractionsRoof):
     global ep_sensWaste_w_m2_per_footprint_area,save_path_clean,vcwg_needed_time_idx_in_seconds, \
         vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, \
-        ep_wallSun_Text_K, ep_wallShade_Text_K, ep_sensWaste_w_m2_per_footprint_area
+        ep_wallSun_Text_K, ep_wallShade_Text_K, ep_sensWaste_w_m2_per_footprint_area_last, \
+        ep_wallSun_Text_K_last, ep_wallShade_Text_K_last, ep_roof_Text_K_last
 
     sem0.acquire()
     vcwg_needed_time_idx_in_seconds = (it + 1) * simTime.dt
@@ -133,24 +137,42 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     print('current time: ', cur_datetime)
     BEM_Building = BEM.building
     BEM_Building.ElecTotal = 0
+
+    _sens_diff = abs(ep_sensWaste_w_m2_per_footprint_area - ep_sensWaste_w_m2_per_footprint_area_last)
+    if 0:
+        _tmp_Sens = min(ep_sensWaste_w_m2_per_footprint_area, ep_sensWaste_w_m2_per_footprint_area_last)
+        _tmp_WallSun = min(ep_wallSun_Text_K, ep_wallSun_Text_K_last)
+        _tmp_WallShade = min(ep_wallShade_Text_K, ep_wallShade_Text_K_last)
+        _tmp_Roof = min(ep_roof_Text_K, ep_roof_Text_K_last)
+    else:
+        _tmp_Sens = ep_sensWaste_w_m2_per_footprint_area
+        _tmp_WallSun = ep_wallSun_Text_K
+        _tmp_WallShade = ep_wallShade_Text_K
+        _tmp_Roof = ep_roof_Text_K
+    ep_sensWaste_w_m2_per_footprint_area_last = ep_sensWaste_w_m2_per_footprint_area
+    ep_sensWaste_w_m2_per_footprint_area = 0
     if 'WithoutCooling' in csv_file_name:
         BEM_Building.sensWaste = 0
     else:
-        BEM_Building.sensWaste = ep_sensWaste_w_m2_per_footprint_area
-    ep_sensWaste_w_m2_per_footprint_area = 0
+        BEM_Building.sensWaste = _tmp_Sens
+
 
     BEM.mass.Text = ep_floor_Text_K
     BEM.mass.Tint = ep_floor_Tint_K
-    BEM.wallSun.Text = ep_wallSun_Text_K
+    BEM.wallSun.Text = _tmp_WallSun
     BEM.wallSun.Tint = ep_wallSun_Tint_K
-    BEM.wallShade.Text = ep_wallShade_Text_K
+    BEM.wallShade.Text = _tmp_WallShade
     BEM.wallShade.Tint = ep_wallShade_Tint_K
 
+    ep_wallSun_Text_K_last = ep_wallSun_Text_K
+    ep_wallShade_Text_K_last = ep_wallShade_Text_K
+    ep_roof_Text_K_last = ep_roof_Text_K
+
     if FractionsRoof.fimp > 0:
-        BEM.roofImp.Text = ep_roof_Text_K
+        BEM.roofImp.Text = _tmp_Roof
         BEM.roofImp.Tint = ep_roof_Tint_K
     if FractionsRoof.fveg > 0:
-        BEM.roofVeg.Text = ep_roof_Text_K
+        BEM.roofVeg.Text = _tmp_Roof
         BEM.roofVeg.Tint = ep_roof_Tint_K
 
     if os.path.exists(data_saving_path) and not save_path_clean:
