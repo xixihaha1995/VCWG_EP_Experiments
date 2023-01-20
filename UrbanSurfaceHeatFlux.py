@@ -606,7 +606,7 @@ class Surface_HeatFlux(object):
         # Calculate aerodynamic resistance (Louis 1979)
         rap_can, rap_Htree_In, _u_Hcan_, alpha, Ri_nearGround = \
             ResistanceCal.Ground_Aerodynamic_Resistance_1D(WindSpeed_top,MeteoData.Zatm,VerticalProfUrban,Gemeotry_m,Tcanyon,Tground,
-                                                           Gemeotry_m.Height_canyon,dcan,zomcan,zom_ground,Gemeotry_m.Height_tree,
+                                                           Gemeotry_m.Height_canyon,dcan,zomcan,_zoh_ground_,Gemeotry_m.Height_tree,
                                                            Gemeotry_m.Radius_tree,ColParam)
 
         # Calculate stomatal and leaf boundary resistances of tree
