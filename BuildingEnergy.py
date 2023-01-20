@@ -510,6 +510,7 @@ class Building(object):
         cur_datetime = datetime.datetime.strptime(coordination.config['__main__']['start_time'],
                                                   '%Y-%m-%d %H:%M:%S') + \
                        datetime.timedelta(seconds= vcwg_needed_time_idx_in_seconds)
+        print('cur_datetime', cur_datetime)
         wallSun_K = BEM.wallSun.Text
         wallShade_K = BEM.wallShade.Text
         roof_K = (FractionsRoof.fimp * BEM.roofImp.Text + FractionsRoof.fveg * BEM.roofVeg.Text)

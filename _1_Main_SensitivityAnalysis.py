@@ -41,8 +41,9 @@ def for_loop_all_ini():
                      "BUBBLE_Ue1_OnlyVCWG.ini","BUBBLE_Ue2_OnlyVCWG.ini",
                      "Vancouver_Rural_OnlyVCWG.ini","Vancouver_TopForcing_OnlyVCWG.ini",
                      "CAPITOUL_WithoutCooling_OnlyVCWG.ini", "CAPITOUL_WithCooling_OnlyVCWG.ini"]
-    # selected_jobs = ["BUBBLE_Ue1_WithoutShading.ini", "BUBBLE_Ue2_WithoutShading.ini" ]
-    # selected_jobs = ['Chicago_MedOffice_Detailed.ini', 'Chicago_MedOffice_ShoeBox.ini']
+    selected_jobs = ["BUBBLE_Ue1_OnlyVCWG.ini", "BUBBLE_Ue2_OnlyVCWG.ini",
+                     "Vancouver_Rural_OnlyVCWG.ini", "Vancouver_TopForcing_OnlyVCWG.ini",
+                     "CAPITOUL_WithoutCooling_OnlyVCWG.ini", "CAPITOUL_WithCooling_OnlyVCWG.ini"]
     nbr_job_for_one_batch = 3
     for i in range(0,len(selected_jobs),nbr_job_for_one_batch):
         print('Todo jobs',selected_jobs[i:i+nbr_job_for_one_batch])

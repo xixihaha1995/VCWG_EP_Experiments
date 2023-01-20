@@ -28,6 +28,8 @@ def ini_all(sensitivity_file_name):
     save_path_clean = False
     sensor_heights = [float(i) for i in config['Bypass']['sensor_height_meter'].split(',')]
     csv_file_name = config['Bypass']['framework'] + '_' + config['Bypass']['csv_file_name']
+    config['Bypass']['csv_file_name'] = csv_file_name
+    print('csv_file_name', csv_file_name)
     data_saving_path = os.path.join(project_path, 'A_prepost_processing',
                                     experiments_theme,f'{csv_file_name}.csv')
     ep_trivial_path = os.path.join(project_path, 'A_prepost_processing',
