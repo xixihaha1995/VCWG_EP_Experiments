@@ -63,11 +63,18 @@ class BuildingCol:
         if 'SimplifiedHighBld' in coordination.bld_type:
             # Instead of 20 stories, we only use floor 1, 11, 20, with centroid heights 1.98, 32.46, 59.89
             centroid_idices = numpy.array([1.98, 32.46, 59.89])
+        # print('SensHVAC')
         for i in range(coordination.EP_nFloor):
-            # multiplier = 50 if i == 10 else 1
-            # self.SensHt_HVAC_Floor[int(centroid_idices[i])] = sum(coordination.EP_floor_energy_lst[:i + 1])
-            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i]
-
+            # if i < -1:
+            #     self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i]
+            # else:
+            #     self.SensHt_HVAC_Floor[int(centroid_idices[i])] = sum(coordination.EP_floor_energy_lst[:i + 1]) * 2E-2
+            # multiplier = 1E-2 if i < 30 else 1
+            # # print(sum(coordination.EP_floor_energy_lst[:i + 1]), end=',')
+            multiplier = 1 if i < 20 else 1
+            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = sum(coordination.EP_floor_energy_lst[:i + 1]) * multiplier
+            # self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i] * multiplier
+        # print()
         coordination.EP_floor_energy_lst = [0 for i in range(coordination.EP_nFloor)]
         # print('self.SensHt_HVAC_Floor', self.SensHt_HVAC_Floor)
         self.HVAC_street_frac = HVAC_street_frac  # Fraction of Sensible waste heat from building released into the atmosphere at street level

@@ -342,8 +342,25 @@ class Surface_HeatFlux(object):
 
         Twsun_dummy = [i  for i in coordination.EP_wall_temperatures_K_dict['south']]
         Twshade_dummy = [i for i in coordination.EP_wall_temperatures_K_dict['north']]
-        # print(f'Twsun_dummy: {[i - 273.15 for i in Twsun_dummy]}')
-        # #Twsun_dummy is currently coordination.EP_nFloor, broadcat to Geometry_m.nz_u
+
+        # Twsun_dummy = [Twsun for i in range(Geometry_m.nz_u + 1)]
+        # Twshade_dummy = [Twshade for i in range(Geometry_m.nz_u + 1)]
+
+
+        self.SensHt_HVAC_Floor = numpy.zeros(Geometry_m.nz_u + 1)
+        if '20Stories' in coordination.bld_type:
+            centroid_spacing = (Geometry_m.nz_u + 1) / coordination.EP_nFloor
+            _start = (Geometry_m.nz_u + 1) / coordination.EP_nFloor / 2
+            _end = (Geometry_m.nz_u + 1)
+            centroid_idices = numpy.arange(_start, _end, centroid_spacing)
+        if 'SimplifiedHighBld' in coordination.bld_type:
+            # Instead of 20 stories, we only use floor 1, 11, 20, with centroid heights 1.98, 32.46, 59.89
+            centroid_idices = numpy.array([1.98, 32.46, 59.89])
+        # print('SensHVAC')
+        for i in range(coordination.EP_nFloor):
+            multiplier = 0 if i < 20 else 1
+            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = sum(coordination.EP_floor_energy_lst[:i + 1]) * multiplier
+            # self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i] * multiplier
 
         for i_z in range(Geometry_m.nz_u):
             # Calculate wall resistance [s m^-1]
@@ -353,8 +370,14 @@ class Surface_HeatFlux(object):
             # Hwsun_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twsun-T_canyon[i_z]) / (RES_w))
             # # Calculate sensible heat flux from shaded wall [W m^-2]
             # Hwshade_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twshade-T_canyon[i_z]) / (RES_w))
-            Hwsun_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twsun_dummy[int(i_z/Geometry_m.nz_u*len(Twsun_dummy))]-T_canyon[i_z]) / (RES_w))
-            Hwshade_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twshade_dummy[int(i_z/Geometry_m.nz_u*len(Twshade_dummy))]-T_canyon[i_z]) / (RES_w))
+            _tmpWSun = cp_atm * VerticalProfUrban.rho[i_z] * \
+                       (Twsun_dummy[int(i_z/Geometry_m.nz_u*len(Twsun_dummy))]-T_canyon[i_z]) / (RES_w) + \
+                       self.SensHt_HVAC_Floor[i] /2
+            _tmpWShade = cp_atm * VerticalProfUrban.rho[i_z] * \
+                         (Twshade_dummy[int(i_z/Geometry_m.nz_u*len(Twshade_dummy))]-T_canyon[i_z]) / (RES_w) + \
+                         self.SensHt_HVAC_Floor[i] / 2
+            Hwsun_z.append(_tmpWSun)
+            Hwshade_z.append(_tmpWShade)
 
         # Calculate total sensible heat flux as the area weighted average of sensible heat fluxes from wall layers [W m^-2]
         Hwsun = (Geometry_m.dz/Geometry_m.Height_canyon)*sum(Hwsun_z)
@@ -616,7 +639,7 @@ class Surface_HeatFlux(object):
         # Calculate aerodynamic resistance (Louis 1979)
         rap_can, rap_Htree_In, _u_Hcan_, alpha, Ri_nearGround = \
             ResistanceCal.Ground_Aerodynamic_Resistance_1D(WindSpeed_top,MeteoData.Zatm,VerticalProfUrban,Gemeotry_m,Tcanyon,Tground,
-                                                           Gemeotry_m.Height_canyon,dcan,zomcan,zom_ground,Gemeotry_m.Height_tree,
+                                                           Gemeotry_m.Height_canyon,dcan,zomcan,_zoh_ground_,Gemeotry_m.Height_tree,
                                                            Gemeotry_m.Radius_tree,ColParam)
 
         # Calculate stomatal and leaf boundary resistances of tree

@@ -8,6 +8,8 @@ from NumericalSolver import Diff
 from Invert import Invert
 import copy
 
+import _0_vcwg_ep_coordination as coordination
+
 """
 Column Model for momentum, turbulent kinetic energy, temperature, and specific humidity in the urban environment
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -74,6 +76,13 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
 
     vx = copy.copy(VerticalProfUrban.vx)             # x component of horizontal wind speed [m s^-1]
     vy = copy.copy(VerticalProfUrban.vy)             # y component of horizontal wind speed [m s^-1]
+
+
+    # for i in range(0, 150):
+    #     vx[i] *= 1e-7
+    #     vy[i] *= 1e-7
+
+
     tke = copy.copy(VerticalProfUrban.tke)           # Turbulent kinetic energy [m^2 s^-2]
     th = copy.copy(VerticalProfUrban.th)             # Potential temperature [K]
     qn = copy.copy(VerticalProfUrban.qn)             # Specific humidity [kgv kga^-1]
@@ -83,6 +92,8 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
 
     # gravitational acceleration [m s^-2]
     g = 9.81
+
+    print('rho', rho)
 
     # Define explicit and implicit parts of source and sink terms
     srex_vx = numpy.zeros(Geometry_m.nz)       # Explicit part of x component of horizontal wind speed [m s^-2]
@@ -147,19 +158,51 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     # -----------------------------------------
     # Calculate turbulent diffusion coefficient (Km) [m^2 s^-1]
 
-    for i in range(0, 20):
-        dlk[i] = dlk[i] * 1e-2
-    # print('dlk')
-    # for i in dlk:
-    #     # print without new line
-    #     print(i, end=',')
-    # print()
-    # dlk[Geometry_m.nz_u] = dlk[Geometry_m.nz_u] * 1e-2
-    # for i in range(Geometry_m.nz_u, Geometry_m.nz):
-    #     # dlk[i] = dlk[Geometry_m.nz_u] * 2e0
-    #     dlk[i] = 20
+    centroid_spacing = (Geometry_m.nz_u + 1) / coordination.EP_nFloor
+    _start = (Geometry_m.nz_u + 1) / coordination.EP_nFloor / 2
+    _end = (Geometry_m.nz_u + 1)
+    centroid_idices = numpy.arange(_start, _end, centroid_spacing)
+    # print(f'centroid_idices: {centroid_idices}')
+
+    # for i in range(60, 62):
+    #     dlk[i] *= 1e-10
+    #     dls[i] *= 1e-10
+
+
+    # for i in range(56, 58):
+    #     dlk[i] *= 1e-3
+    #     dls[i] *= 1e-3
+
+    print('dlk')
+    for i in dlk:
+        # print without new line
+        print(i, end=',')
+    print()
+
+    print('tke')
+    for i in tke:
+        # print without new line
+        print(i, end=',')
+    print()
+
     Km = TurbCoeff(Geometry_m.nz, Ck, tke, dlk)
-    # print(f'Km: {Km}')
+
+    Km_tmp = Km
+    # Km[60] *= 1e4
+    # Km[30] *= 1e4
+
+
+
+    # for i in range(20):
+    #     Km[int(centroid_idices[i])] *= 0
+    #     dls[int(centroid_idices[i])] *= 1e3
+
+    # Km *= 1e-2
+    print(f'Km')
+    for i in Km:
+        # print without new line
+        print(i, end=',')
+    print()
     # Calculate shear production [m^2 s^-3] in TKE equation. (Term II of equation 5.2, Krayenhoff 2014, PhD thesis)
     sh = ShearProd(ColParam.cdmin,Geometry_m.nz, Geometry_m.dz, vx, vy, Km)
 
@@ -177,18 +220,39 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
         sh[i] = sh[i]*sf[i]
         bu[i] = bu[i]*sf[i]
 
+    print('td')
+    for i in td:
+        # print without new line
+        print(i, end=',')
+    print()
+
+
+    print(f'bu')
+    for i in bu:
+        # print without new line
+        print(i, end=',')
+    print()
+
+    print(f'sh')
+    for i in sh:
+        # print without new line
+        print(i, end=',')
+    print()
+
+    print('dls')
+    for i in dls:
+        # print without new line
+        print(i, end=',')
+    print()
     # Calculate sink and source terms in momentum, temperature and turbulent kinetic energy (TKE) equations which are caused by building
     BuildingCoef = BuildingCol(Geometry_m.nz, Geometry_m.dz, dts, vol,Geometry_m.lambdap, Geometry_m.lambdaf,
                                Geometry_m.Height_canyon, Ck, Cp, th_ref, vx, vy, th, Cdrag, rho,Geometry_m.nz_u, pb, ss,
                                z0_road,z0_roof,SensHt_HVAC,ColParam.HVAC_street_frac,ColParam.HVAC_atm_frac,ColParam.WindMin_Urban)
     BuildingCoef.BuildingDrag_UTC(thb,qhb,tvb,FractionsGround,FractionsRoof,TWallSun,TWallShade,TGround,TRoof)
 
-    # print(f'BuildingCoef.srex_th_h = {BuildingCoef.srex_th_h[:Geometry_m.nz_u + 1]}')
 
     # Drag coefficient for vegetation foliage
     cdv = 0.2
-    print(f'srex_th_h = {BuildingCoef.srex_th_h[:Geometry_m.nz_u + 1]},'
-          f'srex_th_v = {BuildingCoef.srex_th_v[:Geometry_m.nz_u + 1]}')
 
     # Calculate source and sink terms caused by trees and then calculate total source and sink terms
     for i in range(0, Geometry_m.nz):
@@ -247,6 +311,32 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
         # Implicit term in humidity equation [s^-1] = term caused by latent heat from vegetation [s^-1]
         srim_qn[i] = srim_qn[i]
 
+    # srim_tke = numpy.zeros(Geometry_m.nz)
+    # srim_tke_tmp = copy.copy(srim_tke)
+    # for i in range(0, 60):
+    #     srim_tke[i] *= 0
+    #
+    # for i in range(60, Geometry_m.nz):
+    #     srim_tke[i] *= 0
+
+    print('srex_tke')
+    for i in range(0, Geometry_m.nz):
+        print(srex_tke[i],end=',')
+    print()
+    print('srim_tke')
+    for i in range(0, Geometry_m.nz):
+        print(srim_tke[i],end=',')
+    print()
+
+    print('srex_th')
+    for i in range(0, Geometry_m.nz):
+        print(srex_th[i],end=',')
+    print()
+
+    print('srex_th_veg')
+    for i in range(0, Geometry_m.nz):
+        print(srex_th_veg[i],end=',')
+    print()
 
     # Solve transport equations
     Sol = Diff(Geometry_m.nz, dts, sf, vol, Geometry_m.dz, rho)
@@ -258,10 +348,16 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     tke_new,wtke,dwtkedz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,tke_bc_bottom,tke_bc_top,dts,rho,tke,Km,srim_tke,srex_tke,sf,vol,Geometry_m.dz)
     # Solve temperature equation
     th_new,wth,dwthdz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,T_bc_bottom,T_bc_top,dts,rho,th,Km/ColParam.prandtl,srim_th,srex_th,sf,vol,Geometry_m.dz)
+
     print('th_new')
     for i in th_new:
         # print without new line
         print(i - 273.15, end=',')
+    print()
+
+    print('velocity')
+    for i in range(0, Geometry_m.nz):
+        print(numpy.sqrt(vx_new[i]**2+vy_new[i]**2),end=',')
     print()
     # Solve specific humidity equation
     qn_new,wqn,dwqndz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,q_bc_bottom,q_bc_top,dts,rho,qn,Km/ColParam.schmidt,srim_qn,srex_qn,sf,vol,Geometry_m.dz)
