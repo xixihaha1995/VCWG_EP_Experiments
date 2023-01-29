@@ -38,7 +38,7 @@ def read_ini(config_file_name):
     global config
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(project_path, 'A_prepost_processing','configs','MedOffice_Sensitivity',config_file_name)
+    config_path = os.path.join(project_path, 'A_prepost_processing','configs','HighOffice_Sensitivity',config_file_name)
     # config_path = os.path.join(project_path, 'A_prepost_processing','configs','Only_VCWG',config_file_name)
     config.read(config_path)
 
@@ -104,5 +104,6 @@ def one_ini(sensitivity_file_name):
 
 
 if __name__ == '__main__':
-    one_ini('Chicago_MedOffice_MixedVariable.ini')
+    # one_ini('Chicago_MedOffice_MixedVariable.ini')
     # one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
+    one_ini('Chicago_HighOffice_MixedVariable.ini')
