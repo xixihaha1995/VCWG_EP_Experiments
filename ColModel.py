@@ -76,14 +76,13 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
 
     vx = copy.copy(VerticalProfUrban.vx)             # x component of horizontal wind speed [m s^-1]
     vy = copy.copy(VerticalProfUrban.vy)             # y component of horizontal wind speed [m s^-1]
-
-
-    # for i in range(0, 150):
-    #     vx[i] *= 1e-7
-    #     vy[i] *= 1e-7
-
-
     tke = copy.copy(VerticalProfUrban.tke)           # Turbulent kinetic energy [m^2 s^-2]
+
+    # for i in range(60, 150):
+    #     vx[i] *= 1e-4
+    #     vy[i] *= 1e-4
+    #     tke[i] *= 1e-4
+
     th = copy.copy(VerticalProfUrban.th)             # Potential temperature [K]
     qn = copy.copy(VerticalProfUrban.qn)             # Specific humidity [kgv kga^-1]
     presProf = copy.copy(VerticalProfUrban.presProf) # Pressure profile [Pa]
@@ -162,16 +161,6 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     _start = (Geometry_m.nz_u + 1) / coordination.EP_nFloor / 2
     _end = (Geometry_m.nz_u + 1)
     centroid_idices = numpy.arange(_start, _end, centroid_spacing)
-    # print(f'centroid_idices: {centroid_idices}')
-
-    # for i in range(60, 62):
-    #     dlk[i] *= 1e-10
-    #     dls[i] *= 1e-10
-
-
-    # for i in range(56, 58):
-    #     dlk[i] *= 1e-3
-    #     dls[i] *= 1e-3
 
     print('dlk')
     for i in dlk:
@@ -186,25 +175,13 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     print()
 
     Km = TurbCoeff(Geometry_m.nz, Ck, tke, dlk)
-
-    Km_tmp = Km
-    # Km[60] *= 1e4
-    # Km[30] *= 1e4
-
-
-
-    # for i in range(20):
-    #     Km[int(centroid_idices[i])] *= 0
-    #     dls[int(centroid_idices[i])] *= 1e3
-
-    # Km *= 1e-2
     print(f'Km')
     for i in Km:
         # print without new line
         print(i, end=',')
     print()
     # Calculate shear production [m^2 s^-3] in TKE equation. (Term II of equation 5.2, Krayenhoff 2014, PhD thesis)
-    sh = ShearProd(ColParam.cdmin,Geometry_m.nz, Geometry_m.dz, vx, vy, Km)
+    sh = ShearProd(ColParam.cdmin,Geometry_m.nz, Geometry_m.dz, vx, vy, Km,ColParam.prandtl)
 
     # Calculate buoyant production [m^2 s^-3] in TKE equation. (Term IX of equation 5.2, Krayenhoff 2014, PhD thesis)
     bu = BuoProd(ColParam.cdmin,Geometry_m.nz, Geometry_m.dz, th, Km, th_ref, ColParam.prandtl)
@@ -311,14 +288,6 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
         # Implicit term in humidity equation [s^-1] = term caused by latent heat from vegetation [s^-1]
         srim_qn[i] = srim_qn[i]
 
-    # srim_tke = numpy.zeros(Geometry_m.nz)
-    # srim_tke_tmp = copy.copy(srim_tke)
-    # for i in range(0, 60):
-    #     srim_tke[i] *= 0
-    #
-    # for i in range(60, Geometry_m.nz):
-    #     srim_tke[i] *= 0
-
     print('srex_tke')
     for i in range(0, Geometry_m.nz):
         print(srex_tke[i],end=',')
@@ -353,6 +322,11 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     for i in th_new:
         # print without new line
         print(i - 273.15, end=',')
+    print()
+
+    print('tke_new')
+    for i in tke_new:
+        print(i, end=',')
     print()
 
     print('velocity')

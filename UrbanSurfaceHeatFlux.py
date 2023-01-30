@@ -356,11 +356,9 @@ class Surface_HeatFlux(object):
         if 'SimplifiedHighBld' in coordination.bld_type:
             # Instead of 20 stories, we only use floor 1, 11, 20, with centroid heights 1.98, 32.46, 59.89
             centroid_idices = numpy.array([1.98, 32.46, 59.89])
-        # print('SensHVAC')
         for i in range(coordination.EP_nFloor):
             multiplier = 0 if i < 20 else 1
-            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = sum(coordination.EP_floor_energy_lst[:i + 1]) * multiplier
-            # self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i] * multiplier
+            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i] * multiplier
 
         for i_z in range(Geometry_m.nz_u):
             # Calculate wall resistance [s m^-1]
