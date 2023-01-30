@@ -1,0 +1,4 @@
+#### 	 Vertical City Weather Generator (VCWG)  	 #### 
+# View Factors 
+# F_gs_nT	F_gw_nT	F_ww_nT	F_wg_nT	F_ws_nT	F_sg_nT	F_sw_nT	F_gs_T	F_gt_T	F_gw_T	F_ww_T	F_wt_T	F_wg_T	F_ws_T	F_sg_T	F_sw_T	F_st_T	F_tg_T	F_tw_T	F_ts_T	F_tt_T F_pg, F_ps, F_pt, F_pw 
+0.082763 0.458619 0.847127 0.076436 0.076436 0.082763 0.458619 0.027451 0.359804 0.306373 0.773709 0.098824 0.051062 0.076405 0.027451 0.458431 0.055686 0.190882 0.314565 0.029542 0.150445 0.424118 0.028627 0.166471 0.190392 
