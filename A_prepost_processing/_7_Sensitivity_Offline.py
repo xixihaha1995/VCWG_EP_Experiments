@@ -126,7 +126,9 @@ def generate_epw(experiment):
         f.writelines(lines)
 def run_energyplus(experiment):
     #/home/xiaoai/VCWG_EP_Experiments/resources/idf/Chicago/MediumOffice/RefBldgMediumOfficeNew2004_v1.4_7.2_5A_USA_IL_CHICAGO-OHARE_Ori0.idf
-    idf_template_name = 'RefBldgMediumOfficeNew2004_v1.4_7.2_5A_USA_IL_CHICAGO-OHARE'
+
+    global idf_template_name
+
     if 'orientation_0' in experiment:
         idf_template_name += '_Ori0.idf'
     elif 'orientation_90' in experiment:
@@ -134,11 +136,12 @@ def run_energyplus(experiment):
     elif 'orientation_45' in experiment:
         idf_template_name += '_Ori45.idf'
 
-
     output_path = os.path.join(experiments_folder,
                                f'{experiment[:-4]}_ep_trivial_outputs')
     project_path = os.path.dirname(os.path.abspath(__file__))
-    idfFilePath = os.path.join(project_path,'..','resources','idf','Chicago','MediumOffice',idf_template_name)
+    idfFilePath = os.path.join(project_path,'..','resources','idf','Chicago',idf_folder,idf_template_name)
+
+    idf_template_name = idf_template_name.replace('_Ori0.idf', '').replace('_Ori90.idf', '').replace('_Ori45.idf', '')
     sys_args = '-d', output_path, '-w', os.path.join(experiments_folder,experiment.replace('.csv', '.epw')), idfFilePath
     state = ep_api.state_manager.new_state()
     ep_api.runtime.run_energyplus(state, sys_args)
@@ -148,7 +151,7 @@ def sort_by_numbers(s):
     return [float(x) for x in re.findall(regex, s)]
 def get_offline_comparison(experiments):
     experiments.sort(key=sort_by_numbers)
-    baseline = 'OnlyVCWG_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
+
     sheet_names = ['Energy Consumption', 'CanTempC', 'CanTempComparison']
 
     all_dfs = {}
@@ -191,18 +194,41 @@ def get_offline_comparison(experiments):
     df_canTemp_comparison_sheet.loc['Baseline', 'NMBE(%)'] = 0
     df_canTemp_comparison_sheet.to_excel(all_sensitivity, sheet_name=sheet_names[2])
     all_sensitivity.save()
+
+def sort_by_orientation(s):
+    #regex find decimal number in string
+    parts = re.findall(r'\d+(?:\.\d+)?', s)
+    orientation = int(parts[-1])
+    y = float(parts[-3])
+    z = float(parts[-2])
+    return (orientation, y, z)
+
 def main():
-    global experiments_folder, epw_template,ep_api
+    global experiments_folder, epw_template,ep_api,idf_template_name,idf_folder,baseline
     from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
     experiments_folder = 'Chicago_MedOffice_Sensitivity'
+    idf_template_name = 'RefBldgMediumOfficeNew2004_v1.4_7.2_5A_USA_IL_CHICAGO-OHARE'
+    idf_folder = 'MediumOffice'
+    baseline = 'OnlyVCWG_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
+
+
+    experiments_folder = 'Chicago_HighOffice_Sensitivity'
+    idf_template_name = '10x_incr_100zones1win_PTHP'
+    idf_folder = 'HighBuilding'
+    baseline = 'OnlyVCWG_Width_canyon_15_fveg_G_0_building_orientation_0.csv'
+
     epw_template = os.path.join('..','resources','epw',
                                 'USA_IL_Chicago-OHare.Intl.AP.725300_TMY3_No_Precipitable_Water.epw')
     experiments = []
     for experiment in os.listdir(experiments_folder):
         if experiment.endswith('.csv') and 'OnlyVCWG' in experiment:
             experiments.append(experiment)
-    for experiment in experiments:
+    experiments.sort(key=sort_by_orientation)
+    print(experiments)
+    for i in range(19,len(experiments)):
+        experiment = experiments[i]
+        print('Running experiment: ', experiment)
         # generate_epw(experiment)
         run_energyplus(experiment)
 

@@ -71,7 +71,8 @@ def read_sql(csv_file):
     heating_query_results = cursor.execute(heating_query).fetchall()
     heating_electricity = float(re.findall(regex, heating_query_results[0][1])[0])
 
-    cooling_demand_query = f"SELECT * FROM TabularDataWithStrings WHERE TabularDataIndex = '{1389}'"
+    cooling_demand_query = f"SELECT * FROM TabularDataWithStrings WHERE ReportName = 'DemandEndUseComponentsSummary'" \
+                           f"And RowName = 'Cooling' "
     cooling_demand_query_results = cursor.execute(cooling_demand_query).fetchall()
     cooling_demand = float(re.findall(regex, cooling_demand_query_results[0][1])[0])
     return totalEnergy, cooling_electricity, heating_electricity, cooling_demand
@@ -90,8 +91,7 @@ def read_csv_energy(csv_file):
     total = elecTotal + gasTotal
     return round(total/1e9, 2), round(coolConsump/1e9, 2), round(heatConsump/1e9, 2)
 
-plot_fontsize = 12
-experiments_folder = 'Chicago_MedOffice_Sensitivity'
+
 '''
 read all csv files, containing OnlyVCWG or PartialVCWG, and create a new excel file with the following sheets:
 sheet_names = ['Energy Consumption','CanTempC', 'CanTempComparison']
@@ -141,10 +141,16 @@ def add_excel_formula(df_excel):
         df_excel.loc['Std', col] = f'=STDEV({idx_letter}2:{idx_letter}{length})'
     return df_excel
 
+plot_fontsize = 12
+experiments_folder = 'Chicago_MedOffice_Sensitivity'
+baseline = 'ByPass_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
+
+experiments_folder = 'Chicago_HighOffice_Sensitivity'
+baseline = 'ByPass_Width_canyon_15_fveg_G_0_building_orientation_0.csv'
 
 all_csv_files = [f for f in os.listdir(experiments_folder)
                  if f.endswith('.csv')]
-baseline = 'ByPass_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
+
 all_csv_files.sort(key=sort_by_orientation)
 sheet_names = ['CanTempComparison_CVRMSE', 'CanTempComparison_NMBE',
                'Total[GJ]', 'Cooling[GJ]', 'Heating[GJ]', 'CanTempC']
