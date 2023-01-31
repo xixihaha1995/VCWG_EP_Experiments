@@ -93,6 +93,10 @@ def read_csv_energy(csv_file):
 
 plot_fontsize = 12
 experiments_folder = 'Chicago_MedOffice_IDFComplexity'
+experiments_folder = 'Chicago_HighOffice_IDFComplexity'
+
+baseline = 'ByPass_IDFComplexity_Detailed_MedOffice.csv'
+baseline = 'ByPass_IDFComplexity_Detailed_HighOffice.csv'
 '''
 read all csv files, containing OnlyVCWG or PartialVCWG, and create a new excel file with the following sheets:
 sheet_names = ['Energy Consumption','CanTempC', 'CanTempComparison']
@@ -130,7 +134,7 @@ def add_excel_formula(df_excel):
 
 all_csv_files = [f for f in os.listdir(experiments_folder)
                  if f.endswith('.csv')]
-baseline = 'ByPass_IDFComplexity_Detailed_MedOffice.csv'
+
 all_csv_files.sort(key=sort_by_numbers)
 sheet_names = ['CanTempComparison_CVRMSE', 'CanTempComparison_NMBE',
                'Total[GJ]', 'Cooling[GJ]', 'Heating[GJ]', 'CanTempC']
@@ -151,7 +155,11 @@ all_dfs = {}
 for csv_file in all_csv_files:
     df = pd.read_csv(os.path.join(experiments_folder, csv_file), index_col=0, parse_dates=True)
     all_dfs[csv_file] = df
-all_sensitivity = pd.ExcelWriter(os.path.join(experiments_folder, 'IDFComplexity_Framework_Sensitivity.xlsx'))
+
+if 'HighOffice' in experiments_folder:
+    all_sensitivity = pd.ExcelWriter(os.path.join(experiments_folder, 'HighOffice_IDFComplexity_Framework.xlsx'))
+else:
+    all_sensitivity = pd.ExcelWriter(os.path.join(experiments_folder, 'MedOffice_IDFComplexity_Framework.xlsx'))
 
 #'CanTempC'
 df_canTemp_c_sheet = pd.DataFrame(index=all_dfs[baseline].index)

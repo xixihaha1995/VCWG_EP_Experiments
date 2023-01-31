@@ -112,11 +112,13 @@ if __name__ == '__main__':
     # one_ini('Chicago_MedOffice_IDFComplexity.ini')
     # one_ini('Chicago_MedOffice_IDFComplexity_OnlyVCWG.ini')
 
+    # todo_jobs = [
+    #     'Chicago_HighOffice_IDFComplexity_OnlyVCWG.ini',
+    #              ]
     todo_jobs = [
-        'Chicago_HighOffice_IDFComplexity_OnlyVCWG.ini',
-        'Chicago_MedOffice_MixedVariable.ini',
-                 ]
-    todo_jobs = ['Chicago_HighOffice_IDFComplexity.ini',
-                 'Chicago_MedOffice_MixedVariable_OnlyVCWG.ini',]
+        'Chicago_HighOffice_IDFComplexity.ini',
+        'Chicago_MedOffice_IDFComplexity.ini',
+        'Chicago_MedOffice_IDFComplexity_OnlyVCWG.ini',
+    ]
     for job in todo_jobs:
         one_ini(job)
