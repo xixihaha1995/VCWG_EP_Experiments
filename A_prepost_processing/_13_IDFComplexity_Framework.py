@@ -93,10 +93,11 @@ def read_csv_energy(csv_file):
 
 plot_fontsize = 12
 experiments_folder = 'Chicago_MedOffice_IDFComplexity'
-experiments_folder = 'Chicago_HighOffice_IDFComplexity'
-
 baseline = 'ByPass_IDFComplexity_Detailed_MedOffice.csv'
-baseline = 'ByPass_IDFComplexity_Detailed_HighOffice.csv'
+
+# experiments_folder = 'Chicago_HighOffice_IDFComplexity'
+# baseline = 'ByPass_IDFComplexity_Detailed_HighOffice.csv'
+
 '''
 read all csv files, containing OnlyVCWG or PartialVCWG, and create a new excel file with the following sheets:
 sheet_names = ['Energy Consumption','CanTempC', 'CanTempComparison']
