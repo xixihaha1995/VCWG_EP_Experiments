@@ -70,7 +70,12 @@ def read_sql(csv_file):
                     f"AND ColumnName = 'Electricity'"
     heating_query_results = cursor.execute(heating_query).fetchall()
     heating_electricity = float(re.findall(regex, heating_query_results[0][1])[0])
-    return totalEnergy, cooling_electricity, heating_electricity
+
+    cooling_demand_query = f"SELECT * FROM TabularDataWithStrings WHERE ReportName = 'DemandEndUseComponentsSummary'" \
+                           f"And RowName = 'Cooling' "
+    cooling_demand_query_results = cursor.execute(cooling_demand_query).fetchall()
+    cooling_demand = float(re.findall(regex, cooling_demand_query_results[0][1])[0])
+    return totalEnergy, cooling_electricity, heating_electricity, cooling_demand
 def read_csv_energy(csv_file):
     '''
     Returns:
@@ -95,6 +100,33 @@ sheet_names = ['Energy Consumption','CanTempC', 'CanTempComparison']
 def sort_by_numbers(s):
     regex = r'(\d+\.?\d*)'
     return [float(x) for x in re.findall(regex, s)]
+
+def excel_letters(idx):
+    #idx:0, letter:A
+    #idx:1, letter:B
+    #idx:25, letter:Z
+    #idx:26, letter:AA
+    if idx < 26:
+        return chr(idx + 65)
+    else:
+        return excel_letters(idx//26 - 1) + excel_letters(idx%26)
+
+def add_excel_formula(df_excel):
+    #for each column, B,C ...
+    # The first row is the header, so we start from the second row
+    # add three cells(with formula) at the bottom:
+    # 1. the average of the column
+    # 2. the max of the column
+    # 3. the min of the column
+    # 4. the standard deviation of the column
+    length = df_excel.shape[0] + 1
+    for idx, col in enumerate(df_excel.columns):
+        idx_letter = excel_letters(idx + 1)
+        df_excel.loc['Average', col] = f'=AVERAGE({idx_letter}2:{idx_letter}{length})'
+        df_excel.loc['Max', col] = f'=MAX({idx_letter}2:{idx_letter}{length})'
+        df_excel.loc['Min', col] = f'=MIN({idx_letter}2:{idx_letter}{length})'
+        df_excel.loc['Std', col] = f'=STDEV({idx_letter}2:{idx_letter}{length})'
+    return df_excel
 
 all_csv_files = [f for f in os.listdir(experiments_folder)
                  if f.endswith('.csv')]
@@ -129,7 +161,6 @@ for csv_file in all_csv_files:
         df_canTemp_c_sheet[csv_file] = all_dfs[csv_file]['canTemp'] - 273.15
     else:
         df_canTemp_c_sheet[csv_file] = all_dfs[csv_file]['canTemp_K'] - 273.15
-df_canTemp_c_sheet.to_excel(all_sensitivity, sheet_name='CanTempC')
 
 '''
 In the CanTempComparison_CVRMSE sheet, the columns are: ByPass, OnlyVCWG/PartialVCWG, and Offline
@@ -164,6 +195,10 @@ df_canTemp_comparison_sheet.to_excel(all_sensitivity, sheet_name='CanTempCompari
 df_cooling_sheet = pd.DataFrame(index=indices)
 df_heating_sheet = pd.DataFrame(index=indices)
 df_total_sheet = pd.DataFrame(index=indices)
+df_cooling_baseline_sheet = pd.DataFrame(index=indices)
+df_cooling_demand_sheet = pd.DataFrame(index=indices)
+df_cooling_demand_percent_sheet = pd.DataFrame(index=indices)
+baseline_energy = (read_sql(baseline))
 for csv_file in all_csv_files:
     _col, _index = get_col_and_index(csv_file)
     if 'ByPass' in csv_file:
@@ -171,16 +206,35 @@ for csv_file in all_csv_files:
         df_cooling_sheet.loc[_index, _col] = energy_tuple[1]
         df_heating_sheet.loc[_index, _col] = energy_tuple[2]
         df_total_sheet.loc[_index, _col] = energy_tuple[0]
+        tmp_cooling_per = round((energy_tuple[1] - baseline_energy[1]) / baseline_energy[1] * 100, 2)
+        df_cooling_baseline_sheet.loc[_index, _col] = tmp_cooling_per
+        df_cooling_demand_sheet.loc[_index, _col] = energy_tuple[3]
+        tmp_cooling_demand_per = round((energy_tuple[3] - baseline_energy[3]) / baseline_energy[3] * 100, 2)
+        df_cooling_demand_percent_sheet.loc[_index, _col] = tmp_cooling_demand_per
     else:
         energy_tuple = (read_csv_energy(csv_file))
         df_cooling_sheet.loc[_index, _col] = energy_tuple[1]
         df_heating_sheet.loc[_index, _col] = energy_tuple[2]
         df_total_sheet.loc[_index, _col] = energy_tuple[0]
+        tmp_cooling_per = round((energy_tuple[1] - baseline_energy[1]) / baseline_energy[1] * 100, 2)
+        df_cooling_baseline_sheet.loc[_index, _col] = tmp_cooling_per
         _offline_energy = (read_sql(csv_file))
         df_cooling_sheet.loc[_index, 'Offline'] = _offline_energy[1]
         df_heating_sheet.loc[_index, 'Offline'] = _offline_energy[2]
         df_total_sheet.loc[_index, 'Offline'] = _offline_energy[0]
+        tmp_cooling_per = round((_offline_energy[1] - baseline_energy[1]) / baseline_energy[1] * 100, 2)
+        df_cooling_baseline_sheet.loc[_index, 'Offline'] = tmp_cooling_per
+        df_cooling_demand_sheet.loc[_index, 'Offline'] = _offline_energy[3]
+        tmp_cooling_demand_per = round((_offline_energy[3] - baseline_energy[3]) / baseline_energy[3] * 100, 2)
+        df_cooling_demand_percent_sheet.loc[_index, 'OnlyVCWG'] = tmp_cooling_demand_per
+        df_cooling_demand_percent_sheet.loc[_index, 'Offline'] = tmp_cooling_demand_per
+
+df_cooling_baseline_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Baseline_Percent')
 df_cooling_sheet.to_excel(all_sensitivity, sheet_name='Cooling_GJ')
 df_heating_sheet.to_excel(all_sensitivity, sheet_name='Heating_GJ')
 df_total_sheet.to_excel(all_sensitivity, sheet_name='Total_GJ')
+df_canTemp_c_sheet = add_excel_formula(df_canTemp_c_sheet)
+df_canTemp_c_sheet.to_excel(all_sensitivity, sheet_name='CanTempC')
+df_cooling_demand_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Demand_W')
+df_cooling_demand_percent_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Demand_Percent')
 all_sensitivity.save()

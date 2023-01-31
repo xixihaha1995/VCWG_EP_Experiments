@@ -38,7 +38,10 @@ def read_ini(config_file_name):
     global config
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(project_path, 'A_prepost_processing','configs','MedOffice_Sensitivity',config_file_name)
+    if 'MedOffice' in config_file_name:
+        config_path = os.path.join(project_path, 'A_prepost_processing','configs','MedOffice_Sensitivity',config_file_name)
+    elif 'HighOffice' in config_file_name:
+        config_path = os.path.join(project_path, 'A_prepost_processing','configs','HighOffice',config_file_name)
     # config_path = os.path.join(project_path, 'A_prepost_processing','configs','Only_VCWG',config_file_name)
     config.read(config_path)
 
@@ -60,6 +63,8 @@ def one_control_variable(sensitivity_file_name):
                     Process(target=ByPass.run_ep_api, args=(sensitivity_file_name, config, ctl_viriable_1, value)))
     for p in this_ini_process:
         p.start()
+    for p in this_ini_process:
+        p.join()
 def mixed_variable(sensitivity_file_name):
     #three control variables (4 * 4 * 3 = 48)
     #nbr_of_parallel = 4
@@ -104,5 +109,14 @@ def one_ini(sensitivity_file_name):
 if __name__ == '__main__':
     # one_ini('Chicago_MedOffice_MixedVariable.ini')
     # one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
-    one_ini('Chicago_MedOffice_IDFComplexity.ini')
+    # one_ini('Chicago_MedOffice_IDFComplexity.ini')
     # one_ini('Chicago_MedOffice_IDFComplexity_OnlyVCWG.ini')
+
+    todo_jobs = [
+        'Chicago_HighOffice_IDFComplexity_OnlyVCWG.ini',
+        'Chicago_MedOffice_MixedVariable.ini',
+                 ]
+    todo_jobs = ['Chicago_HighOffice_IDFComplexity.ini',
+                 'Chicago_MedOffice_MixedVariable_OnlyVCWG.ini',]
+    for job in todo_jobs:
+        one_ini(job)

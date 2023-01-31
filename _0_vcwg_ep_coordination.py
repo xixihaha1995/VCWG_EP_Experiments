@@ -86,6 +86,8 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
         footprint_area_m2 = 22500 * 0.09290304 / 1
     elif "SuperMarket" in bld_type:
         footprint_area_m2 = 45000 * 0.09290304 / 1
+    elif 'HighOffice' in bld_type:
+        footprint_area_m2 = 31 * 15
 
     ep_indoorTemp_C = 20
     ep_sensWaste_w_m2_per_footprint_area = 0

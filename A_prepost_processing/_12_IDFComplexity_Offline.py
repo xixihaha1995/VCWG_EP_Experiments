@@ -132,7 +132,7 @@ def run_energyplus(experiment):
     output_path = os.path.join(experiments_folder,
                                f'{experiment[:-4]}_ep_trivial_outputs')
     project_path = os.path.dirname(os.path.abspath(__file__))
-    idfFilePath = os.path.join(project_path,'..','resources','idf','Chicago','MediumOffice',idf_template_name)
+    idfFilePath = os.path.join(project_path,'..','resources','idf','Chicago',idfFolder,idf_template_name)
     sys_args = '-d', output_path, '-w', os.path.join(experiments_folder,experiment.replace('.csv', '.epw')), idfFilePath
     state = ep_api.state_manager.new_state()
     ep_api.runtime.run_energyplus(state, sys_args)
@@ -186,19 +186,24 @@ def get_offline_comparison(experiments):
     df_canTemp_comparison_sheet.to_excel(all_sensitivity, sheet_name=sheet_names[2])
     all_sensitivity.save()
 def main():
-    global experiments_folder, epw_template,ep_api
+    global experiments_folder, epw_template,ep_api, idfFolder
     from pyenergyplus.api import EnergyPlusAPI
     ep_api = EnergyPlusAPI()
-    experiments_folder = 'Chicago_MedOffice_Sensitivity'
-    experiments_folder = 'Chicago_MedOffice_IDFComplexity'
     epw_template = os.path.join('..','resources','epw','USA_IL_Chicago-OHare.Intl.AP.725300_TMY3_No_Precipitable_Water.epw')
+
+    experiments_folder = 'Chicago_MedOffice_IDFComplexity'
+    idfFolder = 'MediumOffice'
+
+    experiments_folder = 'Chicago_HighOffice_IDFComplexity'
+    idfFolder = 'HighBuilding'
+
     experiments = []
     for experiment in os.listdir(experiments_folder):
         if experiment.endswith('.csv') and 'OnlyVCWG' in experiment:
             experiments.append(experiment)
     for experiment in experiments:
-        # generate_epw(experiment)
-        run_energyplus(experiment)
+        generate_epw(experiment)
+        # run_energyplus(experiment)
 
     # get_offline_comparison(experiments)
 
