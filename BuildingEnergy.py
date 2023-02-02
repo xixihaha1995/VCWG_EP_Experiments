@@ -530,7 +530,7 @@ class Building(object):
             with open(coordination.data_saving_path, 'a') as f1:
                 # prepare the header string for different sensors
                 header_str = 'cur_datetime,canTemp_K,canHum_Ratio,canPres_Pa,sensWaste,' \
-                             'coolConsump[J_m2],heatConsump[J_m2],ElecTotal[J_m2],GasTotal[J_m2],sensCoolDemand[W_m2]' \
+                             'coolConsump[J_m2],heatConsump[J_m2],ElecTotal[J_m2],GasTotal[J_m2],sensCoolDemand[W_m2],' \
                              'wallSun_K,wallShade_K,roof_K,MeteoData.Tatm,MeteoData.Pre,'
                 for i in range(len(mapped_indices)):
                     _temp_height = coordination.sensor_heights[i]

@@ -84,19 +84,21 @@ def read_csv_energy(csv_file):
     '''
     df = pd.read_csv(os.path.join(experiments_folder, csv_file), index_col=0, parse_dates=True)
     #sum over all the desired columns
-    elecTotal = df['ElecTotal[J]'].sum()
-    gasTotal = df['GasTotal[J]'].sum()
-    coolConsump = df['coolConsump[J]'].sum()
-    heatConsump = df['heatConsump[J]'].sum()
+    elecTotal = df['ElecTotal[J_m2]'].sum()
+    gasTotal = df['GasTotal[J_m2]'].sum()
+    coolConsump = df['coolConsump[J_m2]'].sum()
+    heatConsump = df['heatConsump[J_m2]'].sum()
     total = elecTotal + gasTotal
-    return round(total/1e9, 2), round(coolConsump/1e9, 2), round(heatConsump/1e9, 2)
+    return round(total/1e6, 2), round(coolConsump/1e6, 2), round(heatConsump/1e6, 2)
 
 plot_fontsize = 12
 experiments_folder = 'Chicago_MedOffice_IDFComplexity'
 baseline = 'ByPass_IDFComplexity_Detailed_MedOffice.csv'
+footprint_area_m2 = 53628 * 0.09290304 / 3
 
 # experiments_folder = 'Chicago_HighOffice_IDFComplexity'
 # baseline = 'ByPass_IDFComplexity_Detailed_HighOffice.csv'
+# footprint_area_m2 = 31 * 15
 
 '''
 read all csv files, containing OnlyVCWG or PartialVCWG, and create a new excel file with the following sheets:
