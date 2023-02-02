@@ -3585,6 +3585,8 @@ Schedule:Compact,
   Until: 24:00,                                            !- Field 3
   4;                                                       !- Field 4
 
+
+
 ZoneControl:Thermostat,
   Thermal Zone 1 Thermostat,                               !- Name
   Thermal Zone 1,                                          !- Zone or ZoneList Name
@@ -3788,11 +3790,11 @@ AvailabilityManagerAssignmentList,
 AvailabilityManager:NightCycle,
   DXVAV Sys 1 Availability,                                !- Name
   HVACTemplate-Always 1,                                   !- Applicability Schedule Name
-  FanAvailSched,                                           !- Fan Schedule Name
+  HVACOperationSchd,                                           !- Fan Schedule Name
   CycleOnAny,                                              !- Control Type
-  0.2,                                                     !- Thermostat Tolerance {deltaC}
+  1,                                                     !- Thermostat Tolerance {deltaC}
   FixedRunTime,                                            !- Cycling Run Time Control Type
-  3600,                                                    !- Cycling run time {s}
+  1800,                                                    !- Cycling run time {s}
   ;                                                        !- Control Zone Name
 
 Schedule:Compact,
@@ -3834,7 +3836,7 @@ Coil:Cooling:DX:TwoSpeed,
   ALWAYS_ON,                                                        !- Availability Schedule Name
   autosize,                                                !- Rated High Speed Total Cooling Capacity
   autosize,                                                !- Rated High Speed Sensible Heat Ratio
-  3.23372055845678,                                                       !- Rated High Speed COP
+  3,                                                       !- Rated High Speed COP
   autosize,                                                !- Rated High Speed Air Flow Rate
   ,                                                        !- Unit Internal Static Air Pressure
   DXVAV Sys 1 Mixed Air Outlet,                            !- Air Inlet Node Name
@@ -3846,7 +3848,7 @@ Measured_CoolCStandard10Ton_EIRFFF,  !- Energy Input Ratio Function of Flow Frac
 No_PLR_Degredation,      !- Part Load Fraction Correlation Curve Name
 AUTOSIZE,                !- Low Speed Gross Rated Total Cooling Capacity {W}
 AUTOSIZE,                !- Low Speed Gross Rated Sensible Heat Ratio
- 3.28186528141147,        !- Low Speed Gross Rated Cooling COP {W/W}
+ 2.56,        !- Low Speed Gross Rated Cooling COP {W/W}
 AUTOSIZE,                !- Low Speed Rated Air Flow Rate {m3/s}
 Measured_LowSpeedCoolCapLSFT,  !- Low Speed Total Cooling Capacity Function of Temperature Curve Name
 Measured_LowSpeedCoolEIRLSFT,  !- Low Speed Energy Input Ratio Function of Temperature Curve Name
@@ -4087,19 +4089,19 @@ SetpointManager:MixedAir,
 
 Fan:VariableVolume,
   DXVAV Sys 1 Supply Fan,                                  !- Name
-  FanAvailSched,                                           !- Availability Schedule Name
-  0.7,                                                     !- Fan Efficiency
-  1000,                                                    !- Pressure Rise {Pa}
+  HVACOperationSchd,                                           !- Availability Schedule Name
+  0.5915,                                                     !- Fan Efficiency
+  1109.648,                                                    !- Pressure Rise {Pa}
   autosize,                                                !- Maximum Flow Rate {m3/s}
-  Fraction,                                                !- Fan Power Minimum Flow Rate Input Method
-  0.25,                                                    !- Fan Power Minimum Flow Fraction
-  ,                                                        !- Fan Power Minimum Air Flow Rate {m3/s}
-  0.9,                                                     !- Motor Efficiency
+  FixedFlowRate,                                                !- Fan Power Minimum Flow Rate Input Method
+  ,                                                    !- Fan Power Minimum Flow Fraction
+  0.0000,                                                        !- Fan Power Minimum Air Flow Rate {m3/s}
+  0.91,                                                     !- Motor Efficiency
   1,                                                       !- Motor in Airstream Fraction
-  0.35071223,                                              !- Fan Power Coefficient 1
-  0.30850535,                                              !- Fan Power Coefficient 2
-  -0.54137364,                                             !- Fan Power Coefficient 3
-  0.87198823,                                              !- Fan Power Coefficient 4
+  0.0407598940,                                              !- Fan Power Coefficient 1
+  0.08804497,                                              !- Fan Power Coefficient 2
+  -0.072926120,                                             !- Fan Power Coefficient 3
+  0.9437398230,                                              !- Fan Power Coefficient 4
   0,                                                       !- Fan Power Coefficient 5
   DXVAV Sys 1 Heating Coil Outlet,                         !- Air Inlet Node Name
   DXVAV Sys 1 Supply Fan Outlet;                           !- Air Outlet Node Name

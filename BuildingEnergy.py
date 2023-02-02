@@ -529,7 +529,8 @@ class Building(object):
             os.makedirs(os.path.dirname(coordination.data_saving_path), exist_ok=True)
             with open(coordination.data_saving_path, 'a') as f1:
                 # prepare the header string for different sensors
-                header_str = 'cur_datetime,canTemp_K,canHum_Ratio,canPres_Pa,sensWaste,coolConsump[J],heatConsump[J],ElecTotal[J],GasTotal[J],' \
+                header_str = 'cur_datetime,canTemp_K,canHum_Ratio,canPres_Pa,sensWaste,' \
+                             'coolConsump[J_m2],heatConsump[J_m2],ElecTotal[J_m2],GasTotal[J_m2],sensCoolDemand[W_m2]' \
                              'wallSun_K,wallShade_K,roof_K,MeteoData.Tatm,MeteoData.Pre,'
                 for i in range(len(mapped_indices)):
                     _temp_height = coordination.sensor_heights[i]
@@ -541,15 +542,16 @@ class Building(object):
                 f1.write(header_str)
             # write the data
 
-        "coolConsump[J],heatConsump[J],ElecTotal[J]"
-        cool_consump_J = self.coolConsump * coordination.footprint_area_m2 * 300
-        heat_consump_J = self.heatConsump * coordination.footprint_area_m2 * 300
-        elec_total_J = self.ElecTotal * coordination.footprint_area_m2 * 300
-        gas_total_J = self.GasTotal * coordination.footprint_area_m2 * 300
+        "coolConsump[J_m2],heatConsump[J_m2],ElecTotal[J_m2]"
+        cool_consump_J_m2 = self.coolConsump * 300
+        heat_consump_J_m2 = self.heatConsump * 300
+        elec_total_J_m2 = self.ElecTotal * 300
+        gas_total_J_m2 = self.GasTotal * 300
+        cool_demand_w_m2 = self.coolConsump
         with open(coordination.data_saving_path, 'a') as f1:
             fmt1 = "%s," * 1 % (cur_datetime) + \
-                   "%.3f," * 13 % (canTemp,canHum,vcwg_canPress_Pa,self.sensWaste,
-                                   cool_consump_J,heat_consump_J,elec_total_J,gas_total_J,
+                   "%.3f," * 14 % (canTemp,canHum,vcwg_canPress_Pa,self.sensWaste,
+                                      cool_consump_J_m2,heat_consump_J_m2,elec_total_J_m2,gas_total_J_m2,cool_demand_w_m2,
                                    wallSun_K,wallShade_K,roof_K, MeteoData.Tatm, MeteoData.Pre) + \
                    "%.3f," * 2 * len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
                                                              [PresProf_cur[i] for i in mapped_indices]) + '\n'
