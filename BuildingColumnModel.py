@@ -65,7 +65,7 @@ class BuildingCol:
             centroid_idices = numpy.array([1.98, 32.46, 59.89])
         # print('SensHVAC')
         for i in range(coordination.EP_nFloor):
-            multiplier = 1 if i < 20 else 1
+            multiplier = 0 if i < 20 else 1
             self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i] * multiplier
         # print()
         coordination.EP_floor_energy_lst = [0 for i in range(coordination.EP_nFloor)]

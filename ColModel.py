@@ -78,10 +78,10 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     vy = copy.copy(VerticalProfUrban.vy)             # y component of horizontal wind speed [m s^-1]
     tke = copy.copy(VerticalProfUrban.tke)           # Turbulent kinetic energy [m^2 s^-2]
 
-    for i in range(60, 150):
-        vx[i] *= 1e-4
-        vy[i] *= 1e-4
-        tke[i] *= 1e-4
+    # for i in range(60, 150):
+    #     vx[i] *= 1e-4
+    #     vy[i] *= 1e-4
+    #     tke[i] *= 1e-4
 
     th = copy.copy(VerticalProfUrban.th)             # Potential temperature [K]
     qn = copy.copy(VerticalProfUrban.qn)             # Specific humidity [kgv kga^-1]
