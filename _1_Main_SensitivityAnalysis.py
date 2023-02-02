@@ -113,10 +113,10 @@ if __name__ == '__main__':
     # one_ini('Chicago_MedOffice_IDFComplexity_OnlyVCWG.ini')
 
     todo_jobs = [
-        'Chicago_HighOffice_IDFComplexity_OnlyVCWG.ini',
         'Chicago_HighOffice_IDFComplexity.ini',
                  ]
     # todo_jobs = [
+    #     'Chicago_HighOffice_IDFComplexity_OnlyVCWG.ini',
     #     'Chicago_MedOffice_IDFComplexity.ini',
     #     'Chicago_MedOffice_IDFComplexity_OnlyVCWG.ini',
     # ]

@@ -107,7 +107,12 @@ def overwrite_ep_weather(state):
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
                                     "t Roof C")
 
-        if "HighOffice" in coordination.bld_type:
+        if 'ShoeBox_HighOffice' in coordination.bld_type:
+            global Surface_3_roof_hConv_actuator_handle
+            Surface_3_roof_hConv_actuator_handle = coordination.ep_api.exchange. \
+                get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
+                                    "Surface 3")
+        if "HighOffice" in coordination.bld_type and 'ShoeBox_HighOffice' not in coordination.bld_type:
             global Surface_576_roof_hConv_actuator_handle, \
                 Surface_582_roof_hConv_actuator_handle, Surface_588_roof_hConv_actuator_handle, \
                 Surface_594_roof_hConv_actuator_handle, Surface_600_roof_hConv_actuator_handle
@@ -153,7 +158,12 @@ def overwrite_ep_weather(state):
                 os.getpid()
                 os.kill(os.getpid(), signal.SIGTERM)
         elif "HighOffice" in coordination.bld_type:
-            if Surface_576_roof_hConv_actuator_handle < 0 or \
+            if 'ShoeBox_HighOffice' in coordination.bld_type:
+                if Surface_3_roof_hConv_actuator_handle < 0:
+                    print('ovewrite_ep_weather(): ShoeBox HighOffice,some handle not available')
+                    os.getpid()
+                    os.kill(os.getpid(), signal.SIGTERM)
+            elif Surface_576_roof_hConv_actuator_handle < 0 or \
                     Surface_582_roof_hConv_actuator_handle < 0 or Surface_588_roof_hConv_actuator_handle < 0 or \
                     Surface_594_roof_hConv_actuator_handle < 0 or Surface_600_roof_hConv_actuator_handle < 0:
                 print('ovewrite_ep_weather(): HighOffice,some handle not available')
@@ -188,6 +198,14 @@ def overwrite_ep_weather(state):
             coordination.ep_api.exchange.set_actuator_value(state, tRoofS1A_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
             coordination.ep_api.exchange.set_actuator_value(state, tRoofS2A_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
             coordination.ep_api.exchange.set_actuator_value(state, tRoofC_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+        elif 'ShoeBox_HighOffice' in coordination.bld_type:
+            coordination.ep_api.exchange.set_actuator_value(state, Surface_3_roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+        elif "HighOffice" in coordination.bld_type and "ShoeBox" not in coordination.bld_type:
+            coordination.ep_api.exchange.set_actuator_value(state, Surface_576_roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Surface_582_roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Surface_588_roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Surface_594_roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
+            coordination.ep_api.exchange.set_actuator_value(state, Surface_600_roof_hConv_actuator_handle, coordination.vcwg_hConv_w_m2_per_K)
 
         coordination.sem2.release()#
 
@@ -882,7 +900,7 @@ def batch_check_wall_handles(wall_handles_dict):
                 os.getpid()
                 os.kill(os.getpid(), signal.SIGTERM)
 
-def batch_get_20_stories_wall_temperatures(state, wall_handles_dict):
+def batch_get_20_stories_temperatures(state, wall_handles_dict, roof_floors_handles_dict):
     #coordination.ep_api.exchange.get_variable_value(state, surface576_roof_Text_c_handle)
     wall_temperatures_dict = {}
     wall_temperatures_dict['south'] = []
@@ -890,10 +908,19 @@ def batch_get_20_stories_wall_temperatures(state, wall_handles_dict):
     wall_temperatures_dict['east'] = []
     wall_temperatures_dict['west'] = []
 
+    roof_floors_temperatures_dict = {}
+    roof_floors_temperatures_dict['roof'] = []
+    roof_floors_temperatures_dict['floor'] = []
+
     for key in wall_handles_dict.keys():
         for i in range(len(wall_handles_dict[key])):
             tmp = coordination.ep_api.exchange.get_variable_value(state, wall_handles_dict[key][i]) + 273.15
             wall_temperatures_dict[key].append(tmp)
+    for key in roof_floors_handles_dict.keys():
+        for i in range(len(roof_floors_handles_dict[key])):
+            tmp = coordination.ep_api.exchange.get_variable_value(state, roof_floors_handles_dict[key][i]) + 273.15
+            roof_floors_temperatures_dict[key].append(tmp)
+
     south_wall_Text_K = 0
     north_wall_Text_K = 0
     for i in range(len(wall_temperatures_dict['south'])):
@@ -901,61 +928,111 @@ def batch_get_20_stories_wall_temperatures(state, wall_handles_dict):
         north_wall_Text_K += wall_temperatures_dict['north'][i]
     south_wall_Text_K /= len(wall_temperatures_dict['south'])
     north_wall_Text_K /= len(wall_temperatures_dict['north'])
-    return wall_temperatures_dict, south_wall_Text_K - 273.15, north_wall_Text_K - 273.15
-def _20Stories_get_ep_results(state):
-    global get_ep_results_inited_handle, \
-        hvac_heat_rejection_sensor_handle,\
-        surface576_roof_Text_c_handle, surface582_roof_Text_c_handle, surface588_roof_Text_c_handle, \
+
+    roof_Text_K = 0
+    floor_Text_K = 0
+    for i in range(len(roof_floors_temperatures_dict['roof'])):
+        roof_Text_K += roof_floors_temperatures_dict['roof'][i]
+        floor_Text_K += roof_floors_temperatures_dict['floor'][i]
+    roof_Text_K /= len(roof_floors_temperatures_dict['roof'])
+    floor_Text_K /= len(roof_floors_temperatures_dict['floor'])
+
+    return wall_temperatures_dict, south_wall_Text_K - 273.15, north_wall_Text_K - 273.15, \
+        roof_Text_K - 273.15, floor_Text_K - 273.15
+
+def batch_highoffice_roof_floor_handels(state):
+    roof_flr_dict = {}
+    roof_flr_dict['roof'] = []
+    roof_flr_dict['floor'] = []
+    if "ShoeBox_HighOffice" not in coordination.bld_type:
+        global  surface576_roof_Text_c_handle, surface582_roof_Text_c_handle, surface588_roof_Text_c_handle, \
         surface594_roof_Text_c_handle, surface600_roof_Text_c_handle, surface1_floor_Text_c_handle, \
         surface7_floor_Text_c_handle, surface13_floor_Text_c_handle, surface19_floor_Text_c_handle, \
-        surface25_floor_Text_c_handle,wall_handles_dict
+        surface25_floor_Text_c_handle
+
+        surface576_roof_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                                         "Surface Outside Face Temperature", \
+                                                                                         "Surface 576")
+        surface582_roof_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                                         "Surface Outside Face Temperature", \
+                                                                                         "Surface 582")
+        surface588_roof_Text_c_handle = coordination.ep_api.exchange. \
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 588")
+        surface594_roof_Text_c_handle = coordination.ep_api.exchange. \
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 594")
+        surface600_roof_Text_c_handle = coordination.ep_api.exchange. \
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 600")
+        surface1_floor_Text_c_handle = coordination.ep_api.exchange. \
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 1")
+        surface7_floor_Text_c_handle = coordination.ep_api.exchange. \
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 7")
+        surface13_floor_Text_c_handle = coordination.ep_api.exchange. \
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 13")
+        surface19_floor_Text_c_handle = coordination.ep_api.exchange. \
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 19")
+        surface25_floor_Text_c_handle = coordination.ep_api.exchange. \
+            get_variable_handle(state, "Surface Outside Face Temperature", \
+                                "Surface 25")
+
+        if (surface576_roof_Text_c_handle == -1 or surface582_roof_Text_c_handle == -1 or \
+                surface588_roof_Text_c_handle == -1 or surface594_roof_Text_c_handle == -1 or \
+                surface600_roof_Text_c_handle == -1 or surface1_floor_Text_c_handle == -1 or \
+                surface7_floor_Text_c_handle == -1 or surface13_floor_Text_c_handle == -1 or \
+                surface19_floor_Text_c_handle == -1 or surface25_floor_Text_c_handle == -1):
+            print('20Stories_get_ep_results(): some handle not available')
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+        roof_flr_dict['roof'].append(surface576_roof_Text_c_handle)
+        roof_flr_dict['roof'].append(surface582_roof_Text_c_handle)
+        roof_flr_dict['roof'].append(surface588_roof_Text_c_handle)
+        roof_flr_dict['roof'].append(surface594_roof_Text_c_handle)
+        roof_flr_dict['roof'].append(surface600_roof_Text_c_handle)
+        roof_flr_dict['floor'].append(surface1_floor_Text_c_handle)
+        roof_flr_dict['floor'].append(surface7_floor_Text_c_handle)
+        roof_flr_dict['floor'].append(surface13_floor_Text_c_handle)
+        roof_flr_dict['floor'].append(surface19_floor_Text_c_handle)
+        roof_flr_dict['floor'].append(surface25_floor_Text_c_handle)
+
+    else:
+        global surface3_roof_Text_c_handle, surface1_floor_Text_c_handle
+        surface3_roof_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                                        "Surface Outside Face Temperature", \
+                                                                                        "Surface 3")
+        surface1_floor_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                                        "Surface Outside Face Temperature", \
+                                                                                        "Surface 1")
+        if (surface3_roof_Text_c_handle == -1 or surface1_floor_Text_c_handle == -1):
+            print('20Stories_get_ep_results(): some shoebox flr roof handles not available')
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+        roof_flr_dict['roof'].append(surface3_roof_Text_c_handle)
+        roof_flr_dict['floor'].append(surface1_floor_Text_c_handle)
+    return roof_flr_dict
+
+def _20Stories_get_ep_results(state):
+    global get_ep_results_inited_handle, \
+        hvac_heat_rejection_sensor_handle,wall_handles_dict,roof_floor_handles
 
     if not get_ep_results_inited_handle:
         if not coordination.ep_api.exchange.api_data_fully_ready(state):
             return
         get_ep_results_inited_handle = True
+        roof_floor_handles = batch_highoffice_roof_floor_handels(state)
         wall_handles_dict = batch_HighOffice_wall_handles(state)
         batch_check_wall_handles(wall_handles_dict)
         hvac_heat_rejection_sensor_handle = \
             coordination.ep_api.exchange.get_variable_handle(state,\
                                                              "HVAC System Total Heat Rejection Energy",\
                                                              "SIMHVAC")
-        surface576_roof_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
-                                                                                            "Surface 576")
-        surface582_roof_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
-                                                                                            "Surface 582")
-        surface588_roof_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 588")
-        surface594_roof_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 594")
-        surface600_roof_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 600")
-        surface1_floor_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 1")
-        surface7_floor_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 7")
-        surface13_floor_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 13")
-        surface19_floor_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 19")
-        surface25_floor_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 25")
-
-        if (hvac_heat_rejection_sensor_handle == -1 or \
-                surface576_roof_Text_c_handle == -1 or surface582_roof_Text_c_handle == -1 or \
-                surface588_roof_Text_c_handle == -1 or surface594_roof_Text_c_handle == -1 or \
-                surface600_roof_Text_c_handle == -1 or surface1_floor_Text_c_handle == -1 or \
-                surface7_floor_Text_c_handle == -1 or surface13_floor_Text_c_handle == -1 or \
-                surface19_floor_Text_c_handle == -1 or surface25_floor_Text_c_handle == -1 ):
-            print('20Stories_get_ep_results(): some handle not available')
+        if hvac_heat_rejection_sensor_handle == -1:
+            print('20Stories_get_ep_results(): hvac_heat_rejection_sensor_handle not available')
             os.getpid()
             os.kill(os.getpid(), signal.SIGTERM)
 
@@ -976,23 +1053,8 @@ def _20Stories_get_ep_results(state):
             coordination.sem2.release()
             return
 
-        surface576_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface576_roof_Text_c_handle)
-        surface582_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface582_roof_Text_c_handle)
-        surface588_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface588_roof_Text_c_handle)
-        surface594_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface594_roof_Text_c_handle)
-        surface600_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface600_roof_Text_c_handle)
-
-        roof_Text_c = (surface576_roof_Text_c + surface582_roof_Text_c + surface588_roof_Text_c + surface594_roof_Text_c + surface600_roof_Text_c) / 5
-
-        surface1_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface1_floor_Text_c_handle)
-        surface7_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface7_floor_Text_c_handle)
-        surface13_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface13_floor_Text_c_handle)
-        surface19_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface19_floor_Text_c_handle)
-        surface25_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface25_floor_Text_c_handle)
-
-        floor_Text_c = (surface1_floor_Text_c + surface7_floor_Text_c + surface13_floor_Text_c + surface19_floor_Text_c + surface25_floor_Text_c) / 5
-        _EP_wall_temperatures_K_dict, south_wall_Text_c, north_wall_Text_c \
-            = batch_get_20_stories_wall_temperatures(state, wall_handles_dict)
+        _EP_wall_temperatures_K_dict, south_wall_Text_c, north_wall_Text_c, roof_Text_c, floor_Text_c \
+            =batch_get_20_stories_temperatures(state, wall_handles_dict)
 
         coordination.ep_floor_Text_K = floor_Text_c + 273.15
         coordination.ep_roof_Text_K = roof_Text_c + 273.15
