@@ -75,7 +75,11 @@ def read_sql(csv_file):
                            f"And RowName = 'Cooling' "
     cooling_demand_query_results = cursor.execute(cooling_demand_query).fetchall()
     cooling_demand = float(re.findall(regex, cooling_demand_query_results[0][1])[0])
-    return totalEnergy, cooling_electricity, heating_electricity, cooling_demand
+    total_mj_m2 = round(totalEnergy / footprint_area_m2 * 1e3, 2)
+    cooling_electricity_mj_m2 = round(cooling_electricity / footprint_area_m2 * 1e3, 2)
+    heating_electricity_mj_m2 = round(heating_electricity / footprint_area_m2 * 1e3, 2)
+    cooling_demand_w_m2 = round(cooling_demand / footprint_area_m2, 2)
+    return total_mj_m2, cooling_electricity_mj_m2, heating_electricity_mj_m2, cooling_demand_w_m2
 def read_csv_energy(csv_file):
     '''
     Returns:
@@ -88,8 +92,9 @@ def read_csv_energy(csv_file):
     gasTotal = df['GasTotal[J_m2]'].sum()
     coolConsump = df['coolConsump[J_m2]'].sum()
     heatConsump = df['heatConsump[J_m2]'].sum()
+    coolDemand = df['sensCoolDemand[W_m2]'].max()
     total = elecTotal + gasTotal
-    return round(total/1e6, 2), round(coolConsump/1e6, 2), round(heatConsump/1e6, 2)
+    return round(total/1e6, 2), round(coolConsump/1e6, 2), round(heatConsump/1e6, 2), round(coolDemand, 2)
 
 plot_fontsize = 12
 experiments_folder = 'Chicago_MedOffice_IDFComplexity'
@@ -104,9 +109,14 @@ footprint_area_m2 = 53628 * 0.09290304 / 3
 read all csv files, containing OnlyVCWG or PartialVCWG, and create a new excel file with the following sheets:
 sheet_names = ['Energy Consumption','CanTempC', 'CanTempComparison']
 '''
-def sort_by_numbers(s):
-    regex = r'(\d+\.?\d*)'
-    return [float(x) for x in re.findall(regex, s)]
+def sort_by_complexity(s):
+    '''Detailed, Simplified,ShoeBox'''
+    if 'Detailed' in s:
+        return 0
+    elif 'Simplified' in s:
+        return 1
+    elif 'ShoeBox' in s:
+        return 2
 
 def excel_letters(idx):
     #idx:0, letter:A
@@ -138,7 +148,7 @@ def add_excel_formula(df_excel):
 all_csv_files = [f for f in os.listdir(experiments_folder)
                  if f.endswith('.csv')]
 
-all_csv_files.sort(key=sort_by_numbers)
+all_csv_files.sort(key=sort_by_complexity)
 sheet_names = ['CanTempComparison_CVRMSE', 'CanTempComparison_NMBE',
                'Total[GJ]', 'Cooling[GJ]', 'Heating[GJ]', 'CanTempC']
 '''
@@ -152,7 +162,7 @@ for csv_file in all_csv_files:
     csv_file = csv_file.replace('OnlyVCWG_', '')
     csv_file = csv_file.replace('PartialVCWG_', '')
     indices.add(csv_file)
-indices = sorted(indices, key=sort_by_numbers)
+indices = sorted(indices, key=sort_by_complexity)
 indices = [x for x in indices]
 all_dfs = {}
 for csv_file in all_csv_files:
@@ -227,8 +237,12 @@ for csv_file in all_csv_files:
         df_cooling_sheet.loc[_index, _col] = energy_tuple[1]
         df_heating_sheet.loc[_index, _col] = energy_tuple[2]
         df_total_sheet.loc[_index, _col] = energy_tuple[0]
+        df_cooling_demand_sheet.loc[_index, _col] = energy_tuple[3]
         tmp_cooling_per = round((energy_tuple[1] - baseline_energy[1]) / baseline_energy[1] * 100, 2)
         df_cooling_baseline_sheet.loc[_index, _col] = tmp_cooling_per
+        tmp_cooling_demand_per = round((energy_tuple[3] - baseline_energy[3]) / baseline_energy[3] * 100, 2)
+        df_cooling_demand_percent_sheet.loc[_index, _col] = tmp_cooling_demand_per
+
         _offline_energy = (read_sql(csv_file))
         df_cooling_sheet.loc[_index, 'Offline'] = _offline_energy[1]
         df_heating_sheet.loc[_index, 'Offline'] = _offline_energy[2]
@@ -237,15 +251,14 @@ for csv_file in all_csv_files:
         df_cooling_baseline_sheet.loc[_index, 'Offline'] = tmp_cooling_per
         df_cooling_demand_sheet.loc[_index, 'Offline'] = _offline_energy[3]
         tmp_cooling_demand_per = round((_offline_energy[3] - baseline_energy[3]) / baseline_energy[3] * 100, 2)
-        df_cooling_demand_percent_sheet.loc[_index, 'OnlyVCWG'] = tmp_cooling_demand_per
         df_cooling_demand_percent_sheet.loc[_index, 'Offline'] = tmp_cooling_demand_per
 
 df_cooling_baseline_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Baseline_Percent')
-df_cooling_sheet.to_excel(all_sensitivity, sheet_name='Cooling_GJ')
-df_heating_sheet.to_excel(all_sensitivity, sheet_name='Heating_GJ')
-df_total_sheet.to_excel(all_sensitivity, sheet_name='Total_GJ')
+df_cooling_sheet.to_excel(all_sensitivity, sheet_name='Cooling_MJ_m2')
+df_heating_sheet.to_excel(all_sensitivity, sheet_name='Heating_MJ_m2')
+df_total_sheet.to_excel(all_sensitivity, sheet_name='Total_MJ_m2')
 df_canTemp_c_sheet = add_excel_formula(df_canTemp_c_sheet)
 df_canTemp_c_sheet.to_excel(all_sensitivity, sheet_name='CanTempC')
-df_cooling_demand_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Demand_W')
+df_cooling_demand_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Demand_W_m2')
 df_cooling_demand_percent_sheet.to_excel(all_sensitivity, sheet_name='Cooling_Demand_Percent')
 all_sensitivity.save()
