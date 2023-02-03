@@ -2651,7 +2651,7 @@ ZoneInfiltration:DesignFlowRate,
     Flow/ExteriorArea,       !- Design Flow Rate Calculation Method
     ,                        !- Design Flow Rate {m3/s}
     ,                        !- Flow per Zone Floor Area {m3/s-m2}
-    0.00453136,             !- Flow per Exterior Surface Area {m3/s-m2}
+    0.000226568,             !- Flow per Exterior Surface Area {m3/s-m2}
     ,                        !- Air Changes per Hour {1/hr}
     ,                        !- Constant Term Coefficient
     ,                        !- Temperature Term Coefficient
@@ -2808,7 +2808,7 @@ Coil:Cooling:DX:SingleSpeed,
     Always On Discrete hvac_library,  !- Availability Schedule Name
     Autosize,                !- Gross Rated Total Cooling Capacity {W}
     Autosize,                !- Gross Rated Sensible Heat Ratio
-    2.51,                       !- Gross Rated Cooling COP {W/W}
+    2.22,                       !- Gross Rated Cooling COP {W/W}
     Autosize,                !- Rated Air Flow Rate {m3/s}
     773.3,                   !- Rated Evaporator Fan Power Per Volume Flow Rate {W/(m3/s)}
     PTHP 56 Mixed Air Node,  !- Air Inlet Node Name
