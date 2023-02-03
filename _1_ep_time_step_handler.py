@@ -890,6 +890,12 @@ def batch_HighOffice_wall_handles(state):
         wall_handles_dict['west'].append(coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", "Surface 10"))
         wall_handles_dict['west'].append(coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", "Surface 310"))
         wall_handles_dict['west'].append(coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", "Surface 580"))
+    elif 'ShoeBox' in coordination.bld_type:
+        wall_handles_dict['south'].append(coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", "Surface 5"))
+        wall_handles_dict['north'].append(coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", "Surface 2"))
+        wall_handles_dict['east'].append(coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", "Surface 4"))
+        wall_handles_dict['west'].append(coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", "Surface 6"))
+
     return wall_handles_dict
 
 def batch_check_wall_handles(wall_handles_dict):
@@ -1054,7 +1060,7 @@ def _20Stories_get_ep_results(state):
             return
 
         _EP_wall_temperatures_K_dict, south_wall_Text_c, north_wall_Text_c, roof_Text_c, floor_Text_c \
-            =batch_get_20_stories_temperatures(state, wall_handles_dict)
+            =batch_get_20_stories_temperatures(state, wall_handles_dict, roof_floor_handles)
 
         coordination.ep_floor_Text_K = floor_Text_c + 273.15
         coordination.ep_roof_Text_K = roof_Text_c + 273.15

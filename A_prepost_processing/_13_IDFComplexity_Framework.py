@@ -101,9 +101,9 @@ experiments_folder = 'Chicago_MedOffice_IDFComplexity'
 baseline = 'ByPass_IDFComplexity_Detailed_MedOffice.csv'
 footprint_area_m2 = 53628 * 0.09290304 / 3
 
-# experiments_folder = 'Chicago_HighOffice_IDFComplexity'
-# baseline = 'ByPass_IDFComplexity_Detailed_HighOffice.csv'
-# footprint_area_m2 = 31 * 15
+experiments_folder = 'Chicago_HighOffice_IDFComplexity'
+baseline = 'ByPass_IDFComplexity_Detailed_HighOffice.csv'
+footprint_area_m2 = 31 * 15
 
 '''
 read all csv files, containing OnlyVCWG or PartialVCWG, and create a new excel file with the following sheets:

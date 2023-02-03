@@ -2665,7 +2665,7 @@ DesignSpecification:OutdoorAir,
     90.1-2010 - Office - OpenOffice Ventilation,  !- Name
     Sum,                     !- Outdoor Air Method
     0.002359737216,          !- Outdoor Air Flow per Person {m3/s-person}
-    0.006096,               !- Outdoor Air Flow per Zone Floor Area {m3/s-m2}
+    0.0003048,               !- Outdoor Air Flow per Zone Floor Area {m3/s-m2}
     0,                       !- Outdoor Air Flow per Zone {m3/s}
     0;                       !- Outdoor Air Flow Air Changes per Hour {1/hr}
 
@@ -2674,7 +2674,7 @@ DesignSpecification:OutdoorAir,
 
 DesignSpecification:ZoneAirDistribution,
     Thermal Zone 1 Design Spec Zone Air Dist,  !- Name
-    0.4,                       !- Zone Air Distribution Effectiveness in Cooling Mode {dimensionless}
+    1,                       !- Zone Air Distribution Effectiveness in Cooling Mode {dimensionless}
     1;                       !- Zone Air Distribution Effectiveness in Heating Mode {dimensionless}
 
 
@@ -2702,13 +2702,13 @@ Sizing:Zone,
     1.15,                    !- Zone Cooling Sizing Factor
     DesignDay,               !- Cooling Design Air Flow Method
     0,                       !- Cooling Design Air Flow Rate {m3/s}
-    0.01524,                !- Cooling Minimum Air Flow per Zone Floor Area {m3/s-m2}
+    0.000762,                !- Cooling Minimum Air Flow per Zone Floor Area {m3/s-m2}
     0,                       !- Cooling Minimum Air Flow {m3/s}
     0,                       !- Cooling Minimum Air Flow Fraction
     DesignDay,               !- Heating Design Air Flow Method
     0,                       !- Heating Design Air Flow Rate {m3/s}
-    0.0406399,                !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
-    2.831524,               !- Heating Maximum Air Flow {m3/s}
+    0.002032,                !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
+    0.1415762,               !- Heating Maximum Air Flow {m3/s}
     0.3,                     !- Heating Maximum Air Flow Fraction
     Thermal Zone 1 Design Spec Zone Air Dist,  !- Design Specification Zone Air Distribution Object Name
     No,                      !- Account for Dedicated Outdoor Air System
@@ -2808,7 +2808,7 @@ Coil:Cooling:DX:SingleSpeed,
     Always On Discrete hvac_library,  !- Availability Schedule Name
     Autosize,                !- Gross Rated Total Cooling Capacity {W}
     Autosize,                !- Gross Rated Sensible Heat Ratio
-    2.72,                       !- Gross Rated Cooling COP {W/W}
+    2.51,                       !- Gross Rated Cooling COP {W/W}
     Autosize,                !- Rated Air Flow Rate {m3/s}
     773.3,                   !- Rated Evaporator Fan Power Per Volume Flow Rate {W/(m3/s)}
     PTHP 56 Mixed Air Node,  !- Air Inlet Node Name
@@ -2853,7 +2853,7 @@ Coil:Heating:DX:SingleSpeed,
     PTHP 1 Spd DX Htg Coil 56,  !- Name
     Always On Discrete hvac_library,  !- Availability Schedule Name
     Autosize,                !- Gross Rated Heating Capacity {W}
-    8,                       !- Gross Rated Heating COP {W/W}
+    5,                       !- Gross Rated Heating COP {W/W}
     Autosize,                !- Rated Air Flow Rate {m3/s}
     773.3,                   !- Rated Supply Fan Power Per Volume Flow Rate {W/(m3/s)}
     PTHP 56 Cooling Coil Outlet Node,  !- Air Inlet Node Name
