@@ -944,9 +944,10 @@ def batch_highoffice_roof_floor_handels(state):
     roof_flr_dict = {}
     roof_flr_dict['roof'] = []
     roof_flr_dict['floor'] = []
+    global surface1_floor_Text_c_handle
     if "ShoeBox_HighOffice" not in coordination.bld_type:
         global  surface576_roof_Text_c_handle, surface582_roof_Text_c_handle, surface588_roof_Text_c_handle, \
-        surface594_roof_Text_c_handle, surface600_roof_Text_c_handle, surface1_floor_Text_c_handle, \
+        surface594_roof_Text_c_handle, surface600_roof_Text_c_handle, \
         surface7_floor_Text_c_handle, surface13_floor_Text_c_handle, surface19_floor_Text_c_handle, \
         surface25_floor_Text_c_handle
 
@@ -999,9 +1000,8 @@ def batch_highoffice_roof_floor_handels(state):
         roof_flr_dict['floor'].append(surface13_floor_Text_c_handle)
         roof_flr_dict['floor'].append(surface19_floor_Text_c_handle)
         roof_flr_dict['floor'].append(surface25_floor_Text_c_handle)
-
     else:
-        global surface3_roof_Text_c_handle, surface1_floor_Text_c_handle
+        global surface3_roof_Text_c_handle
         surface3_roof_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state,
                                                                                         "Surface Outside Face Temperature", \
                                                                                         "Surface 3")
