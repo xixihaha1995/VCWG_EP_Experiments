@@ -61,7 +61,7 @@ def one_ini(sensitivity_file_name):
         # this_ini_process = []
 
 if __name__ == '__main__':
-    one_ini("DummyChicago20Stories_The_Effect_sensWaste_Profile.ini")
-    # one_ini("DummyChicago20Stories_The_Effect_sensWaste_Profile_NoWind.ini")
+    # one_ini("DummyChicago20Stories_The_Effect_sensWaste_Profile.ini")
+    one_ini("DummyChicago20Stories_The_Effect_sensWaste_Profile_NoWind.ini")
     # one_ini("DummyChicago20Stories_Simplified_The_Effect_sensWaste_Profile.ini")
     # one_ini("CAPITOUL_Temperature_Profile.ini")

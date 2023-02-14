@@ -35,7 +35,7 @@ def ShearProd(cdmin,nz,dz,vx,vy,km,prandtl):
         dudz2 = (vx[i+1]-vx[i])/dz
         dvdz2 = (vy[i+1]-vy[i])/dz
 
-        cdm = max(0.5*(km[i]+km[i+1])/prandtl,cdmin)
+        cdm = max(0.5*(km[i]+km[i+1]),cdmin)
 
         dumdz = 0.5*((dudz1**2+dvdz1**2)+(dudz2**2+dvdz2**2))
 

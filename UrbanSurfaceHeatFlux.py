@@ -357,14 +357,14 @@ class Surface_HeatFlux(object):
             # Instead of 20 stories, we only use floor 1, 11, 20, with centroid heights 1.98, 32.46, 59.89
             centroid_idices = numpy.array([1.98, 32.46, 59.89])
         for i in range(coordination.EP_nFloor):
-            multiplier = 1 if i < 20 else 1
+            multiplier = 0 if i < 20 else 1
             self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i] * multiplier
 
         for i_z in range(Geometry_m.nz_u):
             # Calculate wall resistance [s m^-1]
             RES_w = ResistanceCal.Wall_Aerodynamic_Resistance(VerticalProfUrban,Geometry_m,ColParam.WindMin_Urban,cp_atm,
                                                               i_z,ParCalculation)
-            # # # Calculate sensible heat flux from sunlit wall [W m^-2]
+            # # Calculate sensible heat flux from sunlit wall [W m^-2]
             # Hwsun_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twsun-T_canyon[i_z]) / (RES_w))
             # # Calculate sensible heat flux from shaded wall [W m^-2]
             # Hwshade_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twshade-T_canyon[i_z]) / (RES_w))

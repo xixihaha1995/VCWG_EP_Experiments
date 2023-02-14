@@ -75,8 +75,11 @@ def Length_Scale(nz,z,lambdap,bldHeight,Ceps,Cmu,Ck):
         elif (zc/bldHeight) > 1.5:
             d2 = (1 - a1 / a2) * 1.5 * bldHeight + (a1 / a2) * disp
             dls[i] = Ceps*a2*(zc-d2)
-        dlk[i] = Cmu[i]*dls[i]/(Ceps*Ck)
 
+    for i in range(0,nz):
+        # if i > bldHeight:
+        #     dls[i] *= 1e-2
+        dlk[i] = Cmu[i]*dls[i]/(Ceps*Ck)
     return dls,dlk
 
 # Calculate turbulent and dissipation length scales

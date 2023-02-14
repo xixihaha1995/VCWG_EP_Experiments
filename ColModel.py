@@ -92,8 +92,6 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     # gravitational acceleration [m s^-2]
     g = 9.81
 
-    print('rho', rho)
-
     # Define explicit and implicit parts of source and sink terms
     srex_vx = numpy.zeros(Geometry_m.nz)       # Explicit part of x component of horizontal wind speed [m s^-2]
     srim_vx = numpy.zeros(Geometry_m.nz)       # Implicit part of x component of horizontal wind speed [s^-1]
@@ -162,29 +160,36 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     _end = (Geometry_m.nz_u + 1)
     centroid_idices = numpy.arange(_start, _end, centroid_spacing)
 
-    print('dlk')
-    for i in dlk:
-        # print without new line
-        print(i, end=',')
-    print()
-
-    print('tke')
-    for i in tke:
-        # print without new line
-        print(i, end=',')
-    print()
+    # print('dlk')
+    # for i in dlk:
+    #     # print without new line
+    #     print(i, end=',')
+    # print()
+    #
+    # print('tke')
+    # for i in tke:
+    #     # print without new line
+    #     print(i, end=',')
+    # print()
 
     Km = TurbCoeff(Geometry_m.nz, Ck, tke, dlk)
-    print(f'Km')
-    for i in Km:
-        # print without new line
-        print(i, end=',')
-    print()
+
+    for i in range(1, len(Km)):
+        Km[i] = 2.24E-2
+
+    # print(f'Km')
+    # for i in Km:
+    #     # print without new line
+    #     print(i, end=',')
+    # print()
     # Calculate shear production [m^2 s^-3] in TKE equation. (Term II of equation 5.2, Krayenhoff 2014, PhD thesis)
     sh = ShearProd(ColParam.cdmin,Geometry_m.nz, Geometry_m.dz, vx, vy, Km,ColParam.prandtl)
 
     # Calculate buoyant production [m^2 s^-3] in TKE equation. (Term IX of equation 5.2, Krayenhoff 2014, PhD thesis)
     bu = BuoProd(ColParam.cdmin,Geometry_m.nz, Geometry_m.dz, th, Km, th_ref, ColParam.prandtl)
+
+    # for i in range(60,150):
+    #     dls[i] *= 1e-8
 
     # Calculate dissipation (td) [s^-1] in TKE equation. (Term VI of equation 5.2, Krayenhoff 2014, PhD thesis)
     # parameterization of dissipation is based on Nazarian's code. (https://github.com/nenazarian/MLUCM/blob/master/Column_Model/column_lkPro.f90)
@@ -197,30 +202,30 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
         sh[i] = sh[i]*sf[i]
         bu[i] = bu[i]*sf[i]
 
-    print('td')
-    for i in td:
-        # print without new line
-        print(i, end=',')
-    print()
+    # print('td')
+    # for i in td:
+    #     # print without new line
+    #     print(i, end=',')
+    # print()
 
 
-    print(f'bu')
-    for i in bu:
-        # print without new line
-        print(i, end=',')
-    print()
+    # print(f'bu')
+    # for i in bu:
+    #     # print without new line
+    #     print(i, end=',')
+    # print()
 
-    print(f'sh')
-    for i in sh:
-        # print without new line
-        print(i, end=',')
-    print()
+    # print(f'sh')
+    # for i in sh:
+    #     # print without new line
+    #     print(i, end=',')
+    # print()
 
-    print('dls')
-    for i in dls:
-        # print without new line
-        print(i, end=',')
-    print()
+    # print('dls')
+    # for i in dls:
+    #     # print without new line
+    #     print(i, end=',')
+    # print()
     # Calculate sink and source terms in momentum, temperature and turbulent kinetic energy (TKE) equations which are caused by building
     BuildingCoef = BuildingCol(Geometry_m.nz, Geometry_m.dz, dts, vol,Geometry_m.lambdap, Geometry_m.lambdaf,
                                Geometry_m.Height_canyon, Ck, Cp, th_ref, vx, vy, th, Cdrag, rho,Geometry_m.nz_u, pb, ss,
@@ -288,24 +293,23 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
         # Implicit term in humidity equation [s^-1] = term caused by latent heat from vegetation [s^-1]
         srim_qn[i] = srim_qn[i]
 
-    print('srex_tke')
-    for i in range(0, Geometry_m.nz):
-        print(srex_tke[i],end=',')
-    print()
-    print('srim_tke')
-    for i in range(0, Geometry_m.nz):
-        print(srim_tke[i],end=',')
-    print()
-
-    print('srex_th')
-    for i in range(0, Geometry_m.nz):
-        print(srex_th[i],end=',')
-    print()
-
-    print('srex_th_veg')
-    for i in range(0, Geometry_m.nz):
-        print(srex_th_veg[i],end=',')
-    print()
+    # print('srex_tke')
+    # for i in range(0, Geometry_m.nz):
+    #     print(srex_tke[i],end=',')
+    # print()
+    # print('srim_tke')
+    # for i in range(0, Geometry_m.nz):
+    #     print(srim_tke[i],end=',')
+    # print()
+    #
+    # print('srex_th_h')
+    # for i in range(0, Geometry_m.nz):
+    #     print(BuildingCoef.srex_th_h[i],end=',')
+    # print()
+    # print('srex_th_v')
+    # for i in range(0, Geometry_m.nz):
+    #     print(BuildingCoef.srex_th_v[i],end=',')
+    # print()
 
     # Solve transport equations
     Sol = Diff(Geometry_m.nz, dts, sf, vol, Geometry_m.dz, rho)
@@ -318,21 +322,26 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     # Solve temperature equation
     th_new,wth,dwthdz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,T_bc_bottom,T_bc_top,dts,rho,th,Km/ColParam.prandtl,srim_th,srex_th,sf,vol,Geometry_m.dz)
 
+    # for i in range(0, 150):
+    #     vx_new[i] *= 1e-8
+    #     vy_new[i] *= 1e-8
+    #     tke_new[i] = 1e-4
+
     print('th_new')
     for i in th_new:
         # print without new line
         print(i - 273.15, end=',')
     print()
 
-    print('tke_new')
-    for i in tke_new:
-        print(i, end=',')
-    print()
-
-    print('velocity')
-    for i in range(0, Geometry_m.nz):
-        print(numpy.sqrt(vx_new[i]**2+vy_new[i]**2),end=',')
-    print()
+    # print('tke_new')
+    # for i in tke_new:
+    #     print(i, end=',')
+    # print()
+    #
+    # print('velocity')
+    # for i in range(0, Geometry_m.nz):
+    #     print(numpy.sqrt(vx_new[i]**2+vy_new[i]**2),end=',')
+    # print()
     # Solve specific humidity equation
     qn_new,wqn,dwqndz = Sol.Solver(Geometry_m.nz,Geometry_m.nz,q_bc_bottom,q_bc_top,dts,rho,qn,Km/ColParam.schmidt,srim_qn,srex_qn,sf,vol,Geometry_m.dz)
 
