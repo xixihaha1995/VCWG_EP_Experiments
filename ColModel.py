@@ -174,8 +174,8 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
 
     Km = TurbCoeff(Geometry_m.nz, Ck, tke, dlk)
 
-    for i in range(1, len(Km)):
-        Km[i] = 2.24E-2
+    # for i in range(1, len(Km)):
+    #     Km[i] = 2.24E-2
 
     # print(f'Km')
     # for i in Km:
