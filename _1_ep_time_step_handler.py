@@ -1052,7 +1052,7 @@ def batch_get_energy_results(state, dict, accumulated_time_in_seconds):
     # for each floor, sum up the energy of 5 zones,
     # for each zone, sum up heating, cooling, electricity
     for i in range(1, 21):
-        for j in range(1, 2):
+        for j in range(1, 6):
             tmp_zone = zone_to_pthp[(i - 1) * 5 + j]
             # coordination.EP_floor_energy_lst[i-1] += energy_dict['PTHP ' + str(tmp_zone)][0]
             coordination.EP_floor_energy_lst[i-1] += energy_dict['PTHP ' + str(tmp_zone)][1]
