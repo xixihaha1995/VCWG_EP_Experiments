@@ -1,4 +1,27 @@
-
+Schedule:Compact,
+    CLGSETP_SCH_WithCooling,         !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: Weekdays SummerDesignDay,  !- Field 2
+    Until: 06:00,            !- Field 3
+    26.7,                    !- Field 4
+    Until: 22:00,            !- Field 5
+    24.0,                    !- Field 6
+    Until: 24:00,            !- Field 7
+    26.7,                    !- Field 8
+    For: Saturday,           !- Field 9
+    Until: 06:00,            !- Field 10
+    26.7,                    !- Field 11
+    Until: 18:00,            !- Field 12
+    24.0,                    !- Field 13
+    Until: 24:00,            !- Field 14
+    26.7,                    !- Field 15
+    For WinterDesignDay,     !- Field 16
+    Until: 24:00,            !- Field 17
+    26.7,                    !- Field 18
+    For: AllOtherDays,       !- Field 19
+    Until: 24:00,            !- Field 20
+    26.7;                    !- Field 21
 
 !-Generator IDFEditor 1.51
 !-Option SortedOrder
@@ -18707,502 +18730,502 @@
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 1,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 12,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 5,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 10,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 11,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 9,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 8,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 7,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 6,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 46,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 47,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 48,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 20,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 49,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 50,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 51,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 52,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 53,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 54,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 55,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 56,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 57,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 58,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 19,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 59,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 60,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 61,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 62,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 63,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 64,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 65,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 66,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 67,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 68,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 16,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 69,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 70,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 71,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 72,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 73,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 74,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 75,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 76,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 77,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 78,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 17,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 79,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 80,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 81,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 82,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 83,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 84,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 85,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 86,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 87,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 88,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 18,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 89,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 90,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 91,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 92,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 93,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 94,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 95,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 96,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 97,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 98,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 15,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 99,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 100,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 40,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 41,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 42,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 43,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 44,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 45,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 38,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 39,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 13,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 37,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 22,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 23,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 24,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 25,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 26,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 27,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 28,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 29,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 30,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 14,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 31,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 32,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 33,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 34,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 35,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 36,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 21,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 2,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 3,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
   ThermostatSetpoint:DualSetpoint,
     Thermostat Setpoint Dual Setpoint 4,  !- Name
     Medium Office HtgSetp,   !- Heating Setpoint Temperature Schedule Name
-    Medium Office ClgSetp;   !- Cooling Setpoint Temperature Schedule Name
+    CLGSETP_SCH_WithCooling;   !- Cooling Setpoint Temperature Schedule Name
 
 !-   ===========  ALL OBJECTS IN CLASS: ZONEHVAC:PACKAGEDTERMINALHEATPUMP ===========
 

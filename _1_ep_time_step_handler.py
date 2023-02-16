@@ -1058,7 +1058,7 @@ def _20Stories_get_ep_results(state):
         if not time_index_alignment_bool:
             coordination.sem2.release()
             return
-
+        print('20 Stores en_sensWaste_w_m2_per_footprint_area: ', coordination.ep_sensWaste_w_m2_per_footprint_area)
         _EP_wall_temperatures_K_dict, south_wall_Text_c, north_wall_Text_c, roof_Text_c, floor_Text_c \
             =batch_get_20_stories_temperatures(state, wall_handles_dict, roof_floor_handles)
 
