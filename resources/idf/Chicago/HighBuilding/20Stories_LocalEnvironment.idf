@@ -402,6 +402,328 @@ ZoneProperty:LocalEnvironment,
     Thermal Zone 100,            !- Zone Name
     OutdoorAirNode:Floor_20;     !- Outdoor Air Node Name
 
+
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 1,      !- Name
+    Thermal Zone 1,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 2,      !- Name
+    Thermal Zone 2,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 3,      !- Name
+    Thermal Zone 3,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 5,      !- Name
+    Thermal Zone 5,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 6,      !- Name
+    Thermal Zone 6,             !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 7,      !- Name
+    Thermal Zone 7,             !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 8,      !- Name
+    Thermal Zone 8,             !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 10,     !- Name
+    Thermal Zone 10,            !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 11,     !- Name
+    Thermal Zone 11,            !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 12,     !- Name
+    Thermal Zone 12,            !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 13,     !- Name
+    Thermal Zone 13,            !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 15,     !- Name
+    Thermal Zone 15,            !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 16,     !- Name
+    Thermal Zone 16,            !- Zone Name
+    OutdoorAirNode:Floor_4;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 17,     !- Name
+    Thermal Zone 17,            !- Zone Name
+    OutdoorAirNode:Floor_4;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 18,     !- Name
+    Thermal Zone 18,            !- Zone Name
+    OutdoorAirNode:Floor_4;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 20,     !- Name
+    Thermal Zone 20,            !- Zone Name
+    OutdoorAirNode:Floor_4;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 21,     !- Name
+    Thermal Zone 21,            !- Zone Name
+    OutdoorAirNode:Floor_5;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 22,     !- Name
+    Thermal Zone 22,            !- Zone Name
+    OutdoorAirNode:Floor_5;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 23,     !- Name
+    Thermal Zone 23,            !- Zone Name
+    OutdoorAirNode:Floor_5;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 25,     !- Name
+    Thermal Zone 25,            !- Zone Name
+    OutdoorAirNode:Floor_5;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 26,     !- Name
+    Thermal Zone 26,            !- Zone Name
+    OutdoorAirNode:Floor_6;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 27,     !- Name
+    Thermal Zone 27,            !- Zone Name
+    OutdoorAirNode:Floor_6;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 28,     !- Name
+    Thermal Zone 28,            !- Zone Name
+    OutdoorAirNode:Floor_6;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 30,     !- Name
+    Thermal Zone 30,            !- Zone Name
+    OutdoorAirNode:Floor_6;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 31,     !- Name
+    Thermal Zone 31,            !- Zone Name
+    OutdoorAirNode:Floor_7;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 32,     !- Name
+    Thermal Zone 32,            !- Zone Name
+    OutdoorAirNode:Floor_7;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 33,     !- Name
+    Thermal Zone 33,            !- Zone Name
+    OutdoorAirNode:Floor_7;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 35,     !- Name
+    Thermal Zone 35,            !- Zone Name
+    OutdoorAirNode:Floor_7;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 36,     !- Name
+    Thermal Zone 36,            !- Zone Name
+    OutdoorAirNode:Floor_8;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 37,     !- Name
+    Thermal Zone 37,            !- Zone Name
+    OutdoorAirNode:Floor_8;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 38,     !- Name
+    Thermal Zone 38,            !- Zone Name
+    OutdoorAirNode:Floor_8;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 40,     !- Name
+    Thermal Zone 40,            !- Zone Name
+    OutdoorAirNode:Floor_8;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 41,     !- Name
+    Thermal Zone 41,            !- Zone Name
+    OutdoorAirNode:Floor_9;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 42,     !- Name
+    Thermal Zone 42,            !- Zone Name
+    OutdoorAirNode:Floor_9;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 43,     !- Name
+    Thermal Zone 43,            !- Zone Name
+    OutdoorAirNode:Floor_9;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 45,     !- Name
+    Thermal Zone 45,            !- Zone Name
+    OutdoorAirNode:Floor_9;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 46,     !- Name
+    Thermal Zone 46,            !- Zone Name
+    OutdoorAirNode:Floor_10;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 47,     !- Name
+    Thermal Zone 47,            !- Zone Name
+    OutdoorAirNode:Floor_10;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 48,     !- Name
+    Thermal Zone 48,            !- Zone Name
+    OutdoorAirNode:Floor_10;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 50,     !- Name
+    Thermal Zone 50,            !- Zone Name
+    OutdoorAirNode:Floor_10;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 51,     !- Name
+    Thermal Zone 51,            !- Zone Name
+    OutdoorAirNode:Floor_11;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 52,     !- Name
+    Thermal Zone 52,            !- Zone Name
+    OutdoorAirNode:Floor_11;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 53,     !- Name
+    Thermal Zone 53,            !- Zone Name
+    OutdoorAirNode:Floor_11;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 55,     !- Name
+    Thermal Zone 55,            !- Zone Name
+    OutdoorAirNode:Floor_11;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 56,     !- Name
+    Thermal Zone 56,            !- Zone Name
+    OutdoorAirNode:Floor_12;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 57,     !- Name
+    Thermal Zone 57,            !- Zone Name
+    OutdoorAirNode:Floor_12;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 58,     !- Name
+    Thermal Zone 58,            !- Zone Name
+    OutdoorAirNode:Floor_12;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 60,     !- Name
+    Thermal Zone 60,            !- Zone Name
+    OutdoorAirNode:Floor_12;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 61,     !- Name
+    Thermal Zone 61,            !- Zone Name
+    OutdoorAirNode:Floor_13;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 62,     !- Name
+    Thermal Zone 62,            !- Zone Name
+    OutdoorAirNode:Floor_13;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 63,     !- Name
+    Thermal Zone 63,            !- Zone Name
+    OutdoorAirNode:Floor_13;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 65,     !- Name
+    Thermal Zone 65,            !- Zone Name
+    OutdoorAirNode:Floor_13;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 66,     !- Name
+    Thermal Zone 66,            !- Zone Name
+    OutdoorAirNode:Floor_14;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 67,     !- Name
+    Thermal Zone 67,            !- Zone Name
+    OutdoorAirNode:Floor_14;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 68,     !- Name
+    Thermal Zone 68,            !- Zone Name
+    OutdoorAirNode:Floor_14;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 70,     !- Name
+    Thermal Zone 70,            !- Zone Name
+    OutdoorAirNode:Floor_14;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 71,     !- Name
+    Thermal Zone 71,            !- Zone Name
+    OutdoorAirNode:Floor_15;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 72,     !- Name
+    Thermal Zone 72,            !- Zone Name
+    OutdoorAirNode:Floor_15;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 73,     !- Name
+    Thermal Zone 73,            !- Zone Name
+    OutdoorAirNode:Floor_15;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 75,     !- Name
+    Thermal Zone 75,            !- Zone Name
+    OutdoorAirNode:Floor_15;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 76,     !- Name
+    Thermal Zone 76,            !- Zone Name
+    OutdoorAirNode:Floor_16;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 77,     !- Name
+    Thermal Zone 77,            !- Zone Name
+    OutdoorAirNode:Floor_16;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 78,     !- Name
+    Thermal Zone 78,            !- Zone Name
+    OutdoorAirNode:Floor_16;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 80,     !- Name
+    Thermal Zone 80,            !- Zone Name
+    OutdoorAirNode:Floor_16;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 81,     !- Name
+    Thermal Zone 81,            !- Zone Name
+    OutdoorAirNode:Floor_17;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 82,     !- Name
+    Thermal Zone 82,            !- Zone Name
+    OutdoorAirNode:Floor_17;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 83,     !- Name
+    Thermal Zone 83,            !- Zone Name
+    OutdoorAirNode:Floor_17;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 85,     !- Name
+    Thermal Zone 85,            !- Zone Name
+    OutdoorAirNode:Floor_17;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 86,     !- Name
+    Thermal Zone 86,            !- Zone Name
+    OutdoorAirNode:Floor_18;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 87,     !- Name
+    Thermal Zone 87,            !- Zone Name
+    OutdoorAirNode:Floor_18;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 88,     !- Name
+    Thermal Zone 88,            !- Zone Name
+    OutdoorAirNode:Floor_18;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 90,     !- Name
+    Thermal Zone 90,            !- Zone Name
+    OutdoorAirNode:Floor_18;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 91,     !- Name
+    Thermal Zone 91,            !- Zone Name
+    OutdoorAirNode:Floor_19;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 92,     !- Name
+    Thermal Zone 92,            !- Zone Name
+    OutdoorAirNode:Floor_19;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 93,     !- Name
+    Thermal Zone 93,            !- Zone Name
+    OutdoorAirNode:Floor_19;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 95,     !- Name
+    Thermal Zone 95,            !- Zone Name
+    OutdoorAirNode:Floor_19;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 96,     !- Name
+    Thermal Zone 96,            !- Zone Name
+    OutdoorAirNode:Floor_20;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 97,     !- Name
+    Thermal Zone 97,            !- Zone Name
+    OutdoorAirNode:Floor_20;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 98,     !- Name
+    Thermal Zone 98,            !- Zone Name
+    OutdoorAirNode:Floor_20;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Zone 100,     !- Name
+    Thermal Zone 100,            !- Zone Name
+    OutdoorAirNode:Floor_20;     !- Outdoor Air Node Name
+
 OutdoorAir:Node,
     OutdoorAirNode:Floor_1,     !- Name
     ,                        !- Height Above Ground {m}
