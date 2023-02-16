@@ -234,6 +234,8 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
             # prepare the header string for different sensors
             header_str = 'cur_datetime,canTemp,ForcTemp_K,sensWaste,wallSun_K,wallShade_K,roof_K,' \
                          'MeteoData.Tatm,MeteoData.Pre,'
+            for flr in range(len(vcwg_canTemp_K_list)):
+                header_str += f'Floor[{flr+1}]_OAT_K,'
             for i in range(len(mapped_indices)):
                 _temp_height = sensor_heights[i]
                 header_str += f'TempProf_cur[{_temp_height}],'
@@ -247,8 +249,10 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
         fmt1 = "%s," * 1 % (cur_datetime) + \
                "%.3f," * 8 % (vcwg_canTemp_K,ForcTemp_K,BEM_Building.sensWaste,
                               wallSun_K,wallShade_K,roof_K,MeteoData.Tatm, MeteoData.Pre) + \
+               "%.3f," * len(vcwg_canTemp_K_list) % tuple(vcwg_canTemp_K_list) + \
                "%.3f," * 2 * len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
                                                          [PresProf_cur[i] for i in mapped_indices]) + '\n'
+
         f1.write(fmt1)
 
     sem0.release()
