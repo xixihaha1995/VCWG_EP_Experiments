@@ -13,6 +13,8 @@ Actuator,Schedule:Year,Schedule Value,MEDIUM OFFICE BLDG EQUIP;
 Actuator,Schedule:Year,Schedule Value,MEDIUM OFFICE BLDG OCC;
 Actuator,Schedule:Year,Schedule Value,MEDIUM OFFICE INFIL QUARTER ON;
 Actuator,Schedule:Year,Schedule Value,OFFICE BLDG LIGHT;
+Actuator,Schedule:Compact,Schedule Value,CLGSETP_SCH_WITHCOOLING;
+Actuator,Schedule:Compact,Schedule Value,CLGSETP_SCH_WITHOUTCOOLING;
 Actuator,Schedule:Compact,Schedule Value,OUTDOORAIRNODE:FLOOR_1DRYBULB;
 Actuator,Schedule:Compact,Schedule Value,OUTDOORAIRNODE:FLOOR_1WETBULB;
 Actuator,Schedule:Compact,Schedule Value,OUTDOORAIRNODE:FLOOR_2DRYBULB;
