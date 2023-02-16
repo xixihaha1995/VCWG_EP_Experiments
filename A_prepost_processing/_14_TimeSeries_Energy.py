@@ -20,15 +20,15 @@ def read_sql(sql_path):
     with sqlite3.connect(sql_uri, uri=True) as con:
         cursor = con.cursor()
     #Zone Packaged Terminal Heat Pump Total Heating Energy
-    # time_series_cooling_q = f"SELECT * FROM ReportVariableWithTime " \
-    #                         f"WHERE Name = 'Zone Packaged Terminal Heat Pump Total Cooling Energy'"
-    # time_series_results = cursor.execute(time_series_cooling_q).fetchall()
+    time_series_cooling_q = f"SELECT * FROM ReportVariableWithTime " \
+                            f"WHERE Name = 'Zone Packaged Terminal Heat Pump Total Heating Energy'"
+    time_series_results = cursor.execute(time_series_cooling_q).fetchall()
     # # time_series_results is a list of tuples, to sum over the tuple[4]
     # cooling_sum_J = sum([_tuple[4] for _tuple in time_series_results])
 
-    time_series_electricity_q = f"SELECT * FROM ReportVariableWithTime " \
-                            f"WHERE Name = 'Zone Packaged Terminal Heat Pump Electricity Energy'"
-    time_series_results = cursor.execute(time_series_electricity_q).fetchall()
+    # time_series_electricity_q = f"SELECT * FROM ReportVariableWithTime " \
+    #                         f"WHERE Name = 'Zone Packaged Terminal Heat Pump Electricity Energy'"
+    # time_series_results = cursor.execute(time_series_electricity_q).fetchall()
     # time_series_results is a list of tuples, to sum over the tuple[4]
     elec_lst = [(_tuple[4]) for _tuple in time_series_results]
     zone_oat_hourly_q = f"SELECT * FROM ReportVariableWithTime " \
@@ -71,7 +71,7 @@ def main():
     experiments_folder = os.path.join(_base, _sub_folder, 'eplusout.sql')
     vector_elec_lst, vector_oat_lst = read_sql(experiments_folder)
     plot_elec(scalar_oat_lst, vector_oat_lst, 'Zone Outdoor Air Drybulb Temperature (100 Zone, Avg, C, Hourly)')
-    plot_elec(scalar_elec_lst, vector_elec_lst, 'Zone PTHP Electricity Energy (100 Zone, Sum, J, 5 min)')
+    plot_elec(scalar_elec_lst, vector_elec_lst, 'Zone PTHP Cooling Energy (100 Zone, Sum, J, 5 min)')
 
 if __name__ == '__main__':
     main()
