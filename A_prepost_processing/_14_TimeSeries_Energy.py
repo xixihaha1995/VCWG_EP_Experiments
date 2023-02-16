@@ -124,21 +124,21 @@ def read_sql(sql_path):
     #Zone Packaged Terminal Heat Pump Total Heating Energy
     time_series_cooling_q = f"SELECT * FROM ReportVariableWithTime " \
                             f"WHERE Name = 'Zone Packaged Terminal Heat Pump Total Cooling Energy'"\
-                            f"And KeyValue = 'PTHP 59'"
+                            f"And KeyValue = 'PTHP 5'"
     time_series_results_cooling = cursor.execute(time_series_cooling_q).fetchall()
     # # time_series_results is a list of tuples, to sum over the tuple[4]
     # cooling_sum_J = sum([_tuple[4] for _tuple in time_series_results])
 
     time_series_electricity_q = f"SELECT * FROM ReportVariableWithTime " \
                             f"WHERE Name = 'Zone Packaged Terminal Heat Pump Electricity Energy'"\
-                            f"And KeyValue = 'PTHP 5'"
+                            f"And KeyValue = 'PTHP 2'"
     time_series_results_elec = cursor.execute(time_series_electricity_q).fetchall()
     # time_series_results is a list of tuples, to sum over the tuple[4]
     elec_lst = [(time_series_results_elec[i][4])
                 for i in range(len(time_series_results_elec))]
     zone_oat_hourly_q = f"SELECT * FROM ReportVariableWithTime " \
                         f"WHERE Name = 'Zone Outdoor Air Drybulb Temperature'"\
-                        f"And KeyValue = 'THERMAL ZONE 99'"
+                        f"And KeyValue = 'THERMAL ZONE 96'"
     time_series_results = cursor.execute(zone_oat_hourly_q).fetchall()
     zone_oat_hourly = [(_tuple[4]) for _tuple in time_series_results]
     return elec_lst, zone_oat_hourly
@@ -174,7 +174,8 @@ def main():
     experiments_folder = os.path.join(_base, _sub_folder,'eplusout.sql')
     scalar_elec_lst, scalar_oat_lst = read_sql(experiments_folder)
     _sub_folder = 'Vector_Mod_Cmu'
-    _sub_folder = 'Vector_Default_Cmu'
+    # _sub_folder = 'Vector_Default_Cmu'
+    _sub_folder = 'Vector_Default_Cmu_Core'
     experiments_folder = os.path.join(_base, _sub_folder, 'eplusout.sql')
     vector_elec_lst, vector_oat_lst = read_sql(experiments_folder)
     plot_elec(scalar_oat_lst, vector_oat_lst, 'Zone Outdoor Air Drybulb Temperature (Zone 1, C, Hourly)')
