@@ -646,6 +646,7 @@ zone_pthp_dict = {}
     zone_pthp_dict[99] = 5
 
 
+
 OutdoorAir:Node,
     PTHP 56 OA Node;         !- Node or NodeList Name 1
     ,                        !- Height Above Ground {m}
@@ -653,6 +654,20 @@ OutdoorAir:Node,
     OutdoorAirNode:Floor_1WetBulb,  !- Wetbulb Temperature Schedule Name
     ,  !- Wind Speed Schedule Name
     ;  !- Wind Direction Schedule Name
+
+#Find all semicolons ";", which are left enclosed by "OA Node" and right enclosed by one or more spaces.
+regex = r"OA Node\s+.*\s+;"
+
+ # I need one regex, which will do 2 captures
+1. Capture the lines startting with "    PTHP" and ending with "NodeList Name 1"
+2. Capture the characters ";" in the above lines
+
+regex1 = r"    PTHP.*NodeList Name 1"
+regex2 = r";"
+
+nested_reg
+
+
 OutdoorAir:Node,
     PTHP 57 OA Node;         !- Node or NodeList Name 1
     ,                        !- Height Above Ground {m}
