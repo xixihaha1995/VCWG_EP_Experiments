@@ -2,12 +2,10 @@ import os
 import pathlib
 import re
 import sqlite3
-
 import numpy as np
+import pandas as pd
 from matplotlib import pyplot as plt
 
-# Zone -> PTHP -> Whole Year
-# Floor <- 5 Zones
 def get_zone_to_pthp_dict():
     zone_pthp_dict = {}
     zone_pthp_dict[1] = 56
@@ -111,42 +109,24 @@ def get_zone_to_pthp_dict():
     zone_pthp_dict[98] = 4
     zone_pthp_dict[99] = 5
 
-def read_sql(sql_path):
-    sql_report_name = 'AnnualBuildingUtilityPerformanceSummary'
-    sql_table_name = 'Site and Source Energy'
-    sql_row_name = 'Total Site Energy'
-    sql_col_name = 'Total Energy'
+    return zone_pthp_dict
 
+def read_sql(sql_path):
     abs_sql_path = os.path.abspath(sql_path)
     sql_uri = '{}?mode=ro'.format(pathlib.Path(abs_sql_path).as_uri())
-    query = f"SELECT * FROM TabularDataWithStrings WHERE ReportName = '{sql_report_name}' AND TableName = '{sql_table_name}'" \
-            f" AND RowName = '{sql_row_name}' AND ColumnName = '{sql_col_name}'"
     with sqlite3.connect(sql_uri, uri=True) as con:
         cursor = con.cursor()
-    #Zone Packaged Terminal Heat Pump Total Heating Energy
-    time_series_cooling_q = f"SELECT * FROM ReportVariableWithTime " \
-                            f"WHERE Name = 'Zone Packaged Terminal Heat Pump Total Cooling Energy'"\
-                            f"And KeyValue = 'PTHP 59'"
-    time_series_results_cooling = cursor.execute(time_series_cooling_q).fetchall()
-    # # time_series_results is a list of tuples, to sum over the tuple[4]
-    # cooling_sum_J = sum([_tuple[4] for _tuple in time_series_results])
-
     time_series_electricity_q = f"SELECT * FROM ReportVariableWithTime " \
-                            f"WHERE Name = 'Zone Packaged Terminal Heat Pump Electricity Energy'"\
-                            f"And KeyValue = 'PTHP 5'"
+                            f"WHERE Name = 'Zone Packaged Terminal Heat Pump Electricity Energy'"
     time_series_results_elec = cursor.execute(time_series_electricity_q).fetchall()
-    # time_series_results is a list of tuples, to sum over the tuple[4]
     elec_lst = [(time_series_results_elec[i][4])
                 for i in range(len(time_series_results_elec))]
     zone_oat_hourly_q = f"SELECT * FROM ReportVariableWithTime " \
-                        f"WHERE Name = 'Zone Outdoor Air Drybulb Temperature'"\
-                        f"And KeyValue = 'THERMAL ZONE 99'"
-    time_series_results = cursor.execute(zone_oat_hourly_q).fetchall()
-    zone_oat_hourly = [(_tuple[4]) for _tuple in time_series_results]
-    return elec_lst, zone_oat_hourly
-    electricity_sum_J = sum([_tuple[4] for _tuple in time_series_results])
-    electricity_sum_GJ = electricity_sum_J / 1000000000
-
+                        f"WHERE Name = 'Zone Outdoor Air Drybulb Temperature'"
+    time_series_results_oat = cursor.execute(zone_oat_hourly_q).fetchall()
+    zone_oat_hourly = [(_tuple[4]) for _tuple in time_series_results_oat]
+    cursor.close()
+    return time_series_results_elec, time_series_results_oat
 def plot_elec(scalar_lst, vector_lst, tilte):
     pass
     # # The each 100 values is for one timestep
@@ -166,23 +146,70 @@ def plot_elec(scalar_lst, vector_lst, tilte):
     plt.legend()
     plt.show()
 
+def find_zone_index(zone_number):
+    '''
+    there are 100 zones
+    '''
+    zone_lst = [1,10,100,11,12,13,14,15,16,17,18,19,
+                2,20,21,22,23,24,25,26,27,28,29,
+                3,30,31,32,33,34,35,36,37,38,39,
+                4,40,41,42,43,44,45,46,47,48,49,
+                5,50,51,52,53,54,55,56,57,58,59,
+                6,60,61,62,63,64,65,66,67,68,69,
+                7,70,71,72,73,74,75,76,77,78,79,
+                8,80,81,82,83,84,85,86,87,88,89,
+                9,90,91,92,93,94,95,96,97,98,99]
+    return zone_lst.index(zone_number)
 
+def find_correct_zone(all_zone_elec, all_zone_oat,zone_number):
+    # find the zone that has the most energy consumption
+    pass
+    cur_zone_idx = find_zone_index(zone_number)
+    zone_elec = [all_zone_elec[i][4] for i in range(cur_zone_idx, len(all_zone_elec), 100)]
+    zone_oat = [all_zone_oat[i][4] for i in range(cur_zone_idx, len(all_zone_oat), 100)]
+    return zone_elec, zone_oat
+
+def floor_whole_year(sql_path,_sub_folder):
+    flr_canyon_energy = {}
+    footprint_area = 31 * 15
+    for flr in range(1, 21):
+        flr_canyon_avg_C = 0
+        flr_canyon_max_C = 0
+        flr_canyon_min_C = 0
+        flr_elec_MJ_m2 = 0
+        for zne in range(1, 6):
+            _tmp_zne_nbr = (flr - 1) * 5 + zne
+            _tmp_zne_nbr = (flr - 1) * 5 + 4
+            _tmp_zne_elec, _tmp_zne_oat = find_correct_zone(all_zone_elec, all_zone_oat, _tmp_zne_nbr)
+            flr_canyon_avg_C += sum(_tmp_zne_oat) / len(_tmp_zne_oat)
+            flr_canyon_max_C += max(_tmp_zne_oat)
+            flr_canyon_min_C += min(_tmp_zne_oat)
+            flr_elec_MJ_m2 += sum(_tmp_zne_elec) / 1000000
+        flr_canyon_avg_C /= 5
+        flr_canyon_max_C /= 5
+        flr_canyon_min_C /= 5
+        flr_elec_MJ_m2 /= footprint_area
+        flr_canyon_energy[flr] = (round(flr_canyon_avg_C,2), round(flr_canyon_max_C,2),
+                                  round(flr_canyon_min_C,2), round(flr_elec_MJ_m2,2))
+
+    # Convert flr_canyon_energy to xlsx, wheree each row is a floor, and each column is avg, max, min, elec
+    xls_path = os.path.join(os.path.dirname(sql_path), f'{_sub_folder}_floor_canyon_energy.xlsx')
+    writer = pd.ExcelWriter(xls_path, engine='xlsxwriter')
+    df = pd.DataFrame.from_dict(flr_canyon_energy, orient='index',
+                                columns=[f'Avg_C_{_sub_folder}', f'Max_C_{_sub_folder}',
+                                         f'Min_C_{_sub_folder}', f'Elec_MJ_m2_{_sub_folder}'])
+    df.to_excel(writer, sheet_name='Sheet1')
+    writer.save()
 def main():
-    global experiments_folder
-    # C:\Users\wulic\Desktop\IDF_Vector\Vector_Cooling_Debug
-    _base = 'C:\\Users\\wulic\\Desktop\\IDF_Vector\\Vector_Cooling_Debug'
-    _sub_folder = 'Scalar'
-    # _sub_folder = 'Vector_Mod_Cmu'
-    experiments_folder = os.path.join(_base, _sub_folder,'eplusout.sql')
-    scalar_elec_lst, scalar_oat_lst = read_sql(experiments_folder)
-    _sub_folder = 'Vector_Mod_Cmu'
-    _sub_folder = 'Vector_Default_Cmu'
-    experiments_folder = os.path.join(_base, _sub_folder, 'eplusout.sql')
-    vector_elec_lst, vector_oat_lst = read_sql(experiments_folder)
-    plot_elec(scalar_oat_lst, vector_oat_lst, 'Zone Outdoor Air Drybulb Temperature (Zone 1, C, Hourly)')
-    plot_elec(scalar_elec_lst, vector_elec_lst, 'Zone PTHP Elec Energy (Zone 1, 5 min)\n'
-                                                f'Scalar {round(sum(scalar_elec_lst)/1E9, 2)} GJ, '
-                                                f'Vector {round(sum(vector_elec_lst)/1E9, 2)} GJ')
+    global sql_path, zone_to_pthp, all_zone_elec, all_zone_oat
+    _base = 'C:\\Users\\wulic\\Desktop\\IDF_Vector\\Vector_Cooling_Debug_New'
+    zone_to_pthp = get_zone_to_pthp_dict()
+    sub_folders = [ 'Scalar', 'Vector_Default_Cmu', 'Vector_Mod_Cmu']
+    sub_folders = ['Vector_Default_Cmu_Core']
+    for _sub_folder in sub_folders:
+        sql_path = os.path.join(_base, _sub_folder, 'eplusout.sql')
+        all_zone_elec, all_zone_oat = read_sql(sql_path)
+        floor_whole_year(sql_path,_sub_folder)
 
 if __name__ == '__main__':
     main()
