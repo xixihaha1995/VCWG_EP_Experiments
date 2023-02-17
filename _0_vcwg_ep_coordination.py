@@ -76,6 +76,7 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
         footprint_area_m2 = 5500 * 0.09290304 / 1
     elif "MediumOffice" in bld_type or 'MedOffice' in bld_type:
         footprint_area_m2 = 53628 * 0.09290304 / 3
+        footprint_area_m2 = 1660.73
     elif "LargeOffice" in bld_type:
         footprint_area_m2 = 498588 * 0.09290304 / 12
     elif "MidriseApartment" in bld_type:

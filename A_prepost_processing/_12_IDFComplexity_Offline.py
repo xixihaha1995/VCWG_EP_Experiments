@@ -194,8 +194,8 @@ def main():
     experiments_folder = 'Chicago_MedOffice_IDFComplexity'
     idfFolder = 'MediumOffice'
     #
-    experiments_folder = 'Chicago_HighOffice_IDFComplexity'
-    idfFolder = 'HighBuilding'
+    # experiments_folder = 'Chicago_HighOffice_IDFComplexity'
+    # idfFolder = 'HighBuilding'
 
     experiments = []
     for experiment in os.listdir(experiments_folder):
