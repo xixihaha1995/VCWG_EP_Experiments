@@ -25708,7 +25708,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 56 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -25740,7 +25740,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 65 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -25772,7 +25772,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 6 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -25804,7 +25804,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 66 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -25868,7 +25868,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 68 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -25900,7 +25900,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 69 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -25932,7 +25932,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 70 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -25964,7 +25964,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 71 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -25996,7 +25996,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 72 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26028,7 +26028,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 73 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26092,7 +26092,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 57 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26124,7 +26124,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 75 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26156,7 +26156,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 76 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26188,7 +26188,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 77 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26220,7 +26220,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 78 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26252,7 +26252,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 79 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26284,7 +26284,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 80 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26316,7 +26316,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 81 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26348,7 +26348,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 82 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26380,7 +26380,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 83 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26412,7 +26412,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 84 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26444,7 +26444,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 58 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26476,7 +26476,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 85 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26508,7 +26508,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 86 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26540,7 +26540,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 87 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26572,7 +26572,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 88 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26604,7 +26604,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 89 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26636,7 +26636,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 90 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26668,7 +26668,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 91 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26700,7 +26700,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 92 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26732,7 +26732,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 93 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26764,7 +26764,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 94 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26796,7 +26796,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 59 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26828,7 +26828,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 95 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26860,7 +26860,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 96 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26892,7 +26892,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 97 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26924,7 +26924,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 98 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26956,7 +26956,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 99 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -26988,7 +26988,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 100 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27020,7 +27020,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 38 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27052,7 +27052,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 39 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27084,7 +27084,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 40 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27116,7 +27116,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 41 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27148,7 +27148,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 60 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27180,7 +27180,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 42 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27212,7 +27212,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 43 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27244,7 +27244,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 44 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27276,7 +27276,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 45 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27308,7 +27308,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 46 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27340,7 +27340,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 47 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27372,7 +27372,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 48 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27404,7 +27404,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 49 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27436,7 +27436,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 50 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27468,7 +27468,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 51 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27500,7 +27500,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 61 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27532,7 +27532,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 52 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27564,7 +27564,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 53 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27596,7 +27596,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 54 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27628,7 +27628,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 55 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27660,7 +27660,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 36 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27692,7 +27692,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 37 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27724,7 +27724,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 34 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27788,7 +27788,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 25 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27820,7 +27820,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 26 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27852,7 +27852,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 62 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27884,7 +27884,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 27 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27916,7 +27916,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 28 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27948,7 +27948,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 29 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -27980,7 +27980,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 30 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28012,7 +28012,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 31 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28044,7 +28044,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 32 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28076,7 +28076,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 33 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28108,7 +28108,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 23 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28140,7 +28140,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 24 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28172,7 +28172,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 18 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28204,7 +28204,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 63 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28236,7 +28236,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 19 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28268,7 +28268,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 20 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28300,7 +28300,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 21 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28332,7 +28332,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 22 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28364,7 +28364,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 16 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28396,7 +28396,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 17 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28428,7 +28428,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 14 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28460,7 +28460,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 15 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28492,7 +28492,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 12 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28524,7 +28524,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 13 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28556,7 +28556,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 64 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28588,7 +28588,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 11 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28620,7 +28620,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 7 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28652,7 +28652,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 8 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28684,7 +28684,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 9 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28716,7 +28716,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 10 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28748,7 +28748,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 1 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28780,7 +28780,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 2 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28812,7 +28812,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 3 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28844,7 +28844,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 4 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -28876,7 +28876,7 @@ Schedule:Compact,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 5 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}

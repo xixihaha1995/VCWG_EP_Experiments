@@ -207,8 +207,8 @@ class UCM_Def():
                                                      disp,Geometry_m.dz,vol)
         cmu_can = max(5E-2,-1.6*Geometry_m.lambdaf**2.+0.75*Geometry_m.lambdaf+0.022)
         cmu_above = 5E-2
-        # cmu_can = max(1.8E-2,-1.6*Geometry_m.lambdaf**2.+0.75*Geometry_m.lambdaf+0.022)
-        # cmu_above = 3.7E-5
+        cmu_can = max(1.8E-2,-1.6*Geometry_m.lambdaf**2.+0.75*Geometry_m.lambdaf+0.022)
+        cmu_above = 3.7E-5
         cmu = numpy.zeros(Geometry_m.nz)
         for i in range(0,Geometry_m.nz_u):
             cmu[i] = cmu_can
