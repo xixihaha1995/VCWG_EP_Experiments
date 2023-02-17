@@ -179,7 +179,7 @@ def floor_whole_year(sql_path,_sub_folder):
         flr_elec_MJ_m2 = 0
         for zne in range(1, 6):
             _tmp_zne_nbr = (flr - 1) * 5 + zne
-            _tmp_zne_nbr = (flr - 1) * 5 + 4
+            # _tmp_zne_nbr = (flr - 1) * 5 + 4
             _tmp_zne_elec, _tmp_zne_oat = find_correct_zone(all_zone_elec, all_zone_oat, _tmp_zne_nbr)
             flr_canyon_avg_C += sum(_tmp_zne_oat) / len(_tmp_zne_oat)
             flr_canyon_max_C += max(_tmp_zne_oat)
