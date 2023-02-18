@@ -32,6 +32,7 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
     else:
         config = _config_file
         csv_file_name = _value
+    print('csv_file_name', csv_file_name)
     bld_type = config['Bypass']['bld_type']
     experiments_theme = config['Bypass']['experiments_theme']
     save_path_clean = False
@@ -138,17 +139,14 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
             vcwg_canSpecHum_Ratio_list[i] = numpy.mean(canSpecHumProf_cur[i*nbr_grid_points_per_floor:(i+1)*nbr_grid_points_per_floor])
             vcwg_canPress_Pa_list[i] = numpy.mean(canPressProf_cur[i*nbr_grid_points_per_floor:(i+1)*nbr_grid_points_per_floor])
         elif 'SimplifiedHighBld' in bld_type:
-            nbr_grid_points_per_floor = int(Geometry_m.nz_u / EP_nFloor)
             # index 0: is mean of floor 1
             # index 1: is mean of floor 2-19
             # index 2: is mean of floor 20
-            floor_range_dict = {0: [0, 1], 1: [2, 19], 2: [20, 20]}
+            floor_range_dict = {0: [0, 2], 1: [27, 29], 2: [57, 59]}
             vcwg_canTemp_K_list[i] = numpy.mean(
-                canTempProf_cur[int(floor_range_dict[i][0] * nbr_grid_points_per_floor):int(
-                    (floor_range_dict[i][1] + 1) * nbr_grid_points_per_floor)])
+                canTempProf_cur[floor_range_dict[i][0]:floor_range_dict[i][1]])
             vcwg_canSpecHum_Ratio_list[i] = numpy.mean(
-                canSpecHumProf_cur[int(floor_range_dict[i][0] * nbr_grid_points_per_floor):int(
-                    (floor_range_dict[i][1] + 1) * nbr_grid_points_per_floor)])
+                canSpecHumProf_cur[floor_range_dict[i][0]:floor_range_dict[i][1]])
 
     sem1.release()
     

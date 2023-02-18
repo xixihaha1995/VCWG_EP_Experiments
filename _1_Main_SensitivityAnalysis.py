@@ -52,16 +52,19 @@ def one_ini(sensitivity_file_name):
     batch_value_list = [value_list[i:i + nbr_of_parallel] for i in range(0, len(value_list), nbr_of_parallel)]
     for batch_nbr, batch_value in enumerate(batch_value_list):
         for value in batch_value:
-            ByPass.run_ep_api(sensitivity_file_name,config, value)
-        #     this_ini_process.append(Process(target=ByPass.run_ep_api, args=(sensitivity_file_name,config, value)))
-        # for process in this_ini_process:
-        #     process.start()
-        # for process in this_ini_process:
-        #     process.join()
-        # this_ini_process = []
-
+            # ByPass.run_ep_api(sensitivity_file_name,config, value)
+            this_ini_process.append(Process(target=ByPass.run_ep_api, args=(sensitivity_file_name,config, value)))
+    for i in range(0, len(this_ini_process), nbr_of_parallel):
+        for process in this_ini_process[i:i + nbr_of_parallel]:
+            process.start()
+        for process in this_ini_process[i:i + nbr_of_parallel]:
+            process.join()
 if __name__ == '__main__':
-    one_ini("DummyChicago20Stories_The_Effect_sensWaste_Profile.ini")
+    # one_ini("DummyChicago20Stories_The_Effect_sensWaste_Profile.ini")
     # one_ini("DummyChicago20Stories_The_Effect_sensWaste_Profile_NoWind.ini")
-    # one_ini("DummyChicago20Stories_Simplified_The_Effect_sensWaste_Profile.ini")
-    # one_ini("CAPITOUL_Temperature_Profile.ini")
+    jobs = [
+        # "DummyChicago20Stories_The_Effect_sensWaste_Profile.ini",
+        "DummyChicago20Stories_Simplified_The_Effect_sensWaste_Profile.ini"
+    ]
+    for job in jobs:
+        one_ini(job)
