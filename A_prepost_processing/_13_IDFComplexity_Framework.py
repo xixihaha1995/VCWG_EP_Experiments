@@ -18,7 +18,6 @@ def normalized_mean_bias_error_percentage(measurements, predictions):
     return round(nmb * 100, 2)
 
 def read_sql(csv_file):
-    print(csv_file)
     sql_report_name = 'AnnualBuildingUtilityPerformanceSummary'
     sql_table_name = 'Site and Source Energy'
     sql_row_name = 'Total Site Energy'
@@ -39,31 +38,15 @@ def read_sql(csv_file):
     with sqlite3.connect(sql_uri, uri=True) as con:
         cursor = con.cursor()
         results = cursor.execute(query).fetchall()
-        if results:
-            pass
-        else:
-            print(sql_path)
-            return 0,0,0
-            msg = ("Cannot find the EnergyPlusVersion in the SQL file. "
-                   "Please inspect query used:\n{}".format(query))
-            raise ValueError(msg)
     regex = r'(\d+\.?\d*)'
     totalEnergy = float(re.findall(regex, results[0][1])[0])
 
-    hvac_electricity_query = f"SELECT * FROM TabularDataWithStrings " \
-                             f"WHERE ReportName = '{sql_report_name}'" \
-                             f"AND TableName = 'Utility Use Per Total Floor Area' And RowName = 'HVAC' " \
-                             f"AND ColumnName = 'Electricity Intensity'"
     cooling_query = f"SELECT * FROM TabularDataWithStrings " \
                              f"WHERE ReportName = '{sql_report_name}'" \
                              f"AND TableName = 'End Uses' And RowName = 'Cooling' " \
                              f"AND ColumnName = 'Electricity'"
     cooling_query_results = cursor.execute(cooling_query).fetchall()
     cooling_electricity = float(re.findall(regex, cooling_query_results[0][1])[0])
-    hvac_gas_query = f"SELECT * FROM TabularDataWithStrings " \
-                     f"WHERE ReportName = '{sql_report_name}'" \
-                     f"AND TableName = 'Utility Use Per Total Floor Area' And RowName = 'HVAC' " \
-                     f"AND ColumnName = 'Natural Gas Intensity'"
     heating_query = f"SELECT * FROM TabularDataWithStrings " \
                     f"WHERE ReportName = '{sql_report_name}'" \
                     f"AND TableName = 'End Uses' And RowName = 'Heating' " \
@@ -101,9 +84,9 @@ experiments_folder = 'Chicago_MedOffice_IDFComplexity'
 baseline = 'ByPass_IDFComplexity_Detailed_MedOffice.csv'
 footprint_area_m2 = 53628 * 0.09290304 / 3
 
-experiments_folder = 'Chicago_HighOffice_IDFComplexity'
-baseline = 'ByPass_IDFComplexity_Detailed_HighOffice.csv'
-footprint_area_m2 = 31 * 15
+# experiments_folder = 'Chicago_HighOffice_IDFComplexity'
+# baseline = 'ByPass_IDFComplexity_Detailed_HighOffice.csv'
+# footprint_area_m2 = 31 * 15
 
 '''
 read all csv files, containing OnlyVCWG or PartialVCWG, and create a new excel file with the following sheets:

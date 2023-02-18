@@ -70,7 +70,7 @@ def overwrite_ep_weather(state):
         elif "ShoeBox_MedOffice" in coordination.bld_type:
             roof_hConv_actuator_handle = coordination.ep_api.exchange. \
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
-                                    "roof")
+                                    "Surface 2")
         elif 'Simplified_MedOffice' in coordination.bld_type:
             roof_hConv_actuator_handle = coordination.ep_api.exchange. \
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
@@ -721,15 +721,15 @@ def ShoeBox_MedOffice_get_ep_results(state):
                                                              "HVAC System Total Heat Rejection Energy",\
                                                              "SIMHVAC")
         flr_Text_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature",\
-                                                                                "floor")
+                                                                                "Surface 1")
         roof_Text_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature",\
-                                                                            "roof")
+                                                                            "Surface 2")
         s_wall_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,\
                                                                               "Surface Outside Face Temperature",\
-                                                                              "south")
+                                                                              "Surface 6")
         n_wall_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,\
                                                                                     "Surface Outside Face Temperature",\
-                                                                                    "north")
+                                                                                    "Surface 3")
         if (hvac_heat_rejection_sensor_handle == -1 or flr_Text_handle == -1 or roof_Text_handle == -1 or \
             s_wall_Text_handle == -1 or n_wall_Text_handle == -1):
             print('ShoeBoxMedOffi_get_ep_results(): some handle not available')
