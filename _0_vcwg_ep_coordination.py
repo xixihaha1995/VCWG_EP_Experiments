@@ -82,7 +82,7 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
         EP_wall_temperatures_K_dict['west'] = [300] * EP_nFloor
     elif 'SimplifiedHighBld' in bld_type:
         EP_nFloor = 3
-        footprint_area_m2 = 30 * 15
+        footprint_area_m2 = 31 * 15
         EP_floor_energy_lst = [0.0] * EP_nFloor
         EP_wall_temperatures_K_dict['south'] = [300] * EP_nFloor
         EP_wall_temperatures_K_dict['north'] = [300] * EP_nFloor

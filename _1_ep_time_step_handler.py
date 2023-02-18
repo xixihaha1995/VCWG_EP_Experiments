@@ -887,39 +887,9 @@ def LargeOffice_get_ep_results(state):
                                                                                    zone_indor_spe_hum_sensor_handle)
         coordination.sem3.release()
 
-def batch_get_energy_handles(state):
-    '''
-    Zone Packaged Terminal Heat Pump Total Heating Energy
-    Zone Packaged Terminal Heat Pump Total Cooling Energy
-    Zone Packaged Terminal Heat Pump Electricity Energy
-    'PTHP 1' ... 'PTHP 100'
-    '''
-    pass
-    dict = {}
-    for i in range(1, 101):
-        dict['PTHP ' + str(i)] = []
-        dict['PTHP ' + str(i)].append(
-            coordination.ep_api.exchange.get_variable_handle(state,
-                                                             "Zone Packaged Terminal Heat Pump Total Heating Energy",
-                                                             'PTHP ' + str(i)))
-        dict['PTHP ' + str(i)].append(
-            coordination.ep_api.exchange.get_variable_handle(state,
-                                                             "Zone Packaged Terminal Heat Pump Total Cooling Energy",
-                                                             'PTHP ' + str(i)))
-        dict['PTHP ' + str(i)].append(
-            coordination.ep_api.exchange.get_variable_handle(state,
-                                                             "Zone Packaged Terminal Heat Pump Electricity Energy",
-                                                             'PTHP ' + str(i)))
-    return dict
-
-def batch_check_handles(dict):
-    for i in range(1, 101):
-        if -1 in dict['PTHP ' + str(i)]:
-            print('batch_check_handles(): some handle not available')
-            os.getpid()
-            os.kill(os.getpid(), signal.SIGTERM)
 
 def get_zone_to_pthp_dict():
+    global zone_pthp_dict
     zone_pthp_dict = {}
     zone_pthp_dict[1] = 56
     zone_pthp_dict[10] = 65
@@ -1021,9 +991,9 @@ def get_zone_to_pthp_dict():
     zone_pthp_dict[97] = 3
     zone_pthp_dict[98] = 4
     zone_pthp_dict[99] = 5
-    return zone_pthp_dict
 
-def batch_get_energy_results(state, dict, accumulated_time_in_seconds):
+
+def _20Stories_batch_get_energy_results(state, dict, accumulated_time_in_seconds):
     '''
     Zone Packaged Terminal Heat Pump Total Heating Energy
     Zone Packaged Terminal Heat Pump Total Cooling Energy
@@ -1031,11 +1001,18 @@ def batch_get_energy_results(state, dict, accumulated_time_in_seconds):
     'PTHP 1' ... 'PTHP 100'
     '''
 
+    if 'SimplifiedHighBld' in coordination.bld_type:
+        flr_nbrs = [1,11,20]
+    else:
+        flr_nbrs = [ i for i in range(1,21)]
+    zone_nbrs = [(i - 1) * 5 + j for i in flr_nbrs for j in range(1, 6)]
+
     energy_dict = {}
     heating_total = 0
     cooling_total = 0
     electricity_total = 0
-    for i in range(1, 101):
+    for tmp_zone_nbr in zone_nbrs:
+        i = zone_pthp_dict[tmp_zone_nbr]
         energy_dict['PTHP ' + str(i)] = []
         tmp_heating = coordination.ep_api.exchange.get_variable_value(state, dict['PTHP ' + str(i)][0])
         tmp_cooling = coordination.ep_api.exchange.get_variable_value(state, dict['PTHP ' + str(i)][1])
@@ -1047,24 +1024,24 @@ def batch_get_energy_results(state, dict, accumulated_time_in_seconds):
         cooling_total += tmp_cooling
         electricity_total += tmp_electricity
 
-    zone_to_pthp = get_zone_to_pthp_dict()
-    # to get 20 floors energy,
-    # for each floor, sum up the energy of 5 zones,
-    # for each zone, sum up heating, cooling, electricity
-    for i in range(1, 21):
+    for idx, i in enumerate(flr_nbrs):
         for j in range(1, 6):
-            tmp_zone = zone_to_pthp[(i - 1) * 5 + j]
+            tmp_zone = zone_pthp_dict[(i - 1) * 5 + j]
             # coordination.EP_floor_energy_lst[i-1] += energy_dict['PTHP ' + str(tmp_zone)][0]
-            coordination.EP_floor_energy_lst[i-1] += energy_dict['PTHP ' + str(tmp_zone)][1]
-            coordination.EP_floor_energy_lst[i-1] += energy_dict['PTHP ' + str(tmp_zone)][2]
-        coordination.EP_floor_energy_lst[i - 1] /= accumulated_time_in_seconds
-        coordination.EP_floor_energy_lst[i - 1] /= coordination.footprint_area_m2
+            coordination.EP_floor_energy_lst[idx] += energy_dict['PTHP ' + str(tmp_zone)][1]
+            coordination.EP_floor_energy_lst[idx] += energy_dict['PTHP ' + str(tmp_zone)][2]
+        coordination.EP_floor_energy_lst[idx] /= coordination.footprint_area_m2
+        coordination.EP_floor_energy_lst[idx] /= accumulated_time_in_seconds
     return energy_dict, heating_total, cooling_total, electricity_total
 
-def batch_wall_handles(state):
-    pass
+def _20Stories_batch_handles(state):
     '''
-    surface92_south_wall_Text_c_handle, surface122_south_wall_Text_c_handle, surface152_south_wall_Text_c_handle, \
+        surface576_roof_Text_c_handle, surface582_roof_Text_c_handle, surface588_roof_Text_c_handle, \
+        surface594_roof_Text_c_handle, surface600_roof_Text_c_handle, surface1_floor_Text_c_handle, \
+        surface7_floor_Text_c_handle, surface13_floor_Text_c_handle, surface19_floor_Text_c_handle, \
+        surface25_floor_Text_c_handle
+
+        surface92_south_wall_Text_c_handle, surface122_south_wall_Text_c_handle, surface152_south_wall_Text_c_handle, \
         surface182_south_wall_Text_c_handle, surface212_south_wall_Text_c_handle, surface242_south_wall_Text_c_handle, \
         surface272_south_wall_Text_c_handle, surface302_south_wall_Text_c_handle, surface332_south_wall_Text_c_handle, \
         surface362_south_wall_Text_c_handle, surface392_south_wall_Text_c_handle, surface422_south_wall_Text_c_handle, \
@@ -1090,13 +1067,38 @@ def batch_wall_handles(state):
         surface280_west_wall_Text_c_handle, surface310_west_wall_Text_c_handle, surface340_west_wall_Text_c_handle, \
         surface370_west_wall_Text_c_handle, surface400_west_wall_Text_c_handle, surface430_west_wall_Text_c_handle, \
         surface460_west_wall_Text_c_handle, surface490_west_wall_Text_c_handle, surface520_west_wall_Text_c_handle, \
-        surface550_west_wall_Text_c_handle, surface580_west_wall_Text_c_handle'''
+        surface550_west_wall_Text_c_handle, surface580_west_wall_Text_c_handle
+    '''
+    roof_floor_handles_dict = {}
+    roof_floor_handles_dict['roof'] = []
+    roof_floor_handles_dict['floor'] = []
+    for i in range(1, 6):
+        tmp_roof = coordination.ep_api.exchange.get_variable_handle(state,
+                                                                    "Surface Outside Face Temperature",
+                                                                    "Surface " + str(576 + (i - 1) * 6))
+        tmp_floor = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature",
+                                                                     "Surface " + str(1 + (i - 1) * 6))
+        if tmp_roof * tmp_floor < 0:
+            print("20 Stories roof or floor surface handle error!")
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+
+        roof_floor_handles_dict['roof'].append(tmp_roof)
+        roof_floor_handles_dict['floor'].append(tmp_floor)
+
     wall_handles_dict = {}
     wall_handles_dict['south'] = []
     wall_handles_dict['north'] = []
     wall_handles_dict['east'] = []
     wall_handles_dict['west'] = []
-    for i in range(1, 21):
+
+    if 'SimplifiedHighBld' in coordination.bld_type:
+        flr_nbrs = [1,11,20]
+    else:
+        flr_nbrs = [ i for i in range(1,21)]
+    zone_nbrs = [(i - 1) * 5 + j for i in flr_nbrs for j in range(1, 6)]
+
+    for i in flr_nbrs:
         tmp_south = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
                                                                                                 "Surface " + str(2 + (i - 1) * 30))
         tmp_north = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
@@ -1105,21 +1107,42 @@ def batch_wall_handles(state):
                                                                                                 "Surface " + str(14 + (i - 1) * 30))
         tmp_west = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
                                                                                                 "Surface " + str(10 + (i - 1) * 30))
+        if tmp_south * tmp_west * tmp_east * tmp_north < 0:
+            print("20 Stories wall surface handle error!")
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+
         wall_handles_dict['south'].append(tmp_south)
         wall_handles_dict['north'].append(tmp_north)
         wall_handles_dict['east'].append(tmp_east)
         wall_handles_dict['west'].append(tmp_west)
-    return wall_handles_dict
 
-def batch_check_wall_handles(wall_handles_dict):
-    for key in wall_handles_dict.keys():
-        for i in range(len(wall_handles_dict[key])):
-            if wall_handles_dict[key][i] == -1:
-                print('batch_check_wall_handles(): some handle not available')
-                os.getpid()
-                os.kill(os.getpid(), signal.SIGTERM)
+    pthp_dict = {}
+    for tmp_zone in zone_nbrs:
+        i = zone_pthp_dict[tmp_zone]
+        pthp_dict['PTHP ' + str(i)] = []
 
-def batch_get_wall_temperatures(state, wall_handles_dict):
+        _tmpHeating = coordination.ep_api.exchange.get_variable_handle(state,
+                                                             "Zone Packaged Terminal Heat Pump Total Heating Energy",
+                                                             'PTHP ' + str(i))
+        _tmpCooling = coordination.ep_api.exchange.get_variable_handle(state,
+                                                             "Zone Packaged Terminal Heat Pump Total Cooling Energy",
+                                                             'PTHP ' + str(i))
+        _tmpElectricity = coordination.ep_api.exchange.get_variable_handle(state,
+                                                           "Zone Packaged Terminal Heat Pump Electricity Energy",
+                                                             'PTHP ' + str(i))
+        if _tmpHeating * _tmpCooling * _tmpElectricity < 0:
+            print("PTHP energy handle error!")
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+        pthp_dict['PTHP ' + str(i)].append(_tmpHeating)
+        pthp_dict['PTHP ' + str(i)].append(_tmpCooling)
+        pthp_dict['PTHP ' + str(i)].append(_tmpElectricity)
+    return wall_handles_dict, roof_floor_handles_dict, pthp_dict
+
+
+
+def _20_Stories_batch_get_surface_temperatures(state, wall_handles_dict, roof_floor_handles_dict):
     #coordination.ep_api.exchange.get_variable_value(state, surface576_roof_Text_c_handle)
     wall_temperatures_dict = {}
     wall_temperatures_dict['south'] = []
@@ -1138,67 +1161,28 @@ def batch_get_wall_temperatures(state, wall_handles_dict):
         north_wall_Text_K += wall_temperatures_dict['north'][i]
     south_wall_Text_K /= len(wall_temperatures_dict['south'])
     north_wall_Text_K /= len(wall_temperatures_dict['north'])
-    return wall_temperatures_dict, south_wall_Text_K - 273.15, north_wall_Text_K - 273.15
+
+    roof_Text_K = 0
+    floor_Text_K = 0
+    for i in range(len(roof_floor_handles_dict['roof'])):
+        roof_Text_K += coordination.ep_api.exchange.get_variable_value(state, roof_floor_handles_dict['roof'][i]) + 273.15
+        floor_Text_K += coordination.ep_api.exchange.get_variable_value(state, roof_floor_handles_dict['floor'][i]) + 273.15
+
+    return wall_temperatures_dict, roof_Text_K, floor_Text_K, south_wall_Text_K, north_wall_Text_K
 def _20Stories_get_ep_results(state):
     global get_ep_results_inited_handle, \
         hvac_heat_rejection_sensor_handle,\
-        surface576_roof_Text_c_handle, surface582_roof_Text_c_handle, surface588_roof_Text_c_handle, \
-        surface594_roof_Text_c_handle, surface600_roof_Text_c_handle, surface1_floor_Text_c_handle, \
-        surface7_floor_Text_c_handle, surface13_floor_Text_c_handle, surface19_floor_Text_c_handle, \
-        surface25_floor_Text_c_handle, wall_handles_dict, pthp_energy_handles_dict
-
+        wall_handles_dict, roof_floor_handles_dict, pthp_energy_handles_dict
+    get_zone_to_pthp_dict()
     if not get_ep_results_inited_handle:
         if not coordination.ep_api.exchange.api_data_fully_ready(state):
             return
         get_ep_results_inited_handle = True
-        pthp_energy_handles_dict = batch_get_energy_handles(state)
-        batch_check_handles(pthp_energy_handles_dict)
-        wall_handles_dict = batch_wall_handles(state)
-        batch_check_wall_handles(wall_handles_dict)
+        wall_handles_dict,roof_floor_handles_dict, pthp_energy_handles_dict = _20Stories_batch_handles(state)
         hvac_heat_rejection_sensor_handle = \
             coordination.ep_api.exchange.get_variable_handle(state,\
                                                              "HVAC System Total Heat Rejection Energy",\
                                                              "SIMHVAC")
-        surface576_roof_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
-                                                                                            "Surface 576")
-        surface582_roof_Text_c_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
-                                                                                            "Surface 582")
-        surface588_roof_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 588")
-        surface594_roof_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 594")
-        surface600_roof_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 600")
-        surface1_floor_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 1")
-        surface7_floor_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 7")
-        surface13_floor_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 13")
-        surface19_floor_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 19")
-        surface25_floor_Text_c_handle = coordination.ep_api.exchange.\
-            get_variable_handle(state, "Surface Outside Face Temperature", \
-                                "Surface 25")
-
-        if (hvac_heat_rejection_sensor_handle == -1 or \
-                surface576_roof_Text_c_handle == -1 or surface582_roof_Text_c_handle == -1 or \
-                surface588_roof_Text_c_handle == -1 or surface594_roof_Text_c_handle == -1 or \
-                surface600_roof_Text_c_handle == -1 or surface1_floor_Text_c_handle == -1 or \
-                surface7_floor_Text_c_handle == -1 or surface13_floor_Text_c_handle == -1 or \
-                surface19_floor_Text_c_handle == -1 or surface25_floor_Text_c_handle == -1 ):
-            print('20Stories_get_ep_results(): some handle not available')
-            os.getpid()
-            os.kill(os.getpid(), signal.SIGTERM)
-
-    # get EP results, upload to coordination
     warm_up = coordination.ep_api.exchange.warmup_flag(state)
     if not warm_up and called_vcwg_bool:
         global ep_last_call_time_seconds
@@ -1211,38 +1195,23 @@ def _20Stories_get_ep_results(state):
         hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
         pthp_energy_dict, pthp_heating_total, pthp_cooling_total, pthp_electricity_total =\
-            batch_get_energy_results(state, pthp_energy_handles_dict, accumulated_time_in_seconds)
-        print(f'coordination.ep_sensWaste_w_m2_per_footprint_area = {coordination.ep_sensWaste_w_m2_per_footprint_area},'
-              f'coordination.EP_floor_energy_lst = {sum(coordination.EP_floor_energy_lst)}')
+            _20Stories_batch_get_energy_results(state, pthp_energy_handles_dict, accumulated_time_in_seconds)
+
         time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)
         if not time_index_alignment_bool:
             coordination.sem2.release()
             return
 
-        surface576_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface576_roof_Text_c_handle)
-        surface582_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface582_roof_Text_c_handle)
-        surface588_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface588_roof_Text_c_handle)
-        surface594_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface594_roof_Text_c_handle)
-        surface600_roof_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface600_roof_Text_c_handle)
+        print(f'coordination.ep_sensWaste_w_m2_per_footprint_area = {coordination.ep_sensWaste_w_m2_per_footprint_area},'
+              f'coordination.EP_floor_energy_lst = {sum(coordination.EP_floor_energy_lst)}')
 
-        roof_Text_c = (surface576_roof_Text_c + surface582_roof_Text_c + surface588_roof_Text_c + surface594_roof_Text_c + surface600_roof_Text_c) / 5
+        coordination.EP_wall_temperatures_K_dict,roof_Text_K, floor_Text_K, south_wall_Text_K, north_wall_Text_K \
+            = _20_Stories_batch_get_surface_temperatures(state, wall_handles_dict, roof_floor_handles_dict)
 
-        surface1_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface1_floor_Text_c_handle)
-        surface7_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface7_floor_Text_c_handle)
-        surface13_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface13_floor_Text_c_handle)
-        surface19_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface19_floor_Text_c_handle)
-        surface25_floor_Text_c = coordination.ep_api.exchange.get_variable_value(state,surface25_floor_Text_c_handle)
-
-        floor_Text_c = (surface1_floor_Text_c + surface7_floor_Text_c + surface13_floor_Text_c + surface19_floor_Text_c + surface25_floor_Text_c) / 5
-        coordination.EP_wall_temperatures_K_dict, south_wall_Text_c, north_wall_Text_c \
-            = batch_get_wall_temperatures(state, wall_handles_dict)
-
-        coordination.ep_floor_Text_K = floor_Text_c + 273.15
-        coordination.ep_roof_Text_K = roof_Text_c + 273.15
-
-        coordination.ep_wallSun_Text_K = south_wall_Text_c + 273.15
-        coordination.ep_wallShade_Text_K = north_wall_Text_c + 273.15
-
+        coordination.ep_floor_Text_K = floor_Text_K
+        coordination.ep_roof_Text_K = roof_Text_K
+        coordination.ep_wallSun_Text_K = south_wall_Text_K
+        coordination.ep_wallShade_Text_K = north_wall_Text_K
         coordination.sem3.release()
 
 def Simplified_20Stories_get_ep_results(state):

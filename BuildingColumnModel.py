@@ -65,8 +65,7 @@ class BuildingCol:
             centroid_idices = numpy.array([1.98, 32.46, 59.89])
         # print('SensHVAC')
         for i in range(coordination.EP_nFloor):
-            multiplier = 1 if i < 20 else 1
-            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i] * multiplier
+            self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i] * 0
         # print()
         coordination.EP_floor_energy_lst = [0 for i in range(coordination.EP_nFloor)]
         # print('self.SensHt_HVAC_Floor', self.SensHt_HVAC_Floor)
@@ -194,17 +193,18 @@ class BuildingCol:
         # ------------------
         # Fluxes from Walls
         # ------------------
-        Twsun_dummy = [i for i in coordination.EP_wall_temperatures_K_dict['south']]
+        # Twsun_dummy = [i for i in coordination.EP_wall_temperatures_K_dict['south']]
+
 
         for i in range(0, self.nz_u):
 
             # # Calculate momentum and tke fluxes from wall
-            # uva, vva, _uvb_, _vvb_, _tva_, _tvb_, evb = \
-            #     self.Flux_Wall(self.vx[i], self.vy[i], self.th[i], self.Cdrag[i], TWallSun, self.rho[i],self.windMin)
-            # # int(i_z/Geometry_m.nz_u*len(Twshade_dummy))
             uva, vva, _uvb_, _vvb_, _tva_, _tvb_, evb = \
-                self.Flux_Wall(self.vx[i], self.vy[i], self.th[i], self.Cdrag[i],
-                               Twsun_dummy[int(i / self.nz_u * len(Twsun_dummy))], self.rho[i],self.windMin)
+                self.Flux_Wall(self.vx[i], self.vy[i], self.th[i], self.Cdrag[i], TWallSun, self.rho[i],self.windMin)
+            # # int(i_z/Geometry_m.nz_u*len(Twshade_dummy))
+            # uva, vva, _uvb_, _vvb_, _tva_, _tvb_, evb = \
+            #     self.Flux_Wall(self.vx[i], self.vy[i], self.th[i], self.Cdrag[i],
+            #                    Twsun_dummy[int(i / self.nz_u * len(Twsun_dummy))], self.rho[i],self.windMin)
 
             # Term in momentum equation [s^-1]
             self.srim_vx_v[i] = uva * self.lambdaf * self.pb[i] / max(1e-6, self.hmean) / self.vol[i] / self.nd

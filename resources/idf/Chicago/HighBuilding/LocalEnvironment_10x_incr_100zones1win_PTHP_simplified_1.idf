@@ -6337,7 +6337,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 56 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6369,7 +6369,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 6 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6401,7 +6401,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 58 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6433,7 +6433,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 57 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6465,7 +6465,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 59 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6497,7 +6497,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 60 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6529,7 +6529,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 43 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6561,7 +6561,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 44 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6593,7 +6593,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 45 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6625,7 +6625,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 46 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6657,7 +6657,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 47 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6689,7 +6689,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 2 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6721,7 +6721,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 3 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6753,7 +6753,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 4 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -6785,7 +6785,7 @@ Coil:Cooling:DX:SingleSpeed,
     ,                        !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity {dimensionless}
     ,                        !- Maximum Cycling Rate {cycles/hr}
     ,                        !- Latent Capacity Time Constant {s}
-    ,                        !- Condenser Air Inlet Node Name
+    PTHP 5 OA Node,                        !- Condenser Air Inlet Node Name
     AirCooled,               !- Condenser Type
     0,                       !- Evaporative Condenser Effectiveness {dimensionless}
     Autosize,                !- Evaporative Condenser Air Flow Rate {m3/s}
@@ -7538,50 +7538,115 @@ OutdoorAir:Node,
 
 !-   ===========  ALL OBJECTS IN CLASS: OUTDOORAIR:NODELIST ===========
 
-OutdoorAir:NodeList,
-    PTHP 57 OA Node;         !- Node or NodeList Name 1
+OutdoorAir:Node,
+    PTHP 57 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_1DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_1WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 58 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_1DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_1WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 59 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_1DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_1WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
 
-OutdoorAir:NodeList,
-    PTHP 58 OA Node;         !- Node or NodeList Name 1
+OutdoorAir:Node,
+    PTHP 2 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 3 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 4 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 5 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 6 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
 
-OutdoorAir:NodeList,
-    PTHP 59 OA Node;         !- Node or NodeList Name 1
+OutdoorAir:Node,
+    PTHP 56 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_1DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_1WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
 
-OutdoorAir:NodeList,
-    PTHP 5 OA Node;          !- Node or NodeList Name 1
+OutdoorAir:Node,
+    PTHP 60 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_1DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_1WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
 
-OutdoorAir:NodeList,
-    PTHP 4 OA Node;          !- Node or NodeList Name 1
-
-OutdoorAir:NodeList,
-    PTHP 3 OA Node;          !- Node or NodeList Name 1
-
-OutdoorAir:NodeList,
-    PTHP 2 OA Node;          !- Node or NodeList Name 1
-
-OutdoorAir:NodeList,
-    PTHP 6 OA Node;          !- Node or NodeList Name 1
-
-OutdoorAir:NodeList,
-    PTHP 56 OA Node;         !- Node or NodeList Name 1
-
-OutdoorAir:NodeList,
-    PTHP 60 OA Node;         !- Node or NodeList Name 1
-
-OutdoorAir:NodeList,
-    PTHP 47 OA Node;         !- Node or NodeList Name 1
-
-OutdoorAir:NodeList,
-    PTHP 43 OA Node;         !- Node or NodeList Name 1
-
-OutdoorAir:NodeList,
-    PTHP 44 OA Node;          !- Node or NodeList Name 1
-
-OutdoorAir:NodeList,
-    PTHP 45 OA Node;         !- Node or NodeList Name 1
-
-OutdoorAir:NodeList,
-    PTHP 46 OA Node;         !- Node or NodeList Name 1
+OutdoorAir:Node,
+    PTHP 43 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_11DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_11WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 44 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_11DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_11WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 45 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_11DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_11WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 46 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_11DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_11WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 47 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_11DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_11WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
 
 
 !-   ===========  ALL OBJECTS IN CLASS: CURVE:QUADRATIC ===========
