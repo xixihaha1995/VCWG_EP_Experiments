@@ -11,6 +11,7 @@ eplusssz.csv
 epluszsz.csv
 !A_prepost_processing/measurements/*.zip
 *.pkl
+!readDOE.pkl
 *.pyc
 *.png
 *.zip
