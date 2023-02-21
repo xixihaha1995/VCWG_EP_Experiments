@@ -64,7 +64,8 @@ if __name__ == '__main__':
     # one_ini("DummyChicago20Stories_The_Effect_sensWaste_Profile_NoWind.ini")
     jobs = [
         # "DummyChicago20Stories_The_Effect_sensWaste_Profile.ini",
-        "DummyChicago20Stories_Simplified_The_Effect_sensWaste_Profile.ini"
+        # "DummyChicago20Stories_Simplified_The_Effect_sensWaste_Profile.ini",
+        "DummyChicagoMedOffice_The_Effect_sensWaste_Profile.ini",
     ]
     for job in jobs:
         one_ini(job)

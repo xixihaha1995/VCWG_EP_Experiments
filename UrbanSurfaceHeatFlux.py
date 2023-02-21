@@ -340,13 +340,13 @@ class Surface_HeatFlux(object):
         Hwsun_z = []
         Hwshade_z = []
 
-        nbr_grid_points_per_floor = int(Geometry_m.nz_u / 20)
-        Twsun_dummy = [0 for i in range(Geometry_m.nz_u)]
-        Twshade_dummy = [0 for i in range(Geometry_m.nz_u)]
+        nbr_grid_points_per_floor = int(Geometry_m.nz_u / coordination.EP_nFloor)
+        Twsun_dummy = [Twsun for i in range(Geometry_m.nz_u)]
+        Twshade_dummy = [Twshade for i in range(Geometry_m.nz_u)]
         _simHigh_idx_to_flr = {0:[0,2], 1:[2,12],2:[12,20]}
         for idx, flr in enumerate(coordination.EP_wall_temperatures_K_dict['south']):
             tmp = coordination.EP_wall_temperatures_K_dict['south'][idx]
-            if "20Stories" in coordination.bld_type:
+            if "20Stories" in coordination.bld_type or "MediumOffice" in coordination.bld_type:
                 Twsun_dummy[idx * nbr_grid_points_per_floor:(idx + 1) * nbr_grid_points_per_floor] = \
                 [tmp] * nbr_grid_points_per_floor
                 Twshade_dummy[idx * nbr_grid_points_per_floor:(idx + 1) * nbr_grid_points_per_floor] = \

@@ -28,7 +28,7 @@ def run_vcwg():
         epwFileName = None
         TopForcingFileName = coordination.config['Bypass']['TopForcingFileName']
     VCWGParamFileName = coordination.config['Bypass']['VCWGParamFileName']
-    ViewFactorFileName = f'{coordination.value}_ViewFactor.txt'
+    ViewFactorFileName = f'{coordination.bld_type }_{coordination.value}_ViewFactor.txt'
     # Case name to append output file names with
     case = f'{coordination.value}'
     '''
@@ -56,9 +56,32 @@ def run_vcwg():
         :param humidity_ratio: Humidity ratio, in kgWater/kgDryAir
         :param barometric_pressure: Barometric pressure, in Pa
 '''
+
+
+
+
 def to_get_wet_bulb(state, dry_bulb_temp_C, humidity_ratio, barometric_pressure_Pa):
     _wetbulb = coordination.psychrometric.wet_bulb(state, dry_bulb_temp_C, humidity_ratio, barometric_pressure_Pa)
     return _wetbulb
+
+def medOfficeGetAirNodeHandles(state):
+    flrs = ['BOT', 'MID', 'TOP']
+    handles = {}
+    handles['odb'] = []
+    handles['owb'] = []
+    for flr in flrs:
+        tmp_odb_handle = coordination.ep_api.exchange. \
+            get_actuator_handle(state, "Schedule:Compact", "Schedule Value", f"OUTDOORAIRNODE:{flr}DRYBULB")
+        tmp_owb_handle = coordination.ep_api.exchange. \
+            get_actuator_handle(state, "Schedule:Compact", "Schedule Value", f"OUTDOORAIRNODE:{flr}WETBULB")
+        if tmp_odb_handle * tmp_owb_handle < 0:
+            print('ovewrite_ep_weather(): MediumOffice,some handle not available')
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+
+        handles['odb'].append(tmp_odb_handle)
+        handles['owb'].append(tmp_owb_handle)
+    return handles
 def overwrite_ep_weather(state):
     global overwrite_ep_weather_inited_handle, oat_sensor_handle,\
         wsped_mps_actuator_handle, wdir_deg_actuator_handle,zone_flr_area_handle,\
@@ -75,25 +98,13 @@ def overwrite_ep_weather(state):
             get_actuator_handle(state, "Weather Data", "Outdoor Dry Bulb", "Environment")
         orh_actuator_handle = coordination.ep_api.exchange.\
             get_actuator_handle(state, "Weather Data", "Outdoor Relative Humidity", "Environment")
-        #Actuator	Schedule:Compact	Schedule Value	OUTDOORAIRNODE:BOTDRYBULB;
         if 'MediumOffice' in coordination.bld_type:
-            global odb_bot_actuator_handle, owb_bot_actuator_handle, odb_mid_actuator_handle, owb_mid_actuator_handle, \
-        odb_top_actuator_handle, owb_top_actuator_handle, roof_hConv_actuator_handle
+            global roof_hConv_actuator_handle, medOdbOwbHandles
             roof_hConv_actuator_handle = coordination.ep_api.exchange. \
                 get_actuator_handle(state, "Surface", "Exterior Surface Convection Heat Transfer Coefficient", \
                                     "BUILDING_ROOF")
-            odb_bot_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:BOTDRYBULB")
-            owb_bot_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:BOTWETBULB")
-            odb_mid_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:MIDDRYBULB")
-            owb_mid_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:MIDWETBULB")
-            odb_top_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:TOPDRYBULB")
-            owb_top_actuator_handle = coordination.ep_api.exchange.\
-                get_actuator_handle(state, "Schedule:Compact", "Schedule Value", "OUTDOORAIRNODE:TOPWETBULB")
+            medOdbOwbHandles = medOfficeGetAirNodeHandles(state)
+
         if "20Stories" in coordination.bld_type or 'SimplifiedHighBld' in coordination.bld_type:
             global Surface_576_roof_hConv_actuator_handle, \
             Surface_582_roof_hConv_actuator_handle, Surface_588_roof_hConv_actuator_handle, \
@@ -219,12 +230,6 @@ def overwrite_ep_weather(state):
                 print('ovewrite_ep_weather(): MediumOffice,some handle not available')
                 os.getpid()
                 os.kill(os.getpid(), signal.SIGTERM)
-            if 'vector' in coordination.value and (odb_bot_actuator_handle < 0 or \
-                    owb_bot_actuator_handle < 0 or odb_mid_actuator_handle < 0 or \
-                    owb_mid_actuator_handle < 0 or odb_top_actuator_handle < 0 or owb_top_actuator_handle < 0):
-                print('ovewrite_ep_weather(): MediumOffice,some handle not available')
-                os.getpid()
-                os.kill(os.getpid(), signal.SIGTERM)
 
         if "20Stories" in coordination.bld_type:
             if Surface_576_roof_hConv_actuator_handle < 0 or \
@@ -272,12 +277,10 @@ def overwrite_ep_weather(state):
                 odb_c_list = [i - 273.15 for i in coordination.vcwg_canTemp_K_list]
                 owb_c_list = [to_get_wet_bulb(state, i, coordination.vcwg_canSpecHum_Ratio_list[odb_c_list.index(i)],
                                               coordination.vcwg_canPress_Pa_list[odb_c_list.index(i)]) for i in odb_c_list]
-                coordination.ep_api.exchange.set_actuator_value(state, odb_bot_actuator_handle, odb_c_list[0])
-                coordination.ep_api.exchange.set_actuator_value(state, owb_bot_actuator_handle, owb_c_list[0])
-                coordination.ep_api.exchange.set_actuator_value(state, odb_mid_actuator_handle, odb_c_list[1])
-                coordination.ep_api.exchange.set_actuator_value(state, owb_mid_actuator_handle, owb_c_list[1])
-                coordination.ep_api.exchange.set_actuator_value(state, odb_top_actuator_handle, odb_c_list[2])
-                coordination.ep_api.exchange.set_actuator_value(state, owb_top_actuator_handle, owb_c_list[2])
+                for idx in range(len(odb_c_list)):
+                    coordination.ep_api.exchange.set_actuator_value(state, medOdbOwbHandles['odb'][idx], odb_c_list[idx])
+                    coordination.ep_api.exchange.set_actuator_value(state, medOdbOwbHandles['owb'][idx], owb_c_list[idx])
+
             elif "20Stories" in coordination.bld_type or "SimplifiedHighBld" in coordination.bld_type:
                 odb_c_list = [i - 273.15 for i in coordination.vcwg_canTemp_K_list]
                 owb_c_list = [to_get_wet_bulb(state, i, coordination.vcwg_canSpecHum_Ratio_list[odb_c_list.index(i)],
@@ -589,152 +592,94 @@ def SmallOffice_get_ep_results(state):
 
         coordination.sem3.release()
 
+def medOfficeGetSensorHandles(state):
+    sesHandls = {}
+    sesHandls['roof'] = []
+    sesHandls['floor'] = []
+    sesHandls['wall_south'] = []
+    sesHandls['wall_north'] = []
+    sesHandls['simhvac'] = None
+
+    _hvac = \
+            coordination.ep_api.exchange.get_variable_handle(state,\
+                                                             "HVAC System Total Heat Rejection Energy",\
+                                                             "SIMHVAC")
+    sesHandls['simhvac'] = _hvac
+
+    _roof = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
+                                                                        "Building_Roof")
+    if _roof < 0:
+        print('mediumOfficeGetSensor(): roof handles not available')
+        os.getpid()
+        os.kill(os.getpid(), signal.SIGTERM)
+
+    sesHandls['roof'].append(_roof)
+
+    _flrSurface = ["Perimeter_bot_ZN_1_Floor", "Perimeter_bot_ZN_2_Floor", "Perimeter_bot_ZN_3_Floor", \
+                   "Perimeter_bot_ZN_4_Floor", "Core_bot_ZN_5_Floor"]
+    for _flr in _flrSurface:
+        _flrHandle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature", \
+                                                                        _flr)
+        if _flrHandle < 0:
+            print('mediumOfficeGetSensor(): floor handles not available')
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+        sesHandls['floor'].append(_flrHandle)
+
+    flrs = ['bot', 'mid', 'top']
+    for _flr in flrs:
+        _tmpSouth = coordination.ep_api.exchange.get_variable_handle(state, \
+                                                                        "Surface Outside Face Temperature", \
+                                                                        "Perimeter_" + _flr + "_ZN_1_Wall_South")
+        _tmpNorth = coordination.ep_api.exchange.get_variable_handle(state, \
+                                                                        "Surface Outside Face Temperature", \
+                                                                        "Perimeter_" + _flr + "_ZN_3_Wall_North")
+        if _tmpSouth < 0 or _tmpNorth < 0:
+            print('mediumOfficeGetSensor(): wall handles not available')
+            os.getpid()
+            os.kill(os.getpid(), signal.SIGTERM)
+        sesHandls['wall_south'].append(_tmpSouth)
+        sesHandls['wall_north'].append(_tmpNorth)
+
+    return sesHandls
+
+def medOfficeGetSensorValues(state, handles):
+    wall_temperatures_dict = {}
+    wall_temperatures_dict['south'] = []
+    wall_temperatures_dict['north'] = []
+
+    roofTextK = coordination.ep_api.exchange.get_variable_value(state, handles['roof'][0]) + 273.15
+    flrTextK = 0
+    for _flr in handles['floor']:
+        _flrTextK = coordination.ep_api.exchange.get_variable_value(state, _flr) + 273.15
+        flrTextK += _flrTextK
+    flrTextK /= len(handles['floor'])
+
+    south_K = 0
+    north_K = 0
+
+    for idx in range(0, len(handles['wall_south'])):
+        _south_K = coordination.ep_api.exchange.get_variable_value(state, handles['wall_south'][idx]) + 273.15
+        _north_K = coordination.ep_api.exchange.get_variable_value(state, handles['wall_north'][idx]) + 273.15
+        south_K += _south_K
+        north_K += _north_K
+        wall_temperatures_dict['south'].append(_south_K)
+        wall_temperatures_dict['north'].append(_north_K)
+    south_K /= len(handles['wall_south'])
+    north_K /= len(handles['wall_north'])
+
+    return wall_temperatures_dict, roofTextK, flrTextK, south_K, north_K
+
+
 def MediumOffice_get_ep_results(state):
-    global get_ep_results_inited_handle, oat_sensor_handle, \
-        hvac_heat_rejection_sensor_handle, elec_bld_meter_handle, zone_flr_area_handle, \
-        zone_indor_temp_sensor_handle, zone_indor_spe_hum_sensor_handle, \
-        sens_cool_demand_sensor_handle, sens_heat_demand_sensor_handle, \
-        cool_consumption_sensor_handle, heat_consumption_sensor_handle, \
-        flr_pre1_Text_handle, flr_pre2_Text_handle, flr_pre3_Text_handle, flr_pre4_Text_handle, \
-        flr_core_Text_handle, \
-        roof_Text_handle, \
-        s_wall_bot_1_Text_handle, s_wall_mid_1_Text_handle, s_wall_top_1_Text_handle, \
-        n_wall_bot_1_Text_handle, n_wall_mid_1_Text_handle, n_wall_top_1_Text_handle, \
-        s_wall_bot_1_Solar_handle, s_wall_mid_1_Solar_handle, s_wall_top_1_Solar_handle, \
-        n_wall_bot_1_Solar_handle, n_wall_mid_1_Solar_handle, n_wall_top_1_Solar_handle, \
-        flr_pre1_Tint_handle, flr_pre2_Tint_handle, flr_pre3_Tint_handle, flr_pre4_Tint_handle, \
-        flr_core_Tint_handle, \
-        roof_Tint_handle, \
-        s_wall_bot_1_Tint_handle, s_wall_mid_1_Tint_handle, s_wall_top_1_Tint_handle, \
-        n_wall_bot_1_Tint_handle, n_wall_mid_1_Tint_handle, n_wall_top_1_Tint_handle
+    global get_ep_results_inited_handle, medOfficeSensorHandles
 
     if not get_ep_results_inited_handle:
         if not coordination.ep_api.exchange.api_data_fully_ready(state):
             return
         get_ep_results_inited_handle = True
-        oat_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                             "Site Outdoor Air Drybulb Temperature",\
-                                                                             "Environment")
-        hvac_heat_rejection_sensor_handle = \
-            coordination.ep_api.exchange.get_variable_handle(state,\
-                                                             "HVAC System Total Heat Rejection Energy",\
-                                                             "SIMHVAC")
-        elec_bld_meter_handle = coordination.ep_api.exchange.get_meter_handle(state, "Electricity:Building")
-        zone_flr_area_handle =  coordination.ep_api.exchange.get_internal_variable_handle(state, "Zone Floor Area",\
-                                                                          "CORE_MID")
-        zone_indor_temp_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state, "Zone Air Temperature",\
-                                                                                         "CORE_MID")
-        zone_indor_spe_hum_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                            "Zone Air Humidity Ratio",\
-                                                                                            "CORE_MID")
-        sens_cool_demand_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                          "Zone Air System Sensible Cooling Rate",\
-                                                                                          "CORE_MID")
-        sens_heat_demand_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                          "Zone Air System Sensible Heating Rate",\
-                                                                                          "CORE_MID")
-        cool_consumption_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                          "Cooling Coil Electricity Rate",\
-                                                                                          "VAV_2_COOLC DXCOIL")
-        heat_consumption_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                          "Heating Coil Heating Rate",\
-                                                                                          "CORE_MID VAV BOX REHEAT COIL")
-        flr_pre1_Text_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature",\
-                                                                                "Perimeter_bot_ZN_1_Floor")
-        flr_pre2_Text_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature",\
-                                                                                "Perimeter_bot_ZN_2_Floor")
-        flr_pre3_Text_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature",\
-                                                                                "Perimeter_bot_ZN_3_Floor")
-        flr_pre4_Text_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature",\
-                                                                                "Perimeter_bot_ZN_4_Floor")
-        flr_core_Text_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature",\
-                                                                                "Core_bot_ZN_5_Floor")
-        roof_Text_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Outside Face Temperature",\
-                                                                            "Building_Roof")
-        s_wall_bot_1_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                              "Surface Outside Face Temperature",\
-                                                                              "Perimeter_bot_ZN_1_Wall_South")
-        s_wall_mid_1_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Outside Face Temperature",\
-                                                                                    "Perimeter_mid_ZN_1_Wall_South")
-        s_wall_top_1_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Outside Face Temperature",\
-                                                                                    "Perimeter_top_ZN_1_Wall_South")
-        n_wall_bot_1_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Outside Face Temperature",\
-                                                                                    "Perimeter_bot_ZN_3_Wall_North")
-        n_wall_mid_1_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Outside Face Temperature",\
-                                                                                    "Perimeter_mid_ZN_3_Wall_North")
-        n_wall_top_1_Text_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Outside Face Temperature",\
-                                                                                    "Perimeter_top_ZN_3_Wall_North")
-        s_wall_bot_1_Solar_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                     "Surface Outside Face Incident Solar Radiation Rate per Area",\
-                                                                                     "Perimeter_bot_ZN_1_Wall_South")
-        s_wall_mid_1_Solar_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                     "Surface Outside Face Incident Solar Radiation Rate per Area",\
-                                                                                     "Perimeter_mid_ZN_1_Wall_South")
-        s_wall_top_1_Solar_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                     "Surface Outside Face Incident Solar Radiation Rate per Area",\
-                                                                                     "Perimeter_top_ZN_1_Wall_South")
-        n_wall_bot_1_Solar_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                     "Surface Outside Face Incident Solar Radiation Rate per Area",\
-                                                                                     "Perimeter_bot_ZN_3_Wall_North")
-        n_wall_mid_1_Solar_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                     "Surface Outside Face Incident Solar Radiation Rate per Area",\
-                                                                                     "Perimeter_mid_ZN_3_Wall_North")
-        n_wall_top_1_Solar_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                     "Surface Outside Face Incident Solar Radiation Rate per Area",\
-                                                                                     "Perimeter_top_ZN_3_Wall_North")
-        flr_pre1_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Inside Face Temperature",\
-                                                                                "Perimeter_bot_ZN_1_Floor")
-        flr_pre2_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Inside Face Temperature",\
-                                                                                "Perimeter_bot_ZN_2_Floor")
-        flr_pre3_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Inside Face Temperature",\
-                                                                                "Perimeter_bot_ZN_3_Floor")
-        flr_pre4_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Inside Face Temperature",\
-                                                                                "Perimeter_bot_ZN_4_Floor")
-        flr_core_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Inside Face Temperature",\
-                                                                                "Core_bot_ZN_5_Floor")
-        roof_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state, "Surface Inside Face Temperature",\
-                                                                            "Building_Roof")
-        s_wall_bot_1_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Inside Face Temperature",\
-                                                                                    "Perimeter_bot_ZN_1_Wall_South")
-        s_wall_mid_1_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Inside Face Temperature",\
-                                                                                    "Perimeter_mid_ZN_1_Wall_South")
-        s_wall_top_1_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Inside Face Temperature",\
-                                                                                    "Perimeter_top_ZN_1_Wall_South")
-        n_wall_bot_1_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Inside Face Temperature",\
-                                                                                    "Perimeter_bot_ZN_3_Wall_North")
-        n_wall_mid_1_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Inside Face Temperature",\
-                                                                                    "Perimeter_mid_ZN_3_Wall_North")
-        n_wall_top_1_Tint_handle = coordination.ep_api.exchange.get_variable_handle(state,\
-                                                                                    "Surface Inside Face Temperature",\
-                                                                                    "Perimeter_top_ZN_3_Wall_North")
-        if (oat_sensor_handle == -1 or hvac_heat_rejection_sensor_handle == -1 or zone_flr_area_handle == -1 or\
-                elec_bld_meter_handle == -1 or zone_indor_temp_sensor_handle == -1 or\
-                zone_indor_spe_hum_sensor_handle == -1 or\
-                sens_cool_demand_sensor_handle == -1 or sens_heat_demand_sensor_handle == -1 or\
-                cool_consumption_sensor_handle == -1 or heat_consumption_sensor_handle == -1 or\
-                flr_pre1_Text_handle == -1 or flr_pre2_Text_handle == -1 or flr_pre3_Text_handle == -1 or\
-                flr_pre4_Text_handle == -1 or flr_core_Text_handle == -1 or roof_Text_handle == -1 or\
-                s_wall_bot_1_Text_handle == -1 or s_wall_mid_1_Text_handle == -1 or s_wall_top_1_Text_handle == -1 or\
-                n_wall_bot_1_Text_handle == -1 or n_wall_mid_1_Text_handle == -1 or n_wall_top_1_Text_handle == -1 or\
-                s_wall_bot_1_Solar_handle == -1 or s_wall_mid_1_Solar_handle == -1 or s_wall_top_1_Solar_handle == -1 or\
-                n_wall_bot_1_Solar_handle == -1 or n_wall_mid_1_Solar_handle == -1 or n_wall_top_1_Solar_handle == -1 or\
-                flr_pre1_Tint_handle == -1 or flr_pre2_Tint_handle == -1 or flr_pre3_Tint_handle == -1 or\
-                flr_pre4_Tint_handle == -1 or flr_core_Tint_handle == -1 or roof_Tint_handle == -1 or\
-                s_wall_bot_1_Tint_handle == -1 or s_wall_mid_1_Tint_handle == -1 or s_wall_top_1_Tint_handle == -1 or\
-                n_wall_bot_1_Tint_handle == -1 or n_wall_mid_1_Tint_handle == -1 or n_wall_top_1_Tint_handle == -1):
-            print('mediumOffice_get_ep_results(): some handle not available')
-            os.getpid()
-            os.kill(os.getpid(), signal.SIGTERM)
+
+        medOfficeSensorHandles = medOfficeGetSensorHandles(state)
 
     # get EP results, upload to coordination
     if called_vcwg_bool:
@@ -745,9 +690,13 @@ def MediumOffice_get_ep_results(state):
         curr_sim_time_in_seconds = curr_sim_time_in_hours * 3600  # Should always accumulate, since system time always advances
         accumulated_time_in_seconds = curr_sim_time_in_seconds - ep_last_call_time_seconds
         ep_last_call_time_seconds = curr_sim_time_in_seconds
-        hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state,hvac_heat_rejection_sensor_handle)
+        hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state, medOfficeSensorHandles['simhvac'])
         hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
+
+        for idx in range(coordination.EP_nFloor):
+            tmpEnergy = hvac_waste_w_m2 / coordination.EP_nFloor
+            coordination.EP_floor_energy_lst[idx] += tmpEnergy
 
         time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)
 
@@ -755,73 +704,14 @@ def MediumOffice_get_ep_results(state):
             coordination.sem2.release()
             return
 
-        coordination.ep_indoorTemp_C = coordination.ep_api.exchange.get_variable_value(state, zone_indor_temp_sensor_handle)
-        coordination.ep_indoorHum_Ratio = coordination.ep_api.exchange.get_variable_value(state,
-                                                                                   zone_indor_spe_hum_sensor_handle)
+        coordination.EP_wall_temperatures_K_dict, roof_Text_K, floor_Text_K, south_wall_Text_K, north_wall_Text_K  \
+            = medOfficeGetSensorValues(state, medOfficeSensorHandles)
 
-        flr_core_Text_c = coordination.ep_api.exchange.get_variable_value(state, flr_core_Text_handle)
-        flr_pre1_Text_c = coordination.ep_api.exchange.get_variable_value(state, flr_pre1_Text_handle)
-        flr_pre2_Text_c = coordination.ep_api.exchange.get_variable_value(state, flr_pre2_Text_handle)
-        flr_pre3_Text_c = coordination.ep_api.exchange.get_variable_value(state, flr_pre3_Text_handle)
-        flr_pre4_Text_c = coordination.ep_api.exchange.get_variable_value(state, flr_pre4_Text_handle)
-        roof_Text_c = coordination.ep_api.exchange.get_variable_value(state, roof_Text_handle)
+        coordination.ep_floor_Text_K = floor_Text_K
+        coordination.ep_roof_Text_K = roof_Text_K
+        coordination.ep_wallSun_Text_K = south_wall_Text_K
+        coordination.ep_wallShade_Text_K = north_wall_Text_K
 
-        s_wall_bot_1_Text_c = coordination.ep_api.exchange.get_variable_value(state, s_wall_bot_1_Text_handle)
-        s_wall_mid_1_Text_c = coordination.ep_api.exchange.get_variable_value(state, s_wall_mid_1_Text_handle)
-        s_wall_top_1_Text_c = coordination.ep_api.exchange.get_variable_value(state, s_wall_top_1_Text_handle)
-        n_wall_bot_1_Text_c = coordination.ep_api.exchange.get_variable_value(state, n_wall_bot_1_Text_handle)
-        n_wall_mid_1_Text_c = coordination.ep_api.exchange.get_variable_value(state, n_wall_mid_1_Text_handle)
-        n_wall_top_1_Text_c = coordination.ep_api.exchange.get_variable_value(state, n_wall_top_1_Text_handle)
-
-
-        flr_core_Tint_c = coordination.ep_api.exchange.get_variable_value(state, flr_core_Tint_handle)
-        flr_pre1_Tint_c = coordination.ep_api.exchange.get_variable_value(state, flr_pre1_Tint_handle)
-        flr_pre2_Tint_c = coordination.ep_api.exchange.get_variable_value(state, flr_pre2_Tint_handle)
-        flr_pre3_Tint_c = coordination.ep_api.exchange.get_variable_value(state, flr_pre3_Tint_handle)
-        flr_pre4_Tint_c = coordination.ep_api.exchange.get_variable_value(state, flr_pre4_Tint_handle)
-        roof_Tint_c = coordination.ep_api.exchange.get_variable_value(state, roof_Tint_handle)
-
-        s_wall_bot_1_Tint_c = coordination.ep_api.exchange.get_variable_value(state, s_wall_bot_1_Tint_handle)
-        s_wall_mid_1_Tint_c = coordination.ep_api.exchange.get_variable_value(state, s_wall_mid_1_Tint_handle)
-        s_wall_top_1_Tint_c = coordination.ep_api.exchange.get_variable_value(state, s_wall_top_1_Tint_handle)
-        n_wall_bot_1_Tint_c = coordination.ep_api.exchange.get_variable_value(state, n_wall_bot_1_Tint_handle)
-        n_wall_mid_1_Tint_c = coordination.ep_api.exchange.get_variable_value(state, n_wall_mid_1_Tint_handle)
-        n_wall_top_1_Tint_c = coordination.ep_api.exchange.get_variable_value(state, n_wall_top_1_Tint_handle)
-
-        s_wall_bot_1_Solar_w_m2 = coordination.ep_api.exchange.get_variable_value(state, s_wall_bot_1_Solar_handle)
-        s_wall_mid_1_Solar_w_m2 = coordination.ep_api.exchange.get_variable_value(state, s_wall_mid_1_Solar_handle)
-        s_wall_top_1_Solar_w_m2 = coordination.ep_api.exchange.get_variable_value(state, s_wall_top_1_Solar_handle)
-        n_wall_bot_1_Solar_w_m2 = coordination.ep_api.exchange.get_variable_value(state, n_wall_bot_1_Solar_handle)
-        n_wall_mid_1_Solar_w_m2 = coordination.ep_api.exchange.get_variable_value(state, n_wall_mid_1_Solar_handle)
-        n_wall_top_1_Solar_w_m2 = coordination.ep_api.exchange.get_variable_value(state, n_wall_top_1_Solar_handle)
-
-        floor_Text_C = (flr_core_Text_c + flr_pre1_Text_c + flr_pre2_Text_c + flr_pre3_Text_c + flr_pre4_Text_c )/5
-        floor_Tint_C = (flr_core_Tint_c + flr_pre1_Tint_c + flr_pre2_Tint_c + flr_pre3_Tint_c + flr_pre4_Tint_c )/5
-
-        coordination.ep_floor_Text_K = floor_Text_C + 273.15
-        coordination.ep_floor_Tint_K = floor_Tint_C + 273.15
-
-        coordination.ep_roof_Text_K = roof_Text_c + 273.15
-        coordination.ep_roof_Tint_K = roof_Tint_c + 273.15
-
-        s_wall_Solar_w_m2 = (s_wall_bot_1_Solar_w_m2 + s_wall_mid_1_Solar_w_m2 + s_wall_top_1_Solar_w_m2)/3
-        n_wall_Solar_w_m2 = (n_wall_bot_1_Solar_w_m2 + n_wall_mid_1_Solar_w_m2 + n_wall_top_1_Solar_w_m2)/3
-
-        s_wall_Text_c = (s_wall_bot_1_Text_c + s_wall_mid_1_Text_c + s_wall_top_1_Text_c)/3
-        s_wall_Tint_c = (s_wall_bot_1_Tint_c + s_wall_mid_1_Tint_c + s_wall_top_1_Tint_c)/3
-        n_wall_Text_c = (n_wall_bot_1_Text_c + n_wall_mid_1_Text_c + n_wall_top_1_Text_c)/3
-        n_wall_Tint_c = (n_wall_bot_1_Tint_c + n_wall_mid_1_Tint_c + n_wall_top_1_Tint_c)/3
-
-        if s_wall_Solar_w_m2 > n_wall_Solar_w_m2:
-            coordination.ep_wallSun_Text_K = s_wall_Text_c + 273.15
-            coordination.ep_wallSun_Tint_K = s_wall_Tint_c + 273.15
-            coordination.ep_wallShade_Text_K = n_wall_Text_c + 273.15
-            coordination.ep_wallShade_Tint_K = n_wall_Tint_c + 273.15
-        else:
-            coordination.ep_wallSun_Text_K = n_wall_Text_c + 273.15
-            coordination.ep_wallSun_Tint_K = n_wall_Tint_c + 273.15
-            coordination.ep_wallShade_Text_K = s_wall_Text_c + 273.15
-            coordination.ep_wallShade_Tint_K = s_wall_Tint_c + 273.15
 
         coordination.sem3.release()
 
@@ -1147,8 +1037,6 @@ def _20_Stories_batch_get_surface_temperatures(state, wall_handles_dict, roof_fl
     wall_temperatures_dict = {}
     wall_temperatures_dict['south'] = []
     wall_temperatures_dict['north'] = []
-    wall_temperatures_dict['east'] = []
-    wall_temperatures_dict['west'] = []
 
     for key in wall_handles_dict.keys():
         for i in range(len(wall_handles_dict[key])):
@@ -1216,10 +1104,6 @@ def _20Stories_get_ep_results(state):
         coordination.ep_wallSun_Text_K = south_wall_Text_K
         coordination.ep_wallShade_Text_K = north_wall_Text_K
 
-        # print(f'coordination.ep_floor_Text_K = {coordination.ep_floor_Text_K}, '
-        #       f'coordination.ep_roof_Text_K = {coordination.ep_roof_Text_K},')
-        # print(f'coordination.ep_wallSun_Text_K = {coordination.ep_wallSun_Text_K}, '
-        #       f'coordination.ep_wallShade_Text_K = {coordination.ep_wallShade_Text_K},')
         coordination.sem3.release()
 
 def general_get_ep_results(state):

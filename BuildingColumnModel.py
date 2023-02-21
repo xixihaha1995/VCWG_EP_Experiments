@@ -55,7 +55,7 @@ class BuildingCol:
         coordination.EP_floor_energy_lst
         '''
         self.SensHt_HVAC_Floor = numpy.zeros(self.nz_u + 1)
-        if '20Stories' in coordination.bld_type:
+        if '20Stories' in coordination.bld_type or "MediumOffice" in coordination.bld_type:
             centroid_spacing = (self.nz_u + 1) / coordination.EP_nFloor
             _start = (self.nz_u + 1) / coordination.EP_nFloor / 2
             _end = (self.nz_u + 1)
@@ -66,7 +66,6 @@ class BuildingCol:
         # print('SensHVAC')
         for i in range(coordination.EP_nFloor):
             self.SensHt_HVAC_Floor[int(centroid_idices[i])] = coordination.EP_floor_energy_lst[i]
-        # print()
         coordination.EP_floor_energy_lst = [0 for i in range(coordination.EP_nFloor)]
         # print('self.SensHt_HVAC_Floor', self.SensHt_HVAC_Floor)
         self.HVAC_street_frac = HVAC_street_frac  # Fraction of Sensible waste heat from building released into the atmosphere at street level

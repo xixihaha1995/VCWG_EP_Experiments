@@ -76,19 +76,16 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
     elif "20Stories" in bld_type:
         EP_nFloor = 20
         footprint_area_m2 = 31 * 15
-        EP_floor_energy_lst = [0.0] * EP_nFloor
-        EP_wall_temperatures_K_dict['south'] = [300] * EP_nFloor
-        EP_wall_temperatures_K_dict['north'] = [300] * EP_nFloor
-        EP_wall_temperatures_K_dict['east'] = [300] * EP_nFloor
-        EP_wall_temperatures_K_dict['west'] = [300] * EP_nFloor
     elif 'SimplifiedHighBld' in bld_type:
         EP_nFloor = 3
         footprint_area_m2 = 31 * 15
-        EP_floor_energy_lst = [0.0] * EP_nFloor
-        EP_wall_temperatures_K_dict['south'] = [300] * EP_nFloor
-        EP_wall_temperatures_K_dict['north'] = [300] * EP_nFloor
-        EP_wall_temperatures_K_dict['east'] = [300] * EP_nFloor
-        EP_wall_temperatures_K_dict['west'] = [300] * EP_nFloor
+
+    EP_floor_energy_lst = [0.0] * EP_nFloor
+    EP_wall_temperatures_K_dict['south'] = [300] * EP_nFloor
+    EP_wall_temperatures_K_dict['north'] = [300] * EP_nFloor
+    EP_wall_temperatures_K_dict['east'] = [300] * EP_nFloor
+    EP_wall_temperatures_K_dict['west'] = [300] * EP_nFloor
+
     vcwg_canTemp_K_list = [ 300 for i in range(EP_nFloor)]
     vcwg_canSpecHum_Ratio_list = [ 0 for i in range(EP_nFloor)]
     vcwg_canPress_Pa_list = [ 0 for i in range(EP_nFloor)]
@@ -132,7 +129,7 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     For SimplifiedHighBld, the first floor has one outdoor air node, the 2-19th floors have same outdoor air node, the 20th floor has one outdoor air node.
     '''
     for i in range(EP_nFloor):
-        if '20Stories' in bld_type:
+        if '20Stories' in bld_type or 'MediumOffice' in bld_type:
             #canTempProf_cur has EP_nFloor floors, and total Geometry_m.nz_u grid points
             nbr_grid_points_per_floor = int(Geometry_m.nz_u/EP_nFloor)
             vcwg_canTemp_K_list[i] = numpy.mean(canTempProf_cur[i*nbr_grid_points_per_floor:(i+1)*nbr_grid_points_per_floor])

@@ -1,3 +1,163 @@
+OutdoorAir:Node,
+    VAV_1_OAInlet Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OUTDOORAIRNODE:BOTDRYBULB,  !- Drybulb Temperature Schedule Name
+    OUTDOORAIRNODE:BOTWETBULB,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    VAV_2_OAInlet Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OUTDOORAIRNODE:MIDDRYBULB,  !- Drybulb Temperature Schedule Name
+    OUTDOORAIRNODE:MIDWETBULB,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    VAV_3_OAInlet Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OUTDOORAIRNODE:TOPDRYBULB,  !- Drybulb Temperature Schedule Name
+    OUTDOORAIRNODE:TOPWETBULB,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+
+ZoneProperty:LocalEnvironment,
+    LocEnv:Core_bottom,      !- Name
+    Core_bottom,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Core_mid,         !- Name
+    Core_mid,                !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Core_top,         !- Name
+    Core_top,                !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_bot_ZN_1,  !- Name
+    Perimeter_bot_ZN_1,         !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_bot_ZN_2,  !- Name
+    Perimeter_bot_ZN_2,         !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_bot_ZN_3,  !- Name
+    Perimeter_bot_ZN_3,         !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_bot_ZN_4,  !- Name
+    Perimeter_bot_ZN_4,         !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_mid_ZN_1,  !- Name
+    Perimeter_mid_ZN_1,         !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_mid_ZN_2,  !- Name
+    Perimeter_mid_ZN_2,         !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_mid_ZN_3,  !- Name
+    Perimeter_mid_ZN_3,         !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_mid_ZN_4,  !- Name
+    Perimeter_mid_ZN_4,         !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_top_ZN_1,  !- Name
+    Perimeter_top_ZN_1,         !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_top_ZN_2,  !- Name
+    Perimeter_top_ZN_2,         !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_top_ZN_3,  !- Name
+    Perimeter_top_ZN_3,         !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_top_ZN_4,  !- Name
+    Perimeter_top_ZN_4,         !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:FirstFloor_Plenum,  !- Name
+    FirstFloor_Plenum,         !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:MidFloor_Plenum,    !- Name
+    MidFloor_Plenum,           !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:TopFloor_Plenum,    !- Name
+    TopFloor_Plenum,           !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+
+OutdoorAir:Node,
+    OutdoorAirNode:Floor_1,     !- Name
+    ,                        !- Height Above Ground {m}
+    OUTDOORAIRNODE:BOTDRYBULB,  !- Drybulb Temperature Schedule Name
+    OUTDOORAIRNODE:BOTWETBULB,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    OutdoorAirNode:Floor_2,     !- Name
+    ,                        !- Height Above Ground {m}
+    OUTDOORAIRNODE:MIDDRYBULB,  !- Drybulb Temperature Schedule Name
+    OUTDOORAIRNODE:MIDWETBULB,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    OutdoorAirNode:Floor_3,     !- Name
+    ,                        !- Height Above Ground {m}
+    OUTDOORAIRNODE:TOPDRYBULB,  !- Drybulb Temperature Schedule Name
+    OUTDOORAIRNODE:TOPWETBULB,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+
+Schedule:Compact,
+    OUTDOORAIRNODE:BOTDRYBULB,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OUTDOORAIRNODE:BOTWETBULB,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OUTDOORAIRNODE:MIDDRYBULB,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OUTDOORAIRNODE:MIDWETBULB,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OUTDOORAIRNODE:TOPDRYBULB,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OUTDOORAIRNODE:TOPWETBULB,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+
 Output:Variable,
     *,                       !- Key Value
     Surface Inside Face Temperature,  !- Variable Name
@@ -4648,7 +4808,7 @@ Output:Variable,
     AUTOSIZE,                !- Low Speed Rated Air Flow Rate {m3/s}
     Measured_LowSpeedCoolCapLSFT,  !- Low Speed Total Cooling Capacity Function of Temperature Curve Name
     Measured_LowSpeedCoolEIRLSFT,  !- Low Speed Energy Input Ratio Function of Temperature Curve Name
-    ;                        !- Condenser Air Inlet Node Name
+    VAV_1_OAInlet Node;                        !- Condenser Air Inlet Node Name
 
   Coil:Cooling:DX:TwoSpeed,
     VAV_2_CoolC DXCoil,      !- Name
@@ -4671,7 +4831,7 @@ Output:Variable,
     AUTOSIZE,                !- Low Speed Rated Air Flow Rate {m3/s}
     Measured_LowSpeedCoolCapLSFT,  !- Low Speed Total Cooling Capacity Function of Temperature Curve Name
     Measured_LowSpeedCoolEIRLSFT,  !- Low Speed Energy Input Ratio Function of Temperature Curve Name
-    ;                        !- Condenser Air Inlet Node Name
+    VAV_2_OAInlet Node;                        !- Condenser Air Inlet Node Name
 
   Coil:Cooling:DX:TwoSpeed,
     VAV_3_CoolC DXCoil,      !- Name
@@ -4694,7 +4854,7 @@ Output:Variable,
     AUTOSIZE,                !- Low Speed Rated Air Flow Rate {m3/s}
     Measured_LowSpeedCoolCapLSFT,  !- Low Speed Total Cooling Capacity Function of Temperature Curve Name
     Measured_LowSpeedCoolEIRLSFT,  !- Low Speed Energy Input Ratio Function of Temperature Curve Name
-    ;                        !- Condenser Air Inlet Node Name
+    VAV_3_OAInlet Node;                        !- Condenser Air Inlet Node Name
 
   Coil:Heating:Electric,
     Core_bottom VAV Box Reheat Coil,  !- Name
@@ -6856,14 +7016,6 @@ Output:Variable,
     VAV_3_OA_Controllers,    !- Controller List Name
     VAV_3_OA_Equipment;      !- Outdoor Air Equipment List Name
 
-  OutdoorAir:NodeList,
-    VAV_1_OANode List;       !- Node or NodeList Name 1
-
-  OutdoorAir:NodeList,
-    VAV_2_OANode List;       !- Node or NodeList Name 1
-
-  OutdoorAir:NodeList,
-    VAV_3_OANode List;       !- Node or NodeList Name 1
 
   OutdoorAir:Node,
     VAV_1_CoolC Cond OA node;!- Name

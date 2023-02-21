@@ -1,0 +1,181 @@
+! ZONE LIST:
+! Core_bottom
+! Core_mid
+! Core_top
+! Perimeter_bot_ZN_1
+! Perimeter_bot_ZN_2
+! Perimeter_bot_ZN_3
+! Perimeter_bot_ZN_4
+! Perimeter_mid_ZN_1
+! Perimeter_mid_ZN_2
+! Perimeter_mid_ZN_3
+! Perimeter_mid_ZN_4
+! Perimeter_top_ZN_1
+! Perimeter_top_ZN_2
+! Perimeter_top_ZN_3
+! Perimeter_top_ZN_4
+! FirstFloor_Plenum
+! MidFloor_Plenum
+! TopFloor_Plenum
+
+OutdoorAir:Node,
+    VAV_1_OAInlet Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_1DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_1WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    VAV_2_OAInlet Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_2DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_2WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    VAV_3_OAInlet Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_3DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_3WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+
+ZoneProperty:LocalEnvironment,
+    LocEnv:Core_bottom,      !- Name
+    Core_bottom,             !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Core_mid,         !- Name
+    Core_mid,                !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Core_top,         !- Name
+    Core_top,                !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_bot_ZN_1,  !- Name
+    Perimeter_bot_ZN_1,         !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_bot_ZN_2,  !- Name
+    Perimeter_bot_ZN_2,         !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_bot_ZN_3,  !- Name
+    Perimeter_bot_ZN_3,         !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_bot_ZN_4,  !- Name
+    Perimeter_bot_ZN_4,         !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_mid_ZN_1,  !- Name
+    Perimeter_mid_ZN_1,         !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_mid_ZN_2,  !- Name
+    Perimeter_mid_ZN_2,         !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_mid_ZN_3,  !- Name
+    Perimeter_mid_ZN_3,         !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_mid_ZN_4,  !- Name
+    Perimeter_mid_ZN_4,         !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_top_ZN_1,  !- Name
+    Perimeter_top_ZN_1,         !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_top_ZN_2,  !- Name
+    Perimeter_top_ZN_2,         !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_top_ZN_3,  !- Name
+    Perimeter_top_ZN_3,         !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:Perimeter_top_ZN_4,  !- Name
+    Perimeter_top_ZN_4,         !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:FirstFloor_Plenum,  !- Name
+    FirstFloor_Plenum,         !- Zone Name
+    OutdoorAirNode:Floor_1;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:MidFloor_Plenum,    !- Name
+    MidFloor_Plenum,           !- Zone Name
+    OutdoorAirNode:Floor_2;     !- Outdoor Air Node Name
+ZoneProperty:LocalEnvironment,
+    LocEnv:TopFloor_Plenum,    !- Name
+    TopFloor_Plenum,           !- Zone Name
+    OutdoorAirNode:Floor_3;     !- Outdoor Air Node Name
+
+OutdoorAir:Node,
+    OutdoorAirNode:Floor_1,     !- Name
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_1DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_1WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    OutdoorAirNode:Floor_2,     !- Name
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_2DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_2WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    OutdoorAirNode:Floor_3,     !- Name
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_3DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_3WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+
+Schedule:Compact,
+    OutdoorAirNode:Floor_1DryBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OutdoorAirNode:Floor_1WetBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OutdoorAirNode:Floor_2DryBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OutdoorAirNode:Floor_2WetBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OutdoorAirNode:Floor_3DryBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+Schedule:Compact,
+    OutdoorAirNode:Floor_3WetBulb,  !- Name
+    Temperature,             !- Schedule Type Limits Name
+    Through: 12/31,          !- Field 1
+    For: AllDays,            !- Field 2
+    Until: 24:00,            !- Field 3
+    19.0;                    !- Field 4
+
+
