@@ -344,19 +344,21 @@ class Surface_HeatFlux(object):
         Twsun_dummy = [Twsun for i in range(Geometry_m.nz_u)]
         Twshade_dummy = [Twshade for i in range(Geometry_m.nz_u)]
         _simHigh_idx_to_flr = {0:[0,2], 1:[2,12],2:[12,20]}
-        for idx, flr in enumerate(coordination.EP_wall_temperatures_K_dict['south']):
-            tmp = coordination.EP_wall_temperatures_K_dict['south'][idx]
-            if "20Stories" in coordination.bld_type or "MediumOffice" in coordination.bld_type:
+        if "20Stories" in coordination.bld_type or "MediumOffice" in coordination.bld_type:
+            for idx, flr in enumerate(coordination.EP_wall_temperatures_K_dict['south']):
+                tmpSun = coordination.EP_wall_temperatures_K_dict['south'][idx]
+                tmpShade = coordination.EP_wall_temperatures_K_dict['north'][idx]
                 Twsun_dummy[idx * nbr_grid_points_per_floor:(idx + 1) * nbr_grid_points_per_floor] = \
-                [tmp] * nbr_grid_points_per_floor
+                [tmpSun] * nbr_grid_points_per_floor
                 Twshade_dummy[idx * nbr_grid_points_per_floor:(idx + 1) * nbr_grid_points_per_floor] = \
-                [tmp] * nbr_grid_points_per_floor
-            elif "SimplifiedHighBld" in coordination.bld_type:
-                left,right = _simHigh_idx_to_flr[idx]
-                Twsun_dummy[left * nbr_grid_points_per_floor:right * nbr_grid_points_per_floor] = \
-                    [tmp] * (right - left) * nbr_grid_points_per_floor
-                Twshade_dummy[left * nbr_grid_points_per_floor:right * nbr_grid_points_per_floor] = \
-                    [tmp] * (right - left) * nbr_grid_points_per_floor
+                [tmpShade] * nbr_grid_points_per_floor
+        elif "SimplifiedHighBld" in coordination.bld_type:
+            Twsun_dummy[0:3] = [coordination.EP_wall_temperatures_K_dict['south'][0]] * 3
+            Twsun_dummy[3:57] = [coordination.EP_wall_temperatures_K_dict['south'][1]] * 54
+            Twsun_dummy[57:60] = [coordination.EP_wall_temperatures_K_dict['south'][2]] * 3
+            Twshade_dummy[0:3] = [coordination.EP_wall_temperatures_K_dict['north'][0]] * 3
+            Twshade_dummy[3:57] = [coordination.EP_wall_temperatures_K_dict['north'][1]] * 54
+            Twshade_dummy[57:60] = [coordination.EP_wall_temperatures_K_dict['north'][2]] * 3
         #
         # Twsun_dummy = [Twsun for i in range(Geometry_m.nz_u + 1)]
         # Twshade_dummy = [Twshade for i in range(Geometry_m.nz_u + 1)]

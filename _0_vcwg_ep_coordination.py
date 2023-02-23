@@ -144,7 +144,7 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
                 canTempProf_cur[floor_range_dict[i][0]:floor_range_dict[i][1]])
             vcwg_canSpecHum_Ratio_list[i] = numpy.mean(
                 canSpecHumProf_cur[floor_range_dict[i][0]:floor_range_dict[i][1]])
-    print('vcwg_canTemp_K_list', [i - 273.15 for i in vcwg_canTemp_K_list])
+    # print('vcwg_canTemp_K_list', [i - 273.15 for i in vcwg_canTemp_K_list])
     sem1.release()
     
     sem3.acquire()
