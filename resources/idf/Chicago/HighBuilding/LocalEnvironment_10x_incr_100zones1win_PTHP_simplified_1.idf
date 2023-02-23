@@ -7561,42 +7561,6 @@ OutdoorAir:Node,
     ;  !- Wind Direction Schedule Name
 
 OutdoorAir:Node,
-    PTHP 2 OA Node,        !- Node or NodeList Name 1
-    ,                        !- Height Above Ground {m}
-    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
-    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
-    ,  !- Wind Speed Schedule Name
-    ;  !- Wind Direction Schedule Name
-OutdoorAir:Node,
-    PTHP 3 OA Node,        !- Node or NodeList Name 1
-    ,                        !- Height Above Ground {m}
-    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
-    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
-    ,  !- Wind Speed Schedule Name
-    ;  !- Wind Direction Schedule Name
-OutdoorAir:Node,
-    PTHP 4 OA Node,        !- Node or NodeList Name 1
-    ,                        !- Height Above Ground {m}
-    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
-    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
-    ,  !- Wind Speed Schedule Name
-    ;  !- Wind Direction Schedule Name
-OutdoorAir:Node,
-    PTHP 5 OA Node,        !- Node or NodeList Name 1
-    ,                        !- Height Above Ground {m}
-    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
-    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
-    ,  !- Wind Speed Schedule Name
-    ;  !- Wind Direction Schedule Name
-OutdoorAir:Node,
-    PTHP 6 OA Node,        !- Node or NodeList Name 1
-    ,                        !- Height Above Ground {m}
-    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
-    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
-    ,  !- Wind Speed Schedule Name
-    ;  !- Wind Direction Schedule Name
-
-OutdoorAir:Node,
     PTHP 56 OA Node,        !- Node or NodeList Name 1
     ,                        !- Height Above Ground {m}
     OutdoorAirNode:Floor_1DryBulb,  !- Drybulb Temperature Schedule Name
@@ -7648,6 +7612,41 @@ OutdoorAir:Node,
     ,  !- Wind Speed Schedule Name
     ;  !- Wind Direction Schedule Name
 
+OutdoorAir:Node,
+    PTHP 2 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 3 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 4 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 5 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
+OutdoorAir:Node,
+    PTHP 6 OA Node,        !- Node or NodeList Name 1
+    ,                        !- Height Above Ground {m}
+    OutdoorAirNode:Floor_20DryBulb,  !- Drybulb Temperature Schedule Name
+    OutdoorAirNode:Floor_20WetBulb,  !- Wetbulb Temperature Schedule Name
+    ,  !- Wind Speed Schedule Name
+    ;  !- Wind Direction Schedule Name
 
 !-   ===========  ALL OBJECTS IN CLASS: CURVE:QUADRATIC ===========
 

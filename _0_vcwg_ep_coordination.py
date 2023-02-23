@@ -144,7 +144,7 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
                 canTempProf_cur[floor_range_dict[i][0]:floor_range_dict[i][1]])
             vcwg_canSpecHum_Ratio_list[i] = numpy.mean(
                 canSpecHumProf_cur[floor_range_dict[i][0]:floor_range_dict[i][1]])
-
+    print('vcwg_canTemp_K_list', [i - 273.15 for i in vcwg_canTemp_K_list])
     sem1.release()
     
     sem3.acquire()
@@ -227,8 +227,10 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
         os.makedirs(os.path.dirname(data_saving_path), exist_ok=True)
         with open(data_saving_path, 'a') as f1:
             # prepare the header string for different sensors
-            header_str = 'cur_datetime,canTemp,ForcTemp_K,sensWaste,wallSun_K,wallShade_K,roof_K,' \
-                         'MeteoData.Tatm,MeteoData.Pre,'
+            header_str = 'cur_datetime,canTemp,ForcTemp_K,sensWaste,'
+            for idx in range(len(EP_floor_energy_lst)):
+                header_str += f'EP_floor_energy[{idx}],'
+            header_str += 'wallSun_K,wallShade_K,roof_K,MeteoData.Tatm,MeteoData.Pre,'
             for flr in range(len(vcwg_canTemp_K_list)):
                 header_str += f'Floor[{flr+1}]_OAT_K,'
             for i in range(len(mapped_indices)):
@@ -242,8 +244,9 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
         # write the data
     with open(data_saving_path, 'a') as f1:
         fmt1 = "%s," * 1 % (cur_datetime) + \
-               "%.3f," * 8 % (vcwg_canTemp_K,ForcTemp_K,BEM_Building.sensWaste,
-                              wallSun_K,wallShade_K,roof_K,MeteoData.Tatm, MeteoData.Pre) + \
+               "%.3f," * 3 % (vcwg_canTemp_K,ForcTemp_K,BEM_Building.sensWaste,) + \
+                "%.3f," * len(EP_floor_energy_lst) % tuple(EP_floor_energy_lst) + \
+                "%.3f," * 5 % (wallSun_K,wallShade_K,roof_K,MeteoData.Tatm, MeteoData.Pre) + \
                "%.3f," * len(vcwg_canTemp_K_list) % tuple(vcwg_canTemp_K_list) + \
                "%.3f," * 2 * len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
                                                          [PresProf_cur[i] for i in mapped_indices]) + '\n'

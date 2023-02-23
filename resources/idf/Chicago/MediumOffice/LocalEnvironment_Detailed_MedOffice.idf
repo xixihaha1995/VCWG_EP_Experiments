@@ -195,13 +195,19 @@ Output:Variable,
 
 Output:Variable,
     *,                       !- Key Value
-    Heating Coil Heating Rate,  !- Variable Name
+    Heating Coil Electricity Energy,  !- Variable Name
     timestep;                !- Reporting Frequency
 
 Output:Variable,
     *,                       !- Key Value
-    Cooling Coil Electricity Rate,  !- Variable Name
+    Cooling Coil Electricity Energy,  !- Variable Name
     timestep;                !- Reporting Frequency
+
+Output:Variable,
+    *,                       !- Key Value
+    Fan Electricity Energy,  !- Variable Name
+    timestep;                !- Reporting Frequency
+
 
 Output:Variable,
     *,                       !- Key Value

@@ -327,11 +327,11 @@ def ColumnModelCal(z0_road,z0_roof,Ceps,Cdrag,Ck,thb,qhb,tvb,FractionsGround,Fra
     #     vy_new[i] *= 1e-8
     #     tke_new[i] = 1e-4
 
-    print('th_new')
-    for i in th_new:
-        # print without new line
-        print(i - 273.15, end=',')
-    print()
+    # print('th_new')
+    # for i in th_new:
+    #     # print without new line
+    #     print(i - 273.15, end=',')
+    # print()
 
     # print('tke_new')
     # for i in tke_new:

@@ -146,41 +146,52 @@ def plot_elec(scalar_lst, vector_lst, tilte):
     plt.legend()
     plt.show()
 
-def find_zone_index(zone_number):
+def find_zone_index(zone_number, step):
     '''
     there are 100 zones
     '''
-    zone_lst = [1,10,100,11,12,13,14,15,16,17,18,19,
-                2,20,21,22,23,24,25,26,27,28,29,
-                3,30,31,32,33,34,35,36,37,38,39,
-                4,40,41,42,43,44,45,46,47,48,49,
-                5,50,51,52,53,54,55,56,57,58,59,
-                6,60,61,62,63,64,65,66,67,68,69,
-                7,70,71,72,73,74,75,76,77,78,79,
-                8,80,81,82,83,84,85,86,87,88,89,
-                9,90,91,92,93,94,95,96,97,98,99]
+    if step == 100:
+        zone_lst = [1,10,100,11,12,13,14,15,16,17,18,19,
+                    2,20,21,22,23,24,25,26,27,28,29,
+                    3,30,31,32,33,34,35,36,37,38,39,
+                    4,40,41,42,43,44,45,46,47,48,49,
+                    5,50,51,52,53,54,55,56,57,58,59,
+                    6,60,61,62,63,64,65,66,67,68,69,
+                    7,70,71,72,73,74,75,76,77,78,79,
+                    8,80,81,82,83,84,85,86,87,88,89,
+                    9,90,91,92,93,94,95,96,97,98,99]
+    else:
+        zone_lst = [1,100,2,3,4,5,
+                    51,52,53,54,55,
+                    96,97,98,99]
     return zone_lst.index(zone_number)
 
-def find_correct_zone(all_zone_elec, all_zone_oat,zone_number):
+def find_correct_zone(all_zone_elec, all_zone_oat,zone_number, step):
     # find the zone that has the most energy consumption
     pass
-    cur_zone_idx = find_zone_index(zone_number)
-    zone_elec = [all_zone_elec[i][4] for i in range(cur_zone_idx, len(all_zone_elec), 100)]
-    zone_oat = [all_zone_oat[i][4] for i in range(cur_zone_idx, len(all_zone_oat), 100)]
+    cur_zone_idx = find_zone_index(zone_number, step)
+    zone_elec = [all_zone_elec[i][4] for i in range(cur_zone_idx, len(all_zone_elec), step)]
+    zone_oat = [all_zone_oat[i][4] for i in range(cur_zone_idx, len(all_zone_oat), step)]
     return zone_elec, zone_oat
 
 def floor_whole_year(sql_path,_sub_folder):
     flr_canyon_energy = {}
     footprint_area = 31 * 15
-    for flr in range(1, 21):
+    if 'Simplified' in _sub_folder:
+        step = 15
+        flr_lst = [1,11,20]
+    else:
+        step = 100
+        flr_lst = [i for i in range(1,21)]
+    for flr in flr_lst:
         flr_canyon_avg_C = 0
         flr_canyon_max_C = 0
         flr_canyon_min_C = 0
         flr_elec_MJ_m2 = 0
-        for zne in [1, 2, 3, 5]:
+        for zne in [1, 2, 3, 4, 5]:
             _tmp_zne_nbr = (flr - 1) * 5 + zne
             # _tmp_zne_nbr = (flr - 1) * 5 + 4
-            _tmp_zne_elec, _tmp_zne_oat = find_correct_zone(all_zone_elec, all_zone_oat, _tmp_zne_nbr)
+            _tmp_zne_elec, _tmp_zne_oat = find_correct_zone(all_zone_elec, all_zone_oat, _tmp_zne_nbr, step)
             flr_canyon_avg_C += sum(_tmp_zne_oat) / len(_tmp_zne_oat)
             flr_canyon_max_C += max(_tmp_zne_oat)
             flr_canyon_min_C += min(_tmp_zne_oat)
@@ -205,7 +216,7 @@ def main():
     _base = 'C:\\Users\\wulic\\Desktop\\IDF_Vector\\Vector_Cooling_Debug_New'
     zone_to_pthp = get_zone_to_pthp_dict()
     sub_folders = [ 'Scalar', 'Vector_Default_Cmu', 'Vector_Mod_Cmu']
-    sub_folders = ['Vector_Default_Cmu_Core']
+    sub_folders = ['Vector_Simplified']
     for _sub_folder in sub_folders:
         sql_path = os.path.join(_base, _sub_folder, 'eplusout.sql')
         all_zone_elec, all_zone_oat = read_sql(sql_path)

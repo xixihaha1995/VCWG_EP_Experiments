@@ -285,8 +285,8 @@ def overwrite_ep_weather(state):
                 odb_c_list = [i - 273.15 for i in coordination.vcwg_canTemp_K_list]
                 owb_c_list = [to_get_wet_bulb(state, i, coordination.vcwg_canSpecHum_Ratio_list[odb_c_list.index(i)],
                                               coordination.vcwg_canPress_Pa_list[odb_c_list.index(i)]) for i in odb_c_list]
+                oat_temp_c = coordination.ep_api.exchange.get_variable_value(state, oat_sensor_handle)
                 if '20Stories' in coordination.bld_type:
-                    oat_temp_c = coordination.ep_api.exchange.get_variable_value(state, oat_sensor_handle)
                     print(f'20Stories, oat_temp_c: {oat_temp_c}, odb_c_list: {odb_c_list}')
                     all_odb_actuator_handle_list = [odb_floor1_actuator_handle, odb_floor2_actuator_handle,
                                                     odb_floor3_actuator_handle, odb_floor4_actuator_handle,
@@ -309,6 +309,7 @@ def overwrite_ep_weather(state):
                                                     owb_floor17_actuator_handle, owb_floor18_actuator_handle,
                                                     owb_floor19_actuator_handle, owb_floor20_actuator_handle]
                 elif 'SimplifiedHighBld' in coordination.bld_type:
+                    print(f'20StoriesSimplified, oat_temp_c: {oat_temp_c}, odb_c_list: {odb_c_list}')
                     all_odb_actuator_handle_list = [odb_floor1_actuator_handle, odb_floor11_actuator_handle, odb_floor20_actuator_handle]
                     all_owb_actuator_handle_list = [owb_floor1_actuator_handle, owb_floor11_actuator_handle, owb_floor20_actuator_handle]
 
@@ -592,6 +593,49 @@ def SmallOffice_get_ep_results(state):
 
         coordination.sem3.release()
 
+def medOfficeGetFloorHandles(state, flrNum):
+    _handlsDict = {}
+
+    _flrToName = {'1': ['BOTTOM','BOT'], '2': ['MID','MID'], '3': ['TOP','TOP']}
+
+    _handlsDict['fan'] = None
+    _handlsDict['cooling'] = None
+    _handlsDict['heating'] = None
+    _handlsDict['reheating'] = []
+
+    _tmpFan = coordination.ep_api.exchange.get_variable_handle(state, "Fan Electricity Energy", \
+                                                               f"VAV_{flrNum}_FAN")
+    _tmpClCoil = coordination.ep_api.exchange.get_variable_handle(state, "Cooling Coil Electricity Energy", \
+                                                                    f"VAV_{flrNum}_COOLC DXCOIL")
+    _tmpHtCoil = coordination.ep_api.exchange.get_variable_handle(state, "Heating Coil Electricity Energy", \
+                                                                    f"VAV_{flrNum}_HEATC")
+    _tmpHtCoilCore = coordination.ep_api.exchange.get_variable_handle(state, "Heating Coil Electricity Energy", \
+                                                                        f"CORE_{_flrToName[flrNum][0]} VAV BOX REHEAT COIL")
+    _tmpHtCoilPeri1 = coordination.ep_api.exchange.get_variable_handle(state, "Heating Coil Electricity Energy", \
+                                                                          f"PERIMETER_{_flrToName[flrNum][1]}_ZN_1 VAV BOX REHEAT COIL")
+    _tmpHtCoilPeri2 = coordination.ep_api.exchange.get_variable_handle(state, "Heating Coil Electricity Energy", \
+                                                                            f"PERIMETER_{_flrToName[flrNum][1]}_ZN_2 VAV BOX REHEAT COIL")
+    _tmpHtCoilPeri3 = coordination.ep_api.exchange.get_variable_handle(state, "Heating Coil Electricity Energy", \
+                                                                            f"PERIMETER_{_flrToName[flrNum][1]}_ZN_3 VAV BOX REHEAT COIL")
+    _tmpHtCoilPeri4 = coordination.ep_api.exchange.get_variable_handle(state, "Heating Coil Electricity Energy", \
+                                                                            f"PERIMETER_{_flrToName[flrNum][1]}_ZN_4 VAV BOX REHEAT COIL")
+    if _tmpFan * _tmpClCoil * _tmpHtCoil * _tmpHtCoilCore * _tmpHtCoilPeri1 * _tmpHtCoilPeri2 * _tmpHtCoilPeri3 * _tmpHtCoilPeri4  < 0:
+        print(f'mediumOfficeGetSensor(): floor {flrNum} handles not available')
+        os.getpid()
+        os.kill(os.getpid(), signal.SIGTERM)
+
+    _handlsDict['fan'] = _tmpFan
+    _handlsDict['cooling'] = _tmpClCoil
+    _handlsDict['heating'] = _tmpHtCoil
+    _handlsDict['reheating'].append(_tmpHtCoilCore)
+    _handlsDict['reheating'].append(_tmpHtCoilPeri1)
+    _handlsDict['reheating'].append(_tmpHtCoilPeri2)
+    _handlsDict['reheating'].append(_tmpHtCoilPeri3)
+    _handlsDict['reheating'].append(_tmpHtCoilPeri4)
+
+    return _handlsDict
+
+
 def medOfficeGetSensorHandles(state):
     sesHandls = {}
     sesHandls['roof'] = []
@@ -599,6 +643,11 @@ def medOfficeGetSensorHandles(state):
     sesHandls['wall_south'] = []
     sesHandls['wall_north'] = []
     sesHandls['simhvac'] = None
+
+    sesHandls['floor_energy'] = {}
+    for _flr in range(1,4):
+        sesHandls['floor_energy'][str(_flr)] = medOfficeGetFloorHandles(state, str(_flr))
+
 
     _hvac = \
             coordination.ep_api.exchange.get_variable_handle(state,\
@@ -643,6 +692,23 @@ def medOfficeGetSensorHandles(state):
 
     return sesHandls
 
+def medOfficeGetFloorValues(state, handleDict):
+    # _handlsDict['fan'] = _tmpFan
+    # _handlsDict['cooling'] = _tmpClCoil
+    # _handlsDict['reheating'].append(_tmpHtCoilCore)
+    # _handlsDict['reheating'].append(_tmpHtCoilPeri1)
+    # _handlsDict['reheating'].append(_tmpHtCoilPeri2)
+    # _handlsDict['reheating'].append(_tmpHtCoilPeri3)
+    # _handlsDict['reheating'].append(_tmpHtCoilPeri4)
+    # coordination.ep_api.exchange.get_variable_value(state, medOfficeSensorHandles['simhvac'])
+    flrEnergy_J = 0
+    flrEnergy_J += coordination.ep_api.exchange.get_variable_value(state, handleDict['fan'])
+    flrEnergy_J += coordination.ep_api.exchange.get_variable_value(state, handleDict['cooling'])
+    # _tmpHeating = coordination.ep_api.exchange.get_variable_value(state, handleDict['heating'])
+    # print(f"floor coil heating: {_tmpHeating}")
+    for _reheat in handleDict['reheating']:
+        flrEnergy_J += coordination.ep_api.exchange.get_variable_value(state, _reheat)
+    return flrEnergy_J
 def medOfficeGetSensorValues(state, handles):
     wall_temperatures_dict = {}
     wall_temperatures_dict['south'] = []
@@ -692,11 +758,15 @@ def MediumOffice_get_ep_results(state):
         ep_last_call_time_seconds = curr_sim_time_in_seconds
         hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state, medOfficeSensorHandles['simhvac'])
         hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
+        for flr in range(coordination.EP_nFloor):
+            _tmpFlrJ = medOfficeGetFloorValues(state, medOfficeSensorHandles['floor_energy'][str(1 + flr)])
+            _tmpFlgW_m2 = _tmpFlrJ / accumulated_time_in_seconds/ coordination.footprint_area_m2
+            coordination.EP_floor_energy_lst[flr] += _tmpFlgW_m2
+
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
 
-        for idx in range(coordination.EP_nFloor):
-            tmpEnergy = hvac_waste_w_m2 / coordination.EP_nFloor
-            coordination.EP_floor_energy_lst[idx] += tmpEnergy
+        print("Old waste", coordination.ep_sensWaste_w_m2_per_footprint_area)
+        print("New waste", coordination.EP_floor_energy_lst)
 
         time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)
 
@@ -1038,7 +1108,7 @@ def _20_Stories_batch_get_surface_temperatures(state, wall_handles_dict, roof_fl
     wall_temperatures_dict['south'] = []
     wall_temperatures_dict['north'] = []
 
-    for key in wall_handles_dict.keys():
+    for key in ['south', 'north']:
         for i in range(len(wall_handles_dict[key])):
             tmp = coordination.ep_api.exchange.get_variable_value(state, wall_handles_dict[key][i]) + 273.15
             wall_temperatures_dict[key].append(tmp)

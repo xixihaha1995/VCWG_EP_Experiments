@@ -3594,62 +3594,44 @@ OutputVariable,Facility Total Purchased Electricity Energy,WHOLE BUILDING
 OutputVariable,Facility Total Surplus Electricity Energy,WHOLE BUILDING
 OutputVariable,Facility Net Purchased Electricity Energy,WHOLE BUILDING
 OutputVariable,Heating Coil Heating Energy,CORE_BOTTOM VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,CORE_BOTTOM VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,CORE_BOTTOM VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,CORE_MID VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,CORE_MID VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,CORE_MID VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,CORE_TOP VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,CORE_TOP VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,CORE_TOP VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_BOT_ZN_1 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_BOT_ZN_1 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_BOT_ZN_1 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_BOT_ZN_2 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_BOT_ZN_2 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_BOT_ZN_2 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_BOT_ZN_3 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_BOT_ZN_3 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_BOT_ZN_3 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_BOT_ZN_4 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_BOT_ZN_4 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_BOT_ZN_4 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_MID_ZN_1 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_MID_ZN_1 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_MID_ZN_1 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_MID_ZN_2 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_MID_ZN_2 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_MID_ZN_2 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_MID_ZN_3 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_MID_ZN_3 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_MID_ZN_3 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_MID_ZN_4 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_MID_ZN_4 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_MID_ZN_4 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_TOP_ZN_1 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_TOP_ZN_1 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_TOP_ZN_1 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_TOP_ZN_2 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_TOP_ZN_2 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_TOP_ZN_2 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_TOP_ZN_3 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_TOP_ZN_3 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_TOP_ZN_3 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,PERIMETER_TOP_ZN_4 VAV BOX REHEAT COIL
-OutputVariable,Heating Coil Heating Rate,PERIMETER_TOP_ZN_4 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Electricity Energy,PERIMETER_TOP_ZN_4 VAV BOX REHEAT COIL
 OutputVariable,Heating Coil Heating Energy,VAV_1_HEATC
-OutputVariable,Heating Coil Heating Rate,VAV_1_HEATC
 OutputVariable,Heating Coil NaturalGas Energy,VAV_1_HEATC
 OutputVariable,Heating Coil Electricity Energy,VAV_1_HEATC
 OutputVariable,Heating Coil Ancillary NaturalGas Energy,VAV_1_HEATC
 OutputVariable,Heating Coil Heating Energy,VAV_2_HEATC
-OutputVariable,Heating Coil Heating Rate,VAV_2_HEATC
 OutputVariable,Heating Coil NaturalGas Energy,VAV_2_HEATC
 OutputVariable,Heating Coil Electricity Energy,VAV_2_HEATC
 OutputVariable,Heating Coil Ancillary NaturalGas Energy,VAV_2_HEATC
 OutputVariable,Heating Coil Heating Energy,VAV_3_HEATC
-OutputVariable,Heating Coil Heating Rate,VAV_3_HEATC
 OutputVariable,Heating Coil NaturalGas Energy,VAV_3_HEATC
 OutputVariable,Heating Coil Electricity Energy,VAV_3_HEATC
 OutputVariable,Heating Coil Ancillary NaturalGas Energy,VAV_3_HEATC
@@ -3658,13 +3640,10 @@ OutputVariable,Fan Electricity Energy,VAV_2_FAN
 OutputVariable,Fan Electricity Energy,VAV_3_FAN
 OutputVariable,Exterior Lights Electricity Energy,EXTERIOR FACADE LIGHTING
 OutputVariable,Cooling Coil Total Cooling Energy,VAV_1_COOLC DXCOIL
-OutputVariable,Cooling Coil Electricity Rate,VAV_1_COOLC DXCOIL
 OutputVariable,Cooling Coil Electricity Energy,VAV_1_COOLC DXCOIL
 OutputVariable,Cooling Coil Total Cooling Energy,VAV_2_COOLC DXCOIL
-OutputVariable,Cooling Coil Electricity Rate,VAV_2_COOLC DXCOIL
 OutputVariable,Cooling Coil Electricity Energy,VAV_2_COOLC DXCOIL
 OutputVariable,Cooling Coil Total Cooling Energy,VAV_3_COOLC DXCOIL
-OutputVariable,Cooling Coil Electricity Rate,VAV_3_COOLC DXCOIL
 OutputVariable,Cooling Coil Electricity Energy,VAV_3_COOLC DXCOIL
 OutputVariable,Water Use Equipment Total Volume,CORE_BOTTOM WATER EQUIPMENT
 OutputVariable,Water Use Equipment Mains Water Volume,CORE_BOTTOM WATER EQUIPMENT

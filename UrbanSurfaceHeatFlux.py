@@ -360,7 +360,7 @@ class Surface_HeatFlux(object):
         #
         # Twsun_dummy = [Twsun for i in range(Geometry_m.nz_u + 1)]
         # Twshade_dummy = [Twshade for i in range(Geometry_m.nz_u + 1)]
-        print("Twsun_dummy: ", Twsun_dummy)
+        # print("Twsun_dummy: ", Twsun_dummy)
 
         for i_z in range(Geometry_m.nz_u):
             # Calculate wall resistance [s m^-1]
