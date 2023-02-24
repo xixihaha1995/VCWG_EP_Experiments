@@ -285,6 +285,8 @@ def overwrite_ep_weather(state):
                 odb_c_list = [i - 273.15 for i in coordination.vcwg_canTemp_K_list]
                 owb_c_list = [to_get_wet_bulb(state, i, coordination.vcwg_canSpecHum_Ratio_list[odb_c_list.index(i)],
                                               coordination.vcwg_canPress_Pa_list[odb_c_list.index(i)]) for i in odb_c_list]
+                print(f'20Stories, odb_c_list: {odb_c_list}, owb_c_list: {owb_c_list}')
+                coordination.vcwg_canTempWet_K_list = [i + 273 for i in owb_c_list]
                 oat_temp_c = coordination.ep_api.exchange.get_variable_value(state, oat_sensor_handle)
                 if '20Stories' in coordination.bld_type:
                     print(f'20Stories, oat_temp_c: {oat_temp_c}, odb_c_list: {odb_c_list}')
