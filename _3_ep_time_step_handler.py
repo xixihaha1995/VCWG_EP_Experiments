@@ -51,7 +51,7 @@ def medOfficeGetAirNodeHandles(state):
 
 def highOfficeGetActuatorHandles(state):
     handles = {}
-    handls['roofHconv'] = []
+    handles['roofHconv'] = []
     if '20Stories' in coordination.bld_type:
         flr_nbrs = [i for i in range(1, 21)]
     elif 'SimplifiedHighBld' in coordination.bld_type:
