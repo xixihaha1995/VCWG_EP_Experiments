@@ -216,7 +216,7 @@ class UCM_Def():
             cmu[i] = cmu_can
         for i in range(Geometry_m.nz_u,Geometry_m.nz):
             cmu[i] = cmu_above
-        dls, dlk = Length_Scale(Geometry_m.nz,Geometry_m.z,Geometry_m.lambdap,Geometry_m.Height_canyon,Ceps,cmu, Ck)
+        # dls, dlk = Length_Scale(Geometry_m.nz,Geometry_m.z,Geometry_m.lambdap,Geometry_m.Height_canyon,Ceps,cmu, Ck)
         # Calculate the drag coefficient
         Cdrag = Drag_Coef(Geometry_m.nz,Geometry_m.lambdaf,pb)
 
