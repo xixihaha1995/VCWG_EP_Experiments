@@ -728,7 +728,10 @@ def MediumOffice_get_ep_results(state):
         for flr in range(coordination.EP_nFloor):
             _tmpFlrJ = medOfficeGetFloorValues(state, medOfficeSensorHandles['floor_energy'][str(1 + flr)])
             _tmpFlgW_m2 = _tmpFlrJ / accumulated_time_in_seconds/ coordination.footprint_area_m2
-            coordination.EP_floor_energy_lst[flr] += _tmpFlgW_m2
+            if 'CoolElec' in coordination.value:
+                coordination.EP_floor_energy_lst[flr] += _tmpFlgW_m2
+            else:
+                coordination.EP_floor_energy_lst[flr] += hvac_waste_w_m2 / coordination.EP_nFloor
 
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
 
