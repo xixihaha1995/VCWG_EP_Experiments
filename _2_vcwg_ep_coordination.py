@@ -34,7 +34,7 @@ def ini_all(sensitivity_file_name,_config_file = None, _value = None):
     sensor_heights = [float(i) for i in config['Bypass']['sensor_height_meter'].split(',')]
     data_saving_path = os.path.join(project_path, 'A_prepost_processing','_saved_Cases',
                                     experiments_theme,f'{csv_file_name}.csv')
-    ep_trivial_path = os.path.join(project_path, 'A_prepost_processing',
+    ep_trivial_path = os.path.join(project_path, 'A_prepost_processing','_saved_Cases',
                                    experiments_theme, f"{csv_file_name}_ep_trivial_outputs")
     sys.path.insert(0, '/usr/local/EnergyPlus-22-1-0/')
     sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
