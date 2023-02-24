@@ -22,7 +22,7 @@ Elevation,153,     # Elevation above sea level [m]
 # =================================================
 # Control switches
 # =================================================
-OPTION_RAY,1,         # 1: read the view factors from an existing file, 0: calculate view factors by ray tracing
+OPTION_RAY,0,         # 1: read the view factors from an existing file, 0: calculate view factors by ray tracing
 Rural_Model_name,1,   # 1: MOST, 2: Using an external forcing file with variables specified at the top of the domain
 EB_RuralModel_name,2, # 1: Louis, 2: Penman_Monteith
 Tdeep_ctrl,2,         # 1: Using force restore method, 2: Using climate data (from epw file). If reliable estimate of deep soil temperature is not available using force restore method is recommended
@@ -258,7 +258,7 @@ Catm_O2,210000,         # Atmospheric O2 mixing ratio [ppm]=[umolO2 mol^-1]
 Ri_b_cr,0.1,           # Critical bulk Richardson number in the urban area used to determine thermal stability
 z0_roof,0.02,          # Roof roughness [m] ## Check make sure roughness length are not computed multiple times inconsistently, delete
 z0_road,0.02,          # Road roughness [m] ## Check make sure roughness length are not computed multiple times inconsistently, delete
-cdmin,0.01,            # Minimum diffusion coefficient
+cdmin,1e-2,            # Minimum diffusion coefficient
 prandtl,0.8,           # Turbulent Prandtl number
 schmidt,1,             # Turbulent Schmidt number
 HVAC_atm_frac,1,       # Fraction of sensible waste heat from building released into the atmosphere
