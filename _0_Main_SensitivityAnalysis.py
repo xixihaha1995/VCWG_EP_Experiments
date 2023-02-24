@@ -32,9 +32,9 @@ def one_ini(sensitivity_file_name):
 if __name__ == '__main__':
 
     jobs = [
-        "Chicago_HighOffice_Vector_Detailed.ini",
+        # "Chicago_HighOffice_Vector_Detailed.ini",
         "Chicago_HighOffice_Vector_Simplified.ini",
-        "Chicago_MedOffice_Vector_Detailed.ini",
+        # "Chicago_MedOffice_Vector_Detailed.ini",
     ]
     for job in jobs:
         one_ini(job)
