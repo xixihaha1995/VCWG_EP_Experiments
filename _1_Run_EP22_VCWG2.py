@@ -1,11 +1,9 @@
 
-import os, numpy as np, pandas as pd
-from threading import Thread
-from multiprocessing import Process
-import _0_vcwg_ep_coordination as coordination
-import _1_ep_time_step_handler as time_step_handlers
+import os
+import _2_vcwg_ep_coordination as coordination
+import _3_ep_time_step_handler as time_step_handlers
 from VCWG_Hydrology import VCWG_Hydro
-# sensitivity_file_name,config, ctl_viriable_1, value
+
 def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1,
                ctl_viriable_2=None, value_2=None, ctl_viriable_3=None, value_3=None):
 
@@ -27,15 +25,6 @@ def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1,
     elif 'HighOffice' in coordination.bld_type:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers._20Stories_get_ep_results)
-    elif 'SmallOffice' in coordination.bld_type:
-        coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
-                                                                                      time_step_handlers.SmallOffice_get_ep_results)
-    elif 'LargeOffice' in coordination.bld_type:
-        coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
-                                                                                      time_step_handlers.LargeOffice_get_ep_results)
-    elif 'MidriseApartment' in coordination.bld_type:
-        coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
-                                                                                      time_step_handlers.MidriseApartment_get_ep_results)
     else:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
                                                                                       time_step_handlers.general_get_ep_results)
@@ -52,7 +41,6 @@ def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1,
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
     idffolder = coordination.config['Bypass']['idfFolder']
     idfFilePath = os.path.join(f'.\\resources\\idf{idffolder}', idfFileName)
-    # idfFilePath = os.path.join(f'.\\resources\\idf\\AllCases', idfFileName)
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
     coordination.ep_api.runtime.run_energyplus(state, sys_args)
 
