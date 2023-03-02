@@ -3,7 +3,7 @@ import math
 from Radiation_Functions import RadiationFunctions
 import copy
 from psychrometrics import psychrometrics
-import _2_vcwg_ep_coordination as coordination
+import _1_vcwg_ep_coordination as coordination
 
 """
 Surface energy balance model in the rural area 

@@ -1,5 +1,5 @@
 from threading import Thread
-import _2_vcwg_ep_coordination as coordination
+import _1_vcwg_ep_coordination as coordination
 from VCWG_Hydrology import VCWG_Hydro
 import os, signal
 

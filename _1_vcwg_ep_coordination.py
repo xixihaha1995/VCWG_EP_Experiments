@@ -1,11 +1,7 @@
 import configparser
 import datetime
 import threading, sys, os
-
 import numpy
-# coordination.ini_all(sensitivity_file_name, config, ctl_viriable_1, value_1,
-#                          ctl_viriable_2, value_2, ctl_viriable_3, value_3)
-
 def ini_all(sensitivity_file_name,_config_file = None, _value = None):
     global value, config, project_path, save_path_clean, sensor_heights,ep_trivial_path, data_saving_path, bld_type,\
         ep_api, psychrometric,\

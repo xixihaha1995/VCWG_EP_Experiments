@@ -6,7 +6,7 @@ from Soil_Functions import Soil_Calculations
 from Resistance_Functions import Ressitance_Calculations
 from SurfaceHeatFluxDef import ForceRestoreConductiveHeatImp,ForceRestoreConductiveHeatSoil
 import copy
-import _2_vcwg_ep_coordination as coordination
+import _1_vcwg_ep_coordination as coordination
 '''
 Surface Energy Balance Model (SEBM): Calculate turbulent heat fluxes at the surface of urban elements
 Developed by Mohsen Moradi

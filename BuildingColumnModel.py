@@ -1,6 +1,6 @@
 import numpy
 import math
-import _2_vcwg_ep_coordination as coordination
+import _1_vcwg_ep_coordination as coordination
 """
 Calculate sink and source terms associated with the presence of buildings in the 1D model for momentum, heat, and TKE  
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -155,21 +155,11 @@ class BuildingCol:
             # Term in momentum equation [m s^-2]
             self.srex_vy_h[i] += (vhb / self.nd) * (self.ss[i] * self.lambdap / self.vol[i] / self.dz)
             # Term in energy equation [K s^-1]
-            if 'vector' in coordination.value:
-                self.srex_th_h[i] += (thb_Roofs_Imp / self.nd) * (
-                        self.ss[i] * self.lambdap / self.vol[i] / self.dz) * FractionsRoof.fimp + \
-                                     (thb_Roofs_Veg / self.nd) * (self.ss[i] * self.lambdap / self.vol[
-                    i] / self.dz) * FractionsRoof.fveg + \
-                                     self.HVAC_atm_frac * (1 - self.HVAC_street_frac) * (
-                                             self.SensHt_HVAC_Floor[i] / (
-                                                 self.rho[i] * self.Cp) / self.dz) * self.lambdap / (1 - self.lambdap)
-            else:
-                self.srex_th_h[i] += (thb_Roofs_Imp / self.nd) * (self.ss[i] * self.lambdap / self.vol[i] / self.dz) \
-                                     * FractionsRoof.fimp + (thb_Roofs_Veg / self.nd) * \
-                                     (self.ss[i] * self.lambdap / self.vol[i] / self.dz) * FractionsRoof.fveg + \
-                                     self.HVAC_atm_frac * (1 - self.HVAC_street_frac) * \
-                                     (self.SensHt_HVAC / (self.rho[i] * self.Cp) / self.dz) * self.ss[
-                                         i] * self.lambdap / (1 - self.lambdap)
+            self.srex_th_h[i] += \
+                (thb_Roofs_Imp / self.nd) * (self.ss[i] * self.lambdap / self.vol[i] / self.dz) * FractionsRoof.fimp + \
+                (thb_Roofs_Veg / self.nd) * (self.ss[i] * self.lambdap / self.vol[i] / self.dz) * FractionsRoof.fveg + \
+                self.HVAC_atm_frac * (1 - self.HVAC_street_frac) * \
+                (self.SensHt_HVAC_Floor[i] / (self.rho[i] * self.Cp) / self.dz) * self.lambdap / (1 - self.lambdap)
 
 
             # Term in turbulent kinetic energy equation [m s^-3]
