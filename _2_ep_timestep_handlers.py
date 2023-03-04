@@ -1,5 +1,5 @@
 from threading import Thread
-import _1_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 from VCWG_Hydrology import VCWG_Hydro
 import os, signal
 
@@ -201,7 +201,7 @@ def _midRiseApar_get_sensor_handles(state):
                 os.getpid()
                 os.kill(os.getpid(), signal.SIGTERM)
     return handles_dict
-def _medOff_midApart_get_ep_results(state):
+def medOff_midApart_get_ep_results(state):
     global hanldesDict
 
     if not coordination.get_ep_results_inited_handle:

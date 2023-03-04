@@ -13,7 +13,7 @@ import Utilities
 import pandas
 import numpy
 
-import _1_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 """
 Developed by Bruno Bueno
 Building Technology, Massachusetts Institute of Technology (MIT), Cambridge, U.S.A.

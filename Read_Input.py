@@ -11,7 +11,7 @@ import pandas as pd
 from Soil_Functions import Soil_Calculations
 from datetime import datetime
 
-import _1_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 
 """
 Read input variables

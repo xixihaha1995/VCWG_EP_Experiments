@@ -28,7 +28,7 @@ from ReadDOE import readDOE
 from Material import Material
 from psychrometrics import HumFromRHumTemp
 from EPWGenerator import write_epw
-import _1_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 """
 Main VCWG script 
 Developed by Mohsen Moradi and Amir A. Aliabadi

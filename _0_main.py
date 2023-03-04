@@ -1,6 +1,6 @@
 import os, configparser
-import _1_vcwg_ep_coordination as coordination
-import _2_ep_time_step_handler as time_step_handlers
+import _1_parent_coordination as coordination
+import _2_ep_timestep_handlers as time_step_handlers
 
 def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1):
 
@@ -11,7 +11,7 @@ def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1):
                                                                                         time_step_handlers.overwrite_ep_weather)
     if 'Detailed_MedOffice' in coordination.bld_type or 'Detailed_MidRiseApartment' in coordination.bld_type:
         coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
-                                                                                      time_step_handlers._medOff_midApart_get_ep_results)
+                                                                                      time_step_handlers.medOff_midApart_get_ep_results)
     else:
         raise ValueError('ERROR: Building type not supported')
 
@@ -41,8 +41,8 @@ def one_ini(sensitivity_file_name):
 
 if __name__ == '__main__':
     todo_jobs = [
-        # 'Chicago_MedOffice.ini',
-        'Chicago_MidRiseApartment.ini',
+        'Chicago_MedOffice.ini',
+        # 'Chicago_MidRiseApartment.ini',
     ]
     for job in todo_jobs:
         one_ini(job)

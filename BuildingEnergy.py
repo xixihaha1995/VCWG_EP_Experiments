@@ -5,7 +5,7 @@ from psychrometrics import psychrometrics, moist_air_density
 import logging
 import numpy
 import copy
-import _1_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 """
 Calculate building characteristics
 Developed by Mohsen Moradi and Amir A. Aliabadi

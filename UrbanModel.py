@@ -5,7 +5,7 @@ from Resistance_Functions import Ressitance_Calculations
 from ColModel import ColumnModelCal
 import copy
 
-import _1_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 
 """
 Urban canopy model
