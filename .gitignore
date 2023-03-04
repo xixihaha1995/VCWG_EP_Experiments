@@ -10,7 +10,6 @@ _01_ep_5zone/
 eplusssz.csv
 epluszsz.csv
 !A_prepost_processing/measurements/*.zip
-*.pkl
 *.pyc
 *.png
 *.zip

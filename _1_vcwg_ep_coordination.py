@@ -3,26 +3,26 @@ import datetime
 import threading, sys, os
 
 import numpy
-# coordination.ini_all(sensitivity_file_name, config, ctl_viriable_1, value_1,
-#                          ctl_viriable_2, value_2, ctl_viriable_3, value_3)
 
-def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
-            _ctl_viriable_2=None, _value_2=None, _ctl_viriable_3=None, _value_3=None):
-    global csv_file_name,nbr_control_variables,ctl_virable_1, value_1, ctl_viriable_2, value_2, ctl_viriable_3, value_3,\
-        config, project_path, save_path_clean, sensor_heights,ep_trivial_path, data_saving_path, bld_type,\
+def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1):
+    global csv_file_name,ctl_virable_1, value_1,\
+        config, save_path_clean,ep_trivial_path, data_saving_path, bld_type,\
         ep_api, psychrometric,\
         sem0, sem1, sem2, sem3, \
         vcwg_needed_time_idx_in_seconds, \
-        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, vcwg_wsp_mps, vcwg_wdir_deg, \
-        ep_indoorTemp_C, ep_sensWaste_w_m2_per_footprint_area, \
+        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, ep_sensWaste_w_m2_per_footprint_area, \
         ep_floor_Text_K, ep_floor_Tint_K, ep_roof_Text_K, ep_roof_Tint_K, \
-        ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K, \
-        mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
-        footprint_area_m2, ForcTemp_K, vcwg_hConv_w_m2_per_K
-    # find the project path
+        ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K,\
+        footprint_area_m2, vcwg_hConv_w_m2_per_K, \
+        get_ep_results_inited_handle, overwrite_ep_weather_inited_handle, called_vcwg_bool, ep_last_call_time_seconds
+
+    get_ep_results_inited_handle = False
+    overwrite_ep_weather_inited_handle = False
+    called_vcwg_bool = False
+    ep_last_call_time_seconds = 0
+
     ctl_virable_1 = _ctl_viriable_1
     value_1 = _value_1
-    ForcTemp_K = 293.15
     vcwg_hConv_w_m2_per_K = 10
     project_path = os.path.dirname(os.path.abspath(__file__))
     if _config is None:
@@ -32,24 +32,12 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
     else:
         config = _config
     csv_file_name = config['Bypass']['framework'] + '_'
-    if _ctl_viriable_3 is not None:
-        nbr_control_variables = 3
-        ctl_viriable_3 = _ctl_viriable_3
-        value_3 = _value_3
-        ctl_viriable_2 = _ctl_viriable_2
-        value_2 = _value_2
-        csv_file_name += ctl_virable_1 + '_' + str(value_1) + '_' + \
-                        ctl_viriable_2 + '_' + str(value_2) + '_' + \
-                        ctl_viriable_3 + '_' + str(value_3)
-    else:
-        nbr_control_variables = 1
-        csv_file_name += ctl_virable_1 + '_' + str(value_1)
+    csv_file_name += ctl_virable_1 + '_' + str(value_1)
     csv_file_name += '_'+ config['Bypass']['idfFileName'][0:-4]
     print(f'csv_file_name = {csv_file_name}')
     bld_type = csv_file_name
     experiments_theme = config['Bypass']['experiments_theme']
     save_path_clean = False
-    sensor_heights = [float(i) for i in config['Bypass']['sensor_height_meter'].split(',')]
 
     data_saving_path = os.path.join(project_path, 'A_prepost_processing','_saved_Cases',
                                     experiments_theme,f'{csv_file_name}.csv')
@@ -69,28 +57,17 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
     vcwg_canTemp_K = 300
     vcwg_canSpecHum_Ratio = 0
     vcwg_canPress_Pa = 0
-    vcwg_wsp_mps = 0
-    vcwg_wdir_deg = 0
 
-    if "SmallOffice" in bld_type:
-        footprint_area_m2 = 5500 * 0.09290304 / 1
-    elif "MediumOffice" in bld_type or 'MedOffice' in bld_type:
+    if 'MedOffice' in bld_type:
         footprint_area_m2 = 53628 * 0.09290304 / 3
         footprint_area_m2 = 1660.73
-    elif "LargeOffice" in bld_type:
-        footprint_area_m2 = 498588 * 0.09290304 / 12
-    elif "MidriseApartment" in bld_type:
+    elif "MidRiseApartment" in bld_type:
+        #46.3273m*16.9155m*12.1913m
         footprint_area_m2 = 33740 * 0.09290304 / 4
-    elif "StandAloneRetail" in bld_type:
-        footprint_area_m2 = 24962 * 0.09290304 /1
-    elif "StripMall" in bld_type:
-        footprint_area_m2 = 22500 * 0.09290304 / 1
-    elif "SuperMarket" in bld_type:
-        footprint_area_m2 = 45000 * 0.09290304 / 1
-    elif 'HighOffice' in bld_type:
-        footprint_area_m2 = 31 * 15
+        footprint_area_m2 = 46.3273 * 16.9155
+    else:
+        raise ValueError(f"bld_type = {bld_type} is not supported yet")
 
-    ep_indoorTemp_C = 20
     ep_sensWaste_w_m2_per_footprint_area = 0
     ep_floor_Text_K = 300
     ep_floor_Tint_K = 300
@@ -104,7 +81,7 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1,
 def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
                     FractionsRoof):
     global ep_sensWaste_w_m2_per_footprint_area,save_path_clean,vcwg_needed_time_idx_in_seconds, \
-        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa
+        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, sem0, sem1, sem2, sem3
 
     sem0.acquire()
     vcwg_needed_time_idx_in_seconds = (it + 1) * simTime.dt
@@ -149,16 +126,11 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
         os.remove(data_saving_path)
         save_path_clean = True
 
-    TempProf_cur = VerticalProfUrban.th
-    PresProf_cur = VerticalProfUrban.presProf
     vcwg_needed_time_idx_in_seconds = it * simTime.dt
     cur_datetime = datetime.datetime.strptime(config['__main__']['start_time'],
                                               '%Y-%m-%d %H:%M:%S') + \
                    datetime.timedelta(seconds=vcwg_needed_time_idx_in_seconds)
     print('current time: ', cur_datetime)
-    domain_height = len(TempProf_cur)
-    vcwg_heights_profile = numpy.array([0.5 + i for i in range(domain_height)])
-    mapped_indices = [numpy.argmin(numpy.abs(vcwg_heights_profile - i)) for i in sensor_heights]
 
     wallSun_K = BEM.wallSun.Text
     wallShade_K = BEM.wallShade.Text
@@ -205,23 +177,15 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
         os.makedirs(os.path.dirname(data_saving_path), exist_ok=True)
         with open(data_saving_path, 'a') as f1:
             # prepare the header string for different sensors
-            header_str = 'cur_datetime,canTemp,ForcTemp_K,sensWaste,wallSun_K,wallShade_K,roof_K,' \
+            header_str = 'cur_datetime,canTemp,sensWaste,wallSun_K,wallShade_K,roof_K,' \
                          'MeteoData.Tatm,MeteoData.Pre,'
-            for i in range(len(mapped_indices)):
-                _temp_height = sensor_heights[i]
-                header_str += f'TempProf_cur[{_temp_height}],'
-            for i in range(len(mapped_indices)):
-                _temp_height = sensor_heights[i]
-                header_str += f'PresProf_cur[{_temp_height}],'
             header_str += '\n'
             f1.write(header_str)
         # write the data
     with open(data_saving_path, 'a') as f1:
         fmt1 = "%s," * 1 % (cur_datetime) + \
-               "%.3f," * 8 % (vcwg_canTemp_K,ForcTemp_K,BEM_Building.sensWaste,
-                              wallSun_K,wallShade_K,roof_K,MeteoData.Tatm, MeteoData.Pre) + \
-               "%.3f," * 2 * len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
-                                                         [PresProf_cur[i] for i in mapped_indices]) + '\n'
+               "%.3f," * 7 % (vcwg_canTemp_K,BEM_Building.sensWaste,
+                              wallSun_K,wallShade_K,roof_K,MeteoData.Tatm, MeteoData.Pre) + '\n'
         f1.write(fmt1)
 
     sem0.release()
