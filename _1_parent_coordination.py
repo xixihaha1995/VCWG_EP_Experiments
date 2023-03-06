@@ -1,12 +1,7 @@
-import configparser
-import datetime
-import threading, sys, os
+import configparser, datetime, threading, sys, os,numpy
 
-import numpy
-
-def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1):
-    global csv_file_name,ctl_virable_1, value_1,\
-        config, save_path_clean,ep_trivial_path, data_saving_path, bld_type,\
+def ini_all(_config_file_name):
+    global config, save_path_clean,ep_trivial_path, data_saving_path, bld_type,\
         ep_api, psychrometric,\
         sem0, sem1, sem2, sem3, \
         vcwg_needed_time_idx_in_seconds, \
@@ -21,28 +16,23 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1):
     called_vcwg_bool = False
     ep_last_call_time_seconds = 0
 
-    ctl_virable_1 = _ctl_viriable_1
-    value_1 = _value_1
-    vcwg_hConv_w_m2_per_K = 10
+
     project_path = os.path.dirname(os.path.abspath(__file__))
-    if _config is None:
-        config = configparser.ConfigParser()
-        config_path = os.path.join(project_path, 'A_prepost_processing','_configs','bypass',sensitivity_file_name)
-        config.read(config_path)
-    else:
-        config = _config
-    csv_file_name = config['Bypass']['framework'] + '_'
-    csv_file_name += ctl_virable_1 + '_' + str(value_1)
-    csv_file_name += '_'+ config['Bypass']['idfFileName'][0:-4]
-    print(f'csv_file_name = {csv_file_name}')
-    bld_type = csv_file_name
+
+    config = configparser.ConfigParser()
+    config_path = os.path.join(project_path, 'A_prepost_processing', '_configs', _config_file_name)
+    config.read(config_path)
+
+    bld_type = config['Bypass']['idfFileName'][0:-4]
+    print(f'bld_type = {bld_type}')
+
     experiments_theme = config['Bypass']['experiments_theme']
     save_path_clean = False
 
     data_saving_path = os.path.join(project_path, 'A_prepost_processing','_saved_Cases',
-                                    experiments_theme,f'{csv_file_name}.csv')
+                                    experiments_theme,f'{bld_type}.csv')
     ep_trivial_path = os.path.join(project_path, 'A_prepost_processing','_saved_Cases',
-                                   experiments_theme, f"{csv_file_name}_ep_trivial_outputs")
+                                   experiments_theme, f"{bld_type}_ep_trivial_outputs")
     sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
     sys.path.insert(0, '/usr/local/EnergyPlus-22-1-0/'),
     from pyenergyplus.api import EnergyPlusAPI
@@ -57,6 +47,16 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1):
     vcwg_canTemp_K = 300
     vcwg_canSpecHum_Ratio = 0
     vcwg_canPress_Pa = 0
+    vcwg_hConv_w_m2_per_K = 10
+    ep_sensWaste_w_m2_per_footprint_area = 0
+    ep_floor_Text_K = 300
+    ep_floor_Tint_K = 300
+    ep_roof_Text_K = 300
+    ep_roof_Tint_K = 300
+    ep_wallSun_Text_K = 300
+    ep_wallSun_Tint_K = 300
+    ep_wallShade_Text_K = 300
+    ep_wallShade_Tint_K = 300
 
     if 'MedOffice' in bld_type:
         footprint_area_m2 = 53628 * 0.09290304 / 3
@@ -68,16 +68,6 @@ def ini_all(sensitivity_file_name, _config, _ctl_viriable_1, _value_1):
     else:
         raise ValueError(f"bld_type = {bld_type} is not supported yet")
 
-    ep_sensWaste_w_m2_per_footprint_area = 0
-    ep_floor_Text_K = 300
-    ep_floor_Tint_K = 300
-    ep_roof_Text_K = 300
-    ep_roof_Tint_K = 300
-    ep_wallSun_Text_K = 300
-    ep_wallSun_Tint_K = 300
-    ep_wallShade_Text_K = 300
-    ep_wallShade_Tint_K = 300
-    
 def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
                     FractionsRoof):
     global ep_sensWaste_w_m2_per_footprint_area,save_path_clean,vcwg_needed_time_idx_in_seconds, \
@@ -85,57 +75,32 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
 
     sem0.acquire()
     vcwg_needed_time_idx_in_seconds = (it + 1) * simTime.dt
-
-    TempProf_cur = VerticalProfUrban.th
-    HumProf_cur = VerticalProfUrban.qn
-    PresProf_cur = VerticalProfUrban.presProf
-
-    canTempProf_cur = TempProf_cur[0:Geometry_m.nz_u]
-    canSpecHumProf_cur = HumProf_cur[0:Geometry_m.nz_u]
-    canPressProf_cur = PresProf_cur[0:Geometry_m.nz_u]
-
-    vcwg_canTemp_K = numpy.mean(canTempProf_cur)
-    vcwg_canSpecHum_Ratio = numpy.mean(canSpecHumProf_cur)
-    vcwg_canPress_Pa = numpy.mean(canPressProf_cur)
+    vcwg_canTemp_K = numpy.mean(VerticalProfUrban.th[0:Geometry_m.nz_u])
+    vcwg_canSpecHum_Ratio = numpy.mean(VerticalProfUrban.qn[0:Geometry_m.nz_u])
+    vcwg_canPress_Pa = numpy.mean(VerticalProfUrban.presProf[0:Geometry_m.nz_u])
     sem1.release()
     
     sem3.acquire()
     BEM_Building = BEM.building
-    BEM_Building.ElecTotal = 0
-    if 'WithoutCooling' in csv_file_name:
+    if 'WithoutCooling' in bld_type:
         BEM_Building.sensWaste = 0
     else:
         BEM_Building.sensWaste = ep_sensWaste_w_m2_per_footprint_area
     ep_sensWaste_w_m2_per_footprint_area = 0
 
+    BEM_Building.ElecTotal = 0
     BEM.mass.Text = ep_floor_Text_K
     BEM.mass.Tint = ep_floor_Tint_K
     BEM.wallSun.Text = ep_wallSun_Text_K
     BEM.wallSun.Tint = ep_wallSun_Tint_K
     BEM.wallShade.Text = ep_wallShade_Text_K
     BEM.wallShade.Tint = ep_wallShade_Tint_K
-
     if FractionsRoof.fimp > 0:
         BEM.roofImp.Text = ep_roof_Text_K
         BEM.roofImp.Tint = ep_roof_Tint_K
     if FractionsRoof.fveg > 0:
         BEM.roofVeg.Text = ep_roof_Text_K
         BEM.roofVeg.Tint = ep_roof_Tint_K
-
-    if os.path.exists(data_saving_path) and not save_path_clean:
-        os.remove(data_saving_path)
-        save_path_clean = True
-
-    vcwg_needed_time_idx_in_seconds = it * simTime.dt
-    cur_datetime = datetime.datetime.strptime(config['__main__']['start_time'],
-                                              '%Y-%m-%d %H:%M:%S') + \
-                   datetime.timedelta(seconds=vcwg_needed_time_idx_in_seconds)
-    print('current time: ', cur_datetime)
-
-    wallSun_K = BEM.wallSun.Text
-    wallShade_K = BEM.wallShade.Text
-    roof_K = (FractionsRoof.fimp * BEM.roofImp.Text + FractionsRoof.fveg * BEM.roofVeg.Text)
-
     # dummy values overriding
     BEM_Building.sensCoolDemand = 0
     BEM_Building.sensHeatDemand = 0
@@ -173,6 +138,17 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
     BEM_Building.fluxRoof = 0
     BEM_Building.fluxMass = 0
 
+    if os.path.exists(data_saving_path) and not save_path_clean:
+        os.remove(data_saving_path)
+        save_path_clean = True
+    vcwg_needed_time_idx_in_seconds = it * simTime.dt
+    cur_datetime = datetime.datetime.strptime(config['Bypass']['start_time'],
+                                              '%Y-%m-%d %H:%M:%S') + \
+                   datetime.timedelta(seconds=vcwg_needed_time_idx_in_seconds)
+    print('current time: ', cur_datetime)
+    wallSun_K = BEM.wallSun.Text
+    wallShade_K = BEM.wallShade.Text
+    roof_K = (FractionsRoof.fimp * BEM.roofImp.Text + FractionsRoof.fveg * BEM.roofVeg.Text)
     if not os.path.exists(data_saving_path):
         os.makedirs(os.path.dirname(data_saving_path), exist_ok=True)
         with open(data_saving_path, 'a') as f1:
@@ -187,7 +163,6 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
                "%.3f," * 7 % (vcwg_canTemp_K,BEM_Building.sensWaste,
                               wallSun_K,wallShade_K,roof_K,MeteoData.Tatm, MeteoData.Pre) + '\n'
         f1.write(fmt1)
-
     sem0.release()
 
     return BEM

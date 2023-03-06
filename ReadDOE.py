@@ -470,7 +470,7 @@ def readDOE(serialize_output=True):
         #     str_variable = 'negative' + str(abs(coordination.uwgVariableValue))
         # else:
         #     str_variable = '0'
-        # pklName = f'{coordination.csv_file_name}readDOE.pkl'
+        # pklName = f'{coordination.bld_type}readDOE.pkl'
         pklName = 'readDOE.pkl'
         # create a binary file for serialized obj
         pkl_file_path = os.path.join(DIR_CURR,pklName)

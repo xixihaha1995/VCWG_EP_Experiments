@@ -2,9 +2,8 @@ import os, configparser
 import _1_parent_coordination as coordination
 import _2_ep_timestep_handlers as time_step_handlers
 
-def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1):
-
-    coordination.ini_all(sensitivity_file_name, config, ctl_viriable_1, value_1)
+def run_ep_api(_config_file_name):
+    coordination.ini_all(_config_file_name)
     state = coordination.ep_api.state_manager.new_state()
     coordination.psychrometric=coordination.ep_api.functional.psychrometrics(state)
     coordination.ep_api.runtime.callback_begin_zone_timestep_before_set_current_weather(state,
@@ -20,7 +19,7 @@ def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1):
     coordination.ep_api.exchange.request_variable(state, "Site Outdoor Air Drybulb Temperature", "ENVIRONMENT")
     coordination.ep_api.exchange.request_variable(state, "Site Outdoor Air Humidity Ratio", "ENVIRONMENT")
 
-    idfFileName = str(value_1) + '_' + coordination.config['Bypass']['idfFileName']
+    idfFileName = coordination.config['Bypass']['idfFileName']
     epwFileName = coordination.config['Bypass']['epwFileName']
     output_path = coordination.ep_trivial_path
     weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
@@ -28,21 +27,11 @@ def run_ep_api(sensitivity_file_name, config, ctl_viriable_1, value_1):
     idfFilePath = os.path.join(f'.\\resources\\idf{idffolder}', idfFileName)
     sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
     coordination.ep_api.runtime.run_energyplus(state, sys_args)
-def one_ini(sensitivity_file_name):
-    global config
-    config = configparser.ConfigParser()
-    project_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(project_path, 'A_prepost_processing', '_configs', sensitivity_file_name)
-    config.read(config_path)
-
-    ctl_viriable_1 = config['Bypass']['control_variable_1']
-    ctl_values_1 = [i for i in config['Bypass']['control_values_1'].split(',')]
-    run_ep_api(sensitivity_file_name, config, ctl_viriable_1, ctl_values_1[0])
 
 if __name__ == '__main__':
     todo_jobs = [
-        'Chicago_MedOffice.ini',
-        # 'Chicago_MidRiseApartment.ini',
+        # 'Chicago_MedOffice.ini',
+        'Chicago_MidRiseApartment.ini',
     ]
     for job in todo_jobs:
-        one_ini(job)
+        run_ep_api(job)
