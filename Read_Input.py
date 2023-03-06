@@ -10,8 +10,7 @@ import matplotlib.gridspec as gridspec
 import pandas as pd
 from Soil_Functions import Soil_Calculations
 from datetime import datetime
-
-import _1_parent_coordination as coordination
+from datetime import datetime
 
 """
 Read input variables
@@ -124,6 +123,7 @@ def read_VCWG_param(VCWG_param_file_path):
             count += 1
 
     ipd_vcwg = _init_param_dict
+
     return ipd_vcwg
 
 def ForcingData(MeteoDataRaw, itt, varargin,VCWG_param_file_path,SimTime):
@@ -412,6 +412,7 @@ def Data_Site(InputFile):
     SoilCal = Soil_Calculations()
 
     ipd = read_VCWG_param(InputFile)
+
     # Rural model parameters
     class RSMParam_Def():
         pass

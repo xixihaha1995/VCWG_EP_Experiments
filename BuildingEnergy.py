@@ -1,11 +1,8 @@
-import datetime
-import os
 
 from psychrometrics import psychrometrics, moist_air_density
 import logging
 import numpy
 import copy
-import _1_parent_coordination as coordination
 """
 Calculate building characteristics
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -132,8 +129,7 @@ class Building(object):
     def is_near_zero(self,val,tol=1e-14):
         return abs(float(val)) < tol
 
-    def BEMCalc(self,canTemp,canHum,BEM,MeteoData,ParCalculation,simTime,Geometry_m,FractionsRoof,SWR,
-                VerticalProfUrban,it):
+    def BEMCalc(self,canTemp,canHum,BEM,MeteoData,ParCalculation,simTime,Geometry_m,FractionsRoof,SWR):
 
         """
         ------
@@ -183,6 +179,7 @@ class Building(object):
         QWater: energy consumption for domestic hot water [W m^-2]
         QGas: energy consumption for gas [W m^-2]
         """
+
         self.logger.debug("Logging at {} {}".format(__name__, self.__repr__()))
 
         # Building Energy Model

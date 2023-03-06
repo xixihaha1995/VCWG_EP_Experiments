@@ -12,8 +12,6 @@ from Radiation_Functions import RadiationFunctions
 from scipy.optimize import least_squares
 import copy
 
-import _1_parent_coordination as coordination
-
 """
 Compute energy balance at the roof
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -465,7 +463,7 @@ class EnergyBalanceRoof_Def(object):
         u_ref, u_Hveg = ResistanceCal.WindProfile_Roof(Gemeotry_m.Height_canyon, hc_roof, VerticalProfUrban,Gemeotry_m)
 
         # Calculate aerodynamic resistance [s m^-1]
-        ra = ResistanceCal.Roof_Aerodynamic_Resistance_1D(VerticalProfUrban,Gemeotry_m,zoh,Troof)
+        ra = ResistanceCal.Roof_Aerodynamic_Resistance_1D(VerticalProfUrban,Gemeotry_m,zom,Troof)
 
         # Calculate soil resistance
         _Zs_, _dz_, _ms_, Osat, Ohy, nVG, alpVG, Ks_Zs, L, Pe, O33, SPAR, _EvL_Zs_, _Inf_Zs_, _RfH_Zs_, Rf_Zs, _Zinf_, _Kbot_, \
@@ -479,9 +477,6 @@ class EnergyBalanceRoof_Def(object):
 
         # sensible heat from impervious area [W m^-2]
         Hroof_imp = cp_atm * rho_atm * (Troof_imp - T_above_canyon) / ra
-        coordination.vcwg_hConv_w_m2_per_K = cp_atm * rho_atm / ra
-        # print(f'Troof_imp: {Troof_imp - 273.15}, T_above_canyon: {T_above_canyon - 273.15},'
-        #       f'hConv: {coordination.vcwg_hConv_w_m2_per_K}')
         # Potential evaporation from runon water on impervious area [kg m^-2 s^-1]
         Eroof_imp_pot = rho_atm * (qsat_T_rimp - q_above_canyon) / ra
         # Potential evaporation from first soil layer [kg m^-2 s^-1]
@@ -537,8 +532,6 @@ class EnergyBalanceRoof_Def(object):
         # Condition that evapotranspiration does not exceed available water
         # Real max water evaporation from interception [kg m^-2 s^-1]
         Eroof_imp = min(Eroof_imp_pot, (Int.IntRoofImp / (1000 * ParCalculation.dts) * ParCalculation.rhow))
-        # print(f'Eroof_imp_pot: {Eroof_imp_pot}, Int.IntRoofImp: {Int.IntRoofImp}, '
-        #       f'ParCalculation.dts: {ParCalculation.dts}, ParCalculation.rhow: {ParCalculation.rhow}')
         Eroof_veg = min(Eroof_veg_pot, (Int.IntRoofVegPlant / (1000 * ParCalculation.dts) * ParCalculation.rhow))
         Eroof_ground = min(Eroof_soil_pot, (Int.IntRoofVegGround / (1000 * ParCalculation.dts) * ParCalculation.rhow))
         Eroof_soil_pot = Eroof_soil_pot - Eroof_ground

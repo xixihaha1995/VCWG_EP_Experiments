@@ -13,7 +13,6 @@ import Utilities
 import pandas
 import numpy
 
-import _1_parent_coordination as coordination
 """
 Developed by Bruno Bueno
 Building Technology, Massachusetts Institute of Technology (MIT), Cambridge, U.S.A.
@@ -464,16 +463,8 @@ def readDOE(serialize_output=True):
     # if not test serialize refDOE,refBEM,Schedule and store in resources
     if not serialize_output:
 
-        # if coordination.uwgVariableValue > 0:
-        #     str_variable = 'positive' + str(abs(coordination.uwgVariableValue))
-        # elif coordination.uwgVariableValue < 0:
-        #     str_variable = 'negative' + str(abs(coordination.uwgVariableValue))
-        # else:
-        #     str_variable = '0'
-        # pklName = f'{coordination.bld_type}readDOE.pkl'
-        pklName = 'readDOE.pkl'
         # create a binary file for serialized obj
-        pkl_file_path = os.path.join(DIR_CURR,pklName)
+        pkl_file_path = os.path.join(DIR_CURR,'readDOE.pkl')
         pickle_readDOE = open(pkl_file_path, 'wb')
 
         # dump in ../resources

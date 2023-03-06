@@ -10,58 +10,58 @@
 # =================================================
 # Simulation parameters,
 Month,6,           # starting month 6
-Day,1,             # starting day (1-31) 16
-nDay,30,           # number of days to run simulation 14
+Day,9,             # starting day (1-31) 16
+nDay,14,           # number of days to run simulation 14
 dtSim,300,         # simulation time step [s]
 dtWeather,3600,    # weather time step [s]
 nDay_spinup,1,     # Number of days accounted for spin-up
 nightStart,18,     # Sunset time in local standard time
 nightEnd,8,        # Sunrise time in local standard time
-Elevation,153,     # Elevation above sea level [m]
+Elevation,245,     # Elevation above sea level [m]
 
 # =================================================
 # Control switches
 # =================================================
-OPTION_RAY,0,         # 1: read the view factors from an existing file, 0: calculate view factors by ray tracing
+OPTION_RAY,1,         # 1: read the view factors from an existing file, 0: calculate view factors by ray tracing
 Rural_Model_name,1,   # 1: MOST, 2: Using an external forcing file with variables specified at the top of the domain
 EB_RuralModel_name,2, # 1: Louis, 2: Penman_Monteith
-Tdeep_ctrl,2,         # 1: Using force restore method, 2: Using climate data (from epw file). If reliable estimate of deep soil temperature is not available using force restore method is recommended
+Tdeep_ctrl,1,         # 1: Using force restore method, 2: Using climate data (from epw file). If reliable estimate of deep soil temperature is not available using force restore method is recommended
 
 # =================================================
 # Urban Configuration
 # =================================================
-nz,37,                 # number of points (nz*dz = 3*bldHeight)
-nz_u,12.19,               # number of canopy levels in the vertical (nz_u*dz = bldHeight)
+nz,50,                 # number of points (nz*dz = 3*bldHeight)
+nz_u,15,               # number of canopy levels in the vertical (nz_u*dz = bldHeight)
 dz,1,                  # vertical resolution [m]
-Width_canyon,16.92,     # distance between buildings at street level in the x and y direction must be equal [m]
-Width_roof,16.92,         # building dimension [m]
-theta_canyon,90,       # Canyon direction from geographical north, in the counter trigonometric direction (from -90 to 90 degrees)
-Height_canyon,12.19,      # Average building height [m]
+Width_canyon,18.2,     # distance between buildings at street level in the x and y direction must be equal [m]
+Width_roof,20,         # building dimension [m]
+theta_canyon,65,       # Canyon direction from geographical north, in the counter trigonometric direction (from -90 to 90 degrees)
+Height_canyon,15,      # Average building height [m]
 fveg_R,0,              # Vegetated roof fraction (between 0 and 1)
 fimp_R,1.0,            # Impervious roof fraction (between 0 and 1)
-fveg_G,0,            # Vegetated ground fraction
+fveg_G,0.5,            # Vegetated ground fraction
 fbare_G,0.0,           # Bare ground fraction
-fimp_G,1,            # Impervious ground fraction
+fimp_G,0.5,            # Impervious ground fraction
 Per_runoff_R,1,        # Percentage of roof excess water that leaves the system as runoff, needs to be between 0-1 [-]
 Per_runoff_G,0.5,      # Percentage of ground excess water that leaves the system as runoff, needs to be between 0-1 [-]
 
 # =================================================
 # Radiative Properties
 # =================================================
-aveg_R,0.25,         # Roof vegetation surface albedo (-)
-aimp_R,0.25,         # Roof impervious albedo (-)
-eveg_R,0.95,         # Roof vegetation surface emissivity (-)
-eimp_R,0.95,         # Roof impervious emissivity (-)
-aveg_G,0.25,         # Ground vegetation surface albedo (-)
-abare_G,0.25,         # Ground vegetation surface albedo
-aimp_G,0.08,          # Ground impervious albedo (-)
+aveg_R,0.27,         # Roof vegetation surface albedo (-)
+aimp_R,0.15,         # Roof impervious albedo (-)
+eveg_R,0.97,         # Roof vegetation surface emissivity (-)
+eimp_R,0.94,         # Roof impervious emissivity (-)
+aveg_G,0.27,         # Ground vegetation surface albedo (-)
+abare_G,0.2,         # Ground vegetation surface albedo
+aimp_G,0.1,          # Ground impervious albedo (-)
 eveg_G,0.93,         # Ground vegetation surface emissivity (-)
 ebare_G,0.973,       # Ground vegetation surface emissivity
 eimp_G,0.95,         # Ground impervious emissivity (-)
 albedo_W,0.25,       # Wall surface albedo (-)
-emissivity_W,0.95,    # Wall emissivity (-)
-albedo_T,0.25,       # Tree albedo (-)
-emissivity_T,0.95,   # Tree emissivity (-)
+emissivity_W,0.9,    # Wall emissivity (-)
+albedo_T,0.27,       # Tree albedo (-)
+emissivity_T,0.97,   # Tree emissivity (-)
 e_rural,0.95,        # Rural emissivity
 a_rural,0.2,         # Rural albedo
 aveg_rural,0.20,     # Vegetation (trees) albedo
@@ -268,7 +268,7 @@ WindMin_Urban,0.01,    # min wind speed in the urban area [m s^-1]
 # =================================================
 # Building Energy Model
 # =================================================
-glzR,0.33,              # Glazing Ratio (0 - 1)
+glzR,0.1,              # Glazing Ratio (0 - 1)
 autosize,0,            # autosize HVAC (1 for yes; 0 for no)
 sensOcc,100,           # Sensible heat per occupant [W]
 LatFOcc,0.3,           # Latent heat fraction from occupant (normally 0.3)
@@ -297,7 +297,7 @@ h_floor,3,             # Floor height [m] ## Check run with this lower height an
 # 8(Fairbanks)                  16
 # 4C (Basel)                    17
 
-zone,11,
+zone,17,
 
 # Building type (pre-80's build, 80's-present build, new) (0 or 1)
 bld,
@@ -306,7 +306,7 @@ bld,
 0,0,0,    # LargeHotel
 0,0,0,    # LargeOffice
 0,0,0,    # MediumOffice
-0,0,1,    # MidRiseApartment
+0,1,0,    # MidRiseApartment
 0,0,0,    # OutPatient
 0,0,0,    # PrimarySchool
 0,0,0,    # QuickServiceRestaurant

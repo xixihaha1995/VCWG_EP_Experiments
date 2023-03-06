@@ -28,7 +28,7 @@ from ReadDOE import readDOE
 from Material import Material
 from psychrometrics import HumFromRHumTemp
 from EPWGenerator import write_epw
-import _1_parent_coordination as coordination
+
 """
 Main VCWG script 
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -175,9 +175,7 @@ class VCWG_Hydro(object):
         # --------------------------
         # Define BEM for each DOE type (read the fraction)
         # Open pickle file in binary form
-        # refDOE, refBEM, refSchedule = readDOE(False)
-        pklName = 'readDOE.pkl'
-        readDOE_file = open(pklName, 'rb')
+        readDOE_file = open('readDOE.PKL', 'rb')
         refDOE = cPickle.load(readDOE_file)
         refBEM = cPickle.load(readDOE_file)
         refSchedule = cPickle.load(readDOE_file)
@@ -430,15 +428,13 @@ class VCWG_Hydro(object):
 
         # Start simulation
         for it in range(0,self.simTime.nt-1,1):
-            # print(r'Progress [%]', numpy.round(100 * it / self.simTime.nt, 2))
+            print(r'Progress [%]', numpy.round(100 * it / self.simTime.nt, 2))
 
             # Simulation time increment raised to weather time step
             SunPosition,MeteoData,Anthropogenic,location,ParCalculation = \
                 ForcingData(self.MeteoDataRaw_intp,it, self.WBCanyon.SoilPotW, self.VCWGParamFileName,self.simTime)
             self.simTime.UpdateDate()
-            inobis = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
-            Esimtime = int((inobis[self.simTime.month - 1] + self.simTime.day - 1) * self.simTime.timeDay)+(it-1)*300/3600
-            #print(Esimtime)
+
             #----------------------
             # Update energy balance
             # ---------------------
@@ -616,12 +612,30 @@ class VCWG_Hydro(object):
                 # Calculate one-point temperature and humidity in the canyon: Using 1-D profiles in the canyon
                 canTemp = numpy.mean(self.UCM.VerticalProfUrban.th[0:self.Geometry_m.nz_u])
                 canHum = numpy.mean(self.UCM.VerticalProfUrban.qn[0:self.Geometry_m.nz_u])
+                self.BEM[i].building.BEMCalc(canTemp,canHum,self.BEM[i],MeteoData,ParCalculation,self.simTime,self.Geometry_m,
+                                             self.FractionsRoof,self.EBCanyon.SWR)
 
-                self.BEM[i] = coordination.BEMCalc_Element(self.BEM[i],it, self.simTime,self.UCM.VerticalProfUrban,
-                                                           self.Geometry_m, MeteoData, self.FractionsRoof)
-                ###
                 # Electricity consumption of urban area [W]
                 self.BEM[i].ElecTotal = self.BEM[i].building.ElecTotal * self.BEM[i].fl_area
+
+                # Update surface temperature of building surfaces
+                # Mass
+                self.BEM[i].mass.Element(0,0,0,0,self.TimeParam.dts,0.,1,self.BEM[i].building.fluxMass,self.BEM[i].building.fluxMass)
+                # Roof
+                if self.FractionsRoof.fimp > 0:
+                    self.BEM[i].roofImp.Element(self.EBRoof.SWR.SWRabsRoofImp,self.EBRoof.LWR.LWRabsRoofImp,self.EBRoof.LEflux.LEfluxRoofImp,
+                                                self.EBRoof.Hflux.HfluxRoofImp,self.TimeParam.dts,0.,1,None,self.BEM[i].building.fluxRoof)
+                if self.FractionsRoof.fveg > 0:
+                    self.BEM[i].roofVeg.Element(self.EBRoof.SWR.SWRabsRoofVeg,self.EBRoof.LWR.LWRabsRoofVeg,self.EBRoof.LEflux.LEfluxRoofVeg,
+                                                self.EBRoof.Hflux.HfluxRoofVeg,self.TimeParam.dts,0.,1,None,self.BEM[i].building.fluxRoof)
+                # Walls
+                self.BEM[i].wallSun.Element(self.EBCanyon.SWR.SWRabs.SWRabsWallSun,self.EBCanyon.LWR.LWRabs.LWRabsWallSun,
+                                            self.EBCanyon.LEflux.LEfluxWallSun,self.EBCanyon.Hflux.HfluxWallSun,self.TimeParam.dts,
+                                            0.,1,None,self.BEM[i].building.fluxWall)
+                self.BEM[i].wallShade.Element(self.EBCanyon.SWR.SWRabs.SWRabsWallShade,self.EBCanyon.LWR.LWRabs.LWRabsWallShade,
+                                              self.EBCanyon.LEflux.LEfluxWallShade,self.EBCanyon.Hflux.HfluxWallShade,self.TimeParam.dts,
+                                              0.,1,None,self.BEM[i].building.fluxWall)
+
             # -----------------------------------
             # Update outdoor surface temperatures
             # -----------------------------------
