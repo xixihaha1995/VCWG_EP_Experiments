@@ -28,7 +28,7 @@ from ReadDOE import readDOE
 from Material import Material
 from psychrometrics import HumFromRHumTemp
 from EPWGenerator import write_epw
-import _0_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 """
 Main VCWG script 
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -176,14 +176,6 @@ class VCWG_Hydro(object):
         # Define BEM for each DOE type (read the fraction)
         # Open pickle file in binary form
         # refDOE, refBEM, refSchedule = readDOE(False)
-        # #multiprocessing safe open
-        # if coordination.uwgVariableValue > 0:
-        #     str_variable = 'positive' + str(abs(coordination.uwgVariableValue))
-        # elif coordination.uwgVariableValue < 0:
-        #     str_variable = 'negative' + str(abs(coordination.uwgVariableValue))
-        # else:
-        #     str_variable = '0'
-        # pklName = f'{coordination.uwgVariable}_{str_variable}readDOE.pkl'
         pklName = 'readDOE.pkl'
         readDOE_file = open(pklName, 'rb')
         refDOE = cPickle.load(readDOE_file)
@@ -625,35 +617,11 @@ class VCWG_Hydro(object):
                 canTemp = numpy.mean(self.UCM.VerticalProfUrban.th[0:self.Geometry_m.nz_u])
                 canHum = numpy.mean(self.UCM.VerticalProfUrban.qn[0:self.Geometry_m.nz_u])
 
-                # self.BEM[i].building.BEMCalc(canTemp, canHum, self.BEM[i], MeteoData, ParCalculation, self.simTime,
-                #                              self.Geometry_m,
-                #                              self.FractionsRoof, self.EBCanyon.SWR, self.UCM.VerticalProfUrban,it)
-                # BEM, it, simTime, VerticalProfUrban, Geometry_m, MeteoData,
-                # FractionsRoof
                 self.BEM[i] = coordination.BEMCalc_Element(self.BEM[i],it, self.simTime,self.UCM.VerticalProfUrban,
                                                            self.Geometry_m, MeteoData, self.FractionsRoof)
                 ###
                 # Electricity consumption of urban area [W]
                 self.BEM[i].ElecTotal = self.BEM[i].building.ElecTotal * self.BEM[i].fl_area
-
-                # Update surface temperature of building surfaces
-                # Mass
-                # self.BEM[i].mass.Element(0,0,0,0,self.TimeParam.dts,0.,1,self.BEM[i].building.fluxMass,self.BEM[i].building.fluxMass)
-                # # Roof
-                # if self.FractionsRoof.fimp > 0:
-                #     self.BEM[i].roofImp.Element(self.EBRoof.SWR.SWRabsRoofImp,self.EBRoof.LWR.LWRabsRoofImp,self.EBRoof.LEflux.LEfluxRoofImp,
-                #                                 self.EBRoof.Hflux.HfluxRoofImp,self.TimeParam.dts,0.,1,None,self.BEM[i].building.fluxRoof)
-                # if self.FractionsRoof.fveg > 0:
-                #     self.BEM[i].roofVeg.Element(self.EBRoof.SWR.SWRabsRoofVeg,self.EBRoof.LWR.LWRabsRoofVeg,self.EBRoof.LEflux.LEfluxRoofVeg,
-                #                                 self.EBRoof.Hflux.HfluxRoofVeg,self.TimeParam.dts,0.,1,None,self.BEM[i].building.fluxRoof)
-                # # Walls
-                # self.BEM[i].wallSun.Element(self.EBCanyon.SWR.SWRabs.SWRabsWallSun,self.EBCanyon.LWR.LWRabs.LWRabsWallSun,
-                #                             self.EBCanyon.LEflux.LEfluxWallSun,self.EBCanyon.Hflux.HfluxWallSun,self.TimeParam.dts,
-                #                             0.,1,None,self.BEM[i].building.fluxWall)
-                # self.BEM[i].wallShade.Element(self.EBCanyon.SWR.SWRabs.SWRabsWallShade,self.EBCanyon.LWR.LWRabs.LWRabsWallShade,
-                #                               self.EBCanyon.LEflux.LEfluxWallShade,self.EBCanyon.Hflux.HfluxWallShade,self.TimeParam.dts,
-                #                               0.,1,None,self.BEM[i].building.fluxWall)
-
             # -----------------------------------
             # Update outdoor surface temperatures
             # -----------------------------------

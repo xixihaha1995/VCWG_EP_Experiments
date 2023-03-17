@@ -5,7 +5,7 @@ from Resistance_Functions import Ressitance_Calculations
 from ColModel import ColumnModelCal
 import copy
 
-import _0_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 
 """
 Urban canopy model
@@ -116,8 +116,6 @@ class UCM_Def():
         """
 
         ForcingVariable = [ForcTemp,ForcWindSpeed,ForcWindDir,Forcq_Top]
-        coordination.ForcTemp_K = ForcTemp
-        # print(f'ForcWindSpeed = {ForcWindSpeed}')
 
         self.thb.ground_imp = copy.copy(thb_ground.ground_imp)    # source term in temperature equation originated from impervious ground [K m s^-1]
         self.thb.ground_bare = copy.copy(thb_ground.ground_bare)  # source term in temperature equation originated from bare ground [K m s^-1]
@@ -205,6 +203,14 @@ class UCM_Def():
         dls , dlk = Length_Scale_StabilityCorrection(Geometry_m.nz,Geometry_m.z,Geometry_m.Height_canyon,Ceps,Ck,hfx,
                                                      self.Vx_eq,self.Vy_eq,self.VerticalProfUrban,Geometry_m.lambdaf,
                                                      disp,Geometry_m.dz,vol)
+        # cmu_can = max(5E-2, -1.6 * Geometry_m.lambdaf ** 2. + 0.75 * Geometry_m.lambdaf + 0.022)
+        # cmu_above = 5E-2
+        # cmu = numpy.zeros(Geometry_m.nz)
+        # for i in range(0,Geometry_m.nz_u):
+        #     cmu[i] = cmu_can
+        # for i in range(Geometry_m.nz_u,Geometry_m.nz):
+        #     cmu[i] = cmu_above
+        # dls, dlk = Length_Scale(Geometry_m.nz,Geometry_m.z,Geometry_m.lambdap,Geometry_m.Height_canyon,Ceps,cmu, Ck)
         # Calculate the drag coefficient
         Cdrag = Drag_Coef(Geometry_m.nz,Geometry_m.lambdaf,pb)
 

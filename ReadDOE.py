@@ -13,7 +13,7 @@ import Utilities
 import pandas
 import numpy
 
-import _0_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 """
 Developed by Bruno Bueno
 Building Technology, Massachusetts Institute of Technology (MIT), Cambridge, U.S.A.
@@ -470,7 +470,7 @@ def readDOE(serialize_output=True):
         #     str_variable = 'negative' + str(abs(coordination.uwgVariableValue))
         # else:
         #     str_variable = '0'
-        # pklName = f'{coordination.uwgVariable}_{str_variable}readDOE.pkl'
+        # pklName = f'{coordination.bld_type}readDOE.pkl'
         pklName = 'readDOE.pkl'
         # create a binary file for serialized obj
         pkl_file_path = os.path.join(DIR_CURR,pklName)
