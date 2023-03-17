@@ -465,8 +465,8 @@ class EnergyBalanceRoof_Def(object):
         u_ref, u_Hveg = ResistanceCal.WindProfile_Roof(Gemeotry_m.Height_canyon, hc_roof, VerticalProfUrban,Gemeotry_m)
 
         # Calculate aerodynamic resistance [s m^-1]
-        ra = ResistanceCal.Roof_Aerodynamic_Resistance_1D(VerticalProfUrban,Gemeotry_m,zoh,Troof)
-
+        ra = ResistanceCal.Roof_Aerodynamic_Resistance_1D(VerticalProfUrban,Gemeotry_m,zom,Troof)
+        ra_HConv = ResistanceCal.Roof_Aerodynamic_Resistance_1D(VerticalProfUrban, Gemeotry_m, zoh, Troof)
         # Calculate soil resistance
         _Zs_, _dz_, _ms_, Osat, Ohy, nVG, alpVG, Ks_Zs, L, Pe, O33, SPAR, _EvL_Zs_, _Inf_Zs_, _RfH_Zs_, Rf_Zs, _Zinf_, _Kbot_, \
         _Slo_pot_, _Dz_, _aR_, _aTop_, _rsd_, _lan_dry_, _lan_s_, _cv_s_ = \
@@ -478,8 +478,8 @@ class EnergyBalanceRoof_Def(object):
                                           Osat[0], Ohy[0], L[0], Pe[0], O33[0], alpVG[0], nVG[0], SPAR)
 
         # sensible heat from impervious area [W m^-2]
-        Hroof_imp = cp_atm * rho_atm * (Troof_imp - T_above_canyon) / ra
-        coordination.vcwg_hConv_w_m2_per_K = cp_atm * rho_atm / ra
+        Hroof_imp = cp_atm * rho_atm * (Troof_imp - T_above_canyon) / ra_HConv
+        coordination.vcwg_hConv_w_m2_per_K = cp_atm * rho_atm / ra_HConv
         # print(f'Troof_imp: {Troof_imp - 273.15}, T_above_canyon: {T_above_canyon - 273.15},'
         #       f'hConv: {coordination.vcwg_hConv_w_m2_per_K}')
         # Potential evaporation from runon water on impervious area [kg m^-2 s^-1]
@@ -505,7 +505,7 @@ class EnergyBalanceRoof_Def(object):
                                                         MeteoData.Zatm, disp_h, zom)
 
             # sensible heat from vegetated area [W m^-2]
-            Hroof_veg = cp_atm * rho_atm * (Troof_veg - T_above_canyon) / (rb / (2 * (LAI_roof + ParVegRoof.SAI)) + ra)
+            Hroof_veg = cp_atm * rho_atm * (Troof_veg - T_above_canyon) / (rb / (2 * (LAI_roof + ParVegRoof.SAI)) + ra_HConv)
 
             # Potential evaporation from intercepted water on vegetation [kg m^-2 s^-1]
             Eroof_veg_pot = rho_atm * (qsat_T_rveg - q_above_canyon) / (rb / ((LAI_roof + ParVegRoof.SAI) * dw_veg_roof) + ra)
