@@ -7,10 +7,7 @@ def read_ini(config_file_name):
     global config
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
-    if 'MedOffice' in config_file_name:
-        config_path = os.path.join(project_path, 'A_prepost_processing','_configs','MedOffice',config_file_name)
-    elif 'HighOffice' in config_file_name:
-        config_path = os.path.join(project_path, 'A_prepost_processing','_configs','HighOffice',config_file_name)
+    config_path = os.path.join(project_path, 'A_prepost_processing', '_configs', config_file_name)
     config.read(config_path)
 
 def run_ep_api(sensitivity_file_name,_config=None, _value=None):
