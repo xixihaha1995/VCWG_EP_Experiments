@@ -4,13 +4,13 @@ from VCWG_Hydrology import VCWG_Hydro
 import os, signal
 
 def run_vcwg():
-    if 'None' in coordination.config['Bypass']['TopForcingFileName']:
+    if 'None' in coordination.TopForcingFileName:
         TopForcingFileName = None
-        epwFileName = coordination.config['Bypass']['epwFileName']
+        epwFileName = coordination.epwFileName
     else:
         epwFileName = None
-        TopForcingFileName = coordination.config['Bypass']['TopForcingFileName']
-    VCWGParamFileName = coordination.config['Bypass']['VCWGParamFileName']
+        TopForcingFileName = coordination.TopForcingFileName
+    VCWGParamFileName = coordination.VCWGParamFileName
     ViewFactorFileName = f'{coordination.bld_type}_ViewFactor.txt'
     # Case name to append output file names with
     case = f'{coordination.bld_type}'
@@ -237,3 +237,47 @@ def medOff_midApart_get_ep_results(state):
         coordination.ep_wallSun_Text_K = s_wall_Text_c + 273.15
         coordination.ep_wallShade_Text_K = n_wall_Text_c + 273.15
         coordination.sem3.release()
+
+def run_ep_api():
+
+    experiments_theme = 'Chicago_MedOffice_IDFComplexity'
+    epwFileName = 'USA_IL_Chicago-OHare.Intl.AP.725300_TMY3_No_Precipitable_Water.epw'
+    idfFileName = 'Detailed_MedOffice.idf'
+    TopForcingFileName = 'None'
+    VCWGParamFileName = 'Chicago_MedOffice.uwg'
+    start_time = '2004-06-01 00:00:00'
+
+    '''
+    experiments_theme = 'Chicago_MidRiseApartment_IDFComplexity'
+    epwFileName = 'USA_IL_Chicago-OHare.Intl.AP.725300_TMY3_No_Precipitable_Water.epw'
+    idfFileName = 'Detailed_MidRiseApartment.idf'
+    TopForcingFileName = 'None'
+    VCWGParamFileName = 'Chicago_MidRiseApartment.uwg'
+    start_time = '2004-06-01 00:00:00'
+    '''
+
+    coordination.ini_all(experiments_theme,idfFileName,epwFileName,start_time,
+                         TopForcingFileName,VCWGParamFileName)
+
+    state = coordination.ep_api.state_manager.new_state()
+    coordination.psychrometric=coordination.ep_api.functional.psychrometrics(state)
+    coordination.ep_api.runtime.callback_begin_zone_timestep_before_set_current_weather(state,
+                                                                                        overwrite_ep_weather)
+    if 'Detailed_MedOffice' in coordination.bld_type or 'Detailed_MidRiseApartment' in coordination.bld_type:
+        coordination.ep_api.runtime.callback_end_system_timestep_after_hvac_reporting(state,
+                                                                                      medOff_midApart_get_ep_results)
+    else:
+        raise ValueError('ERROR: Building type not supported')
+
+    coordination.ep_api.exchange.request_variable(state, "HVAC System Total Heat Rejection Energy", "SIMHVAC")
+    coordination.ep_api.exchange.request_variable(state, "Site Outdoor Air Drybulb Temperature", "ENVIRONMENT")
+    coordination.ep_api.exchange.request_variable(state, "Site Outdoor Air Humidity Ratio", "ENVIRONMENT")
+
+    output_path = coordination.ep_trivial_path
+    weather_file_path = os.path.join('.\\resources\\epw', epwFileName)
+    idfFilePath = os.path.join(f'.\\resources\\idf', idfFileName)
+    sys_args = '-d', output_path, '-w', weather_file_path, idfFilePath
+    coordination.ep_api.runtime.run_energyplus(state, sys_args)
+
+if __name__ == '__main__':
+    run_ep_api()

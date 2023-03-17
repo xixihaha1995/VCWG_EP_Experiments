@@ -1,6 +1,7 @@
 import configparser, datetime, threading, sys, os,numpy
 
-def ini_all(_config_file_name):
+def ini_all(_experiments_theme,_idfFileName,_epwFileName,_start_time,
+            _TopForcingFileName,_VCWGParamFileName):
     global config, save_path_clean,ep_trivial_path, data_saving_path, bld_type,\
         ep_api, psychrometric,\
         sem0, sem1, sem2, sem3, \
@@ -9,29 +10,28 @@ def ini_all(_config_file_name):
         ep_floor_Text_K, ep_floor_Tint_K, ep_roof_Text_K, ep_roof_Tint_K, \
         ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K,\
         footprint_area_m2, vcwg_hConv_w_m2_per_K, \
-        get_ep_results_inited_handle, overwrite_ep_weather_inited_handle, called_vcwg_bool, ep_last_call_time_seconds
+        get_ep_results_inited_handle, overwrite_ep_weather_inited_handle, called_vcwg_bool, ep_last_call_time_seconds, \
+        epwFileName, start_time,TopForcingFileName, VCWGParamFileName
+
+    epwFileName = _epwFileName
+    start_time = _start_time
+    TopForcingFileName = _TopForcingFileName
+    VCWGParamFileName = _VCWGParamFileName
 
     get_ep_results_inited_handle = False
     overwrite_ep_weather_inited_handle = False
     called_vcwg_bool = False
     ep_last_call_time_seconds = 0
-
-
     project_path = os.path.dirname(os.path.abspath(__file__))
-
-    config = configparser.ConfigParser()
-    config_path = os.path.join(project_path, 'A_prepost_processing', '_configs', _config_file_name)
-    config.read(config_path)
-
-    bld_type = config['Bypass']['idfFileName'][0:-4]
+    bld_type = _idfFileName[0:-4]
     print(f'bld_type = {bld_type}')
 
-    experiments_theme = config['Bypass']['experiments_theme']
+    experiments_theme = _experiments_theme
     save_path_clean = False
 
-    data_saving_path = os.path.join(project_path, 'A_prepost_processing','_saved_Cases',
+    data_saving_path = os.path.join(project_path, 'A_saved_Cases',
                                     experiments_theme,f'{bld_type}.csv')
-    ep_trivial_path = os.path.join(project_path, 'A_prepost_processing','_saved_Cases',
+    ep_trivial_path = os.path.join(project_path, 'A_saved_Cases',
                                    experiments_theme, f"{bld_type}_ep_trivial_outputs")
     sys.path.insert(0, 'C:/EnergyPlusV22-1-0')
     sys.path.insert(0, '/usr/local/EnergyPlus-22-1-0/'),
@@ -142,7 +142,7 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m,MeteoData,
         os.remove(data_saving_path)
         save_path_clean = True
     vcwg_needed_time_idx_in_seconds = it * simTime.dt
-    cur_datetime = datetime.datetime.strptime(config['Bypass']['start_time'],
+    cur_datetime = datetime.datetime.strptime(start_time,
                                               '%Y-%m-%d %H:%M:%S') + \
                    datetime.timedelta(seconds=vcwg_needed_time_idx_in_seconds)
     print('current time: ', cur_datetime)
