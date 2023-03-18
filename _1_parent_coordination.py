@@ -57,21 +57,6 @@ def ini_all(_bld_type,_experiments_theme,_idfFileName,_epwFileName,_start_time,
     sensor_heights = [float(i) for i in _sensor_height_meter.split(',')]
     vcwg_hConv_w_m2_per_K = 10
 
-
-
-    EP_floor_energy_lst = []
-    EP_wall_temperatures_K_dict = {}
-    EP_floor_energy_lst = [0.0] * EP_nFloor
-    EP_wall_temperatures_K_dict['south'] = [300] * EP_nFloor
-    EP_wall_temperatures_K_dict['north'] = [300] * EP_nFloor
-    EP_wall_temperatures_K_dict['east'] = [300] * EP_nFloor
-    EP_wall_temperatures_K_dict['west'] = [300] * EP_nFloor
-
-    vcwg_canTemp_K_list = [ 300 for i in range(EP_nFloor)]
-    vcwg_canTempWet_K_list = [ 300 for i in range(EP_nFloor)]
-    vcwg_canSpecHum_Ratio_list = [ 0 for i in range(EP_nFloor)]
-    vcwg_canPress_Pa_list = [ 0 for i in range(EP_nFloor)]
-
     ep_indoorTemp_C = 20
     ep_sensWaste_w_m2_per_footprint_area = 0
     ep_floor_Text_K = 300
@@ -92,6 +77,19 @@ def ini_all(_bld_type,_experiments_theme,_idfFileName,_epwFileName,_start_time,
     elif 'SimplifiedHighBld' in bld_type:
         EP_nFloor = 3
         footprint_area_m2 = 31 * 15
+
+    EP_floor_energy_lst = []
+    EP_wall_temperatures_K_dict = {}
+    EP_floor_energy_lst = [0.0] * EP_nFloor
+    EP_wall_temperatures_K_dict['south'] = [300] * EP_nFloor
+    EP_wall_temperatures_K_dict['north'] = [300] * EP_nFloor
+    EP_wall_temperatures_K_dict['east'] = [300] * EP_nFloor
+    EP_wall_temperatures_K_dict['west'] = [300] * EP_nFloor
+
+    vcwg_canTemp_K_list = [ 300 for i in range(EP_nFloor)]
+    vcwg_canTempWet_K_list = [ 300 for i in range(EP_nFloor)]
+    vcwg_canSpecHum_Ratio_list = [ 0 for i in range(EP_nFloor)]
+    vcwg_canPress_Pa_list = [ 0 for i in range(EP_nFloor)]
 
 
 def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m, MeteoData,
