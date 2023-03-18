@@ -611,7 +611,7 @@ class Surface_HeatFlux(object):
 
         rap_can_HConv, notUsedA, notUsedB, notUsedC, notUsedD = \
             ResistanceCal.Ground_Aerodynamic_Resistance_1D(WindSpeed_top,MeteoData.Zatm,VerticalProfUrban,Gemeotry_m,Tcanyon,Tground,
-                                                           Gemeotry_m.Height_canyon,dcan,zomcan,_zoh_ground_,Gemeotry_m.Height_tree,
+                                                           Gemeotry_m.Height_canyon,dcan,zomcan*0.1,_zoh_ground_,Gemeotry_m.Height_tree,
                                                            Gemeotry_m.Radius_tree,ColParam)
 
         # Calculate stomatal and leaf boundary resistances of tree
