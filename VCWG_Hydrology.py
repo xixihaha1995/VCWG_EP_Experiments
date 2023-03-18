@@ -623,7 +623,6 @@ class VCWG_Hydro(object):
                 ###
                 # Electricity consumption of urban area [W]
                 self.BEM[i].ElecTotal = self.BEM[i].building.ElecTotal * self.BEM[i].fl_area
-
             # -----------------------------------
             # Update outdoor surface temperatures
             # -----------------------------------

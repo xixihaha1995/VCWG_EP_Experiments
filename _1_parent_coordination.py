@@ -7,13 +7,14 @@ def ini_all(_bld_type,_experiments_theme,_idfFileName,_epwFileName,_start_time,
         ep_api, psychrometric,\
         sem0, sem1, sem2, sem3, \
         vcwg_needed_time_idx_in_seconds, \
-        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, vcwg_wsp_mps, vcwg_wdir_deg, \
+        vcwg_canTemp_K, vcwg_canSpecHum_Ratio, vcwg_canPress_Pa, \
         vcwg_canTemp_K_list, vcwg_canTempWet_K_list,vcwg_canSpecHum_Ratio_list, vcwg_canPress_Pa_list, \
     ep_indoorTemp_C, ep_sensWaste_w_m2_per_footprint_area, \
         ep_floor_Text_K, ep_floor_Tint_K, ep_roof_Text_K, ep_roof_Tint_K, \
         ep_wallSun_Text_K, ep_wallSun_Tint_K, ep_wallShade_Text_K, ep_wallShade_Tint_K, \
         mediumOfficeBld_footprint_area_m2, smallOfficeBld_footprint_area_m2,\
         footprint_area_m2, vcwg_hConv_w_m2_per_K, EP_nFloor, EP_floor_energy_lst, EP_wall_temperatures_K_dict, \
+        get_ep_results_inited_handle, overwrite_ep_weather_inited_handle, called_vcwg_bool, ep_last_call_time_seconds, \
         epwFileName, start_time, TopForcingFileName, VCWGParamFileName
 
     epwFileName = _epwFileName
@@ -43,24 +44,20 @@ def ini_all(_bld_type,_experiments_theme,_idfFileName,_epwFileName,_start_time,
     sem2 = threading.Semaphore(0)
     sem3 = threading.Semaphore(0)
 
-    sensor_heights = [float(i) for i in _sensor_height_meter.split(',')]
-    vcwg_hConv_w_m2_per_K = 10
+    get_ep_results_inited_handle = False
+    overwrite_ep_weather_inited_handle = False
+    called_vcwg_bool = False
+    ep_last_call_time_seconds = 0
+
+
     vcwg_needed_time_idx_in_seconds = 0
     vcwg_canTemp_K = 300
     vcwg_canSpecHum_Ratio = 0
     vcwg_canPress_Pa = 0
-    vcwg_wsp_mps = 0
-    vcwg_wdir_deg = 0
+    sensor_heights = [float(i) for i in _sensor_height_meter.split(',')]
+    vcwg_hConv_w_m2_per_K = 10
 
-    if "MediumOffice" in bld_type:
-        EP_nFloor = 3
-        footprint_area_m2 = 53628 * 0.09290304 / 3
-    elif "20Stories" in bld_type:
-        EP_nFloor = 20
-        footprint_area_m2 = 31 * 15
-    elif 'SimplifiedHighBld' in bld_type:
-        EP_nFloor = 3
-        footprint_area_m2 = 31 * 15
+
 
     EP_floor_energy_lst = []
     EP_wall_temperatures_K_dict = {}
@@ -86,6 +83,16 @@ def ini_all(_bld_type,_experiments_theme,_idfFileName,_epwFileName,_start_time,
     ep_wallShade_Text_K = 300
     ep_wallShade_Tint_K = 300
 
+    if "MediumOffice" in bld_type:
+        EP_nFloor = 3
+        footprint_area_m2 = 53628 * 0.09290304 / 3
+    elif "20Stories" in bld_type:
+        EP_nFloor = 20
+        footprint_area_m2 = 31 * 15
+    elif 'SimplifiedHighBld' in bld_type:
+        EP_nFloor = 3
+        footprint_area_m2 = 31 * 15
+
 
 def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m, MeteoData,
                     FractionsRoof):
@@ -96,13 +103,9 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m, MeteoData,
     sem0.acquire()
     vcwg_needed_time_idx_in_seconds = (it + 1) * simTime.dt
 
-    TempProf_cur = VerticalProfUrban.th
-    HumProf_cur = VerticalProfUrban.qn
-    PresProf_cur = VerticalProfUrban.presProf
-
-    canTempProf_cur = TempProf_cur[0:Geometry_m.nz_u]
-    canSpecHumProf_cur = HumProf_cur[0:Geometry_m.nz_u]
-    canPressProf_cur = PresProf_cur[0:Geometry_m.nz_u]
+    canTempProf_cur =  VerticalProfUrban.th[0:Geometry_m.nz_u]
+    canSpecHumProf_cur = VerticalProfUrban.qn[0:Geometry_m.nz_u]
+    canPressProf_cur = VerticalProfUrban.presProf[0:Geometry_m.nz_u]
 
     vcwg_canTemp_K = numpy.mean(canTempProf_cur)
     vcwg_canSpecHum_Ratio = numpy.mean(canSpecHumProf_cur)
@@ -163,7 +166,6 @@ def BEMCalc_Element(BEM, it, simTime, VerticalProfUrban, Geometry_m, MeteoData,
         save_path_clean = True
 
     TempProf_cur = VerticalProfUrban.th
-    PresProf_cur = VerticalProfUrban.presProf
     vcwg_needed_time_idx_in_seconds = it * simTime.dt
     cur_datetime = datetime.datetime.strptime(start_time,
                                               '%Y-%m-%d %H:%M:%S') + \

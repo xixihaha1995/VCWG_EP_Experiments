@@ -466,7 +466,7 @@ class EnergyBalanceRoof_Def(object):
 
         # Calculate aerodynamic resistance [s m^-1]
         ra = ResistanceCal.Roof_Aerodynamic_Resistance_1D(VerticalProfUrban,Gemeotry_m,zom,Troof)
-        ra_HConv = ResistanceCal.Roof_Aerodynamic_Resistance_1D(VerticalProfUrban, Gemeotry_m, zoh, Troof)
+        ra_HConv = ResistanceCal.Roof_Aerodynamic_Resistance_1D(VerticalProfUrban,Gemeotry_m,zoh,Troof)
         # Calculate soil resistance
         _Zs_, _dz_, _ms_, Osat, Ohy, nVG, alpVG, Ks_Zs, L, Pe, O33, SPAR, _EvL_Zs_, _Inf_Zs_, _RfH_Zs_, Rf_Zs, _Zinf_, _Kbot_, \
         _Slo_pot_, _Dz_, _aR_, _aTop_, _rsd_, _lan_dry_, _lan_s_, _cv_s_ = \

@@ -3,14 +3,8 @@ import _1_parent_coordination as coordination
 from VCWG_Hydrology import VCWG_Hydro
 import os, signal
 
-get_ep_results_inited_handle = False
-overwrite_ep_weather_inited_handle = False
-called_vcwg_bool = False
 
-accu_hvac_heat_rejection_J = 0
-zone_floor_area_m2 = 0
-ep_last_accumulated_time_index_in_seconds = 0
-ep_last_call_time_seconds = 0
+
 
 def run_vcwg():
     if 'None' in coordination.TopForcingFileName:
@@ -79,14 +73,14 @@ def _highOfficeGetActuatorHandles(state):
         handles[f'owb{flr}'] = tmp_owb_handle
     return handles
 def overwrite_ep_weather(state):
-    global overwrite_ep_weather_inited_handle, oat_sensor_handle,\
+    global oat_sensor_handle,\
         wsped_mps_actuator_handle, wdir_deg_actuator_handle,zone_flr_area_handle,\
-        called_vcwg_bool, odb_actuator_handle, orh_actuator_handle
+        odb_actuator_handle, orh_actuator_handle
 
-    if not overwrite_ep_weather_inited_handle:
+    if not coordination.overwrite_ep_weather_inited_handle:
         if not coordination.ep_api.exchange.api_data_fully_ready(state):
             return
-        overwrite_ep_weather_inited_handle = True
+        coordination.overwrite_ep_weather_inited_handle = True
         oat_sensor_handle = coordination.ep_api.exchange.get_variable_handle(state,
                                                                              "Site Outdoor Air Drybulb Temperature",
                                                                              "Environment")
@@ -118,10 +112,8 @@ def overwrite_ep_weather(state):
     warm_up = coordination.ep_api.exchange.warmup_flag(state)
     if not warm_up:
         # api_to_csv(state)
-        if not called_vcwg_bool:
-            global zone_floor_area_m2
-            #zone_floor_area_m2 = coordination.ep_api.exchange.get_internal_variable_value(state, zone_flr_area_handle)
-            called_vcwg_bool = True
+        if not coordination.called_vcwg_bool:
+            coordination.called_vcwg_bool = True
             Thread(target=run_vcwg).start()
         # Wait for the upstream (VCWG upload canyon info to Parent) to finish
         coordination.sem1.acquire()
@@ -300,24 +292,23 @@ def _medOfficeGetSensorValues(state, handles):
 
     return wall_temperatures_dict, roofTextK, flrTextK, south_K, north_K
 def MediumOffice_get_ep_results(state):
-    global get_ep_results_inited_handle, medOfficeSensorHandles
+    global medOfficeSensorHandles
 
-    if not get_ep_results_inited_handle:
+    if not coordination.get_ep_results_inited_handle:
         if not coordination.ep_api.exchange.api_data_fully_ready(state):
             return
-        get_ep_results_inited_handle = True
+        coordination.get_ep_results_inited_handle = True
 
         medOfficeSensorHandles = _medOfficeGetSensorHandles(state)
 
     # get EP results, upload to coordination
-    if called_vcwg_bool:
-        global ep_last_call_time_seconds
+    if coordination.called_vcwg_bool:
 
         coordination.sem2.acquire()
         curr_sim_time_in_hours = coordination.ep_api.exchange.current_sim_time(state)
         curr_sim_time_in_seconds = curr_sim_time_in_hours * 3600  # Should always accumulate, since system time always advances
-        accumulated_time_in_seconds = curr_sim_time_in_seconds - ep_last_call_time_seconds
-        ep_last_call_time_seconds = curr_sim_time_in_seconds
+        accumulated_time_in_seconds = curr_sim_time_in_seconds - coordination.ep_last_call_time_seconds
+        coordination.ep_last_call_time_seconds = curr_sim_time_in_seconds
         hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state, medOfficeSensorHandles['simhvac'])
         hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
         for flr in range(coordination.EP_nFloor):
@@ -799,27 +790,25 @@ def _20_Stories_batch_get_surface_temperatures(state, wall_handles_dict, roof_fl
 
     return wall_temperatures_dict, roof_Text_K, floor_Text_K, south_wall_Text_K, north_wall_Text_K
 def High20Stories_get_ep_results(state):
-    global get_ep_results_inited_handle, \
-        hvac_heat_rejection_sensor_handle,\
+    global hvac_heat_rejection_sensor_handle,\
         wall_handles_dict, roof_floor_handles_dict, pthp_energy_handles_dict
     _20Stories_get_zone_to_pthp_dict()
-    if not get_ep_results_inited_handle:
+    if not coordination.get_ep_results_inited_handle:
         if not coordination.ep_api.exchange.api_data_fully_ready(state):
             return
-        get_ep_results_inited_handle = True
+        coordination.get_ep_results_inited_handle = True
         wall_handles_dict,roof_floor_handles_dict, pthp_energy_handles_dict = _20Stories_batch_handles(state)
         hvac_heat_rejection_sensor_handle = \
             coordination.ep_api.exchange.get_variable_handle(state,\
                                                              "HVAC System Total Heat Rejection Energy",\
                                                              "SIMHVAC")
     warm_up = coordination.ep_api.exchange.warmup_flag(state)
-    if not warm_up and called_vcwg_bool:
-        global ep_last_call_time_seconds
+    if not warm_up and coordination.called_vcwg_bool:
         coordination.sem2.acquire()
         curr_sim_time_in_hours = coordination.ep_api.exchange.current_sim_time(state)
         curr_sim_time_in_seconds = curr_sim_time_in_hours * 3600  # Should always accumulate, since system time always advances
-        accumulated_time_in_seconds = curr_sim_time_in_seconds - ep_last_call_time_seconds
-        ep_last_call_time_seconds = curr_sim_time_in_seconds
+        accumulated_time_in_seconds = curr_sim_time_in_seconds - coordination.ep_last_call_time_seconds
+        coordination.ep_last_call_time_seconds = curr_sim_time_in_seconds
         hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state,hvac_heat_rejection_sensor_handle)
         hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
