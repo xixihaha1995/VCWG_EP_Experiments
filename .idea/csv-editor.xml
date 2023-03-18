@@ -17,6 +17,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\A_prepost_processing\Chicago_MedOffice_Sensitivity\Width_canyon_11.1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\A_prepost_processing\Chicago_MedOffice_Sensitivity\Width_canyon_22.2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\A_prepost_processing\_measurements\CAPITOUL\CAPITOUL_measurements_2004-06-01_to_2004-06-30.csv">
           <value>
             <Attribute>

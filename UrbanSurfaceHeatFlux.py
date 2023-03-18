@@ -6,7 +6,7 @@ from Soil_Functions import Soil_Calculations
 from Resistance_Functions import Ressitance_Calculations
 from SurfaceHeatFluxDef import ForceRestoreConductiveHeatImp,ForceRestoreConductiveHeatSoil
 import copy
-
+import _1_parent_coordination as coordination
 '''
 Surface Energy Balance Model (SEBM): Calculate turbulent heat fluxes at the surface of urban elements
 Developed by Mohsen Moradi
@@ -337,14 +337,42 @@ class Surface_HeatFlux(object):
 
         Hwsun_z = []
         Hwshade_z = []
+
+        nbr_grid_points_per_floor = int(Geometry_m.nz_u / coordination.EP_nFloor)
+        Twsun_dummy = [Twsun for i in range(Geometry_m.nz_u)]
+        Twshade_dummy = [Twshade for i in range(Geometry_m.nz_u)]
+        _simHigh_idx_to_flr = {0:[0,2], 1:[2,12],2:[12,20]}
+        if "20Stories" in coordination.bld_type or "MediumOffice" in coordination.bld_type:
+            for idx, flr in enumerate(coordination.EP_wall_temperatures_K_dict['south']):
+                tmpSun = coordination.EP_wall_temperatures_K_dict['south'][idx]
+                tmpShade = coordination.EP_wall_temperatures_K_dict['north'][idx]
+                Twsun_dummy[idx * nbr_grid_points_per_floor:(idx + 1) * nbr_grid_points_per_floor] = \
+                [tmpSun] * nbr_grid_points_per_floor
+                Twshade_dummy[idx * nbr_grid_points_per_floor:(idx + 1) * nbr_grid_points_per_floor] = \
+                [tmpShade] * nbr_grid_points_per_floor
+        elif "SimplifiedHighBld" in coordination.bld_type:
+            Twsun_dummy[0:3] = [coordination.EP_wall_temperatures_K_dict['south'][0]] * 3
+            Twsun_dummy[3:57] = [coordination.EP_wall_temperatures_K_dict['south'][1]] * 54
+            Twsun_dummy[57:60] = [coordination.EP_wall_temperatures_K_dict['south'][2]] * 3
+            Twshade_dummy[0:3] = [coordination.EP_wall_temperatures_K_dict['north'][0]] * 3
+            Twshade_dummy[3:57] = [coordination.EP_wall_temperatures_K_dict['north'][1]] * 54
+            Twshade_dummy[57:60] = [coordination.EP_wall_temperatures_K_dict['north'][2]] * 3
+
         for i_z in range(Geometry_m.nz_u):
             # Calculate wall resistance [s m^-1]
             RES_w = ResistanceCal.Wall_Aerodynamic_Resistance(VerticalProfUrban,Geometry_m,ColParam.WindMin_Urban,cp_atm,
                                                               i_z,ParCalculation)
             # Calculate sensible heat flux from sunlit wall [W m^-2]
-            Hwsun_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twsun-T_canyon[i_z]) / (RES_w))
-            # Calculate sensible heat flux from shaded wall [W m^-2]
-            Hwshade_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twshade-T_canyon[i_z]) / (RES_w))
+            # Hwsun_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twsun-T_canyon[i_z]) / (RES_w))
+            # # Calculate sensible heat flux from shaded wall [W m^-2]
+            # Hwshade_z.append(cp_atm * VerticalProfUrban.rho[i_z] * (Twshade-T_canyon[i_z]) / (RES_w))
+
+            _tmpWSun = cp_atm * VerticalProfUrban.rho[i_z] * \
+                       (Twsun_dummy[int(i_z/Geometry_m.nz_u*len(Twsun_dummy))]-T_canyon[i_z]) / (RES_w)
+            _tmpWShade = cp_atm * VerticalProfUrban.rho[i_z] * \
+                         (Twshade_dummy[int(i_z/Geometry_m.nz_u*len(Twshade_dummy))]-T_canyon[i_z]) / (RES_w)
+            Hwsun_z.append(_tmpWSun)
+            Hwshade_z.append(_tmpWShade)
 
         # Calculate total sensible heat flux as the area weighted average of sensible heat fluxes from wall layers [W m^-2]
         Hwsun = (Geometry_m.dz/Geometry_m.Height_canyon)*sum(Hwsun_z)
@@ -609,6 +637,13 @@ class Surface_HeatFlux(object):
                                                            Gemeotry_m.Height_canyon,dcan,zomcan,zom_ground,Gemeotry_m.Height_tree,
                                                            Gemeotry_m.Radius_tree,ColParam)
 
+        rap_can_HConv, notUsedA, notUsedB, notUsedC, notUsedD = \
+            ResistanceCal.Ground_Aerodynamic_Resistance_1D(WindSpeed_top, MeteoData.Zatm, VerticalProfUrban, Gemeotry_m,
+                                                           Tcanyon, Tground,
+                                                           Gemeotry_m.Height_canyon, dcan, zomcan*0.1, _zoh_ground_,
+                                                           Gemeotry_m.Height_tree,
+                                                           Gemeotry_m.Radius_tree, ColParam)
+
         # Calculate stomatal and leaf boundary resistances of tree
         if Ctree == 1 and ParVegTree.LAI > 0:
 
@@ -675,9 +710,9 @@ class Surface_HeatFlux(object):
                                           O33[0], alpVG[0], nVG[0], SPAR)
 
         # Calculate sensible heat fluxes [W m^-2]
-        Himp = Cimp * (cp_atm*rho_atm * (Timp-Tcanyon) / rap_can)
-        Hbare = Cbare * (cp_atm*rho_atm * (Tbare-Tcanyon) / rap_can)
-        Hveg = Cveg * (cp_atm*rho_atm * (Tveg-Tcanyon) / (rb_L / (2*(ParVegGround.LAI+ParVegGround.SAI))+rap_can))
+        Himp = Cimp * (cp_atm*rho_atm * (Timp-Tcanyon) / rap_can_HConv)
+        Hbare = Cbare * (cp_atm*rho_atm * (Tbare-Tcanyon) / rap_can_HConv)
+        Hveg = Cveg * (cp_atm*rho_atm * (Tveg-Tcanyon) / (rb_L / (2*(ParVegGround.LAI+ParVegGround.SAI))+rap_can_HConv))
         Htree = Ctree * (cp_atm*rho_atm * (Ttree-Tcanyon_tree) / (rb_H/(2*(ParVegTree.LAI+ParVegTree.SAI))+rap_Htree_In))
 
 

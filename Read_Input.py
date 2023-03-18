@@ -10,9 +10,8 @@ import matplotlib.gridspec as gridspec
 import pandas as pd
 from Soil_Functions import Soil_Calculations
 from datetime import datetime
-from datetime import datetime
 
-import _0_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 
 """
 Read input variables
@@ -125,7 +124,6 @@ def read_VCWG_param(VCWG_param_file_path):
             count += 1
 
     ipd_vcwg = _init_param_dict
-
     return ipd_vcwg
 
 def ForcingData(MeteoDataRaw, itt, varargin,VCWG_param_file_path,SimTime):
