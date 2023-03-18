@@ -28,7 +28,7 @@ from ReadDOE import readDOE
 from Material import Material
 from psychrometrics import HumFromRHumTemp
 from EPWGenerator import write_epw
-import _1_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 """
 Main VCWG script 
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -176,14 +176,6 @@ class VCWG_Hydro(object):
         # Define BEM for each DOE type (read the fraction)
         # Open pickle file in binary form
         # refDOE, refBEM, refSchedule = readDOE(False)
-        # #multiprocessing safe open
-        # if coordination.uwgVariableValue > 0:
-        #     str_variable = 'positive' + str(abs(coordination.uwgVariableValue))
-        # elif coordination.uwgVariableValue < 0:
-        #     str_variable = 'negative' + str(abs(coordination.uwgVariableValue))
-        # else:
-        #     str_variable = '0'
-        # pklName = f'{coordination.csv_file_name}readDOE.pkl'
         pklName = 'readDOE.pkl'
         readDOE_file = open(pklName, 'rb')
         refDOE = cPickle.load(readDOE_file)

@@ -6,7 +6,7 @@ from Soil_Functions import Soil_Calculations
 from Resistance_Functions import Ressitance_Calculations
 from SurfaceHeatFluxDef import ForceRestoreConductiveHeatImp,ForceRestoreConductiveHeatSoil
 import copy
-import _1_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 '''
 Surface Energy Balance Model (SEBM): Calculate turbulent heat fluxes at the surface of urban elements
 Developed by Mohsen Moradi
@@ -640,7 +640,7 @@ class Surface_HeatFlux(object):
         rap_can_HConv, notUsedA, notUsedB, notUsedC, notUsedD = \
             ResistanceCal.Ground_Aerodynamic_Resistance_1D(WindSpeed_top, MeteoData.Zatm, VerticalProfUrban, Gemeotry_m,
                                                            Tcanyon, Tground,
-                                                           Gemeotry_m.Height_canyon, dcan, zomcan, _zoh_ground_,
+                                                           Gemeotry_m.Height_canyon, dcan, zomcan*0.1, _zoh_ground_,
                                                            Gemeotry_m.Height_tree,
                                                            Gemeotry_m.Radius_tree, ColParam)
 

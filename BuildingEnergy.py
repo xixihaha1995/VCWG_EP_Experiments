@@ -5,7 +5,7 @@ from psychrometrics import psychrometrics, moist_air_density
 import logging
 import numpy
 import copy
-import _1_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 """
 Calculate building characteristics
 Developed by Mohsen Moradi and Amir A. Aliabadi
@@ -183,23 +183,6 @@ class Building(object):
         QWater: energy consumption for domestic hot water [W m^-2]
         QGas: energy consumption for gas [W m^-2]
         """
-        if 'PartialVCWG' in coordination.csv_file_name:
-            coordination.sem0.acquire()
-            coordination.vcwg_needed_time_idx_in_seconds = (it + 1) * simTime.dt
-
-            TempProf_cur = VerticalProfUrban.th
-            HumProf_cur = VerticalProfUrban.qn
-            PresProf_cur = VerticalProfUrban.presProf
-
-            canTempProf_cur = TempProf_cur[0:Geometry_m.nz_u]
-            canSpecHumProf_cur = HumProf_cur[0:Geometry_m.nz_u]
-            canPressProf_cur = PresProf_cur[0:Geometry_m.nz_u]
-
-            coordination.vcwg_canTemp_K = numpy.mean(canTempProf_cur)
-            coordination.vcwg_canSpecHum_Ratio = numpy.mean(canSpecHumProf_cur)
-            coordination.vcwg_canPress_Pa = numpy.mean(canPressProf_cur)
-            coordination.sem1.release()
-
         self.logger.debug("Logging at {} {}".format(__name__, self.__repr__()))
 
         # Building Energy Model
@@ -488,72 +471,7 @@ class Building(object):
         # Waste heat of water heating
         self.QWater = (1 / self.heatEff - 1.) * self.sensWaterHeatDemand
         self.QGas = BEM.Gas * (1 - self.heatEff) * self.nFloor
-        if 'WithoutCooling' in coordination.csv_file_name:
-            self.sensWaste = 0
-        else:
-            self.sensWaste = self.sensWasteCoolHeatDehum + self.QWater + self.QGas
+        self.sensWaste = self.sensWasteCoolHeatDehum + self.QWater + self.QGas
         # Calculate total gas consumption per unit floor area [W m^-2] which is equal to gas consumption per unit floor area +
         # energy consumption for domestic hot water per unit floor area + energy consumption of the heating system per unit floor area
         self.GasTotal = BEM.Gas + (massFlorRateSWH*CpH20*(T_hot - MeteoData.waterTemp)/self.nFloor)/self.heatEff + self.heatConsump/self.nFloor
-
-        if 'PartialVCWG' in coordination.csv_file_name:
-            coordination.sem3.acquire()
-            self.sensWaste = coordination.ep_sensWaste_w_m2_per_footprint_area
-            coordination.ep_sensWaste_w_m2_per_footprint_area = 0
-            BEM.roofImp.Text = coordination.ep_roof_Text_K
-            BEM.roofVeg.Text = coordination.ep_roof_Text_K
-            coordination.sem0.release()
-
-        if os.path.exists(coordination.data_saving_path) and not coordination.save_path_clean:
-            os.remove(coordination.data_saving_path)
-            coordination.save_path_clean = True
-        TempProf_cur = VerticalProfUrban.th
-        PresProf_cur = VerticalProfUrban.presProf
-        canPressProf_cur = PresProf_cur[0:Geometry_m.nz_u]
-        vcwg_canPress_Pa = numpy.mean(canPressProf_cur)
-
-        vcwg_needed_time_idx_in_seconds = it * simTime.dt
-        cur_datetime = datetime.datetime.strptime(coordination.config['__main__']['start_time'],
-                                                  '%Y-%m-%d %H:%M:%S') + \
-                       datetime.timedelta(seconds= vcwg_needed_time_idx_in_seconds)
-        print('cur_datetime', cur_datetime)
-        wallSun_K = BEM.wallSun.Text
-        wallShade_K = BEM.wallShade.Text
-        roof_K = (FractionsRoof.fimp * BEM.roofImp.Text + FractionsRoof.fveg * BEM.roofVeg.Text)
-
-        domain_height = len(PresProf_cur)
-        vcwg_heights_profile = numpy.array([0.5 + i for i in range(domain_height)])
-        mapped_indices = [numpy.argmin(numpy.abs(vcwg_heights_profile - i)) for i in coordination.sensor_heights]
-
-        if not os.path.exists(coordination.data_saving_path):
-            os.makedirs(os.path.dirname(coordination.data_saving_path), exist_ok=True)
-            with open(coordination.data_saving_path, 'a') as f1:
-                # prepare the header string for different sensors
-                header_str = 'cur_datetime,canTemp_K,canHum_Ratio,canPres_Pa,sensWaste,' \
-                             'coolConsump[J_m2],heatConsump[J_m2],ElecTotal[J_m2],GasTotal[J_m2],sensCoolDemand[W_m2],' \
-                             'wallSun_K,wallShade_K,roof_K,MeteoData.Tatm,MeteoData.Pre,'
-                for i in range(len(mapped_indices)):
-                    _temp_height = coordination.sensor_heights[i]
-                    header_str += f'TempProf_cur[{_temp_height}],'
-                for i in range(len(mapped_indices)):
-                    _temp_height = coordination.sensor_heights[i]
-                    header_str += f'PresProf_cur[{_temp_height}],'
-                header_str += '\n'
-                f1.write(header_str)
-            # write the data
-
-        "coolConsump[J_m2],heatConsump[J_m2],ElecTotal[J_m2]"
-        cool_consump_J_m2 = self.coolConsump * 300
-        heat_consump_J_m2 = self.heatConsump * 300
-        elec_total_J_m2 = self.ElecTotal * 300
-        gas_total_J_m2 = self.GasTotal * 300
-        cool_demand_w_m2 = self.coolConsump
-        with open(coordination.data_saving_path, 'a') as f1:
-            fmt1 = "%s," * 1 % (cur_datetime) + \
-                   "%.3f," * 14 % (canTemp,canHum,vcwg_canPress_Pa,self.sensWaste,
-                                      cool_consump_J_m2,heat_consump_J_m2,elec_total_J_m2,gas_total_J_m2,cool_demand_w_m2,
-                                   wallSun_K,wallShade_K,roof_K, MeteoData.Tatm, MeteoData.Pre) + \
-                   "%.3f," * 2 * len(mapped_indices) % tuple([TempProf_cur[i] for i in mapped_indices] + \
-                                                             [PresProf_cur[i] for i in mapped_indices]) + '\n'
-            f1.write(fmt1)
-

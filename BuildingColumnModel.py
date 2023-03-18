@@ -1,6 +1,6 @@
 import numpy
 import math
-import _1_vcwg_ep_coordination as coordination
+import _1_parent_coordination as coordination
 """
 Calculate sink and source terms associated with the presence of buildings in the 1D model for momentum, heat, and TKE  
 Developed by Mohsen Moradi and Amir A. Aliabadi
