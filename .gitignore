@@ -1,41 +1,14 @@
 # git update gitingore
 #git rm -r --cached .
-only_ep/
-pyenergyplus/
-resources/idf/ep_outputs
-Results/
-_0_ep_files/
-_01_ep_5zone/
-2_shared_zip/
-eplusssz.csv
-epluszsz.csv
-!A_prepost_processing/measurements/*.zip
-*.pkl
-*.pyc
-*.png
-*.zip
-EPTEMP-00000001/
-*.bnd
-*.edd
-*.eio
-*.err
-*.eso
-*.mtd
-*.mtr
-*.rvaudit
-*.sql
-*.svg
-*.html
-*.mdd
-*.rdd
-*.shd
-*.epJSONout
-*.audit
-*.dbg
-*.end
-*.idd
-1_scripts/EP_And_VCWG_v2.0.0/_02_ep_midRiseApartment/*.csv
-InputOutputReference.pdf
-EMSApplicationGuide.pdf
-0_docs/EMSApplicationGuide.pdf
-*.sqlite3
+# ignore all files
+*
+# except code and inputs
+!.gitignore
+!*.py
+!/resources/
+!/resources/**
+## note the following txt and csv files are not included in version control
+/resources/Parameters/*.txt
+/resources/DOERefBuildings/**
+/resources/TopForcing/*.csv
+resources/idf/*.html
