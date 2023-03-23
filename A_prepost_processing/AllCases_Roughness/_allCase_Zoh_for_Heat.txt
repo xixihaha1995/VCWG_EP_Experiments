@@ -1,0 +1,204 @@
+cvrmse for Rural_Weather, case name is ByPass_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 1.2, performance is 8.05
+nmbe for Rural_Weather, case name is ByPass_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 1.2, performance is 3.31
+cvrmse for Rural_Weather, case name is ByPass_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 20.0, performance is 8.23
+nmbe for Rural_Weather, case name is ByPass_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 20.0, performance is -1.89
+cvrmse, case name is ByPass_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 1.2, performance is 16.07
+nmbe, case name is ByPass_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 1.2, performance is -4.08
+cvrmse, case name is OnlyVCWG_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 1.2, performance is 16.38
+nmbe, case name is OnlyVCWG_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 1.2, performance is -5.33
+cvrmse, case name is ByPass_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 20.0, performance is 16.02
+nmbe, case name is ByPass_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 20.0, performance is 0.29
+cvrmse, case name is OnlyVCWG_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 20.0, performance is 16.02
+nmbe, case name is OnlyVCWG_Vancouver_Rural_WithoutShading_WithCooling.csv, height is 20.0, performance is 0.29
+cvrmse for Rural_Weather, case name is ByPass_CAPITOUL_WithShading_WithoutCooling.csv, height is 20, performance is 7.27
+nmbe for Rural_Weather, case name is ByPass_CAPITOUL_WithShading_WithoutCooling.csv, height is 20, performance is 4.04
+cvrmse, case name is ByPass_CAPITOUL_WithShading_WithoutCooling.csv, height is 20.0, performance is 5.19
+nmbe, case name is ByPass_CAPITOUL_WithShading_WithoutCooling.csv, height is 20.0, performance is 1.65
+cvrmse, case name is OnlyVCWG_CAPITOUL_WithShading_WithoutCooling.csv, height is 20.0, performance is 4.68
+nmbe, case name is OnlyVCWG_CAPITOUL_WithShading_WithoutCooling.csv, height is 20.0, performance is 0.64
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 2.6, performance is 10.4
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 2.6, performance is 7.67
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 13.9, performance is 9.4
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 13.9, performance is 5.85
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 17.5, performance is 8.94
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 17.5, performance is 4.16
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 21.5, performance is 8.94
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 21.5, performance is 3.33
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 25.5, performance is 8.87
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 25.5, performance is 2.56
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 31.2, performance is 8.82
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 31.2, performance is 1.94
+cvrmse, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 2.6, performance is 7.33
+nmbe, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 2.6, performance is 0.68
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 2.6, performance is 7.41
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 2.6, performance is 0.4
+cvrmse, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 13.9, performance is 8.26
+nmbe, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 13.9, performance is 2.07
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 13.9, performance is 8.25
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 13.9, performance is 1.61
+cvrmse, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 17.5, performance is 9.1
+nmbe, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 17.5, performance is 1.67
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 17.5, performance is 9.11
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 17.5, performance is 1.22
+cvrmse, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 21.5, performance is 9.57
+nmbe, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 21.5, performance is 1.66
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 21.5, performance is 9.59
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 21.5, performance is 1.31
+cvrmse, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 25.5, performance is 9.96
+nmbe, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 25.5, performance is 1.5
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 25.5, performance is 9.99
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 25.5, performance is 1.21
+cvrmse, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 31.2, performance is 10.67
+nmbe, case name is ByPass_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 31.2, performance is 1.65
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 31.2, performance is 10.7
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithoutShading_WithoutCooling.csv, height is 31.2, performance is 1.45
+cvrmse for Rural_Weather, case name is ByPass_Vancouver_Rural_WithShading_WithCooling.csv, height is 1.2, performance is 8.05
+nmbe for Rural_Weather, case name is ByPass_Vancouver_Rural_WithShading_WithCooling.csv, height is 1.2, performance is 3.31
+cvrmse for Rural_Weather, case name is ByPass_Vancouver_Rural_WithShading_WithCooling.csv, height is 20.0, performance is 8.23
+nmbe for Rural_Weather, case name is ByPass_Vancouver_Rural_WithShading_WithCooling.csv, height is 20.0, performance is -1.89
+cvrmse, case name is ByPass_Vancouver_Rural_WithShading_WithCooling.csv, height is 1.2, performance is 16.1
+nmbe, case name is ByPass_Vancouver_Rural_WithShading_WithCooling.csv, height is 1.2, performance is -4.03
+cvrmse, case name is OnlyVCWG_Vancouver_Rural_WithShading_WithCooling.csv, height is 1.2, performance is 16.38
+nmbe, case name is OnlyVCWG_Vancouver_Rural_WithShading_WithCooling.csv, height is 1.2, performance is -5.33
+cvrmse, case name is ByPass_Vancouver_Rural_WithShading_WithCooling.csv, height is 20.0, performance is 16.02
+nmbe, case name is ByPass_Vancouver_Rural_WithShading_WithCooling.csv, height is 20.0, performance is 0.29
+cvrmse, case name is OnlyVCWG_Vancouver_Rural_WithShading_WithCooling.csv, height is 20.0, performance is 16.02
+nmbe, case name is OnlyVCWG_Vancouver_Rural_WithShading_WithCooling.csv, height is 20.0, performance is 0.29
+cvrmse for Rural_Weather, case name is ByPass_CAPITOUL_WithShading_WithCooling.csv, height is 20, performance is 7.27
+nmbe for Rural_Weather, case name is ByPass_CAPITOUL_WithShading_WithCooling.csv, height is 20, performance is 4.04
+cvrmse, case name is ByPass_CAPITOUL_WithShading_WithCooling.csv, height is 20.0, performance is 5.14
+nmbe, case name is ByPass_CAPITOUL_WithShading_WithCooling.csv, height is 20.0, performance is 0.75
+cvrmse, case name is OnlyVCWG_CAPITOUL_WithShading_WithCooling.csv, height is 20.0, performance is 5.04
+nmbe, case name is OnlyVCWG_CAPITOUL_WithShading_WithCooling.csv, height is 20.0, performance is -1.13
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 3.0, performance is 7.97
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 3.0, performance is 3.93
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 15.8, performance is 8.09
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 15.8, performance is 3.43
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 22.9, performance is 7.91
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 22.9, performance is 3.2
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 27.8, performance is 8.37
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 27.8, performance is 1.79
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 32.9, performance is 8.58
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 32.9, performance is 1.01
+cvrmse, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 3.0, performance is 10.19
+nmbe, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 3.0, performance is -5.59
+cvrmse, case name is OnlyVCWG_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 3.0, performance is 9.33
+nmbe, case name is OnlyVCWG_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 3.0, performance is -4.62
+cvrmse, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 15.8, performance is 9.65
+nmbe, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 15.8, performance is -0.34
+cvrmse, case name is OnlyVCWG_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 15.8, performance is 9.51
+nmbe, case name is OnlyVCWG_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 15.8, performance is -0.43
+cvrmse, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 22.9, performance is 10.52
+nmbe, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 22.9, performance is 1.34
+cvrmse, case name is OnlyVCWG_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 22.9, performance is 10.41
+nmbe, case name is OnlyVCWG_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 22.9, performance is 1.28
+cvrmse, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 27.8, performance is 10.87
+nmbe, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 27.8, performance is 0.73
+cvrmse, case name is OnlyVCWG_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 27.8, performance is 10.8
+nmbe, case name is OnlyVCWG_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 27.8, performance is 0.67
+cvrmse, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 32.9, performance is 11.42
+nmbe, case name is ByPass_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 32.9, performance is 0.64
+cvrmse, case name is OnlyVCWG_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 32.9, performance is 11.38
+nmbe, case name is OnlyVCWG_BUBBLE_UE2_WithShading_WithoutCooling.csv, height is 32.9, performance is 0.6
+cvrmse for Rural_Weather, case name is ByPass_CAPITOUL_WithoutShading_WithCooling.csv, height is 20, performance is 7.27
+nmbe for Rural_Weather, case name is ByPass_CAPITOUL_WithoutShading_WithCooling.csv, height is 20, performance is 4.04
+cvrmse, case name is ByPass_CAPITOUL_WithoutShading_WithCooling.csv, height is 20.0, performance is 5.09
+nmbe, case name is ByPass_CAPITOUL_WithoutShading_WithCooling.csv, height is 20.0, performance is 0.43
+cvrmse, case name is OnlyVCWG_CAPITOUL_WithoutShading_WithCooling.csv, height is 20.0, performance is 5.04
+nmbe, case name is OnlyVCWG_CAPITOUL_WithoutShading_WithCooling.csv, height is 20.0, performance is -1.13
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 2.6, performance is 10.4
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 2.6, performance is 7.67
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 13.9, performance is 9.4
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 13.9, performance is 5.85
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 17.5, performance is 8.94
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 17.5, performance is 4.16
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 21.5, performance is 8.94
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 21.5, performance is 3.33
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 25.5, performance is 8.87
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 25.5, performance is 2.56
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 31.2, performance is 8.82
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 31.2, performance is 1.94
+cvrmse, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 2.6, performance is 7.51
+nmbe, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 2.6, performance is 0.66
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 2.6, performance is 7.41
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 2.6, performance is 0.4
+cvrmse, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 13.9, performance is 8.4
+nmbe, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 13.9, performance is 2.05
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 13.9, performance is 8.25
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 13.9, performance is 1.61
+cvrmse, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 17.5, performance is 9.2
+nmbe, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 17.5, performance is 1.66
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 17.5, performance is 9.11
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 17.5, performance is 1.22
+cvrmse, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 21.5, performance is 9.65
+nmbe, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 21.5, performance is 1.66
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 21.5, performance is 9.59
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 21.5, performance is 1.31
+cvrmse, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 25.5, performance is 10.02
+nmbe, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 25.5, performance is 1.49
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 25.5, performance is 9.99
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 25.5, performance is 1.21
+cvrmse, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 31.2, performance is 10.71
+nmbe, case name is ByPass_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 31.2, performance is 1.64
+cvrmse, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 31.2, performance is 10.7
+nmbe, case name is OnlyVCWG_BUBBLE_UE1_WithShading_WithoutCooling.csv, height is 31.2, performance is 1.45
+cvrmse for Rural_Weather, case name is ByPass_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 1.2, performance is 11.37
+nmbe for Rural_Weather, case name is ByPass_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 1.2, performance is 4.43
+cvrmse for Rural_Weather, case name is ByPass_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 20.0, performance is 6.76
+nmbe for Rural_Weather, case name is ByPass_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 20.0, performance is -0.71
+cvrmse, case name is ByPass_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 1.2, performance is 9.76
+nmbe, case name is ByPass_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 1.2, performance is 1.27
+cvrmse, case name is OnlyVCWG_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 1.2, performance is 9.59
+nmbe, case name is OnlyVCWG_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 1.2, performance is 1.36
+cvrmse, case name is ByPass_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 20.0, performance is 7.23
+nmbe, case name is ByPass_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 20.0, performance is 0.22
+cvrmse, case name is OnlyVCWG_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 20.0, performance is 7.23
+nmbe, case name is OnlyVCWG_Vancouver_TopForcing_WithoutShading_WithCooling.csv, height is 20.0, performance is 0.22
+cvrmse for Rural_Weather, case name is ByPass_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 1.2, performance is 11.37
+nmbe for Rural_Weather, case name is ByPass_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 1.2, performance is 4.43
+cvrmse for Rural_Weather, case name is ByPass_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 20.0, performance is 6.76
+nmbe for Rural_Weather, case name is ByPass_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 20.0, performance is -0.71
+cvrmse, case name is ByPass_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 1.2, performance is 9.75
+nmbe, case name is ByPass_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 1.2, performance is 1.23
+cvrmse, case name is OnlyVCWG_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 1.2, performance is 9.59
+nmbe, case name is OnlyVCWG_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 1.2, performance is 1.36
+cvrmse, case name is ByPass_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 20.0, performance is 7.23
+nmbe, case name is ByPass_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 20.0, performance is 0.22
+cvrmse, case name is OnlyVCWG_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 20.0, performance is 7.23
+nmbe, case name is OnlyVCWG_Vancouver_TopForcing_WithShading_WithCooling.csv, height is 20.0, performance is 0.22
+cvrmse for Rural_Weather, case name is ByPass_CAPITOUL_WithoutShading_WithoutCooling.csv, height is 20, performance is 7.27
+nmbe for Rural_Weather, case name is ByPass_CAPITOUL_WithoutShading_WithoutCooling.csv, height is 20, performance is 4.04
+cvrmse, case name is ByPass_CAPITOUL_WithoutShading_WithoutCooling.csv, height is 20.0, performance is 5.04
+nmbe, case name is ByPass_CAPITOUL_WithoutShading_WithoutCooling.csv, height is 20.0, performance is 1.52
+cvrmse, case name is OnlyVCWG_CAPITOUL_WithoutShading_WithoutCooling.csv, height is 20.0, performance is 4.68
+nmbe, case name is OnlyVCWG_CAPITOUL_WithoutShading_WithoutCooling.csv, height is 20.0, performance is 0.64
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 3.0, performance is 7.97
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 3.0, performance is 3.93
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 15.8, performance is 8.09
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 15.8, performance is 3.43
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 22.9, performance is 7.91
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 22.9, performance is 3.2
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 27.8, performance is 8.37
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 27.8, performance is 1.79
+cvrmse for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 32.9, performance is 8.58
+nmbe for Rural_Weather, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 32.9, performance is 1.01
+cvrmse, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 3.0, performance is 10.39
+nmbe, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 3.0, performance is -5.83
+cvrmse, case name is OnlyVCWG_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 3.0, performance is 9.33
+nmbe, case name is OnlyVCWG_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 3.0, performance is -4.62
+cvrmse, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 15.8, performance is 9.7
+nmbe, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 15.8, performance is -0.41
+cvrmse, case name is OnlyVCWG_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 15.8, performance is 9.51
+nmbe, case name is OnlyVCWG_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 15.8, performance is -0.43
+cvrmse, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 22.9, performance is 10.55
+nmbe, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 22.9, performance is 1.29
+cvrmse, case name is OnlyVCWG_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 22.9, performance is 10.41
+nmbe, case name is OnlyVCWG_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 22.9, performance is 1.28
+cvrmse, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 27.8, performance is 10.9
+nmbe, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 27.8, performance is 0.69
+cvrmse, case name is OnlyVCWG_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 27.8, performance is 10.8
+nmbe, case name is OnlyVCWG_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 27.8, performance is 0.67
+cvrmse, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 32.9, performance is 11.45
+nmbe, case name is ByPass_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 32.9, performance is 0.61
+cvrmse, case name is OnlyVCWG_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 32.9, performance is 11.38
+nmbe, case name is OnlyVCWG_BUBBLE_UE2_WithoutShading_WithoutCooling.csv, height is 32.9, performance is 0.6
