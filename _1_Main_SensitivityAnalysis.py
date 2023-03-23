@@ -112,7 +112,10 @@ def one_ini(sensitivity_file_name):
 if __name__ == '__main__':
     # one_ini('Chicago_MedOffice_MixedVariable.ini')
     # one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
-    todos = ['Chicago_HighOffice_MixedVariable.ini',
-             'Chicago_HighOffice_MixedVariable_OnlyVCWG.ini']
+    todos = [
+        # 'Chicago_HighOffice_MixedVariable.ini',
+         'Chicago_HighOffice_MixedVariable_OnlyVCWG.ini',
+         'Chicago_MedOffice_MixedVariable.ini',
+         'Chicago_MedOffice_MixedVariable_OnlyVCWG.ini']
     for todo in todos:
         one_ini(todo)

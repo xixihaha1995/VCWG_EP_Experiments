@@ -606,7 +606,12 @@ class Surface_HeatFlux(object):
         # Calculate aerodynamic resistance (Louis 1979)
         rap_can, rap_Htree_In, _u_Hcan_, alpha, Ri_nearGround = \
             ResistanceCal.Ground_Aerodynamic_Resistance_1D(WindSpeed_top,MeteoData.Zatm,VerticalProfUrban,Gemeotry_m,Tcanyon,Tground,
-                                                           Gemeotry_m.Height_canyon,dcan,zomcan,_zoh_ground_,Gemeotry_m.Height_tree,
+                                                           Gemeotry_m.Height_canyon,dcan,zomcan,zom_ground,Gemeotry_m.Height_tree,
+                                                           Gemeotry_m.Radius_tree,ColParam)
+
+        rap_can_HConv, notUsedA, notUsedB, notUsedC, notUsedD = \
+            ResistanceCal.Ground_Aerodynamic_Resistance_1D(WindSpeed_top,MeteoData.Zatm,VerticalProfUrban,Gemeotry_m,Tcanyon,Tground,
+                                                           Gemeotry_m.Height_canyon,dcan,zomcan*0.1,_zoh_ground_,Gemeotry_m.Height_tree,
                                                            Gemeotry_m.Radius_tree,ColParam)
 
         # Calculate stomatal and leaf boundary resistances of tree
@@ -675,9 +680,9 @@ class Surface_HeatFlux(object):
                                           O33[0], alpVG[0], nVG[0], SPAR)
 
         # Calculate sensible heat fluxes [W m^-2]
-        Himp = Cimp * (cp_atm*rho_atm * (Timp-Tcanyon) / rap_can)
-        Hbare = Cbare * (cp_atm*rho_atm * (Tbare-Tcanyon) / rap_can)
-        Hveg = Cveg * (cp_atm*rho_atm * (Tveg-Tcanyon) / (rb_L / (2*(ParVegGround.LAI+ParVegGround.SAI))+rap_can))
+        Himp = Cimp * (cp_atm*rho_atm * (Timp-Tcanyon) / rap_can_HConv)
+        Hbare = Cbare * (cp_atm*rho_atm * (Tbare-Tcanyon) / rap_can_HConv)
+        Hveg = Cveg * (cp_atm*rho_atm * (Tveg-Tcanyon) / (rb_L / (2*(ParVegGround.LAI+ParVegGround.SAI))+rap_can_HConv))
         Htree = Ctree * (cp_atm*rho_atm * (Ttree-Tcanyon_tree) / (rb_H/(2*(ParVegTree.LAI+ParVegTree.SAI))+rap_Htree_In))
 
 
