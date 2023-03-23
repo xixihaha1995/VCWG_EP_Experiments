@@ -144,9 +144,9 @@ def add_excel_formula(df_excel):
 plot_fontsize = 12
 experiments_folder = 'Chicago_MedOffice_Sensitivity'
 baseline = 'ByPass_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
-
-experiments_folder = 'Chicago_HighOffice_Sensitivity'
-baseline = 'ByPass_Width_canyon_15_fveg_G_0_building_orientation_0.csv'
+#
+# experiments_folder = 'Chicago_HighOffice_Sensitivity'
+# baseline = 'ByPass_Width_canyon_15_fveg_G_0_building_orientation_0.csv'
 
 all_csv_files = [f for f in os.listdir(experiments_folder)
                  if f.endswith('.csv')]
