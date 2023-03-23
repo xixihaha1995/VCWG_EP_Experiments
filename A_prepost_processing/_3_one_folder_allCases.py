@@ -239,6 +239,7 @@ def process_one_theme(csv_filename):
 
     cvrmse_dict = {}
     nmbe_dict = {}
+    _tempHeights = []
     if "BUBBLE_UE1" in csv_filename:
         comparison = get_BUUBLE_Ue1_measurements()
         cvrmse_dict['Rural_2.6'] = cvrmse(comparison['Urban_DBT_C_2.6'], comparison['Rural_DBT_C'])
@@ -254,12 +255,8 @@ def process_one_theme(csv_filename):
         nmbe_dict['Rural_25.5'] = normalized_mean_bias_error(comparison['Urban_DBT_C_25.5'], comparison['Rural_DBT_C'])
         nmbe_dict['Rural_31.2'] = normalized_mean_bias_error(comparison['Urban_DBT_C_31.2'], comparison['Rural_DBT_C'])
 
-        print(f'cvrmse for Rural_2.6 is {cvrmse_dict["Rural_2.6"]}, nmbe is {nmbe_dict["Rural_2.6"]}')
-        print(f'cvrmse for Rural_13.9 is {cvrmse_dict["Rural_13.9"]}, nmbe is {nmbe_dict["Rural_13.9"]}')
-        print(f'cvrmse for Rural_17.5 is {cvrmse_dict["Rural_17.5"]}, nmbe is {nmbe_dict["Rural_17.5"]}')
-        print(f'cvrmse for Rural_21.5 is {cvrmse_dict["Rural_21.5"]}, nmbe is {nmbe_dict["Rural_21.5"]}')
-        print(f'cvrmse for Rural_25.5 is {cvrmse_dict["Rural_25.5"]}, nmbe is {nmbe_dict["Rural_25.5"]}')
-        print(f'cvrmse for Rural_31.2 is {cvrmse_dict["Rural_31.2"]}, nmbe is {nmbe_dict["Rural_31.2"]}')
+        _tempHeights = ['Rural_2.6', 'Rural_13.9', 'Rural_17.5', 'Rural_21.5', 'Rural_25.5', 'Rural_31.2']
+
 
     elif "BUBBLE_UE2" in csv_filename:
         comparison = get_BUUBLE_Ue2_measurements()
@@ -273,25 +270,28 @@ def process_one_theme(csv_filename):
         nmbe_dict['Rural_22.9'] = normalized_mean_bias_error(comparison['Urban_DBT_C_22.9'], comparison['Rural_DBT_C'])
         nmbe_dict['Rural_27.8'] = normalized_mean_bias_error(comparison['Urban_DBT_C_27.8'], comparison['Rural_DBT_C'])
         nmbe_dict['Rural_32.9'] = normalized_mean_bias_error(comparison['Urban_DBT_C_32.9'], comparison['Rural_DBT_C'])
-
-        print(f'cvrmse for Rural vs Urban(3.0) is {cvrmse_dict["Rural_3.0"]}, nmbe is {nmbe_dict["Rural_3.0"]}')
-        print(f'cvrmse for Rural vs Urban(15.8) is {cvrmse_dict["Rural_15.8"]}, nmbe is {nmbe_dict["Rural_15.8"]}')
-        print(f'cvrmse for Rural vs Urban(22.9) is {cvrmse_dict["Rural_22.9"]}, nmbe is {nmbe_dict["Rural_22.9"]}')
-        print(f'cvrmse for Rural vs Urban(27.8) is {cvrmse_dict["Rural_27.8"]}, nmbe is {nmbe_dict["Rural_27.8"]}')
-        print(f'cvrmse for Rural vs Urban(32.9) is {cvrmse_dict["Rural_32.9"]}, nmbe is {nmbe_dict["Rural_32.9"]}')
+        _tempHeights = ['Rural_3.0', 'Rural_15.8', 'Rural_22.9', 'Rural_27.8', 'Rural_32.9']
     elif 'Vancouver' in csv_filename:
         comparison = get_Vancouver_measurements(csv_filename)
         cvrmse_dict['Rural_1.2'] = cvrmse(comparison['Urban_DBT_C_1.2'], comparison['Rural_DBT_C'])
         cvrmse_dict['Rural_20.0'] = cvrmse(comparison['Urban_DBT_C_20.0'], comparison['Rural_DBT_C'])
         nmbe_dict['Rural_1.2'] = normalized_mean_bias_error(comparison['Urban_DBT_C_1.2'], comparison['Rural_DBT_C'])
         nmbe_dict['Rural_20.0'] = normalized_mean_bias_error(comparison['Urban_DBT_C_20.0'], comparison['Rural_DBT_C'])
-        print(f'cvrmse for Rural vs Urban(1.2) is {cvrmse_dict["Rural_1.2"]}, nmbe is {nmbe_dict["Rural_1.2"]}')
-        print(f'cvrmse for Rural vs Urban(20.0) is {cvrmse_dict["Rural_20.0"]}, nmbe is {nmbe_dict["Rural_20.0"]}')
+        _tempHeights = ['Rural_1.2', 'Rural_20.0']
     else:
         comparison = get_CAPITOUL_measurements()
         cvrmse_dict['Rural'] = cvrmse(comparison['Urban_DBT_C'], comparison['Rural_DBT_C'])
         nmbe_dict['Rural'] = normalized_mean_bias_error(comparison['Urban_DBT_C'], comparison['Rural_DBT_C'])
-        print(f'cvrmse for Rural is {cvrmse_dict["Rural"]}, nmbe for Rural is {nmbe_dict["Rural"]}')
+        _tempHeights = ['Rural']
+
+    for _key in _tempHeights:
+        # extract decimal number from string _key, if none found, return 20
+        _height = float(re.findall(r'\d+\.\d+', _key)[0]) if re.findall(r'\d+\.\d+', _key) else 20
+        print(
+            f'cvrmse for Rural_Weather, case name is {csv_filename}, height is {_height}, performance is {cvrmse_dict[_key]}')
+        print(
+            f'nmbe for Rural_Weather, case name is {csv_filename}, height is {_height}, performance is {nmbe_dict[_key]}')
+
 
 
     sql_dict = {}
@@ -303,7 +303,7 @@ def process_one_theme(csv_filename):
     comparison['wallSun_K_' + csv_filename] = df['wallSun_K']
     comparison['wallShade_K_' + csv_filename] = df['wallShade_K']
     comparison['roof_K_' + csv_filename] = df['roof_K']
-    comparison['ForcTemp_K_' + csv_filename] = df['ForcTemp_K']
+    # comparison['ForcTemp_K_' + csv_filename] = df['ForcTemp_K']
     # #OnlyVCWG
     df_onlyVCWG = pd.read_csv(os.path.join(experiments_folder, 'OnlyVCWG_' + csv_file[7:] + '.csv'), index_col=0, parse_dates=True)
     comparison['sensWaste_' + 'OnlyVCWG_'+csv_filename] = df_onlyVCWG['sensWaste']
@@ -343,8 +343,11 @@ def process_one_theme(csv_filename):
         _onlyVCWG_tempNMBE = normalized_mean_bias_error(comparison[_tmp_col],
                                                         comparison['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx])
         nmbe_dict['OnlyVCWG_' + csv_file + '_sensor_idx_' + height_idx] = _onlyVCWG_tempNMBE
-        print(f'cvrmse for {csv_file} at height idx:{height_idx} is {tempCVRMSE}, NMBE is {tempNMBE}')
-        # print(f'cvrmse for OnlyVCWG_{csv_file} at height idx:{height_idx} is {_onlyVCWG_tempCVRMSE}, NMBE is {_onlyVCWG_tempNMBE}')
+        print(f'cvrmse, case name is {csv_filename}, height is {height_idx}, performance is {tempCVRMSE}')
+        print(f'nmbe, case name is {csv_filename}, height is {height_idx}, performance is {tempNMBE}')
+
+        print(f'cvrmse, case name is OnlyVCWG_{csv_filename[7:]}, height is {height_idx}, performance is {_onlyVCWG_tempCVRMSE}')
+        print(f'nmbe, case name is OnlyVCWG_{csv_filename[7:]}, height is {height_idx}, performance is {_onlyVCWG_tempNMBE}')
 
     sql_dict[csv_file] = read_sql(csv_filename)
     if os.path.exists(os.path.join(experiments_folder, csv_file + 'comparison.xlsx')):
@@ -357,12 +360,12 @@ def process_one_theme(csv_filename):
     nmbe_df.to_excel(writer, 'nmbe')
     sql_df = pd.DataFrame.from_dict(sql_dict, orient='index', columns=['total_site_energy'])
     sql_df.to_excel(writer, 'sql')
-    writer.save()
+    # writer.save()
 
 def iterate_all_cases(experiments_folder):
     csv_files = []
     for file in os.listdir(experiments_folder):
-        if file.endswith('.csv') and 'OnlyVCWG' not in file and 'WithShading' in file:
+        if file.endswith('.csv') and 'OnlyVCWG' not in file:
             csv_files.append(file)
             process_one_theme(file,)
 
