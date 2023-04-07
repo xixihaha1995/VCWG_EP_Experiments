@@ -213,10 +213,10 @@ def main():
     baseline = 'OnlyVCWG_Width_canyon_33.3_fveg_G_0_building_orientation_0.csv'
 
 
-    experiments_folder = 'Chicago_HighOffice_Sensitivity'
-    idf_template_name = '10x_incr_100zones1win_PTHP'
-    idf_folder = 'HighBuilding'
-    baseline = 'OnlyVCWG_Width_canyon_15_fveg_G_0_building_orientation_0.csv'
+    # experiments_folder = 'Chicago_HighOffice_Sensitivity'
+    # idf_template_name = '10x_incr_100zones1win_PTHP'
+    # idf_folder = 'HighBuilding'
+    # baseline = 'OnlyVCWG_Width_canyon_15_fveg_G_0_building_orientation_0.csv'
 
     epw_template = os.path.join('..','resources','epw',
                                 'USA_IL_Chicago-OHare.Intl.AP.725300_TMY3_No_Precipitable_Water.epw')
@@ -226,7 +226,7 @@ def main():
             experiments.append(experiment)
     experiments.sort(key=sort_by_orientation)
     print(experiments)
-    for i in range(19,len(experiments)):
+    for i in range(0,len(experiments)):
         experiment = experiments[i]
         print('Running experiment: ', experiment)
         # generate_epw(experiment)

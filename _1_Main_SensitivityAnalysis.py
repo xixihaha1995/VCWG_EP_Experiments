@@ -38,7 +38,10 @@ def read_ini(config_file_name):
     global config
     config = configparser.ConfigParser()
     project_path = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(project_path, 'A_prepost_processing','configs','HighOffice_Sensitivity',config_file_name)
+    if 'HighOffice' in config_file_name:
+        config_path = os.path.join(project_path, 'A_prepost_processing','configs','HighOffice_Sensitivity',config_file_name)
+    elif 'MedOffice' in config_file_name:
+        config_path = os.path.join(project_path, 'A_prepost_processing','configs','MedOffice_Sensitivity',config_file_name)
     # config_path = os.path.join(project_path, 'A_prepost_processing','configs','Only_VCWG',config_file_name)
     config.read(config_path)
 
@@ -114,8 +117,8 @@ if __name__ == '__main__':
     # one_ini('Chicago_MedOffice_MixedVariable_OnlyVCWG.ini')
     todos = [
         # 'Chicago_HighOffice_MixedVariable.ini',
-         'Chicago_HighOffice_MixedVariable_OnlyVCWG.ini',
-         'Chicago_MedOffice_MixedVariable.ini',
-         'Chicago_MedOffice_MixedVariable_OnlyVCWG.ini']
+        #      'Chicago_HighOffice_MixedVariable_OnlyVCWG.ini',
+             'Chicago_MedOffice_MixedVariable.ini',
+             'Chicago_MedOffice_MixedVariable_OnlyVCWG.ini']
     for todo in todos:
         one_ini(todo)
