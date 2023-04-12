@@ -1052,6 +1052,8 @@ def _20Stories_get_ep_results(state):
         accumulated_time_in_seconds = curr_sim_time_in_seconds - ep_last_call_time_seconds
         ep_last_call_time_seconds = curr_sim_time_in_seconds
         hvac_heat_rejection_J = coordination.ep_api.exchange.get_variable_value(state,hvac_heat_rejection_sensor_handle)
+        if hvac_heat_rejection_J > 1e13:
+            hvac_heat_rejection_J = 0
         hvac_waste_w_m2 = hvac_heat_rejection_J / accumulated_time_in_seconds / coordination.footprint_area_m2
         coordination.ep_sensWaste_w_m2_per_footprint_area += hvac_waste_w_m2
         time_index_alignment_bool = 1 > abs(curr_sim_time_in_seconds - coordination.vcwg_needed_time_idx_in_seconds)

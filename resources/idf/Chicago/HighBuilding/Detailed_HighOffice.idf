@@ -112,7 +112,7 @@ Schedule:Compact,
     -87.92,                  !- Longitude {deg}
     -6,                      !- Time Zone {hr}
     201;                     !- Elevation {m}
-
+Site:GroundTemperature:BuildingSurface,19.527,19.502,19.536,19.598,20.002,21.640,22.225,22.375,21.449,20.121,19.802,19.633;
 !-   ===========  ALL OBJECTS IN CLASS: SIZINGPERIOD:DESIGNDAY ===========
 
   SizingPeriod:DesignDay,
@@ -188,6 +188,15 @@ Schedule:Compact,
     Yes;                     !- Use Weather File Snow Indicators
 
 !-   ===========  ALL OBJECTS IN CLASS: SCHEDULETYPELIMITS ===========
+
+  ScheduleTypeLimits,
+    Any Number;              !- Name
+  ScheduleTypeLimits,
+    Temperature,             !- Name
+    -60,                     !- Lower Limit Value
+    200,                     !- Upper Limit Value
+    CONTINUOUS,              !- Numeric Type
+    Temperature;             !- Unit Type
 
   ScheduleTypeLimits,
     Thermal Zone 1 Thermostat Schedule Type Limits,  !- Name
@@ -2055,9 +2064,9 @@ Schedule:Compact,
 
   Schedule:Constant,Always On Discrete,OnOff,1;
 
-  Schedule:Constant,Always Off Discrete,,0;
+  Schedule:Constant,Always Off Discrete,OnOff,0;
 
-  Schedule:Constant,Always On Continuous,,1;
+  Schedule:Constant,Always On Continuous,OnOff,1;
 
 !-   ===========  ALL OBJECTS IN CLASS: MATERIAL ===========
 
@@ -33034,6 +33043,9 @@ Schedule:Compact,
 
   OutdoorAir:NodeList,
     PTHP 55 OA Node;         !- Node or NodeList Name 1
+
+  OutdoorAir:NodeList,
+    PTHP 56 OA Node;         !- Node or NodeList Name 1
 
   OutdoorAir:NodeList,
     PTHP 36 OA Node;         !- Node or NodeList Name 1
